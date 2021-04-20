@@ -26,7 +26,8 @@ Vehicles.getInitVehicles = function(result) {
                 INNER JOIN brands ON models.brand_id = brands.id 
                 INNER JOIN vehicle_type ON vehicles.type = vehicle_type.id 
                 LEFT JOIN comments ON comments.product_id = products.id 
-                GROUP BY products.id 
+                GROUP BY products.id
+                ORDER BY products.id DESC 
                 LIMIT 0, 8`;
 
     sql.query(query, (err, res) => {
@@ -62,6 +63,7 @@ Vehicles.getInitVehiclesByType = function(conditions, result) {
                 LEFT JOIN comments ON comments.product_id = products.id 
                 GROUP BY products.id 
                 HAVING vehicle_type.name = ? AND products.id != ?
+                ORDER BY products.id, val DESC
                 LIMIT 0, 8`;
     
     sql.query(query, [conditions[0], conditions[1]], (err, res) => {
