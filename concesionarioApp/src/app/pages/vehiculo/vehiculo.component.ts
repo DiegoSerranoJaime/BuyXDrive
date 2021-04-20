@@ -48,7 +48,6 @@ export class VehiculoComponent implements OnInit {
         this.comments = data;
       });
     });
-
   }
 
   addProduct(id: number) {
