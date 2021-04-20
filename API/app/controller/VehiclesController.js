@@ -11,7 +11,7 @@ exports.getInitVehicles = function(req, res) {
 };
 
 exports.getInitVehiclesByType = function(req, res) {
-    Vehicles.getInitVehiclesByType(req.params.type, (err, vehicles) => {
+    Vehicles.getInitVehiclesByType([req.params.type, req.params.id], (err, vehicles) => {
         if(err) {
             res.send(err);
         }

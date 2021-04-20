@@ -36,7 +36,7 @@ export class VehiculoComponent implements OnInit {
       .subscribe(([vehicle, images]) => {
         this.vehicle = vehicle;
 
-        this._vehiclesService.getInitVehiclesByType(vehicle.type).subscribe((data: vehicle_card[]) => {
+        this._vehiclesService.getInitVehiclesByType(vehicle.type, this.id).subscribe((data: vehicle_card[]) => {
           this.vehicle_rel = data;
         });
 

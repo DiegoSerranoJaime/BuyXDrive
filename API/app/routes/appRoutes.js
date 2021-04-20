@@ -29,7 +29,7 @@ module.exports = function(app) {
     app.route('/api/vehicles/type')
         .get(vehicles.getVehicleTypes);
 
-    app.route('/api/vehicles/type/:type')
+    app.route('/api/vehicles/type/:type/selected_vehicle/:id')
         .get(vehicles.getInitVehiclesByType);
 
     //Endpoints de comentarios    

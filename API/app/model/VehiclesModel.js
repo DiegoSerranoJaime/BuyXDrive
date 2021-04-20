@@ -37,7 +37,7 @@ Vehicles.getInitVehicles = function(result) {
     });
 };
 
-Vehicles.getInitVehiclesByType = function(type, result) {
+Vehicles.getInitVehiclesByType = function(conditions, result) {
     let query = `SELECT 
                     products.id, 
                     products.price, 
@@ -57,10 +57,10 @@ Vehicles.getInitVehiclesByType = function(type, result) {
                 INNER JOIN brands ON models.brand_id = brands.id 
                 INNER JOIN vehicle_type ON vehicles.type = vehicle_type.id 
                 GROUP BY products.id 
-                HAVING vehicle_type.name = ?
+                HAVING vehicle_type.name = ? AND products.id != ?
                 LIMIT 0, 8`;
     
-    sql.query(query, type, (err, res) => {
+    sql.query(query, [conditions[0], conditions[1]], (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);

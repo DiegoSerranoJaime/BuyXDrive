@@ -18,8 +18,8 @@ export class VehiclesService {
     return this._http.get<vehicle_card[]>(`${this.baseUrl}/init`);
   }
 
-  getInitVehiclesByType(type: string): Observable<vehicle_card[]> {
-    return this._http.get<vehicle_card[]>(`${this.baseUrl}/type/${type}`);
+  getInitVehiclesByType(type: string, id: number): Observable<vehicle_card[]> {
+    return this._http.get<vehicle_card[]>(`${this.baseUrl}/type/${type}/selected_vehicle/${id}`);
   }
 
   getVehicle(id: number): Observable<vehicle> {
