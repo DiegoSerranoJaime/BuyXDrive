@@ -17,13 +17,15 @@ Vehicles.getInitVehicles = function(result) {
                     models.name AS mname, 
                     vehicles.doors, 
                     vehicles.seating,
-                    vehicles.cv
+                    vehicles.cv,
+                    IF(COUNT(comments.product_id), AVG(comments.valoration), 0) AS val
                 FROM images
                 INNER JOIN products ON images.product_id = products.id 
                 INNER JOIN vehicles ON products.id = vehicles.id 
                 INNER JOIN models ON vehicles.model_id = models.id 
                 INNER JOIN brands ON models.brand_id = brands.id 
                 INNER JOIN vehicle_type ON vehicles.type = vehicle_type.id 
+                LEFT JOIN comments ON comments.product_id = products.id 
                 GROUP BY products.id 
                 LIMIT 0, 8`;
 
@@ -49,13 +51,15 @@ Vehicles.getInitVehiclesByType = function(conditions, result) {
                     models.name AS mname, 
                     vehicles.doors,
                     vehicles.seating, 
-                    vehicles.cv
+                    vehicles.cv,
+                    IF(COUNT(comments.product_id), AVG(comments.valoration), 0) AS val
                 FROM images
                 INNER JOIN products ON images.product_id = products.id 
                 INNER JOIN vehicles ON products.id = vehicles.id 
                 INNER JOIN models ON vehicles.model_id = models.id 
                 INNER JOIN brands ON models.brand_id = brands.id 
                 INNER JOIN vehicle_type ON vehicles.type = vehicle_type.id 
+                LEFT JOIN comments ON comments.product_id = products.id 
                 GROUP BY products.id 
                 HAVING vehicle_type.name = ? AND products.id != ?
                 LIMIT 0, 8`;

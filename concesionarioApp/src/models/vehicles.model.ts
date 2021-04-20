@@ -39,4 +39,5 @@ export interface vehicle_card {
   doors: number,
   seating: number,
   cv: number,
+  val: number
 };
