@@ -1,0 +1,17 @@
+<div class="card position-relative" routerLink="/vehiculos/{{vehicle.id}}">
+  <img [src]="vehicle.image" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{ vehicle.bname }} {{ vehicle.mname }}</h5>
+    <p class="card-subtitle mb-2 text-muted">{{ vehicle.doors }} puertas | {{ vehicle.seating }} asientos | {{ vehicle.cv }} CV | {{ vehicle.type }}</p>
+    <div class="card-text">
+      <div class="row">
+        <div class="col d-flex justify-content-between">
+          <p class="fw-bolder">Precio:</p>
+          <p class="text-success">{{ vehicle.price | discount:vehicle.discount | number:'.1-2':'en' }} €</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="vehicle.discount" class="badge bg-primary position-absolute mt-2 ms-2">{{ vehicle.discount }}%</div>
+  <div class="badge bg-warning position-absolute mt-2 end-0 me-2">4 <i class="fas fa-star"></i></div>
+</div>

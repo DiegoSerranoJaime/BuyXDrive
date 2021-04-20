@@ -1,0 +1,24 @@
+<div #modal class="modal mt-5" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content bg-dark text-white">
+      <div class="modal-header">
+        <h5 class="modal-title" [innerHTML]="options.title"></h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <ng-template adHost></ng-template>
+      </div>
+      <div class="modal-footer">
+        <div class="col">
+            <a data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#register" class="text-white">Crear cuenta</a>
+        </div>
+        <div class="col">
+          <div class="d-flex justify-content-end">
+            <button type="button" class="btn btn-primary" (click)="options.aceptar(componente)">{{ options.botonAceptar }}</button>
+            <button type="button" class="btn btn-danger ms-2" data-bs-dismiss="modal">{{ options.botonCancelar }}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+<h4 class="d-flex justify-content-center fw-normal mb-4">Deja tu comentario</h4>
+<div class="row d-flex justify-content-between">
+  <div class="col-12">
+    <form (ngSubmit)="submit()" [formGroup]="myForm">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" #title formControlName="title">
+        <label for="title">Titulo (50 Carácteres máx.)</label>
+      </div>
+      <div class="form-floating">
+        <textarea class="form-control" placeholder="Leave a comment here" #body formControlName="body"></textarea>
+        <label for="body">Comentario (255 Carácteres máx.)</label>
+      </div>
+      <div class="row mt-3">
+        <div class="col">
+          <p>Valoración: <span class="text-warning"><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i></span></p>
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">
+            Publicar
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
