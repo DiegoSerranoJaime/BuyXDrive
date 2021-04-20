@@ -1,4 +1,4 @@
-<div class="card position-relative" routerLink="/vehiculos/{{vehicle.id}}">
+<div class="card position-relative" [routerLink]="['/vehiculos', vehicle.id]">
   <img [src]="vehicle.image" class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">{{ vehicle.bname }} {{ vehicle.mname }}</h5>
