@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalInterface } from 'src/app/interfaces/moda.interface';
+import { ModalInterface } from 'src/app/interfaces/modal.interface';
 
 @Component({
   selector: 'app-login',
