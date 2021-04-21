@@ -27,7 +27,8 @@ Comments.getCommentsOfAProduct = function(id, result) {
     let query = `SELECT email, image, title, body, valoration, publication_date
     FROM comments
     INNER JOIN users ON users.id = comments.user_id
-    WHERE product_id = ?`;
+    WHERE product_id = ?
+    ORDER BY publication_date DESC`;
 
     sql.query(query, id, (err, res) => {
         if (err) {
