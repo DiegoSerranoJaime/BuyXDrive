@@ -1,6 +1,6 @@
 import { ComponentFactoryResolver } from '@angular/core';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ModalInterface } from 'src/app/interfaces/moda.interface';
+import { ModalInterface } from 'src/app/interfaces/modal.interface';
 import { ModalOptions, ModalService, ModalShow } from 'src/app/services/modal.service';
 import { AdHostDirective } from './ad-host.directive';
 declare const bootstrap: any;

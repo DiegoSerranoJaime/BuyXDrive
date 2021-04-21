@@ -3,6 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 import { AdHostDirective } from './components/modals/modal/ad-host.directive';
 
@@ -24,6 +28,7 @@ import { StarsComponent } from './components/stars/stars.component';
 import { CommentsFormComponent } from './components/comments-form/comments-form.component';
 import { CommentsComponent } from './components/comments/comments.component';
 import { CartComponent } from './pages/cart/cart.component';
+import { ToastComponent } from './components/toast/toast.component';
 
 @NgModule({
   declarations: [
@@ -44,13 +49,18 @@ import { CartComponent } from './pages/cart/cart.component';
     StarsComponent,
     CommentsFormComponent,
     CommentsComponent,
-    CartComponent
+    CartComponent,
+    ToastComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatSnackBarModule,
+    MatIconModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

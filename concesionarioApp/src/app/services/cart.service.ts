@@ -27,11 +27,13 @@ export class CartService {
     return of(this.cart);
   }
 
-  addToCart(product_id: number): void {
+  addToCart(product_id: number): boolean {
     let index = this.cart.findIndex((p) => product_id == p.id);
+    let exist: boolean;
 
     if (index >= 0) {
       this.cart[index].amount++;
+      exist = true;
     } else {
       let new_product: cart_data = {
         id: product_id,
@@ -39,9 +41,11 @@ export class CartService {
       };
 
       this.cart.push(new_product);
+      exist = false;
     }
 
     this.save();
+    return exist;
   }
 
   removeFromCart(product_id: number): boolean {

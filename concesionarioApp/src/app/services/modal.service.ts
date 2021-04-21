@@ -1,6 +1,6 @@
 import { Injectable, Type } from '@angular/core';
 import { Subject } from 'rxjs';
-import { ModalInterface } from '../interfaces/moda.interface';
+import { ModalInterface } from '../interfaces/modal.interface';
 
 export type ModalShow<T> = {
   component: Type<ModalInterface>;

@@ -8,6 +8,7 @@ import { comment } from 'src/models/comments.model';
 import { CartService } from 'src/app/services/cart.service';
 import { ImagesService } from 'src/app/services/images.service';
 import { combineLatest } from 'rxjs';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-vehiculo',
@@ -26,7 +27,8 @@ export class VehiculoComponent implements OnInit {
     private _vehiclesService: VehiclesService,
     private _imagesService: ImagesService,
     private _commentsService: CommentsService,
-    private _cartService: CartService) { }
+    private _cartService: CartService,
+    private _toastService: ToastService) { }
 
   ngOnInit(): void {
     this._activatedRoute.params.subscribe((params) => {
@@ -51,7 +53,16 @@ export class VehiculoComponent implements OnInit {
   }
 
   addProduct(id: number) {
-    this._cartService.addToCart(id);
+    let exist = this._cartService.addToCart(id);
+    let message: string;
+
+    if (exist) {
+      message = `Se ha incrementado la cantidad en 1 del producto ${id}`;
+    } else {
+      message = `Se ha agregado el producto ${id}`;
+    }
+
+    this._toastService.show(message);
   }
 
 }
