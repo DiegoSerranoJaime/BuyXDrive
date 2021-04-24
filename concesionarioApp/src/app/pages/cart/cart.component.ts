@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { CartService } from 'src/app/services/cart.service';
 import { VehiclesService } from 'src/app/services/vehicles.service';
 import { cart_data, cart_product } from 'src/models/products.model';
+import { ProductUpdate } from './amount/amount.component';
 
 @Component({
   selector: 'app-cart',
@@ -43,18 +45,15 @@ export class CartComponent implements OnInit {
     });
   }
 
-  updateAmount(id: number, amount: number) {
-    if (amount > 0) {
-      this._cartService.updateAmount(id, amount);
+  updateAmount(productUpdate: ProductUpdate) {
+    this._cartService.updateAmount(productUpdate.product, productUpdate.amount);
 
-      this.products.find((p) => {
-        if (p.id === id) {
-          p.amount = amount;
-        }
-      });
-    } else {
-      this.deleteProduct(id);
-    }
+    this.products.find((p) => {
+      if (p.id === productUpdate.product) {
+        p.amount = productUpdate.amount;
+      }
+    });
+
   }
 
   deleteProduct(id: number) {
