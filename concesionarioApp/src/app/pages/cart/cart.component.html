@@ -19,11 +19,7 @@
             <td>{{ product.bname }} {{ product.mname }}</td>
             <td><img width="100px" [src]="product.image"></td>
             <td>
-              <div class="input-group input-group-sm mb-3 w-75 mx-auto">
-                <button type="button" class="btn btn-primary d-none d-md-block" [disabled]="product.amount == 1" (click)="updateAmount(product.id, product.amount - 1)">-</button>
-                <input type="number" [value]="product.amount" class="form-control form-control-sm">
-                <button type="button" class="btn btn-primary d-none d-md-block" (click)="updateAmount(product.id, product.amount + 1)">+</button>
-              </div>
+                <app-amount [amount]="product.amount" [product]="product.id" (update)="updateAmount($event)"></app-amount>
             </td>
             <td><span *ngIf="product.discount" class="text-decoration-line-through text-muted fs-6" [ngClass]="{'me-1': product.discount}">{{ product.price * product.amount | number:'.0-2' }}</span> {{ product.price * product.amount | discount:product.discount | number:'.0-2'  }}€</td>
             <td><div class="badge bg-primary">{{ product.discount }}%</div></td>

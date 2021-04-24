@@ -1,0 +1,11 @@
+<form [formGroup]="amountForm" (ngSubmit)="updateAmount()">
+  <div class="input-group input-group-sm mb-3 w-75 mx-auto">
+    <button type="button" class="btn btn-primary d-none d-md-block" [disabled]="amountInput.value == 1" (click)="decrementAmount()">-</button>
+    <input type="number" class="form-control form-control-sm" [ngClass]="{'is-invalid': amountInput.touched && amountInput.invalid}" formControlName="amount">
+    <button type="button" class="btn btn-primary d-none d-md-block" (click)="incrementAmount()">+</button>
+  </div>
+  <div *ngIf="amountInput.touched && amountInput.invalid" class="text-danger">
+    <span *ngIf="amountInput.errors['required']">Se necesita una cantidad</span>
+    <span *ngIf="amountInput.errors['min']">La cantidad mínima es de 1</span>
+  </div>
+</form>

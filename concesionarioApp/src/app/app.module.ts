@@ -29,6 +29,7 @@ import { CommentsFormComponent } from './components/comments-form/comments-form.
 import { CommentsComponent } from './components/comments/comments.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { ToastComponent } from './components/toast/toast.component';
+import { AmountComponent } from './pages/cart/amount/amount.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { ToastComponent } from './components/toast/toast.component';
     CommentsFormComponent,
     CommentsComponent,
     CartComponent,
-    ToastComponent
+    ToastComponent,
+    AmountComponent
   ],
   imports: [
     BrowserModule,
