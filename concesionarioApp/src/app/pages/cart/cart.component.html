@@ -19,7 +19,7 @@
             <td>{{ product.bname }} {{ product.mname }}</td>
             <td><img width="100px" [src]="product.image"></td>
             <td>
-                <app-amount [amount]="product.amount" [product]="product.id" (update)="updateAmount($event)"></app-amount>
+              <app-amount [amount]="product.amount" [product]="product.id" (update)="updateAmount($event)"></app-amount>
             </td>
             <td><span *ngIf="product.discount" class="text-decoration-line-through text-muted fs-6" [ngClass]="{'me-1': product.discount}">{{ product.price * product.amount | number:'.0-2' }}</span> {{ product.price * product.amount | discount:product.discount | number:'.0-2'  }}€</td>
             <td><div class="badge bg-primary">{{ product.discount }}%</div></td>
@@ -33,10 +33,10 @@
   <div class="col-12 col-md">
     <div class="card shadow mx-0 my-4">
       <div class="card-body">
-        <p class="d-flex justify-content-between">Precio: <span>{{ total_price }}€</span></p>
-        <p class="d-flex justify-content-between">Descuento: <span>-{{ discount_price }}€</span></p>
+        <p class="d-flex justify-content-between">Precio: <span>{{ total_price | number:'.0-2'  }}€</span></p>
+        <p class="d-flex justify-content-between">Descuento: <span>-{{ discount_price | number:'.0-2' }}€</span></p>
         <hr>
-        <p class="d-flex justify-content-between">Precio Final: <span>{{ total_price - discount_price }}€</span></p>
+        <p class="d-flex justify-content-between">Precio Final: <span>{{ total_price - discount_price | number:'.0-2'  }}€</span></p>
         <div class="d-grid">
           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#checkout">Realizar Compra</button>
         </div>
