@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { combineLatest } from 'rxjs';
 import { CartService } from 'src/app/services/cart.service';
 import { VehiclesService } from 'src/app/services/vehicles.service';
 import { cart_data, cart_product } from 'src/models/products.model';
@@ -19,7 +20,10 @@ export class CartComponent implements OnInit {
   discount_price: number;
 
   constructor(private _cartService: CartService,
-    private _vehicleService: VehiclesService) { }
+    private _vehicleService: VehiclesService) {
+      this.total_price = 0;
+      this.discount_price = 0;
+    }
 
   ngOnInit(): void {
     this._cartService.getCart().subscribe((cart: cart_data[]) => {
@@ -38,10 +42,20 @@ export class CartComponent implements OnInit {
 
           this.products.push(new_product);
 
-          this.total_price += new_product.price;
-          this.discount_price += (new_product.price * new_product.discount) / 100;
+          this.total_price += new_product.price * new_product.amount;
+          this.discount_price += (new_product.price * new_product.amount * new_product.discount) / 100;
         });
-      })
+      });
+    });
+  }
+
+  calculatePrice() {
+    this.total_price = 0;
+    this.discount_price = 0;
+
+    this.products.forEach((product) => {
+      this.total_price += product.price * product.amount;
+      this.discount_price += (product.price * product.amount * product.discount) / 100;
     });
   }
 
@@ -54,6 +68,7 @@ export class CartComponent implements OnInit {
       }
     });
 
+    this.calculatePrice();
   }
 
   deleteProduct(id: number) {
@@ -64,6 +79,8 @@ export class CartComponent implements OnInit {
     });
 
     this.products.splice(index, 1);
+
+    this.calculatePrice();
   }
 
 }
