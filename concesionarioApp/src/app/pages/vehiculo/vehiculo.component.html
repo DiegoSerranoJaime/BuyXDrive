@@ -82,7 +82,7 @@
         <hr>
         <p class="d-flex justify-content-between">Precio Final: <span>{{ vehicle.price | discount:vehicle.discount | number:'.2-2' }}€</span></p>
         <div class="d-grid">
-          <button type="button" class="btn btn-primary" (click)="addProduct(vehicle.id)">Agregar al carrito</button>
+          <button type="button" class="btn btn-primary" (click)="addProduct()">Agregar al carrito</button>
         </div>
       </div>
     </div>
@@ -91,7 +91,7 @@
 
 <hr>
 
-<app-init-vehicles [vehicles]="vehicle_rel" [categoryTitle]="'Vehículos relacionados'"></app-init-vehicles>
+<app-init-vehicles [vehicles]="vehicleRel" [categoryTitle]="'Vehículos relacionados'"></app-init-vehicles>
 
 <hr>
 
