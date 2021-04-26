@@ -19,7 +19,7 @@ export class VehiculoComponent implements OnInit {
 
   public id: number;
   public vehicle: vehicle;
-  public vehicle_rel: vehicle_card[] = [];
+  public vehicleRel: vehicle_card[] = [];
   public images: any[] = [];
   public comments: comment[] = [];
 
@@ -39,7 +39,7 @@ export class VehiculoComponent implements OnInit {
         this.vehicle = vehicle;
 
         this._vehiclesService.getInitVehiclesByType(vehicle.type, this.id).subscribe((data: vehicle_card[]) => {
-          this.vehicle_rel = data;
+          this.vehicleRel = data;
         });
 
         this.images = images;
@@ -52,14 +52,16 @@ export class VehiculoComponent implements OnInit {
     });
   }
 
-  addProduct(id: number) {
-    let exist = this._cartService.addToCart(id);
+  addProduct() {
+    let exist = this._cartService.addToCart(this.id);
     let message: string;
 
+    let vehicleName: string = `${this.vehicle.bname} ${this.vehicle.mname}`;
+
     if (exist) {
-      message = `Se ha incrementado la cantidad en 1 del producto ${id}`;
+      message = `Se ha incrementado la cantidad en 1 del producto ${vehicleName}`;
     } else {
-      message = `Se ha agregado el producto ${id}`;
+      message = `Se ha agregado el producto ${vehicleName}`;
     }
 
     this._toastService.show(message);
