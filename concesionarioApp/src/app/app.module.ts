@@ -30,6 +30,7 @@ import { CommentsComponent } from './components/comments/comments.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { ToastComponent } from './components/toast/toast.component';
 import { AmountComponent } from './pages/cart/amount/amount.component';
+import { RatingModule } from 'ng-starrating';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { AmountComponent } from './pages/cart/amount/amount.component';
     BrowserAnimationsModule,
     MatSnackBarModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    RatingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
