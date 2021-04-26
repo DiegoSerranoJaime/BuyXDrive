@@ -23,7 +23,7 @@ export class CommentsFormComponent implements OnInit {
   createFormControls() {
     this.title = new FormControl('', [Validators.required, Validators.maxLength(50), Validators.minLength(5)]);
     this.body = new FormControl('', [Validators.required, Validators.maxLength(255), Validators.minLength(10)]);
-    this.valoration = new FormControl('', [Validators.required, Validators.max(5), Validators.min(0)]);
+    this.valoration = new FormControl(0, [Validators.required, Validators.max(5), Validators.min(0)]);
   }
 
   createForm() {
@@ -35,9 +35,8 @@ export class CommentsFormComponent implements OnInit {
   }
 
   submit() {
-
     if (this.myForm.valid) {
-
+      console.log(this.myForm);
     }
 
     this.myForm.markAllAsTouched();
