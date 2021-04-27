@@ -5,6 +5,8 @@ exports.getInitVehicles = function(req, res) {
         if(err) {
             res.send(err);
         }
+
+        vehicles = imageRoute(vehicles);
         
         res.json(vehicles);
     });
@@ -15,6 +17,8 @@ exports.getInitVehiclesByType = function(req, res) {
         if(err) {
             res.send(err);
         }
+
+        vehicles = imageRoute(vehicles);
         
         res.json(vehicles);
     });
@@ -31,12 +35,14 @@ exports.getVehicle = function(req, res) {
 };
 
 exports.getVehicleCart = function(req, res) {
-    Vehicles.getVehicle(req.params.id, (err, vehicle) => {
+    Vehicles.getVehicleCart(req.params.id, (err, vehicles) => {
         if(err) {
             res.send(err);
         }
         
-        res.json(vehicle);
+        vehicles = imageRoute(vehicles);
+
+        res.json(vehicles);
     });
 };
 
@@ -49,3 +55,11 @@ exports.getVehicleTypes = function(req, res) {
         res.json(vehicles);
     });
 };
+
+imageRoute = function(data) {
+    for (let i = 0; i < data.length; i++) {
+        data[i].image = 'http://localhost:3000/api/images/' + data[i].image;
+    }
+
+    return data;
+}

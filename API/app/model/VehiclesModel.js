@@ -130,8 +130,8 @@ Vehicles.getVehicleCart = function(id, result) {
                 INNER JOIN models ON vehicles.model_id = models.id
                 INNER JOIN brands ON models.brand_id = brands.id
                 INNER JOIN images ON products.id = images.product_id
-                GROUP BY products.id
-                WHERE products.id = ?`;
+                WHERE products.id = ?
+                GROUP BY products.id`;
 
     sql.query(query, id, (err, res) => {
         if (err) {

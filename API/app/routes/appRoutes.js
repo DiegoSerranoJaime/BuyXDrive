@@ -14,7 +14,10 @@ module.exports = function(app) {
 
     //Endpoint de Images
     app.route('/api/images/product/:id')
-        .get(images.getImagesOfAProduct);
+        .get(images.getImagesRoutes);
+        
+    app.route('/api/images/:image')
+        .get(images.getImage);
 
     //Endpoints de vehiculos
     app.route('/api/vehicles/init')

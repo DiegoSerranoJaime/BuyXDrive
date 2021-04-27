@@ -4,13 +4,14 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { vehicle, vehicle_card, vehicle_type } from 'src/models/vehicles.model';
 import { cart_product } from 'src/models/products.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VehiclesService {
 
-  baseUrl: string = 'http://localhost:3000/api/vehicles';
+  baseUrl: string = `${environment.urlApi}/vehicles`;
 
   constructor(private _http: HttpClient) { }
 

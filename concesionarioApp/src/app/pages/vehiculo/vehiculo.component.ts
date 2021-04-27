@@ -25,7 +25,7 @@ export class VehiculoComponent implements OnInit {
 
   constructor(private _activatedRoute: ActivatedRoute,
     private _vehiclesService: VehiclesService,
-    private _imagesService: ImagesService,
+    public _imagesService: ImagesService,
     private _commentsService: CommentsService,
     private _cartService: CartService,
     private _toastService: ToastService) { }
@@ -43,7 +43,6 @@ export class VehiculoComponent implements OnInit {
         });
 
         this.images = images;
-
       });
 
       this._commentsService.getCommentsOfAProduct(this.id).subscribe((data: comment[]) => {
