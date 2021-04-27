@@ -29,7 +29,7 @@ app.listen(port, () => {
 });
 
 // BodyParser
-app.use(bodyParser.urlencoded({ extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Rutas de la api
