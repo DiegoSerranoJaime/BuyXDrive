@@ -23,7 +23,7 @@
             </td>
             <td><span *ngIf="product.discount" class="text-decoration-line-through text-muted fs-6" [ngClass]="{'me-1': product.discount}">{{ product.price * product.amount | number:'.0-2' }}</span> {{ product.price * product.amount | discount:product.discount | number:'.0-2'  }}€</td>
             <td><div class="badge bg-primary">{{ product.discount }}%</div></td>
-            <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminar"><i class="fas fa-trash"></i></button></td>
+            <td><button type="button" class="btn btn-danger" (click)="deleteModal(product, i)"><i class="fas fa-trash"></i></button></td>
           </tr>
           <!-- <app-cart-product  [orden]="i" [cart_data]="product"></app-cart-product> -->
         </tbody>

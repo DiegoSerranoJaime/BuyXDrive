@@ -31,6 +31,7 @@ import { CartComponent } from './pages/cart/cart.component';
 import { ToastComponent } from './components/toast/toast.component';
 import { AmountComponent } from './pages/cart/amount/amount.component';
 import { RatingModule } from 'ng-starrating';
+import { SimpleBodyModalComponent } from './components/modals/simple-body-modal/simple-body-modal.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { RatingModule } from 'ng-starrating';
     CommentsComponent,
     CartComponent,
     ToastComponent,
-    AmountComponent
+    AmountComponent,
+    SimpleBodyModalComponent,
   ],
   imports: [
     BrowserModule,

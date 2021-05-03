@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { combineLatest } from 'rxjs';
+import { SimpleBodyModalComponent } from 'src/app/components/modals/simple-body-modal/simple-body-modal.component';
 import { CartService } from 'src/app/services/cart.service';
+import { ModalService } from 'src/app/services/modal.service';
+import { ToastService } from 'src/app/services/toast.service';
 import { VehiclesService } from 'src/app/services/vehicles.service';
 import { cart_data, cart_product } from 'src/models/products.model';
 import { ProductUpdate } from './amount/amount.component';
@@ -20,7 +21,9 @@ export class CartComponent implements OnInit {
   discount_price: number;
 
   constructor(private _cartService: CartService,
-    private _vehicleService: VehiclesService) {
+    private _vehicleService: VehiclesService,
+    private _modalService: ModalService,
+    private _toastService: ToastService) {
       this.total_price = 0;
       this.discount_price = 0;
     }
@@ -71,16 +74,34 @@ export class CartComponent implements OnInit {
     this.calculatePrice();
   }
 
-  deleteProduct(id: number) {
-    this._cartService.removeFromCart(id);
-
-    let index = this.products.findIndex((p) => {
-      p.id == id;
-    });
-
-    this.products.splice(index, 1);
-
-    this.calculatePrice();
+  deleteProduct(index: number) {
+    if (index >= 0) {
+      this._cartService.removeFromCart(index);
+      this.products.splice(index, 1);
+      this.calculatePrice();
+      return true;
+    } else {
+      return false;
+    }
   }
 
+
+  public deleteModal(product: cart_product, index: number) {
+    this._modalService.show(SimpleBodyModalComponent,
+      {
+      title: `Eliminar <span class="text-danger">Producto</span>`,
+      aceptar: (component) => {
+        if(this.deleteProduct(index)) {
+          this._toastService.show('Se ha eliminado el producto exitosamente');
+        } else {
+          this._toastService.show('No se ha podido eliminar el producto');
+        }
+
+        this._modalService.hide();
+      }},
+      {
+        body: `¿Estás seguro de que deseas eliminar el producto <span class="text-danger">${product.bname} ${product.mname}</span> de su carrito?`,
+      }
+    );
+  }
 }

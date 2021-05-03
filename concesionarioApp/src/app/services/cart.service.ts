@@ -48,27 +48,16 @@ export class CartService {
     return exist;
   }
 
-  removeFromCart(product_id: number): boolean {
-    let index = this.cart.findIndex((p) => product_id == p.id);
-
-    if (index >= 0) {
-      this.cart.splice(index, 1);
-      this.save();
-      return true;
-    }
-
-    return false;
+  removeFromCart(index: number): boolean {
+    this.cart.splice(index, 1);
+    return true;
   }
 
   updateAmount(product_id: number, amount: number): void {
-    if (amount <= 0) {
-      this.removeFromCart(product_id);
-    } else {
-      let index = this.cart.findIndex((p) => product_id == p.id);
+    let index = this.cart.findIndex((p) => product_id == p.id);
 
-      if (index >= 0) {
-        this.cart[index].amount = amount;
-      }
+    if (index >= 0) {
+      this.cart[index].amount = amount;
     }
 
     this.save();
