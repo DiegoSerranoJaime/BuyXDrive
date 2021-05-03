@@ -30,7 +30,7 @@
           </li>
         </ul>
         <div class="col-12 col-md-auto">
-          <div class="row gap-2">
+          <div class="row gap-2" *ngIf="!isAuthenticated(); else auth">
             <div class="col-12 pe-md-0 col-md-auto">
               <div class="d-grid">
                 <button class="btn btn-sm btn-primary" type="button" (click)="login()">Iniciar Sesion</button>
@@ -42,6 +42,20 @@
               </div>
             </div>
           </div>
+          <ng-template #auth>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle active" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {{ userData.email }}
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="navbarDarkDropdownMenuLink">
+                <li><a class="dropdown-item">Perfil</a></li>
+                <li><a class="dropdown-item">Historial</a></li>
+                <li><a class="dropdown-item">Configuracion</a></li>
+                <li><hr></li>
+                <li><a class="dropdown-item text-danger" (click)="logout()">Cerrar Sesión</a></li>
+              </ul>
+          </li>
+          </ng-template>
         </div>
       </div>
     </div>

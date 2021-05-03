@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 import { ModalService } from 'src/app/services/modal.service';
 import { LoginComponent } from '../modals/login/login.component';
 
@@ -9,7 +10,10 @@ import { LoginComponent } from '../modals/login/login.component';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private _modal: ModalService) { }
+  userData: any = {};
+
+  constructor(private _modal: ModalService,
+    private _authService: AuthService) { }
 
   ngOnInit(): void {
   }
@@ -19,10 +23,26 @@ export class NavbarComponent implements OnInit {
       title: 'Inicio de <span class="text-danger">Sesión</span>',
       botonAceptar: 'Iniciar sesión',
       aceptar: (componente) => {
-        console.log(componente.data)
-        this._modal.hide();
+        if (componente.myForm.valid) {
+          this._authService.login(componente.myForm.value);
+          this._authService.getDecodedToken().then((res) => {
+            console.log(res);
+          }).catch((err) => {
+            console.log(err);
+          });
+          this._modal.hide();
+        }
+        componente.myForm.markAllAsTouched();
       }
    });
+  }
+
+  logout() {
+    this._authService.logout();
+  }
+
+  isAuthenticated() {
+    return this._authService.isAuthenticated();
   }
 
 }
