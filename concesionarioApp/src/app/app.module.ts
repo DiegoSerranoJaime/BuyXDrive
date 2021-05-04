@@ -33,6 +33,16 @@ import { AmountComponent } from './pages/cart/amount/amount.component';
 import { RatingModule } from 'ng-starrating';
 import { SimpleBodyModalComponent } from './components/modals/simple-body-modal/simple-body-modal.component';
 
+import { JwtModule, JwtModuleOptions } from '@auth0/angular-jwt';
+
+const JWT_Module_Options: JwtModuleOptions = {
+  config: {
+    tokenGetter: () => {
+      return localStorage.getItem('token');
+    }
+  }
+};
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,7 +76,8 @@ import { SimpleBodyModalComponent } from './components/modals/simple-body-modal/
     MatSnackBarModule,
     MatIconModule,
     MatButtonModule,
-    RatingModule
+    RatingModule,
+    JwtModule.forRoot(JWT_Module_Options)
   ],
   providers: [],
   bootstrap: [AppComponent]
