@@ -37,8 +37,10 @@ module.exports = function(app) {
 
     //Endpoints de comentarios    
     app.route('/api/comments/products/:id')
-        .post(verifyToken, comments.addComment)
         .get(comments.getCommentsOfAProduct);
+    
+    app.route('/api/comments/products')
+        .post(verifyToken, comments.addComment);
 
     // JSON web token use example
     // app.route('/api/user/reserve')
@@ -48,14 +50,13 @@ module.exports = function(app) {
 
     function verifyToken(req, res, next) {
         const bearerHeader = req.headers['authorization'];
-    
+        
         if (typeof bearerHeader !== 'undefined') {
             const bearer = bearerHeader.split(' ');
     
             const bearerToken = bearer[1];
     
             req.token = bearerToken;
-            
             next();
         } else {
             res.sendStatus(403);

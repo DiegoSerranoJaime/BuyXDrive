@@ -16,6 +16,7 @@ export class NavbarComponent implements OnInit {
     private _authService: AuthService) { }
 
   ngOnInit(): void {
+    this.userData = this._authService.getDecodedToken();
   }
 
   public login() {

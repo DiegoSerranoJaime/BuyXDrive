@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
+import { CommentsService } from 'src/app/services/comments.service';
+import { ToastService } from 'src/app/services/toast.service';
+import { CommentSend } from 'src/models/comments.model';
 
 @Component({
   selector: 'app-comments-form',
@@ -8,12 +12,16 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class CommentsFormComponent implements OnInit {
 
+  @Input() product_id: number;
+
   myForm: FormGroup;
   title: FormControl;
   body: FormControl;
   valoration: FormControl;
 
-  constructor() { }
+  constructor(public _authService: AuthService,
+    private _commentsService: CommentsService,
+    private _toastService: ToastService) { }
 
   ngOnInit(): void {
     this.createFormControls();
@@ -36,7 +44,16 @@ export class CommentsFormComponent implements OnInit {
 
   submit() {
     if (this.myForm.valid) {
-      console.log(this.myForm);
+      let comment: CommentSend = {
+        ...this.myForm.value,
+        product_id: Number(this.product_id)
+      };
+
+      this._commentsService.insertCommentOfAProduct(comment).subscribe((data) => {
+        this._toastService.show(data.msg);
+      }, (err) => {
+        this._toastService.show('No se ha podido agregar el comentario');
+      });
     }
 
     this.myForm.markAllAsTouched();

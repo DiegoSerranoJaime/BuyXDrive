@@ -2,9 +2,9 @@
 
 const sql = require('./db');
 
-let Comments = function(comment, user, product_id) {
+let Comments = function(comment, user) {
     this.user_id = user.user.id;
-    this.product_id = product_id;
+    this.product_id = comment.product_id;
     this.title = comment.title;
     this.body = comment.body;
     this.valoration = comment.valoration;
@@ -12,14 +12,21 @@ let Comments = function(comment, user, product_id) {
 };
 
 Comments.addComment = function(comment, result) {
-    sql.query('INSERT INTO comments SET ?', comment, (err, res) => {
-
-        if (err) {
-            console.log("error: ", err);
-            result(err, null);
+    sql.query('SELECT * FROM comments WHERE user_id = ? AND product_id = ?', [comment.user_id, comment.product_id], (err, res) => {
+        if (res.length == 0) {
+            sql.query('INSERT INTO comments SET ?', comment, (err, res) => {
+                if (err) {
+                    console.log("error: ", err);
+                    result(err, null);
+                }
+                
+                result(null, res);
+            });
+        } else {
+            result(null, {
+                duplicate: true
+            });
         }
-
-        result(null, res);
     });
 };
 
