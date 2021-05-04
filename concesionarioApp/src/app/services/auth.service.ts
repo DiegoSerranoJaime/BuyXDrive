@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { Subscription, timer } from 'rxjs';
+import { Observable, of, Subject, Subscription, timer } from 'rxjs';
 import jwt_decode from "jwt-decode";
 import { environment } from 'src/environments/environment';
 
@@ -12,6 +12,7 @@ import { environment } from 'src/environments/environment';
 export class AuthService {
   tokenExpireSubscription: Subscription;
   baseUrl: string = `${environment.urlApi}/user`;
+  dataToken: Subject<any> = new Subject();
 
   constructor(private _http: HttpClient,
     private _jwtHelper: JwtHelperService) { }
@@ -25,6 +26,8 @@ export class AuthService {
       }
 
       const token: any = jwt_decode(data.token);
+
+      this.dataToken.next(token);
 
       this.tokenExpireSubscription = timer(new Date(token.exp * 1000)).subscribe(() => localStorage.removeItem('token'));
     });
@@ -56,15 +59,12 @@ export class AuthService {
     return false;
   }
 
-  getDecodedToken(): Promise<any>{
+  getDecodedToken(): Observable<any>{
     let token
 
-    return new Promise<any>((resolve, reject) => {
-      if (this.isAuthenticated()) {
-        resolve(jwt_decode(localStorage.getItem('token')));
-      } else {
-        reject(null);
-      }
-    })
+    if (localStorage.getItem('token')) {
+      token = jwt_decode(localStorage.getItem('token'));
+    }
+    return of(token);
   }
 }

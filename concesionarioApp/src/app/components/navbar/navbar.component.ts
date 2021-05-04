@@ -24,12 +24,10 @@ export class NavbarComponent implements OnInit {
       botonAceptar: 'Iniciar sesión',
       aceptar: (componente) => {
         if (componente.myForm.valid) {
-          this._authService.login(componente.myForm.value);
-          this._authService.getDecodedToken().then((res) => {
-            console.log(res);
-          }).catch((err) => {
-            console.log(err);
-          });
+            this._authService.dataToken.subscribe((token) => {
+              this.userData = token.user;
+            });
+            this._authService.login(componente.myForm.value);
           this._modal.hide();
         }
         componente.myForm.markAllAsTouched();
