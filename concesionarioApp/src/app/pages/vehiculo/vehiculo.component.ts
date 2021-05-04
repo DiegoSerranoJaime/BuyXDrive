@@ -4,7 +4,7 @@ import { VehiclesService } from 'src/app/services/vehicles.service';
 import { vehicle, vehicle_card } from 'src/models/vehicles.model';
 import { withLatestFrom } from 'rxjs/operators';
 import { CommentsService } from 'src/app/services/comments.service';
-import { comment } from 'src/models/comments.model';
+import { Comment } from 'src/models/comments.model';
 import { CartService } from 'src/app/services/cart.service';
 import { ImagesService } from 'src/app/services/images.service';
 import { combineLatest } from 'rxjs';
@@ -21,7 +21,7 @@ export class VehiculoComponent implements OnInit {
   public vehicle: vehicle;
   public vehicleRel: vehicle_card[] = [];
   public images: any[] = [];
-  public comments: comment[] = [];
+  public comments: Comment[] = [];
 
   constructor(private _activatedRoute: ActivatedRoute,
     private _vehiclesService: VehiclesService,
@@ -45,7 +45,7 @@ export class VehiculoComponent implements OnInit {
         this.images = images;
       });
 
-      this._commentsService.getCommentsOfAProduct(this.id).subscribe((data: comment[]) => {
+      this._commentsService.getCommentsOfAProduct(this.id).subscribe((data: Comment[]) => {
         this.comments = data;
       });
     });

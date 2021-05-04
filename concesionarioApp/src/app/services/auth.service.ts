@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { Observable, of, Subject, Subscription, timer } from 'rxjs';
+import { Subject, Subscription, timer } from 'rxjs';
 import jwt_decode from "jwt-decode";
 import { environment } from 'src/environments/environment';
 
@@ -28,8 +28,9 @@ export class AuthService {
       const token: any = jwt_decode(data.token);
 
       this.dataToken.next(token);
+      this.saveDataToken(token);
 
-      this.tokenExpireSubscription = timer(new Date(token.exp * 1000)).subscribe(() => localStorage.removeItem('token'));
+      this.tokenExpireSubscription = timer(new Date(token.exp * 1000)).subscribe(() => this.logout());
     });
   }
 
@@ -38,9 +39,8 @@ export class AuthService {
   }
 
   logout() {
-    if (localStorage.getItem('token')) {
-      return localStorage.removeItem('token');
-    }
+    localStorage.removeItem('token');
+    localStorage.removeItem('dataToken');
   }
 
   isAuthenticated(): boolean {
@@ -59,12 +59,27 @@ export class AuthService {
     return false;
   }
 
-  getDecodedToken(): Observable<any>{
+  getDecodedToken(): any{
     let token
 
-    if (localStorage.getItem('token')) {
-      token = jwt_decode(localStorage.getItem('token'));
+    if (localStorage.getItem('dataToken')) {
+      token = JSON.parse(localStorage.getItem('dataToken'));
     }
-    return of(token);
+
+    return token.user;
+  }
+
+  saveDataToken(token: any) {
+    localStorage.setItem('dataToken', JSON.stringify(token));
+  }
+
+  getToken() {
+    if (localStorage.getItem('token')) {
+      let header = new HttpHeaders()
+        .set('Authorization', `Bearer ${localStorage.getItem('token')}`);
+      return header;
+    }
+
+    return null;
   }
 }
