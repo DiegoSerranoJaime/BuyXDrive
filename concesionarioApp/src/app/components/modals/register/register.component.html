@@ -1,0 +1,56 @@
+<form class="mx-1" [formGroup]="myForm">
+  <div class="mb-3">
+    <label for="name" class="form-label">Nombre</label>
+    <input type="text" class="form-control" id="name" formControlName="name" [ngClass]="{'is-invalid': name.touched && name.invalid}">
+    <div class="text-danger" *ngIf="name.touched && name.invalid">
+      <span *ngIf="name.hasError('required')">El nombre es requerido</span>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="surname" class="form-label">Apellidos</label>
+    <input type="text" class="form-control" id="surname" formControlName="surname" [ngClass]="{'is-invalid': surname.touched && surname.invalid}">
+    <div class="text-danger" *ngIf="surname.touched && surname.invalid">
+      <span *ngIf="surname.hasError('required')">Los apellidos son requeridos</span>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="email" class="form-label">Correo electrónico</label>
+    <input type="email" class="form-control" id="email" formControlName="email" [ngClass]="{'is-invalid': email.touched && email.invalid}">
+    <div class="text-danger" *ngIf="email.touched && email.invalid">
+      <span *ngIf="email.hasError('required')">El Email es requerido</span>
+      <span *ngIf="email.hasError('pattern')">El Email introducido no tiene el formato correcto</span>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Contraseña</label>
+    <input type="password" class="form-control" id="password" formControlName="password" [ngClass]="{'is-invalid': password.touched && password.invalid}">
+    <div class="text-danger" *ngIf="password.touched && password.invalid">
+      <span *ngIf="password.hasError('required')">La contraseña es requerida</span>
+      <span *ngIf="password.hasError('minlength')">La contraseña tiene una longitud mínima de 8 carácteres</span>
+      <span *ngIf="password.hasError('maxlength')">La contraseña tiene una longitud máxima de 16 carácteres</span>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="c-password" class="form-label">Confirmar Contraseña</label>
+    <input type="password" class="form-control" id="c-password" formControlName="passwordConfirmation" [ngClass]="{'is-invalid': passwordConfirmation.touched && passwordConfirmation.invalid}">
+    <div class="text-danger" *ngIf="passwordConfirmation.touched && passwordConfirmation.invalid">
+      <span *ngIf="passwordConfirmation.hasError('required')">La contraseña es requerida</span>
+      <span *ngIf="passwordConfirmation.hasError('minlength')">La contraseña tiene una longitud mínima de 8 carácteres</span>
+      <span *ngIf="passwordConfirmation.hasError('maxlength')">La contraseña tiene una longitud máxima de 16 carácteres</span>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="address" class="form-label">Dirección</label>
+    <input type="text" class="form-control" id="address" formControlName="address" [ngClass]="{'is-invalid': address.touched && address.invalid}">
+    <div class="text-danger" *ngIf="address.touched && address.invalid">
+      <span *ngIf="address.hasError('required')">La dirección es requerida</span>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="phoneNumber" class="form-label">Número de teléfono</label>
+    <input type="text" class="form-control" id="phoneNumber" formControlName="phoneNumber" [ngClass]="{'is-invalid': phoneNumber.touched && phoneNumber.invalid}">
+    <div class="text-danger" *ngIf="phoneNumber.touched && phoneNumber.invalid">
+      <span *ngIf="phoneNumber.hasError('required')">El número de teléfono es requerido</span>
+    </div>
+  </div>
+</form>

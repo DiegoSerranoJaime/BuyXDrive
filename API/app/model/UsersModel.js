@@ -26,13 +26,22 @@ Users.login = function(user, result) {
 };
 
 Users.register = function(user, result) {
-    sql.query("INSERT INTO users SET ?", user, (err, res) => {
-        if (err) {
-            console.log("error: ", err);
-            result(err, null);
+    sql.query("SELECT email FROM users WHERE email = ?", user.email, (err, res) => {
+        if (res.length == 0) {
+            sql.query("INSERT INTO users SET ?", user, (err, res) => {
+                if (err) {
+                    console.log("error: ", err);
+                    result(err, null);
+                }
+                
+                result(null, res);
+            });
+        } else {
+            result(null, {
+                duplicate: true,
+                msg: 'El correó electrónico ya existe'
+            });
         }
-        
-        result(null, res);
     });
 };
 

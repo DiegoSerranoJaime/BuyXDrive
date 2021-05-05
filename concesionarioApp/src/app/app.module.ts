@@ -34,6 +34,7 @@ import { RatingModule } from 'ng-starrating';
 import { SimpleBodyModalComponent } from './components/modals/simple-body-modal/simple-body-modal.component';
 
 import { JwtModule, JwtModuleOptions } from '@auth0/angular-jwt';
+import { RegisterComponent } from './components/modals/register/register.component';
 
 const JWT_Module_Options: JwtModuleOptions = {
   config: {
@@ -66,6 +67,7 @@ const JWT_Module_Options: JwtModuleOptions = {
     ToastComponent,
     AmountComponent,
     SimpleBodyModalComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
