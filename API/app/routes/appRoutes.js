@@ -4,6 +4,7 @@ module.exports = function(app) {
     let vehicles = require('../controller/VehiclesController');
     let images = require('../controller/ImagesController');
     let comments = require('../controller/CommentsController');
+    let orders = require('../controller/OrdersController');
     
     //Endpoints de login y registro
     app.route('/api/user/login')
@@ -41,6 +42,17 @@ module.exports = function(app) {
     
     app.route('/api/comments/products')
         .post(verifyToken, comments.addComment);
+
+    //Endpoints para pedidos
+    app.route('/api/orders')
+        .post(verifyToken, orders.createOrder)
+        .get(verifyToken, orders.getOrders);
+
+    app.route('/api/orders/:id/products')
+        .get(verifyToken, orders.getProductsFromAnOrder);
+
+    app.route('/api/orders/product')
+        .post(verifyToken, orders.addProductToAnOrder);
 
     // JSON web token use example
     // app.route('/api/user/reserve')

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { SimpleBodyModalComponent } from 'src/app/components/modals/simple-body-modal/simple-body-modal.component';
+import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
 import { ModalService } from 'src/app/services/modal.service';
+import { OrdersService } from 'src/app/services/orders.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { VehiclesService } from 'src/app/services/vehicles.service';
 import { cart_data, cart_product } from 'src/models/products.model';
@@ -17,15 +19,17 @@ export class CartComponent implements OnInit {
   cart: cart_data[] = [];
   products: cart_product[] = [];
 
-  total_price: number;
-  discount_price: number;
+  totalPrice: number;
+  discountPrice: number;
 
   constructor(private _cartService: CartService,
     private _vehicleService: VehiclesService,
     private _modalService: ModalService,
-    private _toastService: ToastService) {
-      this.total_price = 0;
-      this.discount_price = 0;
+    private _toastService: ToastService,
+    public _authService: AuthService,
+    private _ordersService: OrdersService) {
+      this.totalPrice = 0;
+      this.discountPrice = 0;
     }
 
   ngOnInit(): void {
@@ -45,20 +49,20 @@ export class CartComponent implements OnInit {
 
           this.products.push(new_product);
 
-          this.total_price += new_product.price * new_product.amount;
-          this.discount_price += (new_product.price * new_product.amount * new_product.discount) / 100;
+          this.totalPrice += new_product.price * new_product.amount;
+          this.discountPrice += (new_product.price * new_product.amount * new_product.discount) / 100;
         });
       });
     });
   }
 
   calculatePrice() {
-    this.total_price = 0;
-    this.discount_price = 0;
+    this.totalPrice = 0;
+    this.discountPrice = 0;
 
     this.products.forEach((product) => {
-      this.total_price += product.price * product.amount;
-      this.discount_price += (product.price * product.amount * product.discount) / 100;
+      this.totalPrice += product.price * product.amount;
+      this.discountPrice += (product.price * product.amount * product.discount) / 100;
     });
   }
 
@@ -103,5 +107,30 @@ export class CartComponent implements OnInit {
         body: `¿Estás seguro de que deseas eliminar el producto <span class="text-danger">${product.bname} ${product.mname}</span> de su carrito?`,
       }
     );
+  }
+
+  public buyProducts() {
+    this._modalService.show(SimpleBodyModalComponent,
+      {
+        title: `Realizar <span class="text-danger">Compra</span>`,
+        aceptar: (component) => {
+          this._ordersService.buyProducts(this.products);
+          this.clean()
+        }
+      },
+      {
+        body: `<p>¿Estas seguro de que deseas realizar la compra de los próximos productos?</p>
+        <p class="text-danger">Una vez se realice solo se podrá cancelar mientras su estado sea pendiente</p>`
+      });
+  }
+
+  clean() {
+    this.products = [];
+    this.totalPrice = 0;
+    this.discountPrice= 0
+  }
+
+  disableBuy() {
+    return this._authService.isAuthenticated() && this.products.length > 0 ? false : true;
   }
 }
