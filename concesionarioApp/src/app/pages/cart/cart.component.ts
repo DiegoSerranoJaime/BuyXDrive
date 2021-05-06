@@ -114,8 +114,12 @@ export class CartComponent implements OnInit {
       {
         title: `Realizar <span class="text-danger">Compra</span>`,
         aceptar: (component) => {
-          this._ordersService.buyProducts(this.products);
-          this.clean()
+          this._ordersService.buyProducts(this.products).subscribe((data) => {
+            this.clean();
+            this._cartService.clean();
+            this._modalService.hide();
+            this._toastService.show(`Se ha creado un nuevo pedido con el código ${data}`);
+          });
         }
       },
       {
