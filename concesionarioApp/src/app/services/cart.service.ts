@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { cart_data } from 'src/models/products.model';
+import { cart_data, cart_product } from 'src/models/products.model';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class CartService {
 
   cart: cart_data[] = [];
 
-  constructor() {
+  constructor(private _authService: AuthService) {
     this.load();
   }
 
@@ -50,6 +51,8 @@ export class CartService {
 
   removeFromCart(index: number): boolean {
     this.cart.splice(index, 1);
+
+    this.save();
     return true;
   }
 
@@ -63,4 +66,10 @@ export class CartService {
     this.save();
   }
 
+  clean() {
+    if (localStorage.getItem('cart')) {
+      localStorage.removeItem('cart');
+      this.cart = [];
+    }
+  }
 }
