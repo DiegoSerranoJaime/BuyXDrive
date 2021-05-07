@@ -34,9 +34,9 @@ Orders.addProductToAnOrder = function(product, result) {
 };
 
 Orders.getOrdersNotDelivered = function(id, result) {
-    let query = `SELECT id, status, order_date, publication_date
+    let query = `SELECT id, status, order_date, delivery_date
     FROM orders
-    WHERE user_id = ?`;
+    WHERE user_id = ? AND status != 'Entregado'`;
 
     sql.query(query, id, (err, res) => {
         if (err) {

@@ -52,7 +52,7 @@ exports.getOrdersNotDelivered = function(req, res) {
         if (err) {
             res.sendStatus(403);
         } else {
-            Orders.getOrders(authData.user.id, (err, data) => {
+            Orders.getOrdersNotDelivered(authData.user.id, (err, data) => {
                 if(err) {
                     res.send(err);
                 }

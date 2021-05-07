@@ -2,11 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { order } from 'src/models/orders.model';
 import { cart_product } from 'src/models/products.model';
 import { AuthService } from './auth.service';
-import { CartService } from './cart.service';
-import { ModalService } from './modal.service';
-import { ToastService } from './toast.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +12,24 @@ import { ToastService } from './toast.service';
 export class OrdersService {
 
   private baseUrl: string = `${ environment.urlApi }/orders`;
+  public orderColumns: string[] = ['Código', 'Estado', 'Fecha del pedido', 'Fecha de entrega', 'Acciones'];
+  public orderFields: any[] = [
+    {
+      field: 'id',
+      type: 'string'
+    },
+    {
+      field: 'status',
+      type: 'string'
+    },
+    {
+      field: 'order_date',
+      type: 'date'
+    }, {
+      field: 'delivery_date',
+      type: 'date'
+    }
+  ];
 
   constructor(private _http: HttpClient,
     private _authService: AuthService) { }
@@ -43,5 +59,11 @@ export class OrdersService {
     });
 
     return order;
+  }
+
+  getOrdersNotDelivered(): Observable<order[]> {
+    return this._http.get<order[]>(`${this.baseUrl}/not-delivered`, {
+      headers: this._authService.getToken()
+    });
   }
 }
