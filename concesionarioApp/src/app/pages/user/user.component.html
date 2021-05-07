@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="col-12">
+    <nav mat-tab-nav-bar>
+      <a mat-tab-link *ngFor="let link of links"
+      (click)="activeLink = link"
+      [active]="activeLink == link"
+      [routerLink]="[link.route]">{{ link.name }}</a>
+    </nav>
+    <div class="my-2">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

@@ -46,7 +46,7 @@ exports.addProductToAnOrder = function(req, res) {
     });
 }
 
-exports.getOrders = function(req, res) {
+exports.getOrdersNotDelivered = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
 
         if (err) {
