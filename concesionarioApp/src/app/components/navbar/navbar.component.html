@@ -49,9 +49,9 @@
                   {{ userData.email }}
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="navbarDarkDropdownMenuLink">
-                  <li><a class="dropdown-item">Perfil</a></li>
-                  <li><a class="dropdown-item">Historial</a></li>
-                  <li><a class="dropdown-item">Configuracion</a></li>
+                  <li><a class="dropdown-item" routerLink="/user/profile">Perfil</a></li>
+                  <li><a class="dropdown-item" routerLink="/user/history">Historial</a></li>
+                  <li><a class="dropdown-item" routerLink="/user/orders">Pedidos</a></li>
                   <li><hr></li>
                   <li><a class="dropdown-item text-danger" (click)="logout()">Cerrar Sesión</a></li>
                 </ul>

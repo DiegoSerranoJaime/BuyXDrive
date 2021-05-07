@@ -33,7 +33,7 @@ Orders.addProductToAnOrder = function(product, result) {
     });
 };
 
-Orders.getOrders = function(id, result) {
+Orders.getOrdersNotDelivered = function(id, result) {
     let query = `SELECT id, status, order_date, publication_date
     FROM orders
     WHERE user_id = ?`;

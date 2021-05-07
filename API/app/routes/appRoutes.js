@@ -45,8 +45,10 @@ module.exports = function(app) {
 
     //Endpoints para pedidos
     app.route('/api/orders')
-        .post(verifyToken, orders.createOrder)
-        .get(verifyToken, orders.getOrders);
+        .post(verifyToken, orders.createOrder);
+
+    app.route('/api/orders/not-delivered')
+        .get(verifyToken, orders.getOrdersNotDelivered);
 
     app.route('/api/orders/:id/products')
         .get(verifyToken, orders.getProductsFromAnOrder);
