@@ -37,6 +37,7 @@
       <span *ngIf="passwordConfirmation.hasError('required')">La contraseña es requerida</span>
       <span *ngIf="passwordConfirmation.hasError('minlength')">La contraseña tiene una longitud mínima de 8 carácteres</span>
       <span *ngIf="passwordConfirmation.hasError('maxlength')">La contraseña tiene una longitud máxima de 16 carácteres</span>
+      <span *ngIf="passwordConfirmation.hasError('differents')">La confirmación de la contraseña ha de ser igual que la contraseña</span>
     </div>
   </div>
   <div class="mb-3">
