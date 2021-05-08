@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ValidationsService } from 'src/app/services/validations.service';
 
 @Component({
   selector: 'app-register',
@@ -19,7 +20,7 @@ export class RegisterComponent implements OnInit {
   address: FormControl;
   phoneNumber: FormControl;
 
-  constructor() { }
+  constructor(private _validationsService: ValidationsService) { }
 
   ngOnInit(): void {
     this.buildFormControls();
@@ -48,7 +49,9 @@ export class RegisterComponent implements OnInit {
     this.passwordConfirmation = new FormControl('', [
       Validators.required,
       Validators.minLength(8),
-      Validators.maxLength(16)
+      Validators.maxLength(16),
+    ], [
+      this._validationsService.passwordValidation(this.password)
     ]);
 
     this.address = new FormControl('', [
