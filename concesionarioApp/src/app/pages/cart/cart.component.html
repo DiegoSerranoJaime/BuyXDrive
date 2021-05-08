@@ -16,7 +16,7 @@
         <tbody>
           <tr *ngFor="let product of products; index as i">
             <th scope="row">{{ i + 1 }}</th>
-            <td>{{ product.bname }} {{ product.mname }}</td>
+            <td>{{ product.name }}</td>
             <td><img width="100px" [src]="product.image"></td>
             <td>
               <app-amount [amount]="product.amount" [product]="product.id" (update)="updateAmount($event)"></app-amount>

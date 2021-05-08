@@ -13,8 +13,7 @@ Vehicles.getInitVehicles = function(result) {
                     products.discount, 
                     images.image, 
                     vehicle_type.name as type, 
-                    brands.name AS bname, 
-                    models.name AS mname, 
+                    concat(brands.name," ",models.name) as name,
                     vehicles.doors, 
                     vehicles.seating,
                     vehicles.cv,
@@ -48,8 +47,7 @@ Vehicles.getInitVehiclesByType = function(conditions, result) {
                     products.discount, 
                     images.image, 
                     vehicle_type.name as type, 
-                    brands.name AS bname, 
-                    models.name AS mname, 
+                    concat(brands.name," ",models.name) as name,
                     vehicles.doors,
                     vehicles.seating, 
                     vehicles.cv,
@@ -82,6 +80,7 @@ Vehicles.getVehicle = function(id, result) {
                     products.price, 
                     products.amount, 
                     products.discount, 
+                    concat(brands.name," ",models.name) as name, 
                     brands.name as bname, 
                     models.name as mname, 
                     description, 
@@ -120,8 +119,7 @@ Vehicles.getVehicle = function(id, result) {
 
 Vehicles.getVehicleCart = function(id, result) {
     let query = `SELECT 
-                    brands.name AS bname, 
-                    models.name AS mname, 
+    concat(brands.name," ",models.name) as name,
                     price, 
                     discount, 
                     image

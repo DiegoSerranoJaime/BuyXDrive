@@ -40,8 +40,7 @@ export class CartComponent implements OnInit {
         this._vehicleService.getVehicleCart(cart_data.id).subscribe((vehicle) => {
           let new_product: cart_product = {
             ...cart_data,
-            bname: vehicle.bname,
-            mname: vehicle.mname,
+            name: vehicle.name,
             image: vehicle.image,
             price: vehicle.price,
             discount: vehicle.discount
@@ -104,7 +103,7 @@ export class CartComponent implements OnInit {
         this._modalService.hide();
       }},
       {
-        body: `¿Estás seguro de que deseas eliminar el producto <span class="text-danger">${product.bname} ${product.mname}</span> de su carrito?`,
+        body: `¿Estás seguro de que deseas eliminar el producto <span class="text-danger">${product.name}</span> de su carrito?`,
       }
     );
   }

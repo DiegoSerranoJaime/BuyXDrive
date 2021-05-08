@@ -49,11 +49,14 @@ Orders.getOrdersNotDelivered = function(id, result) {
 };
 
 Orders.getProductsFromAnOrder = function(id, result) {
-    let query = `SELECT bname, mname, amount, price, discount
+    let query = `SELECT concat(brands.name," ",models.name) as name, orders_products.amount, orders_products.price, orders_products.discount
     FROM orders_products
-    INNER JOIN order ON order.id = orders_products.order_id
-    INNER JOIN products ON products.id = orders_products.products.id
-    WHERE user_id = ? AND order_id = ?`;
+    INNER JOIN orders ON orders.id = orders_products.order_id
+    INNER JOIN products ON products.id = orders_products.product_id
+    INNER JOIN vehicles ON products.id = vehicles.id
+    INNER JOIN models ON vehicles.model_id = models.id
+    INNER JOIN brands ON models.brand_id = brands.id
+    WHERE user_id = ? AND order_id LIKE ?;`;
 
     sql.query(query, [id[1], id[0]], (err, res) => {
         if (err) {

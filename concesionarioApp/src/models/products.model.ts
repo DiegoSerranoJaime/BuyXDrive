@@ -4,8 +4,7 @@ export interface cart_data {
 };
 
 export interface cart_product {
-  bname: string,
-  mname: string,
+  name: string,
   image: string,
   price: number,
   discount: number

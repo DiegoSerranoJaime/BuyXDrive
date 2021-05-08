@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { ActivatedRoute } from '@angular/router';
+import { OrdersProductsService } from 'src/app/services/orders-products.service';
+import { orderProduct } from 'src/models/orders.model';
 
 @Component({
   selector: 'app-order',
@@ -7,9 +12,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrderComponent implements OnInit {
 
-  constructor() { }
+  public displayedColumns: string[] = [];
+  public displayedData: any[] = [];
+  public dataSource = new MatTableDataSource<orderProduct>();
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+
+  constructor(private _activatedRoute: ActivatedRoute,
+    private _ordersProductsService: OrdersProductsService) { }
 
   ngOnInit(): void {
+    this._activatedRoute.params.subscribe((params) => {
+      this.displayedColumns = this._ordersProductsService.orderColumns;
+      this.displayedData = this._ordersProductsService.orderFields;
+
+      this._ordersProductsService.getProductsFromAnOrder(params.id).subscribe((data) => {
+        this.dataSource.data = data;
+        this.initPaginator();
+      });
+    });
+  }
+
+  initPaginator() {
+    this.dataSource.paginator = this.paginator;
   }
 
 }
