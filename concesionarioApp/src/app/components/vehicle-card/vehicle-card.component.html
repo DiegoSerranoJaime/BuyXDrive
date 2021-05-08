@@ -1,7 +1,7 @@
 <div class="card position-relative" [routerLink]="['/vehiculos', vehicle.id]">
   <img [src]="vehicle.image" class="card-img-top" alt="...">
   <div class="card-body">
-    <h5 class="card-title">{{ vehicle.bname }} {{ vehicle.mname }}</h5>
+    <h5 class="card-title">{{ vehicle.name }}</h5>
     <p class="card-subtitle mb-2 text-muted">{{ vehicle.doors }} puertas | {{ vehicle.seating }} asientos | {{ vehicle.cv }} CV | {{ vehicle.type }}</p>
     <div class="card-text">
       <div class="row">

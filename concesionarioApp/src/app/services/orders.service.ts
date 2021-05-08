@@ -16,18 +16,22 @@ export class OrdersService {
   public orderFields: any[] = [
     {
       field: 'id',
-      type: 'string'
+      type: 'string',
+      noData: true
     },
     {
       field: 'status',
-      type: 'string'
+      type: 'string',
+      noData: true
     },
     {
       field: 'order_date',
-      type: 'date'
+      type: 'date',
+      noData: false
     }, {
       field: 'delivery_date',
-      type: 'date'
+      type: 'date',
+      noData: false
     }
   ];
 

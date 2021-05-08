@@ -55,12 +55,10 @@ export class VehiculoComponent implements OnInit {
     let exist = this._cartService.addToCart(this.id);
     let message: string;
 
-    let vehicleName: string = `${this.vehicle.bname} ${this.vehicle.mname}`;
-
     if (exist) {
-      message = `Se ha incrementado la cantidad en 1 del producto ${vehicleName}`;
+      message = `Se ha incrementado la cantidad en 1 del producto ${this.vehicle.name}`;
     } else {
-      message = `Se ha agregado el producto ${vehicleName}`;
+      message = `Se ha agregado el producto ${this.vehicle.name}`;
     }
 
     this._toastService.show(message);
