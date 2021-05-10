@@ -39,13 +39,13 @@ exports.register = function(req, res) {
     let user = new Users(req.body);
 
     if (!user.email || !user.password || !user.name || !user.surname || !user.address || !user.phoneNumber) {
-        res.sendStatus(400).send({error: true,  message: 'No data send'});
+        resizeBy.send({error: true,  msg: 'No data send'});
     } else if(user.password.length < 8 || user.password > 16) {
-        res.sendStatus(400).send({error: true,  message: 'Password length doesn\'t in the limit'});
+        res.send({error: true,  msg: 'Password length doesn\'t in the limit'});
     } else if(req.body.password != req.body.passwordConfirmation) {
-        res.send({ok: false,  message: 'Las contraseñas no coinciden'});
+        res.send({ok: false,  msg: 'Las contraseñas no coinciden'});
     } else if(!validateEmail(user.email)) {
-        res.sendStatus(400).send({error: true,  message: 'Email format is incorrect'});
+        res.send({error: true,  message: 'Email format is incorrect'});
     } else {
         Users.register(user, (err, user) => {
             console.log('controller');
