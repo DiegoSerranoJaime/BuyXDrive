@@ -1,4 +1,4 @@
-export interface vehicle {
+export interface Vehicle {
   id: number,
   price: number,
   amount: number,
@@ -23,12 +23,12 @@ export interface vehicle {
   val: number
 };
 
-export interface vehicle_type {
+export interface VehicleType {
   id: number,
   name: string
 };
 
-export interface vehicle_card {
+export interface VehicleCard {
   id: number,
   price: string,
   amount: number,

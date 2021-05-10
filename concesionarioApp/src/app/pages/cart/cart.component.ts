@@ -6,7 +6,7 @@ import { ModalService } from 'src/app/services/modal.service';
 import { OrdersService } from 'src/app/services/orders.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { VehiclesService } from 'src/app/services/vehicles.service';
-import { cart_data, cart_product } from 'src/models/products.model';
+import { CartData, CartProduct } from 'src/models/products.model';
 import { ProductUpdate } from './amount/amount.component';
 
 @Component({
@@ -16,8 +16,8 @@ import { ProductUpdate } from './amount/amount.component';
 })
 export class CartComponent implements OnInit {
 
-  cart: cart_data[] = [];
-  products: cart_product[] = [];
+  cart: CartData[] = [];
+  products: CartProduct[] = [];
 
   totalPrice: number;
   discountPrice: number;
@@ -33,13 +33,13 @@ export class CartComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    this._cartService.getCart().subscribe((cart: cart_data[]) => {
+    this._cartService.getCart().subscribe((cart: CartData[]) => {
       this.cart = cart;
 
-      this.cart.forEach((cart_data) => {
-        this._vehicleService.getVehicleCart(cart_data.id).subscribe((vehicle) => {
-          let new_product: cart_product = {
-            ...cart_data,
+      this.cart.forEach((CartData) => {
+        this._vehicleService.getVehicleCart(CartData.id).subscribe((vehicle) => {
+          let new_product: CartProduct = {
+            ...CartData,
             name: vehicle.name,
             image: vehicle.image,
             price: vehicle.price,
@@ -89,7 +89,7 @@ export class CartComponent implements OnInit {
   }
 
 
-  public deleteModal(product: cart_product, index: number) {
+  public deleteModal(product: CartProduct, index: number) {
     this._modalService.show(SimpleBodyModalComponent,
       {
       title: `Eliminar <span class="text-danger">Producto</span>`,

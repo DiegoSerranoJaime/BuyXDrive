@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { cart_data, cart_product } from 'src/models/products.model';
+import { CartData, CartProduct } from 'src/models/products.model';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -8,7 +8,7 @@ import { AuthService } from './auth.service';
 })
 export class CartService {
 
-  cart: cart_data[] = [];
+  cart: CartData[] = [];
 
   constructor(private _authService: AuthService) {
     this.load();
@@ -24,7 +24,7 @@ export class CartService {
     localStorage.setItem('cart', JSON.stringify(this.cart));
   }
 
-  getCart(): Observable<cart_data[]> {
+  getCart(): Observable<CartData[]> {
     return of(this.cart);
   }
 
@@ -36,7 +36,7 @@ export class CartService {
       this.cart[index].amount++;
       exist = true;
     } else {
-      let new_product: cart_data = {
+      let new_product: CartData = {
         id: product_id,
         amount: 1
       };

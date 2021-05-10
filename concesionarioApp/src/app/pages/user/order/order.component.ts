@@ -3,7 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { OrdersProductsService } from 'src/app/services/orders-products.service';
-import { orderProduct } from 'src/models/orders.model';
+import { OrderProduct } from 'src/models/orders.model';
 
 @Component({
   selector: 'app-order',
@@ -14,7 +14,7 @@ export class OrderComponent implements OnInit {
 
   public displayedColumns: string[] = [];
   public displayedData: any[] = [];
-  public dataSource = new MatTableDataSource<orderProduct>();
+  public dataSource = new MatTableDataSource<OrderProduct>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -29,13 +29,8 @@ export class OrderComponent implements OnInit {
 
       this._ordersProductsService.getProductsFromAnOrder(params.id).subscribe((data) => {
         this.dataSource.data = data;
-        this.initPaginator();
       });
     });
-  }
-
-  initPaginator() {
-    this.dataSource.paginator = this.paginator;
   }
 
 }

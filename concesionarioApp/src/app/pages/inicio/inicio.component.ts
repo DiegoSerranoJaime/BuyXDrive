@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { VehiclesService } from 'src/app/services/vehicles.service';
-import { vehicle_card } from 'src/models/vehicles.model';
+import { VehicleCard } from 'src/models/vehicles.model';
 
 @Component({
   selector: 'app-inicio',
@@ -9,12 +9,12 @@ import { vehicle_card } from 'src/models/vehicles.model';
 })
 export class InicioComponent implements OnInit {
 
-  public vehicles: vehicle_card[] = [];
+  public vehicles: VehicleCard[] = [];
 
   constructor(private _vehiclesService: VehiclesService) { }
 
   ngOnInit(): void {
-    this._vehiclesService.getInitVehicles().subscribe((vehicles: vehicle_card[]) => {
+    this._vehiclesService.getInitVehicles().subscribe((vehicles: VehicleCard[]) => {
       this.vehicles = vehicles;
     });
   }

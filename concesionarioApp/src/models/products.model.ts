@@ -1,9 +1,9 @@
-export interface cart_data {
+export interface CartData {
   id: number,
   amount: number
 };
 
-export interface cart_product {
+export interface CartProduct {
   name: string,
   image: string,
   price: number,

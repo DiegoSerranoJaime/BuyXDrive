@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { orderProduct } from 'src/models/orders.model';
+import { OrderProduct } from 'src/models/orders.model';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -27,7 +27,7 @@ export class OrdersProductsService {
     {
       field: 'amount',
       type: 'number',
-      noData: true
+      noData: false
     },
     {
       field: 'price',
@@ -44,8 +44,8 @@ export class OrdersProductsService {
   constructor(private _http: HttpClient,
     private _authService: AuthService) { }
 
-  getProductsFromAnOrder(id: string): Observable<orderProduct[]> {
-    return this._http.get<orderProduct[]>(`${this.baseUrl}/${id}/products`, {
+  getProductsFromAnOrder(id: string): Observable<OrderProduct[]> {
+    return this._http.get<OrderProduct[]>(`${this.baseUrl}/${id}/products`, {
       headers: this._authService.getToken()
     });
   }
