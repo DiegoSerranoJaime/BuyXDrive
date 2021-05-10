@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { order } from 'src/models/orders.model';
-import { cart_product } from 'src/models/products.model';
+import { Order } from 'src/models/orders.model';
+import { CartProduct } from 'src/models/products.model';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -17,12 +17,12 @@ export class OrdersService {
     {
       field: 'id',
       type: 'string',
-      noData: true
+      noData: false
     },
     {
       field: 'status',
       type: 'string',
-      noData: true
+      noData: false
     },
     {
       field: 'order_date',
@@ -31,14 +31,14 @@ export class OrdersService {
     }, {
       field: 'delivery_date',
       type: 'date',
-      noData: false
+      noData: true
     }
   ];
 
   constructor(private _http: HttpClient,
     private _authService: AuthService) { }
 
-  buyProducts(products: cart_product[]): Observable<string> {
+  buyProducts(products: CartProduct[]): Observable<string> {
     let order = new Subject<string>();
 
     this._http.post(this.baseUrl, {}, {
@@ -65,8 +65,8 @@ export class OrdersService {
     return order;
   }
 
-  getOrdersNotDelivered(): Observable<order[]> {
-    return this._http.get<order[]>(`${this.baseUrl}/not-delivered`, {
+  getOrdersNotDelivered(): Observable<Order[]> {
+    return this._http.get<Order[]>(`${this.baseUrl}/not-delivered`, {
       headers: this._authService.getToken()
     });
   }

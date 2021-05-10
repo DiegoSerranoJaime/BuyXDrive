@@ -35,6 +35,10 @@ import { SimpleBodyModalComponent } from './components/modals/simple-body-modal/
 
 import { JwtModule, JwtModuleOptions } from '@auth0/angular-jwt';
 import { RegisterComponent } from './components/modals/register/register.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { UserModule } from './pages/user/user.module';
+
 
 const JWT_Module_Options: JwtModuleOptions = {
   config: {
@@ -78,7 +82,10 @@ const JWT_Module_Options: JwtModuleOptions = {
     MatSnackBarModule,
     MatIconModule,
     MatButtonModule,
+    MatTableModule,
+    MatPaginatorModule,
     RatingModule,
+    UserModule,
     JwtModule.forRoot(JWT_Module_Options)
   ],
   providers: [],

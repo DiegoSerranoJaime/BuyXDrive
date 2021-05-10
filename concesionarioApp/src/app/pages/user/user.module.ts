@@ -3,14 +3,15 @@ import { CommonModule } from '@angular/common';
 import { UserComponent } from './user.component';
 import { UserRoutingModule } from './user-routing.module';
 import { MatTabsModule } from '@angular/material/tabs';
-import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { ProfileComponent } from './profile/profile.component';
 import { HistoryComponent } from './history/history.component';
 import { OrdersComponent } from './orders/orders.component';
 import { OrderComponent } from './order/order.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { GenericMaterialTableComponent } from 'src/app/components/generic-material-table/generic-material-table.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { OrderComponent } from './order/order.component';
     ProfileComponent,
     HistoryComponent,
     OrdersComponent,
-    OrderComponent
+    OrderComponent,
+    GenericMaterialTableComponent
   ],
   imports: [
     CommonModule,
@@ -28,7 +30,10 @@ import { OrderComponent } from './order/order.component';
     MatTableModule,
     MatPaginatorModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+  ],
+  exports: [
+    GenericMaterialTableComponent
   ]
 })
 export class UserModule { }

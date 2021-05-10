@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { vehicle, vehicle_card, vehicle_type } from 'src/models/vehicles.model';
-import { cart_product } from 'src/models/products.model';
+import { Vehicle, VehicleCard, VehicleType } from 'src/models/vehicles.model';
+import { CartProduct } from 'src/models/products.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -15,27 +15,27 @@ export class VehiclesService {
 
   constructor(private _http: HttpClient) { }
 
-  getInitVehicles(): Observable<vehicle_card[]> {
-    return this._http.get<vehicle_card[]>(`${this.baseUrl}/init`);
+  getInitVehicles(): Observable<VehicleCard[]> {
+    return this._http.get<VehicleCard[]>(`${this.baseUrl}/init`);
   }
 
-  getInitVehiclesByType(type: string, id: number): Observable<vehicle_card[]> {
-    return this._http.get<vehicle_card[]>(`${this.baseUrl}/type/${type}/selected_vehicle/${id}`);
+  getInitVehiclesByType(type: string, id: number): Observable<VehicleCard[]> {
+    return this._http.get<VehicleCard[]>(`${this.baseUrl}/type/${type}/selected_vehicle/${id}`);
   }
 
-  getVehicle(id: number): Observable<vehicle> {
-    return this._http.get<vehicle>(`${this.baseUrl}/${id}`).pipe(
+  getVehicle(id: number): Observable<Vehicle> {
+    return this._http.get<Vehicle>(`${this.baseUrl}/${id}`).pipe(
       map((data) => data[0])
     );
   }
 
-  getVehicleCart(id: number): Observable<cart_product> {
-    return this._http.get<cart_product>(`${this.baseUrl}/cart/${id}`).pipe(
+  getVehicleCart(id: number): Observable<CartProduct> {
+    return this._http.get<CartProduct>(`${this.baseUrl}/cart/${id}`).pipe(
       map((data) => data[0])
     );
   }
 
-  getVehicleTypes(): Observable<vehicle_type> {
-    return this._http.get<vehicle_type>(`${this.baseUrl}/type`);
+  getVehicleTypes(): Observable<VehicleType> {
+    return this._http.get<VehicleType>(`${this.baseUrl}/type`);
   }
 }

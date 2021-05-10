@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { VehiclesService } from 'src/app/services/vehicles.service';
-import { vehicle, vehicle_card } from 'src/models/vehicles.model';
-import { withLatestFrom } from 'rxjs/operators';
+import { Vehicle, VehicleCard } from 'src/models/vehicles.model';
 import { CommentsService } from 'src/app/services/comments.service';
 import { Comment } from 'src/models/comments.model';
 import { CartService } from 'src/app/services/cart.service';
@@ -18,8 +17,8 @@ import { ToastService } from 'src/app/services/toast.service';
 export class VehiculoComponent implements OnInit {
 
   public id: number;
-  public vehicle: vehicle;
-  public vehicleRel: vehicle_card[] = [];
+  public vehicle: Vehicle;
+  public vehicleRel: VehicleCard[] = [];
   public images: any[] = [];
   public comments: Comment[] = [];
 
@@ -38,7 +37,7 @@ export class VehiculoComponent implements OnInit {
       .subscribe(([vehicle, images]) => {
         this.vehicle = vehicle;
 
-        this._vehiclesService.getInitVehiclesByType(vehicle.type, this.id).subscribe((data: vehicle_card[]) => {
+        this._vehiclesService.getInitVehiclesByType(vehicle.type, this.id).subscribe((data: VehicleCard[]) => {
           this.vehicleRel = data;
         });
 
