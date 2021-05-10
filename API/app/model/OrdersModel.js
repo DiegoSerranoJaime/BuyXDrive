@@ -36,7 +36,7 @@ Orders.addProductToAnOrder = function(product, result) {
 Orders.getOrdersNotDelivered = function(id, result) {
     let query = `SELECT id, status, order_date, delivery_date
     FROM orders
-    WHERE user_id = ? AND status != 'Entregado'`;
+    WHERE user_id = ? AND status NOT IN ('Entregado', 'Cancelado')`;
 
     sql.query(query, id, (err, res) => {
         if (err) {
@@ -47,6 +47,28 @@ Orders.getOrdersNotDelivered = function(id, result) {
         result(null, res);
     });
 };
+
+Orders.cancelOrder = function(id, result) {
+    sql.query("SELECT * FROM orders WHERE id = ? AND status LIKE 'Pendiente' AND user_id = ?", [id[0], id[1]], (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+
+        if (res.length != 0) {
+            sql.query("UPDATE orders SET status = 'Cancelado' WHERE id = ? AND user_id = ?", [id[0], id[1]], (err, res) => {
+                if (err) {
+                    console.log("error: ", err);
+                    result(err, null);
+                }
+
+                result(null, res);
+            });
+        } else {
+            result({nonExist: true, msg: 'No existe tal pedido pendiente'});
+        }
+    });
+}
 
 Orders.getProductsFromAnOrder = function(id, result) {
     let query = `SELECT concat(brands.name," ",models.name) as name, orders_products.amount, orders_products.price, orders_products.discount

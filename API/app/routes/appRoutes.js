@@ -52,10 +52,12 @@ module.exports = function(app) {
 
     app.route('/api/orders/:id/products')
         .get(verifyToken, orders.getProductsFromAnOrder);
-
+    
     app.route('/api/orders/product')
         .post(verifyToken, orders.addProductToAnOrder);
-
+    
+    app.route('/api/orders/:id/cancel')
+        .get(verifyToken, orders.cancelOrder);
     // JSON web token use example
     // app.route('/api/user/reserve')
     //     .post(verifyToken, stockpiles.reserve)

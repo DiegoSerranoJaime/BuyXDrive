@@ -63,6 +63,29 @@ exports.getOrdersNotDelivered = function(req, res) {
     });
 }
 
+exports.cancelOrder = function(req, res) {
+    jwt.verify(req.token, 'secretkey', (err, authData) => {
+
+        let id = [req.params.id, authData.user.id];
+
+        if (err) {
+            res.sendStatus(403);
+        } else {
+            Orders.cancelOrder(id, (err, data) => {
+                if(err) {
+                    res.send(err);
+                }
+
+                if(data.nonExist) {
+                    res.send({ok: false, msg: data.msg});
+                } else {
+                    res.send({ok: true, data: data});
+                }
+            });
+        }
+    });
+}
+
 exports.getProductsFromAnOrder = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
         if (err) {
