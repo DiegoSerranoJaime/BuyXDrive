@@ -28,8 +28,8 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-  <div class="d-flex align-items-center justify-content-between" [ngClass]="{'justify-content-between': enlaceVolver, 'justify-content-end': !enlaceVolver}">
-    <a class="ms-2" *ngIf="enlaceVolver" [routerLink]="enlaceVolver">Volver</a>
+  <div class="d-flex align-items-center justify-content-between" [ngClass]="{'justify-content-between': volver, 'justify-content-end': !volver}">
+    <a class="ms-2" *ngIf="volver" (click)="goBack()">Volver</a>
     <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
   </div>
 </div>

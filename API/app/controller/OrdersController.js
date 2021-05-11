@@ -63,6 +63,23 @@ exports.getOrdersNotDelivered = function(req, res) {
     });
 }
 
+exports.getHistoryOrders = function(req, res) {
+    jwt.verify(req.token, 'secretkey', (err, authData) => {
+
+        if (err) {
+            res.sendStatus(403);
+        } else {
+            Orders.getHistoryOrders(authData.user.id, (err, data) => {
+                if(err) {
+                    res.send(err);
+                }
+
+                res.send(data);
+            });
+        }
+    });
+}
+
 exports.cancelOrder = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
 

@@ -11,6 +11,7 @@ const USER_ROUTES: Routes = [
   { path: '', component: UserComponent, children: [
     { path: 'profile', component: ProfileComponent },
     { path: 'history', component: HistoryComponent },
+    { path: 'history/:id', component: OrderComponent },
     { path: 'orders', component: OrdersComponent },
     { path: 'orders/:id', component: OrderComponent },
     { path: '**', pathMatch: 'full', redirectTo: 'profile' }

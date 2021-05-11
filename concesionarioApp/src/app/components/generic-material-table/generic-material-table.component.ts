@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { SimpleBodyModalComponent } from 'src/app/components/modals/simple-body-modal/simple-body-modal.component';
@@ -10,19 +11,20 @@ import { ToastService } from 'src/app/services/toast.service';
   templateUrl: './generic-material-table.component.html',
   styleUrls: ['./generic-material-table.component.scss']
 })
-export class GenericMaterialTableComponent implements OnInit {
+export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
 
   @Input() displayedColumns: string[];
   @Input() displayedData: any[];
   @Input() dataSource: any;
-  @Input() enlaceVolver: string;
+  @Input() volver: boolean;
   @Input() permisos: any[]
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private _ordersService: OrdersService,
     private _modalService: ModalService,
-    private _toastService: ToastService) { }
+    private _toastService: ToastService,
+    private _location: Location) { }
 
   ngOnInit(): void {
     this.initPaginator();
@@ -70,5 +72,9 @@ export class GenericMaterialTableComponent implements OnInit {
     res = this.permisos.find((p) => p.name == name);
 
     return res.route;
+  }
+
+  goBack() {
+    this._location.back();
   }
 }
