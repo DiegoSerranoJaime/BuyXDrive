@@ -71,6 +71,12 @@ export class OrdersService {
     });
   }
 
+  getHistoryOrders(): Observable<Order[]> {
+    return this._http.get<Order[]>(`${this.baseUrl}/history`, {
+      headers: this._authService.getToken()
+    });
+  }
+
   cancelOrder(id): Observable<any> {
     return this._http.get<any>(`${this.baseUrl}/${id}/cancel`, {
       headers: this._authService.getToken()

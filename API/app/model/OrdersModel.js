@@ -48,6 +48,21 @@ Orders.getOrdersNotDelivered = function(id, result) {
     });
 };
 
+Orders.getHistoryOrders = function(id, result) {
+    let query = `SELECT id, status, order_date, delivery_date
+    FROM orders
+    WHERE user_id = ? AND status IN ('Entregado', 'Cancelado')`;
+
+    sql.query(query, id, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+
+        result(null, res);
+    });
+};
+
 Orders.cancelOrder = function(id, result) {
     sql.query("SELECT * FROM orders WHERE id = ? AND status LIKE 'Pendiente' AND user_id = ?", [id[0], id[1]], (err, res) => {
         if (err) {
