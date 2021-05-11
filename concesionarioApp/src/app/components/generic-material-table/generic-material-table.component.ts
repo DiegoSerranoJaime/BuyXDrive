@@ -1,6 +1,8 @@
 import { Location } from '@angular/common';
 import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { SimpleBodyModalComponent } from 'src/app/components/modals/simple-body-modal/simple-body-modal.component';
 import { ModalService } from 'src/app/services/modal.service';
 import { OrdersService } from 'src/app/services/orders.service';
@@ -15,11 +17,12 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
 
   @Input() displayedColumns: string[];
   @Input() displayedData: any[];
-  @Input() dataSource: any;
+  @Input() dataSource: MatTableDataSource<any>;
   @Input() volver: boolean;
-  @Input() permisos: any[]
+  @Input() permisos: any[];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true }) sort: MatSort;
 
   constructor(private _ordersService: OrdersService,
     private _modalService: ModalService,
@@ -27,15 +30,19 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
     private _location: Location) { }
 
   ngOnInit(): void {
-    this.initPaginator();
   }
 
   ngAfterViewInit(): void {
-    this.initPaginator();
+    this.initTableAdds();
   }
 
-  initPaginator(): void {
-    this.dataSource.paginator = this.paginator;
+
+  initTableAdds(): void {
+    if (this.paginator && this.sort) {
+      console.log(this.sort);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }
   }
 
   cancelOrder(id: string) {
