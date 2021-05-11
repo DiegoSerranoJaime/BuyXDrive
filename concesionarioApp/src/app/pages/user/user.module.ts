@@ -12,6 +12,7 @@ import { OrderComponent } from './order/order.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { GenericMaterialTableComponent } from 'src/app/components/generic-material-table/generic-material-table.component';
+import { MatSortModule } from '@angular/material/sort';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { GenericMaterialTableComponent } from 'src/app/components/generic-materi
     MatPaginatorModule,
     MatIconModule,
     MatButtonModule,
+    MatSortModule
   ],
   exports: [
     GenericMaterialTableComponent

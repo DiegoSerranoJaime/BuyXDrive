@@ -1,8 +1,8 @@
 <div class="mat-elevation-z8">
-  <table mat-table [dataSource]="dataSource">
+  <table mat-table [dataSource]="dataSource" matSort>
 
     <ng-container [matColumnDef]="displayedColumns[i]" *ngFor="let data of displayedData; index as i">
-      <th mat-header-cell *matHeaderCellDef> {{ displayedColumns[i] }} </th>
+      <th mat-header-cell *matHeaderCellDef [mat-sort-header]="data.field"> {{ displayedColumns[i] }} </th>
       <td mat-cell *matCellDef="let order; index as contador">
         <span *ngIf="data.type == 'count'">{{ contador + 1 }}</span>
         <span *ngIf="data.type == 'string' || data.type == 'number'">{{ order[data.field] }}</span>
