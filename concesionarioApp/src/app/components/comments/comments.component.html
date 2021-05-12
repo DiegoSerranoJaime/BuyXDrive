@@ -1,9 +1,6 @@
 <div *ngIf="comments.length > 0; else noComments">
   <div class="row d-flex justify-content-between mb-4" *ngFor="let comment of comments">
     <div class="col-12 col-md-3">
-      <div class="col-12 d-flex justify-content-center">
-        <img [src]="comment.image" width="70px">
-      </div>
       <div class="col-12 text-center mt-2">
         <p>{{ comment.email }}</p>
         <p>Valoración: <span class="text-warning"><app-stars [valoration]="comment.valoration"></app-stars></span> ({{ comment.valoration }} / 5)</p>

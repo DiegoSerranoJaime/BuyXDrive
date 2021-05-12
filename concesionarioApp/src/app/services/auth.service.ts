@@ -66,7 +66,11 @@ export class AuthService {
       token = JSON.parse(localStorage.getItem('dataToken'));
     }
 
-    return token.user;
+    if (token) {
+      return token.user;
+    } else {
+      return null;
+    }
   }
 
   saveDataToken(token: any) {
