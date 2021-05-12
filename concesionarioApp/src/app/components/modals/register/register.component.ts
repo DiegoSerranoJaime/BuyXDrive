@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { GendersService } from 'src/app/services/genders.service';
 import { ValidationsService } from 'src/app/services/validations.service';
 
 @Component({
@@ -9,7 +10,9 @@ import { ValidationsService } from 'src/app/services/validations.service';
 })
 export class RegisterComponent implements OnInit {
 
-  data: any = {}
+  data: any = {};
+
+  genders: any[] = [];
 
   myForm: FormGroup;
   name: FormControl;
@@ -17,12 +20,18 @@ export class RegisterComponent implements OnInit {
   email: FormControl;
   password: FormControl;
   passwordConfirmation: FormControl;
+  gender: FormControl;
   address: FormControl;
   phoneNumber: FormControl;
 
-  constructor(private _validationsService: ValidationsService) { }
+  constructor(private _validationsService: ValidationsService,
+    private _gendersService: GendersService) { }
 
   ngOnInit(): void {
+    this._gendersService.getAllGenders().subscribe((genders) => {
+      this.genders = genders;
+    });
+
     this.buildFormControls();
     this.buildFormGroup();
   }
@@ -54,6 +63,10 @@ export class RegisterComponent implements OnInit {
       this._validationsService.passwordValidation(this.password)
     ]);
 
+    this.gender = new FormControl('', [
+      Validators.required
+    ]);
+
     this.address = new FormControl('', [
       Validators.required
     ]);
@@ -70,6 +83,7 @@ export class RegisterComponent implements OnInit {
       email: this.email,
       password: this.password,
       passwordConfirmation: this.passwordConfirmation,
+      gender: this.gender,
       address: this.address,
       phoneNumber: this.phoneNumber
     });

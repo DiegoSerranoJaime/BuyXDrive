@@ -1,6 +1,5 @@
 export interface Comment {
   email: string,
-  image: string,
   title: string,
   body: string,
   valoration: number,

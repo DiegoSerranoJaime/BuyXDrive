@@ -6,7 +6,7 @@ const { v4: uuidv4 } = require('uuid');
 let Orders = function(user) {
     this.id = uuidv4();
     this.user_id = user.user.id;
-    this.status = 'Pendiente';
+    this.status = 1;
     this.order_date = new Date();
     this.delivery_date = null;
 };
@@ -34,9 +34,10 @@ Orders.addProductToAnOrder = function(product, result) {
 };
 
 Orders.getOrdersNotDelivered = function(id, result) {
-    let query = `SELECT id, status, order_date, delivery_date
+    let query = `SELECT orders.id AS id, status.name AS status, order_date, delivery_date
     FROM orders
-    WHERE user_id = ? AND status NOT IN ('Entregado', 'Cancelado')`;
+    INNER JOIN status ON orders.status = status.id
+    WHERE user_id = ? AND status NOT IN (2, 4)`;
 
     sql.query(query, id, (err, res) => {
         if (err) {
@@ -49,9 +50,10 @@ Orders.getOrdersNotDelivered = function(id, result) {
 };
 
 Orders.getHistoryOrders = function(id, result) {
-    let query = `SELECT id, status, order_date, delivery_date
+    let query = `SELECT orders.id AS id, status.name AS status, order_date, delivery_date
     FROM orders
-    WHERE user_id = ? AND status IN ('Entregado', 'Cancelado')`;
+    INNER JOIN status ON orders.status = status.id
+    WHERE user_id = ? AND status IN (2, 4)`;
 
     sql.query(query, id, (err, res) => {
         if (err) {
@@ -64,14 +66,14 @@ Orders.getHistoryOrders = function(id, result) {
 };
 
 Orders.cancelOrder = function(id, result) {
-    sql.query("SELECT * FROM orders WHERE id = ? AND status LIKE 'Pendiente' AND user_id = ?", [id[0], id[1]], (err, res) => {
+    sql.query("SELECT * FROM orders WHERE id = ? AND status = 1 AND user_id = ?", [id[0], id[1]], (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
         }
 
         if (res.length != 0) {
-            sql.query("UPDATE orders SET status = 'Cancelado' WHERE id = ? AND user_id = ?", [id[0], id[1]], (err, res) => {
+            sql.query("UPDATE orders SET status = 2 WHERE id = ? AND user_id = ?", [id[0], id[1]], (err, res) => {
                 if (err) {
                     console.log("error: ", err);
                     result(err, null);

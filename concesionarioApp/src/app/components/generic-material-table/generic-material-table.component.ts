@@ -39,7 +39,6 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
 
   initTableAdds(): void {
     if (this.paginator && this.sort) {
-      console.log(this.sort);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     }

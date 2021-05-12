@@ -9,6 +9,7 @@ let Users = function(user) {
     this.surname = user.surname;
     this.email = user.email;
     this.password = hash.createHash('sha256').update(user.password).digest('hex');
+    this.gender = user.gender;
     this.address = user.address;
     this.phoneNumber = user.phoneNumber;
     this.user_type = 1;
@@ -44,5 +45,16 @@ Users.register = function(user, result) {
         }
     });
 };
+
+Users.getAllGenders = function(result) {
+    sql.query("SELECT * FROM genders", (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null)
+        }
+
+        result(null, res)
+    })
+}
 
 module.exports = Users;

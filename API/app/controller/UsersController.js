@@ -17,6 +17,7 @@ exports.login = function(req, res) {
                     name: user[0].name,
                     surname: user[0].surname,
                     email: user[0].email,
+                    gender: user[0].gender,
                     address: user[0].address,
                     phoneNumber: user[0].phoneNumber,
                     user_type: user[0].user_type,
@@ -38,7 +39,7 @@ exports.login = function(req, res) {
 exports.register = function(req, res) {
     let user = new Users(req.body);
 
-    if (!user.email || !user.password || !user.name || !user.surname || !user.address || !user.phoneNumber) {
+    if (!user.email || !user.password || !user.name || !user.surname || !user.gender || !user.address || !user.phoneNumber) {
         resizeBy.send({error: true,  msg: 'No data send'});
     } else if(user.password.length < 8 || user.password > 16) {
         res.send({error: true,  msg: 'Password length doesn\'t in the limit'});
@@ -47,9 +48,7 @@ exports.register = function(req, res) {
     } else if(!validateEmail(user.email)) {
         res.send({error: true,  message: 'Email format is incorrect'});
     } else {
-        Users.register(user, (err, user) => {
-            console.log('controller');
-    
+        Users.register(user, (err, user) => {    
             if(err) {
                 res.send(err);
             }
@@ -62,12 +61,22 @@ exports.register = function(req, res) {
             } else {
                 res.send({
                     ok: true,
-                    msg: 'Usaurio registrado'
+                    msg: 'Usuario registrado'
                 });
             }
         });
     }
 };
+
+exports.getAllGenders = function(req, res) {
+    Users.getAllGenders((err, genders) => {
+        if(err) {
+            res.send(err);
+        }
+
+        res.send(genders);
+    });
+}
 
 function validateEmail(email) {
     let reg = new RegExp("^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$");

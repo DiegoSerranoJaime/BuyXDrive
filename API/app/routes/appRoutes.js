@@ -13,6 +13,9 @@ module.exports = function(app) {
     app.route('/api/user/register')
         .post(users.register);
 
+    app.route('/api/user/genders')
+        .get(users.getAllGenders);
+
     //Endpoint de Images
     app.route('/api/images/product/:id')
         .get(images.getImagesRoutes);
