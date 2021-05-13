@@ -24,19 +24,25 @@ module.exports = function(app) {
         .get(images.getImage);
 
     //Endpoints de vehiculos
+    app.route('/api/vehicles')
+        .get(vehicles.getAllVehicles);
+
     app.route('/api/vehicles/init')
         .get(vehicles.getInitVehicles);
+
+    app.route('/api/vehicles/brands')
+        .get(vehicles.getVehiclesBrands);
+
+    app.route('/api/vehicles/types')
+        .get(vehicles.getVehiclesTypes);
 
     app.route('/api/vehicles/:id')
         .get(vehicles.getVehicle);
 
     app.route('/api/vehicles/cart/:id')
         .get(vehicles.getVehicleCart);
-
-    app.route('/api/vehicles/type')
-        .get(vehicles.getVehicleTypes);
-
-    app.route('/api/vehicles/type/:type/selected_vehicle/:id')
+        
+    app.route('/api/vehicles/types/:type/selected_vehicle/:id')
         .get(vehicles.getInitVehiclesByType);
 
     //Endpoints de comentarios    
@@ -61,18 +67,9 @@ module.exports = function(app) {
     
     app.route('/api/orders/product')
         .post(verifyToken, orders.addProductToAnOrder);
-    
 
     app.route('/api/orders/:id/cancel')
         .get(verifyToken, orders.cancelOrder);
-
-    
-
-    // JSON web token use example
-    // app.route('/api/user/reserve')
-    //     .post(verifyToken, stockpiles.reserve)
-    //     .get(verifyToken, stockpiles.getAllStockpiles);
-
 
     function verifyToken(req, res, next) {
         const bearerHeader = req.headers['authorization'];

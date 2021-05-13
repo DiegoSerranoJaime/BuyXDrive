@@ -1,5 +1,17 @@
 const Vehicles = require('../model/VehiclesModel');
 
+exports.getAllVehicles = function(req, res) {
+    Vehicles.getAllVehicles((err, vehicles) => {
+        if(err) {
+            res.send(err);
+        }
+
+        vehicles = imageRoute(vehicles);
+        
+        res.json(vehicles);
+    });
+};
+
 exports.getInitVehicles = function(req, res) {
     Vehicles.getInitVehicles((err, vehicles) => {
         if(err) {
@@ -46,13 +58,23 @@ exports.getVehicleCart = function(req, res) {
     });
 };
 
-exports.getVehicleTypes = function(req, res) {
-    Vehicles.getVehicleTypes((err, vehicles) => {
+exports.getVehiclesTypes = function(req, res) {
+    Vehicles.getVehiclesTypes((err, types) => {
         if(err) {
             res.send(err);
         }
         
-        res.json(vehicles);
+        res.json(types);
+    });
+};
+
+exports.getVehiclesBrands = function(req, res) {
+    Vehicles.getVehiclesBrands((err, brands) => {
+        if(err) {
+            res.send(err);
+        }
+        
+        res.json(brands);
     });
 };
 

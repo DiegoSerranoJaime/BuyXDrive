@@ -1,1 +1,11 @@
-<p>vehiculos works!</p>
+<div class="container">
+  <div class="row">
+    <!-- Filtros -->
+    <div class="col-12 col-md-3 mt-5">
+      <app-filters (nameEmit)="filterName($event)" (priceEmit)="filterPrice($event)" (brandsEmit)="filterBrands($event)" (typesEmit)="filterTypes($event)" [maxPrice]="1000000" [brands]="brands" [types]="types"></app-filters>
+    </div>
+    <div class="col-12 col-md">
+      <app-init-vehicles [vehicles]="vehiculos | filterVehicles:name:prices:selectedBrands:selectedTypes"></app-init-vehicles>
+    </div>
+  </div>
+</div>

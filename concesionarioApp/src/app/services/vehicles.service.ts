@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Vehicle, VehicleCard, VehicleType } from 'src/models/vehicles.model';
+import { Vehicle, VehicleCard } from 'src/models/vehicles.model';
 import { CartProduct } from 'src/models/products.model';
 import { environment } from 'src/environments/environment';
 
@@ -15,12 +15,16 @@ export class VehiclesService {
 
   constructor(private _http: HttpClient) { }
 
+  getAllVehicles(): Observable<VehicleCard[]> {
+    return this._http.get<VehicleCard[]>(`${this.baseUrl}`);
+  }
+
   getInitVehicles(): Observable<VehicleCard[]> {
     return this._http.get<VehicleCard[]>(`${this.baseUrl}/init`);
   }
 
   getInitVehiclesByType(type: string, id: number): Observable<VehicleCard[]> {
-    return this._http.get<VehicleCard[]>(`${this.baseUrl}/type/${type}/selected_vehicle/${id}`);
+    return this._http.get<VehicleCard[]>(`${this.baseUrl}/types/${type}/selected_vehicle/${id}`);
   }
 
   getVehicle(id: number): Observable<Vehicle> {
@@ -35,7 +39,11 @@ export class VehiclesService {
     );
   }
 
-  getVehicleTypes(): Observable<VehicleType> {
-    return this._http.get<VehicleType>(`${this.baseUrl}/type`);
+  getVehiclesTypes(): Observable<any[]> {
+    return this._http.get<any[]>(`${this.baseUrl}/types`);
+  }
+
+  getVehiclesBrands(): Observable<any[]> {
+    return this._http.get<any[]>(`${this.baseUrl}/brands`);
   }
 }
