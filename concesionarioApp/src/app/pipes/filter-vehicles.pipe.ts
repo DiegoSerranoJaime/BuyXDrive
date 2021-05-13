@@ -32,10 +32,10 @@ export class FilterVehiclesPipe implements PipeTransform {
       return ret ? v : null;
     })
 
-    if (res.length == 0 && !name && brands.length == 0 && types.length == 0) {
-      return vehicles;
-    } else {
+    if (name || brands.length > 0 || types.length > 0 || prices.length > 0) {
       return res;
+    } else {
+      return vehicles;
     }
 
   }
