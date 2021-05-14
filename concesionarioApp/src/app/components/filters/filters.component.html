@@ -1,0 +1,53 @@
+<mat-accordion>
+  <mat-expansion-panel (opened)="collapse = true"
+                       (closed)="collapse = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Filtros
+      </mat-panel-title>
+      <mat-panel-description>
+        Vehiculos
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div class="mb-2">
+      <label for="name" class="form-label">Nombre</label>
+      <input type="text" name="name" class="form-control" #name (keyup)="filterByName(name.value)">
+    </div>
+    <div class="mb-2">
+      <label for="price" class="form-label">Precio</label>
+      <div class="custom-slider">
+        <ngx-slider [options]="priceOptions" [value]="0" [highValue]="maxPrice" #price (valueChange)="filterByPrice(price)"></ngx-slider>
+      </div>
+    </div>
+    <div class="mb-2">
+      <label for="brands" class="form-check-label">Marcas</label>
+      <div class="row justify-content-between checkrow">
+        <div class="col-5 form-check" *ngFor="let brand of brands">
+          <input type="checkbox" class="form-check-input" [name]="brand.name" #brand [value]="brand.name" (change)="filterByBrands(brand)">
+          <label> {{brand.name}}</label>
+        </div>
+      </div>
+    </div>
+    <div class="mb-2">
+      <label for="types" class="form-check-label">Tipos</label>
+      <div class="row justify-content-between checkrow">
+        <div class="col-6 form-check" *ngFor="let type of types">
+          <input type="checkbox" class="form-check-input" [name]="type.name" #type [value]="type.name" (change)="filterByTypes(type)">
+          <label> {{type.name}}</label>
+        </div>
+      </div>
+    </div>
+    <div class="mb-2">
+      <label for="valoration" class="form-label">Valoracion</label>
+      <div class="custom-slider">
+        <ngx-slider [options]="valorationOptions" [value]="0" [highValue]="5" #valoration (valueChange)="filterByValoration(valoration)"></ngx-slider>
+      </div>
+    </div>
+    <div class="mb-2">
+      <label for="amountPerPage" class="form-label">Productos a mostrar</label>
+      <select name="amountPerPage" #amountPerPage class="form-select form-select-sm" (change)="emitProductsPerPage($event.target['value'])">
+        <option *ngFor="let amount of productsPerPage" [selected]="amount === 16" [value]="amount">{{ amount }} Productos</option>
+      </select>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>

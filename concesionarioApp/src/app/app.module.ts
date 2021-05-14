@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
@@ -36,9 +36,14 @@ import { SimpleBodyModalComponent } from './components/modals/simple-body-modal/
 import { JwtModule, JwtModuleOptions } from '@auth0/angular-jwt';
 import { RegisterComponent } from './components/modals/register/register.component';
 import { MatTableModule } from '@angular/material/table';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSliderModule } from '@angular/material/slider';
 import { UserModule } from './pages/user/user.module';
-
+import { FiltersComponent } from './components/filters/filters.component';
+import { FilterVehiclesPipe } from './pipes/filter-vehicles.pipe';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
+import { NgbModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 
 const JWT_Module_Options: JwtModuleOptions = {
   config: {
@@ -72,12 +77,15 @@ const JWT_Module_Options: JwtModuleOptions = {
     AmountComponent,
     SimpleBodyModalComponent,
     RegisterComponent,
+    FiltersComponent,
+    FilterVehiclesPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
     MatIconModule,
@@ -86,6 +94,11 @@ const JWT_Module_Options: JwtModuleOptions = {
     MatPaginatorModule,
     RatingModule,
     UserModule,
+    MatExpansionModule,
+    MatSliderModule,
+    NgxSliderModule,
+    NgbModule,
+    NgbPaginationModule,
     JwtModule.forRoot(JWT_Module_Options)
   ],
   providers: [],
