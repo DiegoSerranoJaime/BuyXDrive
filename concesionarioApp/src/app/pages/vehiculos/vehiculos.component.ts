@@ -12,6 +12,7 @@ export class VehiculosComponent implements OnInit {
 
   name: string;
   prices: number[] = [];
+  valoration: number[] = [];
   selectedBrands: any[] = [];
   selectedTypes: any[] = [];
 
@@ -19,6 +20,9 @@ export class VehiculosComponent implements OnInit {
   types: any[] = [];
 
   vehiculos: VehicleCard[] = [];
+
+  page: number = 1;
+  pageSize: number = 16;
 
   constructor(private _vehiclesService: VehiclesService) { }
 
@@ -58,4 +62,11 @@ export class VehiculosComponent implements OnInit {
     }
   }
 
+  filterValoration(event: any) {
+    this.valoration = event;
+  }
+
+  productsPerPage(event: any) {
+    this.pageSize = event;
+  }
 }

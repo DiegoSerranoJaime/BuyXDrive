@@ -2,10 +2,30 @@
   <div class="row">
     <!-- Filtros -->
     <div class="col-12 col-md-3 mt-5">
-      <app-filters (nameEmit)="filterName($event)" (priceEmit)="filterPrice($event)" (brandsEmit)="filterBrands($event)" (typesEmit)="filterTypes($event)" [maxPrice]="1000000" [brands]="brands" [types]="types"></app-filters>
+      <app-filters (nameEmit)="filterName($event)"
+                    (priceEmit)="filterPrice($event)"
+                    (brandsEmit)="filterBrands($event)"
+                    (typesEmit)="filterTypes($event)"
+                    (valorationEmit)="filterValoration($event)"
+                    (productsPerPageEmit)="productsPerPage($event)"
+                    [maxPrice]="1000000"
+                    [brands]="brands"
+                    [types]="types">
+      </app-filters>
     </div>
     <div class="col-12 col-md">
-      <app-init-vehicles [vehicles]="vehiculos | filterVehicles:name:prices:selectedBrands:selectedTypes"></app-init-vehicles>
+      <ng-template #noVehicles>
+        <div class="alert alert-info mt-5" role="alert">
+          No se encuentran vehiculos disponibles
+        </div>
+      </ng-template>
+      <div *ngIf="vehiculos && (vehiculos | filterVehicles:name:prices:selectedBrands:selectedTypes:valoration).length > 0; else noVehicles">
+        <app-init-vehicles class="flex-grow-1" [vehicles]="vehiculos | filterVehicles:name:prices:selectedBrands:selectedTypes:valoration | slice: (page-1) * pageSize : page * pageSize"></app-init-vehicles>
+
+        <div class="d-flex justify-content-center mt-4">
+          <ngb-pagination [collectionSize]="(vehiculos | filterVehicles:name:prices:selectedBrands:selectedTypes:valoration).length" [(page)]="page" [maxSize]="5" [pageSize]="pageSize" [boundaryLinks]="true"></ngb-pagination>
+        </div>
+      </div>
     </div>
   </div>
 </div>

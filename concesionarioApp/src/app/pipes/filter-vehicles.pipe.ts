@@ -6,7 +6,7 @@ import { VehicleCard } from 'src/models/vehicles.model';
 })
 export class FilterVehiclesPipe implements PipeTransform {
 
-  transform(vehicles: VehicleCard[], name: string, prices: number[], brands: any[], types: any[]): VehicleCard[] {
+  transform(vehicles: VehicleCard[], name: string, prices: number[], brands: any[], types: any[], valoration: number[]): VehicleCard[] {
     let res: VehicleCard[] = [];
 
     res = vehicles.filter((v) => {
@@ -15,6 +15,8 @@ export class FilterVehiclesPipe implements PipeTransform {
       if (name && !v.name.toLowerCase().includes(name)) {
         ret = false;
       } else if (Number(v.price) < prices[0] || Number(v.price) > prices[1]) {
+        ret = false;
+      } else if (Number(v.val) < valoration[0] || Number(v.val) > valoration[1]) {
         ret = false;
       }
 
@@ -32,7 +34,7 @@ export class FilterVehiclesPipe implements PipeTransform {
       return ret ? v : null;
     })
 
-    if (name || brands.length > 0 || types.length > 0 || prices.length > 0) {
+    if (name || brands.length > 0 || types.length > 0 || prices.length > 0 || valoration.length > 0) {
       return res;
     } else {
       return vehicles;

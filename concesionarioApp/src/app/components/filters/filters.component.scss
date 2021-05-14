@@ -1,10 +1,10 @@
 ::ng-deep {
   .custom-slider .ngx-slider .ngx-slider-bar {
-    background: #ffe4d1;
+    background: #f0babe;
     height: 2px;
   }
   .custom-slider .ngx-slider .ngx-slider-selection {
-    background: orange;
+    background: #dc3545;
   }
   .custom-slider .ngx-slider .ngx-slider-limit {
     font-size: 14px;
@@ -48,7 +48,7 @@
   }
 
   .custom-slider .ngx-slider .ngx-slider-tick.ngx-slider-selected {
-    background: orange;
+    background: #dc3545;
   }
 }
 

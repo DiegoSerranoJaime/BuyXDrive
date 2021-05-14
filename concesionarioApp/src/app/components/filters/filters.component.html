@@ -16,7 +16,7 @@
     <div class="mb-2">
       <label for="price" class="form-label">Precio</label>
       <div class="custom-slider">
-        <ngx-slider [options]="options" [value]="0" [highValue]="maxPrice" #price (valueChange)="filterByPrice(price)"></ngx-slider>
+        <ngx-slider [options]="priceOptions" [value]="0" [highValue]="maxPrice" #price (valueChange)="filterByPrice(price)"></ngx-slider>
       </div>
     </div>
     <div class="mb-2">
@@ -36,6 +36,18 @@
           <label> {{type.name}}</label>
         </div>
       </div>
+    </div>
+    <div class="mb-2">
+      <label for="valoration" class="form-label">Valoracion</label>
+      <div class="custom-slider">
+        <ngx-slider [options]="valorationOptions" [value]="0" [highValue]="5" #valoration (valueChange)="filterByValoration(valoration)"></ngx-slider>
+      </div>
+    </div>
+    <div class="mb-2">
+      <label for="amountPerPage" class="form-label">Productos a mostrar</label>
+      <select name="amountPerPage" #amountPerPage class="form-select form-select-sm" (change)="emitProductsPerPage($event.target['value'])">
+        <option *ngFor="let amount of productsPerPage" [selected]="amount === 16" [value]="amount">{{ amount }} Productos</option>
+      </select>
     </div>
   </mat-expansion-panel>
 </mat-accordion>

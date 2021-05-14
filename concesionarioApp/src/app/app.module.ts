@@ -43,7 +43,7 @@ import { UserModule } from './pages/user/user.module';
 import { FiltersComponent } from './components/filters/filters.component';
 import { FilterVehiclesPipe } from './pipes/filter-vehicles.pipe';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
-
+import { NgbModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 
 const JWT_Module_Options: JwtModuleOptions = {
   config: {
@@ -78,7 +78,7 @@ const JWT_Module_Options: JwtModuleOptions = {
     SimpleBodyModalComponent,
     RegisterComponent,
     FiltersComponent,
-    FilterVehiclesPipe,
+    FilterVehiclesPipe
   ],
   imports: [
     BrowserModule,
@@ -97,6 +97,8 @@ const JWT_Module_Options: JwtModuleOptions = {
     MatExpansionModule,
     MatSliderModule,
     NgxSliderModule,
+    NgbModule,
+    NgbPaginationModule,
     JwtModule.forRoot(JWT_Module_Options)
   ],
   providers: [],

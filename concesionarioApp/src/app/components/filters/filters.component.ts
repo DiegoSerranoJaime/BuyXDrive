@@ -12,6 +12,8 @@ export class FiltersComponent implements OnInit {
   @Output() priceEmit = new EventEmitter<number[]>();
   @Output() brandsEmit = new EventEmitter<string[]>();
   @Output() typesEmit = new EventEmitter<string[]>();
+  @Output() valorationEmit = new EventEmitter<number[]>();
+  @Output() productsPerPageEmit = new EventEmitter<number>();
 
   @Input() brands: any[];
   @Input() types: any[];
@@ -19,15 +21,18 @@ export class FiltersComponent implements OnInit {
 
   collapse: boolean = false;
 
-  options: Options;
+  priceOptions: Options;
+  valorationOptions: Options;
 
   selectedBrands: any[] = [];
   selectedTypes: any[] = [];
 
+  productsPerPage: number[] = [4, 8, 12, 16];
+
   constructor() { }
 
   ngOnInit(): void {
-    this.options = {
+    this.priceOptions = {
       minLimit: 0,
       maxLimit: this.maxPrice,
       floor: 0,
@@ -42,6 +47,18 @@ export class FiltersComponent implements OnInit {
         return value + ' €';
       }
     }
+    this.valorationOptions = {
+      minLimit: 0,
+      maxLimit: 5,
+      floor: 0,
+      ceil: 5,
+      tickStep: 1,
+      showTicks: true,
+      step: 1,
+      minRange: 1,
+      noSwitching: true,
+      autoHideLimitLabels: true,
+    }
   }
 
   filterByName(name: string) {
@@ -50,6 +67,10 @@ export class FiltersComponent implements OnInit {
 
   filterByPrice(price: any) {
     this.priceEmit.emit([price.value, price.highValue]);
+  }
+
+  filterByValoration(valoration: any) {
+    this.valorationEmit.emit([valoration.value, valoration.highValue]);
   }
 
   filterByBrands(brand: any) {
@@ -76,4 +97,7 @@ export class FiltersComponent implements OnInit {
     this.typesEmit.emit(this.selectedTypes);
   }
 
+  emitProductsPerPage(amount: number) {
+    this.productsPerPageEmit.emit(amount)
+  }
 }
