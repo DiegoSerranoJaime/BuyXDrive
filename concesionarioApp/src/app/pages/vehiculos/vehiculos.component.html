@@ -2,13 +2,14 @@
   <div class="row">
     <!-- Filtros -->
     <div class="col-12 col-md-3 mt-5">
-      <app-filters (nameEmit)="filterName($event)"
+      <app-filters *ngIf="allFilterData"
+                    (nameEmit)="filterName($event)"
                     (priceEmit)="filterPrice($event)"
                     (brandsEmit)="filterBrands($event)"
                     (typesEmit)="filterTypes($event)"
                     (valorationEmit)="filterValoration($event)"
                     (productsPerPageEmit)="productsPerPage($event)"
-                    [maxPrice]="1000000"
+                    [maxPrice]="maxPrice"
                     [brands]="brands"
                     [types]="types">
       </app-filters>

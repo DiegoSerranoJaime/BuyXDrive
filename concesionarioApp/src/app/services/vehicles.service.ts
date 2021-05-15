@@ -46,4 +46,10 @@ export class VehiclesService {
   getVehiclesBrands(): Observable<any[]> {
     return this._http.get<any[]>(`${this.baseUrl}/brands`);
   }
+
+  getVehiclesMaxPrice(): Observable<any> {
+    return this._http.get<any>(`${this.baseUrl}/maxPrice`).pipe(
+      map((p) => p[0])
+    );
+  }
 }

@@ -16,8 +16,10 @@ export class VehiculosComponent implements OnInit {
   selectedBrands: any[] = [];
   selectedTypes: any[] = [];
 
+  allFilterData = false;
   brands: any[] = [];
   types: any[] = [];
+  maxPrice: number = 0;
 
   vehiculos: VehicleCard[] = [];
 
@@ -31,11 +33,13 @@ export class VehiculosComponent implements OnInit {
       this.vehiculos = res;
     });
 
-    combineLatest(this._vehiclesService.getVehiclesBrands(), this._vehiclesService.getVehiclesTypes())
-    .subscribe(([brands, types]) => {
+    combineLatest(this._vehiclesService.getVehiclesBrands(), this._vehiclesService.getVehiclesTypes(), this._vehiclesService.getVehiclesMaxPrice())
+    .subscribe(([brands, types, price]) => {
       this.brands = brands;
       this.types = types;
-    })
+      this.maxPrice = Math.ceil(price['maxPrice']);
+      this.allFilterData = true;
+    });
   }
 
   filterName(event: any) {

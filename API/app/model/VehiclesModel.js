@@ -198,4 +198,15 @@ Vehicles.getVehiclesBrands = function(result) {
     });
 };
 
+Vehicles.getVehiclesMaxPrice = function(result) {
+    sql.query("SELECT MAX(price) AS maxPrice FROM products INNER JOIN vehicles USING (id)", (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+
+        result(null, res);
+    });
+};
+
 module.exports = Vehicles;
