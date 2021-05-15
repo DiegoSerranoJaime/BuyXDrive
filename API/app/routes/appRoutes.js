@@ -36,6 +36,9 @@ module.exports = function(app) {
     app.route('/api/vehicles/types')
         .get(vehicles.getVehiclesTypes);
 
+    app.route('/api/vehicles/maxPrice')
+        .get(vehicles.getVehiclesMaxPrice);
+
     app.route('/api/vehicles/:id')
         .get(vehicles.getVehicle);
 

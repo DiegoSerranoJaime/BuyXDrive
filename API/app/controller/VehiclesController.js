@@ -78,6 +78,16 @@ exports.getVehiclesBrands = function(req, res) {
     });
 };
 
+exports.getVehiclesMaxPrice = function(req, res) {
+    Vehicles.getVehiclesMaxPrice((err, maxPrice) => {
+        if(err) {
+            res.send(err);
+        }
+        
+        res.json(maxPrice);
+    });
+};
+
 imageRoute = function(data) {
     for (let i = 0; i < data.length; i++) {
         data[i].image = 'http://localhost:3000/api/images/' + data[i].image;

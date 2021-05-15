@@ -13,13 +13,13 @@
       <label for="name" class="form-label">Nombre</label>
       <input type="text" name="name" class="form-control" #name (keyup)="filterByName(name.value)">
     </div>
-    <div class="mb-2">
+    <div class="mb-2" *ngIf="maxPrice > 0">
       <label for="price" class="form-label">Precio</label>
       <div class="custom-slider">
         <ngx-slider [options]="priceOptions" [value]="0" [highValue]="maxPrice" #price (valueChange)="filterByPrice(price)"></ngx-slider>
       </div>
     </div>
-    <div class="mb-2">
+    <div class="mb-2" *ngIf="brands.length > 0">
       <label for="brands" class="form-check-label">Marcas</label>
       <div class="row justify-content-between checkrow">
         <div class="col-5 form-check" *ngFor="let brand of brands">
@@ -28,7 +28,7 @@
         </div>
       </div>
     </div>
-    <div class="mb-2">
+    <div class="mb-2" *ngIf="types.length > 0">
       <label for="types" class="form-check-label">Tipos</label>
       <div class="row justify-content-between checkrow">
         <div class="col-6 form-check" *ngFor="let type of types">

@@ -39,14 +39,14 @@ export class FiltersComponent implements OnInit {
       ceil: this.maxPrice,
       tickStep: this.maxPrice / 5,
       showTicks: true,
-      step: 1000,
       minRange: 1,
       noSwitching: true,
       autoHideLimitLabels: true,
       translate: (value: number): string => {
         return value + ' €';
       }
-    }
+    };
+
     this.valorationOptions = {
       minLimit: 0,
       maxLimit: 5,
@@ -58,7 +58,7 @@ export class FiltersComponent implements OnInit {
       minRange: 1,
       noSwitching: true,
       autoHideLimitLabels: true,
-    }
+    };
   }
 
   filterByName(name: string) {
