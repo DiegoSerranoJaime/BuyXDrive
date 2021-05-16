@@ -12,20 +12,20 @@
                     [maxPrice]="maxPrice"
                     [brands]="brands"
                     [types]="types"
-                    [title]="'Vehiculos'">
+                    [title]="'Articulos'">
       </app-filters>
     </div>
     <div class="col-12 col-md">
       <ng-template #noVehicles>
         <div class="alert alert-info mt-5" role="alert">
-          No se encuentran vehiculos disponibles
+          No se encuentran articulos disponibles
         </div>
       </ng-template>
-      <div *ngIf="vehiculos && (vehiculos | filterProducts:name:prices:selectedBrands:selectedTypes:valoration).length > 0; else noVehicles">
-        <app-init-products class="flex-grow-1" [products]="vehiculos | filterProducts:name:prices:selectedBrands:selectedTypes:valoration | slice: (page-1) * pageSize : page * pageSize" [type]="'vehiculo'"></app-init-products>
+      <div *ngIf="articulos && (articulos | filterProducts:name:prices:selectedBrands:selectedTypes:valoration).length > 0; else noVehicles">
+        <app-init-products class="flex-grow-1" [products]="articulos | filterProducts:name:prices:selectedBrands:selectedTypes:valoration | slice: (page-1) * pageSize : page * pageSize" [type]="'articulo'"></app-init-products>
 
         <div class="d-flex justify-content-center mt-4">
-          <ngb-pagination [collectionSize]="(vehiculos | filterProducts:name:prices:selectedBrands:selectedTypes:valoration).length" [(page)]="page" [maxSize]="5" [pageSize]="pageSize" [boundaryLinks]="true"></ngb-pagination>
+          <ngb-pagination [collectionSize]="(articulos | filterProducts:name:prices:selectedBrands:selectedTypes:valoration).length" [(page)]="page" [maxSize]="5" [pageSize]="pageSize" [boundaryLinks]="true"></ngb-pagination>
         </div>
       </div>
     </div>

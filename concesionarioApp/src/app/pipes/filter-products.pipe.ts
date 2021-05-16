@@ -1,15 +1,15 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { VehicleCard } from 'src/models/vehicles.model';
 
 @Pipe({
-  name: 'filterVehicles'
+  name: 'filterProducts',
+  pure: false
 })
-export class FilterVehiclesPipe implements PipeTransform {
+export class FilterProductsPipe implements PipeTransform {
 
-  transform(vehicles: VehicleCard[], name: string, prices: number[], brands: any[], types: any[], valoration: number[]): VehicleCard[] {
-    let res: VehicleCard[] = [];
+  transform(products: any[], name: string, prices: number[], brands: any[], types: any[], valoration: number[]): any[] {
+    let res: any[] = [];
 
-    res = vehicles.filter((v) => {
+    res = products.filter((v) => {
       let ret: boolean = true;
 
       if (name && !v.name.toLowerCase().includes(name)) {
@@ -32,12 +32,12 @@ export class FilterVehiclesPipe implements PipeTransform {
       }
 
       return ret ? v : null;
-    })
+    });
 
     if (name || brands.length > 0 || types.length > 0 || prices.length > 0 || valoration.length > 0) {
       return res;
     } else {
-      return vehicles;
+      return products;
     }
 
   }

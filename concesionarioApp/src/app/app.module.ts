@@ -17,13 +17,10 @@ import { InicioComponent } from './pages/inicio/inicio.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { VehiculosComponent } from './pages/vehiculos/vehiculos.component';
-import { ProductosComponent } from './pages/productos/productos.component';
 import { VehiculoComponent } from './pages/vehiculo/vehiculo.component';
-import { ProductoComponent } from './pages/producto/producto.component';
 import { LoginComponent } from './components/modals/login/login.component';
 import { ModalComponent } from './components/modals/modal/modal.component';
 import { VehicleCardComponent } from './components/vehicle-card/vehicle-card.component';
-import { InitVehiclesComponent } from './components/init-vehicles/init-vehicles.component';
 import { StarsComponent } from './components/stars/stars.component';
 import { CommentsFormComponent } from './components/comments-form/comments-form.component';
 import { CommentsComponent } from './components/comments/comments.component';
@@ -41,9 +38,13 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSliderModule } from '@angular/material/slider';
 import { UserModule } from './pages/user/user.module';
 import { FiltersComponent } from './components/filters/filters.component';
-import { FilterVehiclesPipe } from './pipes/filter-vehicles.pipe';
+import { FilterProductsPipe } from './pipes/filter-products.pipe';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { NgbModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { ArticleCardComponent } from './components/article-card/article-card.component';
+import { ArticulosComponent } from './pages/articulos/articulos.component';
+import { ArticuloComponent } from './pages/articulo/articulo.component';
+import { InitProductsComponent } from './components/init-products/init-products.component';
 
 const JWT_Module_Options: JwtModuleOptions = {
   config: {
@@ -60,15 +61,12 @@ const JWT_Module_Options: JwtModuleOptions = {
     NavbarComponent,
     FooterComponent,
     VehiculosComponent,
-    ProductosComponent,
     VehiculoComponent,
-    ProductoComponent,
     LoginComponent,
     ModalComponent,
     AdHostDirective,
     DiscountPipe,
     VehicleCardComponent,
-    InitVehiclesComponent,
     StarsComponent,
     CommentsFormComponent,
     CommentsComponent,
@@ -78,7 +76,11 @@ const JWT_Module_Options: JwtModuleOptions = {
     SimpleBodyModalComponent,
     RegisterComponent,
     FiltersComponent,
-    FilterVehiclesPipe
+    FilterProductsPipe,
+    ArticleCardComponent,
+    ArticulosComponent,
+    ArticuloComponent,
+    InitProductsComponent
   ],
   imports: [
     BrowserModule,

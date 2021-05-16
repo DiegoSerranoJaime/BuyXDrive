@@ -1,78 +1,98 @@
 module.exports = function(app) {
     // Controladores de categorias y productos que tienen las funciones
-    let users = require('../controller/UsersController');
-    let vehicles = require('../controller/VehiclesController');
-    let images = require('../controller/ImagesController');
-    let comments = require('../controller/CommentsController');
-    let orders = require('../controller/OrdersController');
+    let Users = require('../controller/UsersController');
+    let Vehicles = require('../controller/VehiclesController');
+    let Articles = require('../controller/ArticlesController');
+    let Images = require('../controller/ImagesController');
+    let Comments = require('../controller/CommentsController');
+    let Orders = require('../controller/OrdersController');
     
     //Endpoints de login y registro
     app.route('/api/user/login')
-        .post(users.login);
+        .post(Users.login);
         
     app.route('/api/user/register')
-        .post(users.register);
+        .post(Users.register);
 
     app.route('/api/user/genders')
-        .get(users.getAllGenders);
+        .get(Users.getAllGenders);
 
     //Endpoint de Images
     app.route('/api/images/product/:id')
-        .get(images.getImagesRoutes);
+        .get(Images.getImagesRoutes);
         
     app.route('/api/images/:image')
-        .get(images.getImage);
+        .get(Images.getImage);
 
     //Endpoints de vehiculos
     app.route('/api/vehicles')
-        .get(vehicles.getAllVehicles);
+        .get(Vehicles.getAllVehicles);
 
     app.route('/api/vehicles/init')
-        .get(vehicles.getInitVehicles);
+        .get(Vehicles.getInitVehicles);
 
     app.route('/api/vehicles/brands')
-        .get(vehicles.getVehiclesBrands);
+        .get(Vehicles.getVehiclesBrands);
 
     app.route('/api/vehicles/types')
-        .get(vehicles.getVehiclesTypes);
+        .get(Vehicles.getVehiclesTypes);
 
     app.route('/api/vehicles/maxPrice')
-        .get(vehicles.getVehiclesMaxPrice);
+        .get(Vehicles.getVehiclesMaxPrice);
 
     app.route('/api/vehicles/:id')
-        .get(vehicles.getVehicle);
+        .get(Vehicles.getVehicle);
 
     app.route('/api/vehicles/cart/:id')
-        .get(vehicles.getVehicleCart);
+        .get(Vehicles.getVehicleCart);
         
     app.route('/api/vehicles/types/:type/selected_vehicle/:id')
-        .get(vehicles.getInitVehiclesByType);
+        .get(Vehicles.getInitVehiclesByType);
+
+    //Endpoint de articulos
+    app.route('/api/articles')
+        .get(Articles.getAllArticles);
+
+    app.route('/api/articles/init')
+        .get(Articles.getInitArticles);
+
+    app.route('/api/articles/brands')
+        .get(Articles.getArticlesBrands);
+
+    app.route('/api/articles/types')
+        .get(Articles.getArticlesTypes);
+
+    app.route('/api/articles/maxPrice')
+        .get(Articles.getArticlesMaxPrice);
+
+    app.route('/api/articles/types/:type/selected_article/:id')
+        .get(Articles.getInitArticlesByType);
 
     //Endpoints de comentarios    
     app.route('/api/comments/products/:id')
-        .get(comments.getCommentsOfAProduct);
+        .get(Comments.getCommentsOfAProduct);
     
     app.route('/api/comments/products')
-        .post(verifyToken, comments.addComment);
+        .post(verifyToken, Comments.addComment);
 
     //Endpoints para pedidos
     app.route('/api/orders')
-        .post(verifyToken, orders.createOrder);
+        .post(verifyToken, Orders.createOrder);
 
     app.route('/api/orders/not-delivered')
-        .get(verifyToken, orders.getOrdersNotDelivered);
+        .get(verifyToken, Orders.getOrdersNotDelivered);
         
         app.route('/api/orders/history')
-        .get(verifyToken, orders.getHistoryOrders);
+        .get(verifyToken, Orders.getHistoryOrders);
         
     app.route('/api/orders/:id/products')
-        .get(verifyToken, orders.getProductsFromAnOrder);
+        .get(verifyToken, Orders.getProductsFromAnOrder);
     
     app.route('/api/orders/product')
-        .post(verifyToken, orders.addProductToAnOrder);
+        .post(verifyToken, Orders.addProductToAnOrder);
 
     app.route('/api/orders/:id/cancel')
-        .get(verifyToken, orders.cancelOrder);
+        .get(verifyToken, Orders.cancelOrder);
 
     function verifyToken(req, res, next) {
         const bearerHeader = req.headers['authorization'];

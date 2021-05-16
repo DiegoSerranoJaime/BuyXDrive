@@ -1,0 +1,17 @@
+<div class="card position-relative" [routerLink]="['/articulos', article.id]">
+  <img [src]="article.image" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{ article.name }}</h5>
+    <p class="card-subtitle mb-2 text-muted">{{ article.bname }} | {{ article.type }}</p>
+    <div class="card-text">
+      <div class="row">
+        <div class="col d-flex justify-content-between">
+          <p class="fw-bolder">Precio:</p>
+          <p class="text-success">{{ article.price | discount:article.discount | number:'.1-2':'en' }} €</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="article.discount" class="badge bg-primary position-absolute mt-2 ms-2">{{ article.discount }}%</div>
+  <div class="badge bg-warning position-absolute mt-2 end-0 me-2">{{ article.val }} <i class="fas fa-star"></i></div>
+</div>
