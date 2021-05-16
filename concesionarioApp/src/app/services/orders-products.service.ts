@@ -12,13 +12,8 @@ export class OrdersProductsService {
 
   private baseUrl: string = `${ environment.urlApi }/orders`;
 
-  public orderColumns: string[] = ['No.', 'Nombre', 'Cantidad', 'Precio', 'Descuento'];
+  public orderColumns: string[] = ['Contador', 'Nombre', 'Cantidad', 'Precio', 'Descuento'];
   public orderFields: any[] = [
-    {
-      field: 'count',
-      type: 'count',
-      noData: false
-    },
     {
       field: 'name',
       type: 'string',

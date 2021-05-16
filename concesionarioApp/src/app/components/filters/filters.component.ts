@@ -18,6 +18,7 @@ export class FiltersComponent implements OnInit {
   @Input() brands: any[];
   @Input() types: any[];
   @Input() maxPrice: number;
+  @Input() title: string;
 
   collapse: boolean = false;
 

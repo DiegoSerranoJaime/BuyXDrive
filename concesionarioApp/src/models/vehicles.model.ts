@@ -22,12 +22,6 @@ export interface Vehicle {
   cant: number,
   val: number
 };
-
-export interface VehicleType {
-  id: number,
-  name: string
-};
-
 export interface VehicleCard {
   id: number,
   price: string,
