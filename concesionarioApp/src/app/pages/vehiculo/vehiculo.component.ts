@@ -35,8 +35,8 @@ export class VehiculoComponent implements OnInit {
     this._activatedRoute.params.subscribe((params) => {
       this.id = params.id;
 
-      combineLatest(this._vehiclesService.getVehicle(this.id),  this._imagesService.getImagesOfAProduct(this.id))
-      .subscribe(([vehicle, images]) => {
+      combineLatest(this._vehiclesService.getVehicle(this.id),  this._imagesService.getImagesOfAProduct(this.id), this._commentsService.getCommentsOfAProduct(this.id))
+      .subscribe(([vehicle, images, comments]) => {
         this.vehicle = vehicle;
 
         this._vehiclesService.getInitVehiclesByType(vehicle.type, this.id).subscribe((data: VehicleCard[]) => {
@@ -44,10 +44,7 @@ export class VehiculoComponent implements OnInit {
         });
 
         this.images = images;
-      });
-
-      this._commentsService.getCommentsOfAProduct(this.id).subscribe((data: Comment[]) => {
-        this.comments = data;
+        this.comments = comments;
       });
     });
   }

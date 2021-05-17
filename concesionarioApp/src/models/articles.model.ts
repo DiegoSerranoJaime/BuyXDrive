@@ -10,3 +10,17 @@ export interface ArticleCard {
   val: number,
   bname?: string
 }
+
+export interface Article {
+  id: number,
+  price: number,
+  amount: number,
+  discount: number,
+  name: string,
+  aname: string,
+  bname: string,
+  description: string,
+  type: string,
+  cant: number,
+  val: number
+}

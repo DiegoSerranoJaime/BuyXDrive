@@ -33,12 +33,6 @@ export class VehiclesService {
     );
   }
 
-  getVehicleCart(id: number): Observable<CartProduct> {
-    return this._http.get<CartProduct>(`${this.baseUrl}/cart/${id}`).pipe(
-      map((data) => data[0])
-    );
-  }
-
   getVehiclesTypes(): Observable<any[]> {
     return this._http.get<any[]>(`${this.baseUrl}/types`);
   }
