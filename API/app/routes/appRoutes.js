@@ -1,6 +1,7 @@
 module.exports = function(app) {
     // Controladores de categorias y productos que tienen las funciones
     let Users = require('../controller/UsersController');
+    let Products = require('../controller/ProductsController');
     let Vehicles = require('../controller/VehiclesController');
     let Articles = require('../controller/ArticlesController');
     let Images = require('../controller/ImagesController');
@@ -43,9 +44,6 @@ module.exports = function(app) {
     app.route('/api/vehicles/:id')
         .get(Vehicles.getVehicle);
 
-    app.route('/api/vehicles/cart/:id')
-        .get(Vehicles.getVehicleCart);
-        
     app.route('/api/vehicles/types/:type/selected_vehicle/:id')
         .get(Vehicles.getInitVehiclesByType);
 
@@ -65,8 +63,15 @@ module.exports = function(app) {
     app.route('/api/articles/maxPrice')
         .get(Articles.getArticlesMaxPrice);
 
+    app.route('/api/articles/:id')
+        .get(Articles.getArticle);
+
     app.route('/api/articles/types/:type/selected_article/:id')
         .get(Articles.getInitArticlesByType);
+
+    //Endpoint de productso
+    app.route('/api/products/cart/:id')
+        .get(Products.getProductCart);
 
     //Endpoints de comentarios    
     app.route('/api/comments/products/:id')

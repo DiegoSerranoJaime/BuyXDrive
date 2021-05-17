@@ -102,6 +102,39 @@ Articles.getInitArticlesByType = function(conditions, result) {
     });
 };
 
+
+Articles.getArticle = function(id, result) {
+    let query = `SELECT 
+                    products.id, 
+                    products.price, 
+                    products.amount, 
+                    products.discount, 
+                    concat(brands.name," ",articles.name) as name, 
+                    articles.name as aname, 
+                    brands.name as bname, 
+                    description, 
+                    article_type.name AS type, 
+                    COUNT(comments.product_id) AS cant, 
+                    IF(COUNT(comments.product_id), AVG(comments.valoration), 0) AS val 
+                FROM products 
+                INNER JOIN articles ON articles.id = products.id 
+                INNER JOIN article_type ON articles.type = article_type.id 
+                INNER JOIN brands ON articles.brand = brands.id 
+                LEFT JOIN comments ON comments.product_id = products.id 
+                GROUP BY products.id 
+                HAVING products.id = ?`;
+
+    sql.query(query, id, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+
+        result(null, res);
+    });
+}
+
+
 Articles.getArticlesTypes = function(result) {
     sql.query("SELECT name FROM article_type", (err, res) => {
         if (err) {

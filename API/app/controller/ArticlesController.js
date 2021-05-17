@@ -36,6 +36,17 @@ exports.getInitArticlesByType = function(req, res) {
     });
 };
 
+exports.getArticle = function(req, res) {
+    Articles.getArticle(req.params.id, (err, article) => {
+        if(err) {
+            res.send(err);
+        }
+        
+        res.json(article);
+    });
+};
+
+
 exports.getArticlesTypes = function(req, res) {
     Articles.getArticlesTypes((err, types) => {
         if(err) {

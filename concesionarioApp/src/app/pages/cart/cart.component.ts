@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
 import { ModalService } from 'src/app/services/modal.service';
 import { OrdersService } from 'src/app/services/orders.service';
+import { ProductsService } from 'src/app/services/products.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { VehiclesService } from 'src/app/services/vehicles.service';
 import { CartData, CartProduct } from 'src/models/products.model';
@@ -23,7 +24,7 @@ export class CartComponent implements OnInit {
   discountPrice: number;
 
   constructor(private _cartService: CartService,
-    private _vehicleService: VehiclesService,
+    private _productsService: ProductsService,
     private _modalService: ModalService,
     private _toastService: ToastService,
     public _authService: AuthService,
@@ -37,13 +38,13 @@ export class CartComponent implements OnInit {
       this.cart = cart;
 
       this.cart.forEach((CartData) => {
-        this._vehicleService.getVehicleCart(CartData.id).subscribe((vehicle) => {
+        this._productsService.getProductCart(CartData.id).subscribe((product) => {
           let new_product: CartProduct = {
             ...CartData,
-            name: vehicle.name,
-            image: vehicle.image,
-            price: vehicle.price,
-            discount: vehicle.discount
+            name: product.name,
+            image: product.image,
+            price: product.price,
+            discount: product.discount
           };
 
           this.products.push(new_product);
