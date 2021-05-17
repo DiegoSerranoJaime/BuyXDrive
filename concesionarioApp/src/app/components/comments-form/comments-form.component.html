@@ -29,7 +29,7 @@
                 Valoración:
               </label>
               <div class="col-auto px-0">
-                <star-rating [value]="valoration.value" [totalstars]="5" checkedcolor="#ffc107" uncheckedcolor="#adb5bd" size="20px" (rate)="valoration.setValue($event.newValue)"></star-rating>
+                <ngb-rating [formControl]="valoration" [rate]="valoration.value" [max]="5"></ngb-rating>
               </div>
               <span class="col-auto">
                 <div class="row d-flex align-items-center">
@@ -37,7 +37,7 @@
                     [
                   </div>
                   <div class="col-2 px-1">
-                    <input type="text" class="form-control py-0 px-1" formControlName="valoration" [ngClass]="{'border border-danger': valoration.invalid && valoration.touched}">
+                    <input type="text" class="form-control py-0 px-1" formControlName="valoration" [value]="valoration.value" [ngClass]="{'border border-danger': valoration.invalid && valoration.touched}">
                   </div>
                   <div class="col-auto px-1">
                     / 5 ]

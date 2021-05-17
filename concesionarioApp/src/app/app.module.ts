@@ -27,7 +27,6 @@ import { CommentsComponent } from './components/comments/comments.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { ToastComponent } from './components/toast/toast.component';
 import { AmountComponent } from './pages/cart/amount/amount.component';
-import { RatingModule } from 'ng-starrating';
 import { SimpleBodyModalComponent } from './components/modals/simple-body-modal/simple-body-modal.component';
 
 import { JwtModule, JwtModuleOptions } from '@auth0/angular-jwt';
@@ -40,7 +39,7 @@ import { UserModule } from './pages/user/user.module';
 import { FiltersComponent } from './components/filters/filters.component';
 import { FilterProductsPipe } from './pipes/filter-products.pipe';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
-import { NgbModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbPaginationModule, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 import { ArticleCardComponent } from './components/article-card/article-card.component';
 import { ArticulosComponent } from './pages/articulos/articulos.component';
 import { ArticuloComponent } from './pages/articulo/articulo.component';
@@ -94,13 +93,13 @@ const JWT_Module_Options: JwtModuleOptions = {
     MatButtonModule,
     MatTableModule,
     MatPaginatorModule,
-    RatingModule,
     UserModule,
     MatExpansionModule,
     MatSliderModule,
     NgxSliderModule,
     NgbModule,
     NgbPaginationModule,
+    NgbRatingModule,
     JwtModule.forRoot(JWT_Module_Options)
   ],
   providers: [],

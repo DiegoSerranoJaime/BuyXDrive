@@ -8,6 +8,7 @@ import { CartService } from 'src/app/services/cart.service';
 import { ImagesService } from 'src/app/services/images.service';
 import { combineLatest } from 'rxjs';
 import { ToastService } from 'src/app/services/toast.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-vehiculo',
@@ -27,7 +28,8 @@ export class VehiculoComponent implements OnInit {
     public _imagesService: ImagesService,
     private _commentsService: CommentsService,
     private _cartService: CartService,
-    private _toastService: ToastService) { }
+    private _toastService: ToastService,
+    private _location: Location) { }
 
   ngOnInit(): void {
     this._activatedRoute.params.subscribe((params) => {
@@ -62,5 +64,4 @@ export class VehiculoComponent implements OnInit {
 
     this._toastService.show(message);
   }
-
 }

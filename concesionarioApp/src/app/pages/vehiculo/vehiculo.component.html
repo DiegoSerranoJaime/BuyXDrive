@@ -1,6 +1,6 @@
 <div class="row d-flex align-items-center position-relative">
   <div class="col-auto position-absolute">
-    <a routerLink="inicio" class="btn btn-primary"><i class="fas fa-arrow-left"></i></a>
+    <a routerLink="/vehiculos" class="btn btn-primary"><i class="fas fa-arrow-left"></i></a>
   </div>
   <div class="col mx-auto" *ngIf="vehicle">
     <h4 class="d-flex justify-content-center">{{ vehicle.name }}</h4>
@@ -17,21 +17,21 @@
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
       </div>
       <div class="carousel-inner">
-        <div class="carousel-item" *ngFor="let image of images; first as first" [ngClass]="{'active': first}">
-          <img [src]="image.image" class="d-block w-100">
+        <div class="carousel-item" [ngClass]="{'active': first}" *ngFor="let image of images; first as first">
+          <img [src]="image.image" class="d-block w-100" alt="...">
         </div>
       </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"  data-bs-slide="prev">
-        <div class="bg-dark rounded-circle p-1 d-flex" style="height: 40px;">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        </div>
-        <span class="visually-hidden">Previous</span>
+          <div class="bg-dark rounded-circle p-1 d-flex" style="height: 40px;">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          </div>
+          <span class="visually-hidden">Previous</span>
       </button>
       <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"  data-bs-slide="next">
-        <div class="bg-dark rounded-circle p-1 d-flex" style="height: 40px;">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        </div>
-        <span class="visually-hidden">Next</span>
+          <div class="bg-dark rounded-circle p-1 d-flex" style="height: 40px;">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          </div>
+          <span class="visually-hidden">Next</span>
       </button>
     </div>
     <div class="col-12 col-sm-12 col-md-12 mt-4">
