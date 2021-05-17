@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { CartData, CartProduct } from 'src/models/products.model';
-import { AuthService } from './auth.service';
+import { CartData } from 'src/models/products.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +9,7 @@ export class CartService {
 
   cart: CartData[] = [];
 
-  constructor(private _authService: AuthService) {
+  constructor() {
     this.load();
   }
 
