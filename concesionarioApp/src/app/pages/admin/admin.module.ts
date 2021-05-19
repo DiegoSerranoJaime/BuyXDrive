@@ -9,6 +9,7 @@ import { EmployersComponent } from './employers/employers.component';
 import { ProvidersComponent } from './providers/providers.component';
 import { AdminRoutingModule } from './admin-routing.module';
 import { UserModule } from '../user/user.module';
+import { MatTabsModule } from '@angular/material/tabs';
 
 
 
@@ -25,7 +26,8 @@ import { UserModule } from '../user/user.module';
   imports: [
     CommonModule,
     AdminRoutingModule,
-    UserModule
+    UserModule,
+    MatTabsModule
   ]
 })
 export class AdminModule { }

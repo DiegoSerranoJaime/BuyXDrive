@@ -1,13 +1,15 @@
+
 module.exports = function(app) {
     // Controladores de categorias y productos que tienen las funciones
-    let Users = require('../controller/UsersController');
-    let Products = require('../controller/ProductsController');
-    let Vehicles = require('../controller/VehiclesController');
-    let Articles = require('../controller/ArticlesController');
-    let Images = require('../controller/ImagesController');
-    let Comments = require('../controller/CommentsController');
-    let Orders = require('../controller/OrdersController');
-    
+    const Users = require('../controller/UsersController');
+    const Products = require('../controller/ProductsController');
+    const Vehicles = require('../controller/VehiclesController');
+    const Articles = require('../controller/ArticlesController');
+    const Images = require('../controller/ImagesController');
+    const Comments = require('../controller/CommentsController');
+    const Orders = require('../controller/OrdersController');
+    const AdminUsers = require('../controller/AdminUsersController');
+
     //Endpoints de login y registro
     app.route('/api/user/login')
         .post(Users.login);
@@ -17,6 +19,13 @@ module.exports = function(app) {
 
     app.route('/api/user/genders')
         .get(Users.getAllGenders);
+
+    //Endpoint de admin
+    app.route('/api/admin/users')
+        .get(verifyToken, AdminUsers.getAllUsers);
+
+    app.route('/api/admin/employers')
+        .get(verifyToken, AdminUsers.getAllEmployers);
 
     //Endpoint de Images
     app.route('/api/images/product/:id')
@@ -87,7 +96,7 @@ module.exports = function(app) {
     app.route('/api/orders/not-delivered')
         .get(verifyToken, Orders.getOrdersNotDelivered);
         
-        app.route('/api/orders/history')
+    app.route('/api/orders/history')
         .get(verifyToken, Orders.getHistoryOrders);
         
     app.route('/api/orders/:id/products')
