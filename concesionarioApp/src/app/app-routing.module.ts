@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminGuard } from './guards/admin.guard';
 import { AuthGuard } from './guards/auth.guard';
 import { ArticuloComponent } from './pages/articulo/articulo.component';
 import { ArticulosComponent } from './pages/articulos/articulos.component';
@@ -16,6 +17,7 @@ const APP_ROUTES: Routes = [
   { path: 'articulos/:id' , component: ArticuloComponent },
   { path: 'cart', component: CartComponent },
   { path: 'user', canActivate: [AuthGuard], loadChildren: () => import('./pages/user/user.module').then(m => m.UserModule)},
+  { path: 'admin', canActivate: [AdminGuard], loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminModule)},
   { path: '**', pathMatch: 'full', redirectTo: 'inicio'}
 ];
 
