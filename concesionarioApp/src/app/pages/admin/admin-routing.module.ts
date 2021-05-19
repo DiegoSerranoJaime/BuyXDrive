@@ -8,6 +8,7 @@ import { UserOrdersComponent } from './user-orders/user-orders.component';
 import { AllOrdersComponent } from './all-orders/all-orders.component';
 import { ProvidersComponent } from './providers/providers.component';
 import { EmployersComponent } from './employers/employers.component';
+import { ProductsComponent } from '../products/products.component';
 
 const ADMIN_ROUTES: Routes = [
   { path: '', component: AdminComponent, children: [
@@ -17,6 +18,8 @@ const ADMIN_ROUTES: Routes = [
     { path: 'orders', component: AllOrdersComponent },
     { path: 'providers', component: ProvidersComponent },
     { path: 'employers', component: EmployersComponent },
+    { path: 'employers/:id', component: UserPageComponent },
+    { path: 'products', component: ProductsComponent },
     { path: '**', pathMatch: 'full', redirectTo: 'users' }
   ]},
   { path: '**', pathMatch: 'full', redirectTo: 'users' }

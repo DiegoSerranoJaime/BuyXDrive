@@ -44,6 +44,7 @@ import { ArticleCardComponent } from './components/article-card/article-card.com
 import { ArticulosComponent } from './pages/articulos/articulos.component';
 import { ArticuloComponent } from './pages/articulo/articulo.component';
 import { InitProductsComponent } from './components/init-products/init-products.component';
+import { ProductsComponent } from './pages/products/products.component';
 
 const JWT_Module_Options: JwtModuleOptions = {
   config: {
@@ -79,7 +80,8 @@ const JWT_Module_Options: JwtModuleOptions = {
     ArticleCardComponent,
     ArticulosComponent,
     ArticuloComponent,
-    InitProductsComponent
+    InitProductsComponent,
+    ProductsComponent
   ],
   imports: [
     BrowserModule,

@@ -7,6 +7,7 @@ import { SimpleBodyModalComponent } from 'src/app/components/modals/simple-body-
 import { ModalService } from 'src/app/services/modal.service';
 import { OrdersService } from 'src/app/services/orders.service';
 import { ToastService } from 'src/app/services/toast.service';
+import { Permissions } from 'src/models/permissions.model';
 
 @Component({
   selector: 'app-generic-material-table',
@@ -19,7 +20,7 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
   @Input() displayedData: any[];
   @Input() dataSource: MatTableDataSource<any>;
   @Input() volver: boolean;
-  @Input() permisos: any[];
+  @Input() permisos: Permissions[];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true }) sort: MatSort;
@@ -69,7 +70,13 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
   }
 
   checkPermission(name: string) {
-    return this.permisos.some((p) => p.name == name);
+    let permiso = false;
+
+    if (this.permisos) {
+      permiso = this.permisos.some((p) => p.name == name);
+    }
+
+    return permiso;
   }
 
   getRouteFromPermission(name: string) {
