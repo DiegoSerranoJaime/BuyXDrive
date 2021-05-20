@@ -1,0 +1,10 @@
+<div class="row">
+  <div class="col-2">
+    <div class="btn-group-vertical d-flex" role="group" aria-label="Basic outlined example">
+      <button *ngFor="let link of links" type="button" class="btn btn-outline-primary" [routerLink]="[link.route]" routerLinkActive="active">{{ link.name }}</button>
+    </div>
+  </div>
+  <div class="col-10">
+    <router-outlet></router-outlet>
+  </div>
+</div>

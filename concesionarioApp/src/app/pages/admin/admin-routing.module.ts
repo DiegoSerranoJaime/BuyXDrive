@@ -8,7 +8,9 @@ import { UserOrdersComponent } from './user-orders/user-orders.component';
 import { AllOrdersComponent } from './all-orders/all-orders.component';
 import { ProvidersComponent } from './providers/providers.component';
 import { EmployersComponent } from './employers/employers.component';
-import { ProductsComponent } from '../products/products.component';
+import { ProductsComponent } from './products/products.component';
+import { AdminVehiclesComponent } from './products/admin-vehicles/admin-vehicles.component';
+import { AdminArticlesComponent } from './products/admin-articles/admin-articles.component';
 
 const ADMIN_ROUTES: Routes = [
   { path: '', component: AdminComponent, children: [
@@ -19,7 +21,11 @@ const ADMIN_ROUTES: Routes = [
     { path: 'providers', component: ProvidersComponent },
     { path: 'employers', component: EmployersComponent },
     { path: 'employers/:id', component: UserPageComponent },
-    { path: 'products', component: ProductsComponent },
+    { path: 'products', component: ProductsComponent, children:
+    [
+      { path: 'vehicles', component: AdminVehiclesComponent },
+      { path: 'articles', component: AdminArticlesComponent },
+    ]},
     { path: '**', pathMatch: 'full', redirectTo: 'users' }
   ]},
   { path: '**', pathMatch: 'full', redirectTo: 'users' }

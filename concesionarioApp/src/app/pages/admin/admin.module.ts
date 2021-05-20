@@ -10,6 +10,9 @@ import { ProvidersComponent } from './providers/providers.component';
 import { AdminRoutingModule } from './admin-routing.module';
 import { UserModule } from '../user/user.module';
 import { MatTabsModule } from '@angular/material/tabs';
+import { AdminVehiclesComponent } from './products/admin-vehicles/admin-vehicles.component';
+import { ProductsComponent } from './products/products.component';
+import { AdminArticlesComponent } from './products/admin-articles/admin-articles.component';
 
 
 
@@ -21,7 +24,10 @@ import { MatTabsModule } from '@angular/material/tabs';
     AllOrdersComponent,
     UserOrdersComponent,
     EmployersComponent,
-    ProvidersComponent
+    ProvidersComponent,
+    AdminVehiclesComponent,
+    ProductsComponent,
+    AdminArticlesComponent
   ],
   imports: [
     CommonModule,
