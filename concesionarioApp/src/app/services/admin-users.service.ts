@@ -11,8 +11,13 @@ import { AuthService } from './auth.service';
 export class AdminUsersService {
   baseUrl: string = `${environment.urlApi}/admin`;
 
-  public orderColumns: string[] = ['Contador', 'Nombre', 'Email', 'Género', 'Dirección', 'No. Teléfono', 'Tipo', 'Acciones'];
+  public orderColumns: string[] = ['No.', 'Nombre', 'Email', 'Género', 'Dirección', 'No. Teléfono', 'Tipo', 'Acciones'];
   public orderFields: any[] = [
+    {
+      field: 'id',
+      type: 'number',
+      noData: false
+    },
     {
       field: 'name',
       type: 'string',
