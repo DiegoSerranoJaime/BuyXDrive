@@ -12,6 +12,7 @@ module.exports = function(app) {
     const AdminVehicles = require('../controller/AdminVehiclesController');
     const AdminArticles = require('../controller/AdminArticlesController');
     const AdminOrders = require('../controller/AdminOrdersController');
+    const AdminProviders = require('../controller/AdminProvidersController');
 
 
     //Endpoints de login y registro
@@ -39,6 +40,9 @@ module.exports = function(app) {
 
     app.route('/api/admin/orders')
         .get(verifyToken, AdminOrders.getAllOrders);
+    
+    app.route('/api/admin/providers')
+        .get(verifyToken, AdminProviders.getAllProviders);
 
     //Endpoint de Images
     app.route('/api/images/product/:id')

@@ -1,15 +1,15 @@
-const Orders = require('../model/AdminOrdersModel');
+const Providers = require('../model/AdminProvidersModel');
 const jwt = require('jsonwebtoken');
 
-exports.getAllOrders = function(req, res) {
+exports.getAllProviders = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
         if (authData.user.user_type == 2) {
-            Orders.getAllOrders((err, orders) => {
+            Providers.getAllProviders((err, providers) => {
                 if(err) {
                     res.send(err);
                 }
                         
-                res.json(orders);
+                res.json(providers);
             });
         } else {
             res.json({ok: false, msg: 'Permission denied'});
