@@ -44,7 +44,6 @@ export class NavbarComponent implements OnInit {
       title: 'Creación de <span class="text-danger">Cuenta</span>',
       botonAceptar: 'Crear cuenta',
       aceptar: (componente) => {
-        console.log(componente.myForm);
         if (componente.myForm.valid) {
           this._authService.register(componente.myForm.value).subscribe((data: any) => {
             this._toastService.show(data.msg);

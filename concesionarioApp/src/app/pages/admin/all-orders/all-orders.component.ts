@@ -12,9 +12,6 @@ import { Permissions } from 'src/models/permissions.model';
 })
 export class AllOrdersComponent implements OnInit {
 
-  public displayedColumns: string[] = [];
-  public displayedData: any[] = [];
-  public dataSource = new MatTableDataSource<AdminOrder>();
   public permisos: Permissions[] = [
     {
       name: 'view',
@@ -22,18 +19,10 @@ export class AllOrdersComponent implements OnInit {
     },
   ]
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-
-  constructor(private _adminOrdersService: AdminOrdersService) {}
+  constructor(public _adminOrdersService: AdminOrdersService) {}
 
 
   ngOnInit(): void {
-    this.displayedColumns = this._adminOrdersService.orderColumns;
-    this.displayedData = this._adminOrdersService.orderFields;
-
-    this._adminOrdersService.getAllOrders().subscribe((orders) => {
-      this.dataSource.data = orders;
-    });
   }
 
 }

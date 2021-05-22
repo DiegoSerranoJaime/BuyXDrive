@@ -2,9 +2,9 @@
 
 const sql = require('./db');
 
-let AdminUsers = function() {};
+let AdminEmployers = function() {};
 
-AdminUsers.getAllUsers = function(result) {
+AdminEmployers.getAllEmployers = function(result) {
     
     let query = `SELECT  
                     users.id,
@@ -13,11 +13,12 @@ AdminUsers.getAllUsers = function(result) {
                     genders.name as gender,
                     address,
                     phoneNumber,
+                    user_type.name as type,
                     active
                 FROM users 
                 INNER JOIN user_type ON users.user_type = user_type.id
                 INNER JOIN genders ON users.gender = genders.id
-                WHERE user_type = 1
+                WHERE users.user_type <> 1
                 ORDER BY active DESC, users.id ASC`;
 
     sql.query(query, (err, res) => {
@@ -30,7 +31,7 @@ AdminUsers.getAllUsers = function(result) {
     });
 };
 
-AdminUsers.logicDelete = function(id, result) {
+AdminEmployers.logicDelete = function(id, result) {
     
     let query = `UPDATE users SET active = 0 WHERE id = ?`;
 
@@ -44,7 +45,7 @@ AdminUsers.logicDelete = function(id, result) {
     });
 };
 
-AdminUsers.reactive = function(id, result) {
+AdminEmployers.reactive = function(id, result) {
     
     let query = `UPDATE users SET active = 1 WHERE id = ?`;
 
@@ -58,7 +59,7 @@ AdminUsers.reactive = function(id, result) {
     });
 };
 
-AdminUsers.delete = function(id, result) {
+AdminEmployers.delete = function(id, result) {
     
     let query = `DELETE FROM users WHERE id = ?`;
 
@@ -68,8 +69,8 @@ AdminUsers.delete = function(id, result) {
             result(err, null);
         }
 
-        return AdminUsers.getAllUsers(result);
+        return AdminEmployers.getAllEmployers(result);
     });
 };
 
-module.exports = AdminUsers;
+module.exports = AdminEmployers;

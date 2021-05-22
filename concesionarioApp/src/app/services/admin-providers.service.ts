@@ -11,7 +11,7 @@ import { AdminProvider } from 'src/models/adminProviders.models';
 export class AdminProvidersService {
   baseUrl: string = `${environment.urlApi}/admin/providers`;
 
-  public orderColumns: string[] = ['No.', 'Nombre', 'Email', 'Dirección', 'No. Teléfono', 'Acciones'];
+  public orderColumns: string[] = ['No.', 'Nombre', 'Email', 'Dirección', 'No. Teléfono', 'Activo', 'Acciones'];
   public orderFields: any[] = [
     {
       field: 'id',
@@ -37,14 +37,36 @@ export class AdminProvidersService {
       field: 'phone_number',
       type: 'string',
       noData: false
+    },
+    {
+      field: 'active',
+      type: 'boolean',
+      noData: false
     }
   ];
 
   constructor(private _http: HttpClient,
     private _authService: AuthService) { }
 
-  getAllProviders(): Observable<AdminProvider[]> {
+  getAll(): Observable<AdminProvider[]> {
     return this._http.get<AdminProvider[]>(`${this.baseUrl}`, {
+      headers: this._authService.getToken()
+    });
+  }
+
+  delete(id: number): Observable<AdminProvider> {
+    return this._http.get<AdminProvider>(`${this.baseUrl}/delete/${id}`, {
+      headers: this._authService.getToken()
+    });
+  }
+
+  logicDelete(id: number): Observable<any> {
+    return this._http.get<any>(`${this.baseUrl}/logicDelete/${id}`, {
+      headers: this._authService.getToken()
+    });
+  }
+  reactive(id: number): Observable<any> {
+    return this._http.get<any>(`${this.baseUrl}/reactive/${id}`, {
       headers: this._authService.getToken()
     });
   }

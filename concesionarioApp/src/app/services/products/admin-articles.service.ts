@@ -11,7 +11,7 @@ import { AuthService } from '../auth.service';
 export class AdminArticlesService {
   baseUrl: string = `${environment.urlApi}/admin/articles`;
 
-  public orderColumns: string[] = ['No.', 'Marca', 'Nombre', 'Tipo', 'Valoración', 'Precio', 'Cantidad', 'Descuento', 'Acciones'];
+  public orderColumns: string[] = ['No.', 'Marca', 'Nombre', 'Tipo', 'Valoración', 'Precio', 'Cantidad', 'Descuento', 'Activo', 'Acciones'];
   public orderFields: any[] = [
     {
       field: 'id',
@@ -53,13 +53,37 @@ export class AdminArticlesService {
       type: 'percentage',
       noData: false
     },
+    {
+      field: 'active',
+      type: 'boolean',
+      noData: false
+    }
   ];
 
   constructor(private _http: HttpClient,
     private _authService: AuthService) { }
 
-  getAllArticles(): Observable<AdminArticle[]> {
+  getAll(): Observable<AdminArticle[]> {
     return this._http.get<AdminArticle[]>(`${this.baseUrl}`, {
       headers: this._authService.getToken()
     });
-  }}
+  }
+
+  delete(id: number): Observable<AdminArticle[]> {
+    return this._http.get<AdminArticle[]>(`${this.baseUrl}/delete/${id}`, {
+      headers: this._authService.getToken()
+    });
+  }
+
+  logicDelete(id: number): Observable<any> {
+    return this._http.get<any>(`${this.baseUrl}/logicDelete/${id}`, {
+      headers: this._authService.getToken()
+    });
+  }
+  reactive(id: number): Observable<any> {
+    return this._http.get<any>(`${this.baseUrl}/reactive/${id}`, {
+      headers: this._authService.getToken()
+    });
+  }
+}
+

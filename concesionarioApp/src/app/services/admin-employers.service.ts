@@ -2,16 +2,17 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { AdminVehicle } from 'src/models/adminVehicles.model';
-import { AuthService } from '../auth.service';
+import { AdminEmployer } from 'src/models/adminEmployers.models';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AdminVehiclesService {
-  baseUrl: string = `${environment.urlApi}/admin/vehicles`;
+export class AdminEmployersService {
 
-  public orderColumns: string[] = ['No.', 'Marca', 'Modelo', 'Tipo', 'Valoración', 'Precio', 'Cantidad', 'Descuento', 'Activo', 'Acciones'];
+  baseUrl: string = `${environment.urlApi}/admin/employers`;
+
+  public orderColumns: string[] = ['No.', 'Nombre', 'Email', 'Género', 'Dirección', 'No. Teléfono', 'Tipo', 'Activo', 'Acciones'];
   public orderFields: any[] = [
     {
       field: 'id',
@@ -19,38 +20,33 @@ export class AdminVehiclesService {
       noData: false
     },
     {
-      field: 'bname',
+      field: 'name',
       type: 'string',
       noData: true
     },
     {
-      field: 'mname',
+      field: 'email',
+      type: 'string',
+      noData: false
+    },
+    {
+      field: 'gender',
+      type: 'string',
+      noData: false
+    },
+    {
+      field: 'address',
+      type: 'string',
+      noData: false
+    },
+    {
+      field: 'phoneNumber',
       type: 'string',
       noData: false
     },
     {
       field: 'type',
       type: 'string',
-      noData: false
-    },
-    {
-      field: 'val',
-      type: 'number',
-      noData: false
-    },
-    {
-      field: 'price',
-      type: 'price',
-      noData: false
-    },
-    {
-      field: 'amount',
-      type: 'number',
-      noData: false
-    },
-    {
-      field: 'discount',
-      type: 'percentage',
       noData: false
     },
     {
@@ -63,14 +59,15 @@ export class AdminVehiclesService {
   constructor(private _http: HttpClient,
     private _authService: AuthService) { }
 
-  getAll(): Observable<AdminVehicle[]> {
-    return this._http.get<AdminVehicle[]>(`${this.baseUrl}`, {
+
+  getAll(): Observable<AdminEmployer[]> {
+    return this._http.get<AdminEmployer[]>(`${this.baseUrl}`, {
       headers: this._authService.getToken()
     });
   }
 
-  delete(id: number): Observable<AdminVehicle> {
-    return this._http.get<AdminVehicle>(`${this.baseUrl}/delete/${id}`, {
+  delete(id: number): Observable<any> {
+    return this._http.get<any>(`${this.baseUrl}/delete/${id}`, {
       headers: this._authService.getToken()
     });
   }
@@ -85,5 +82,4 @@ export class AdminVehiclesService {
       headers: this._authService.getToken()
     });
   }
-
 }

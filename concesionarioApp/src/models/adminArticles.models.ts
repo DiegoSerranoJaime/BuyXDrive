@@ -7,4 +7,5 @@ export interface AdminArticle {
   val: number,
   bname: string,
   aname: string,
+  active: boolean
 }

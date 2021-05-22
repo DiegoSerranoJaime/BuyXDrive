@@ -16,11 +16,13 @@ let Users = function(user) {
 };
 
 Users.login = function(user, result) {
-    sql.query("SELECT * FROM users WHERE email = ? AND password = ?", [user.email,  hash.createHash('sha256').update(user.password).digest('hex')], (err, res) => {
+    sql.query("SELECT * FROM users WHERE email = ? AND password = ? AND active = 1", [user.email,  hash.createHash('sha256').update(user.password).digest('hex')], (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
         }
+
+        console.log(res);
 
         result(null, res);
     });

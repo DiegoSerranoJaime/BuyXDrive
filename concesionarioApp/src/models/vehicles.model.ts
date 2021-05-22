@@ -20,7 +20,8 @@ export interface Vehicle {
   inner_materials: string,
   type: string,
   cant: number,
-  val: number
+  val: number,
+  active: boolean
 };
 export interface VehicleCard {
   id: number,
@@ -34,5 +35,6 @@ export interface VehicleCard {
   seating: number,
   cv: number,
   val: number,
-  bname?: string
+  bname: string,
+  active: boolean
 };

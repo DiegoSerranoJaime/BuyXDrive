@@ -9,9 +9,11 @@ module.exports = function(app) {
     const Comments = require('../controller/CommentsController');
     const Orders = require('../controller/OrdersController');
     const AdminUsers = require('../controller/AdminUsersController');
+    const AdminEmployers = require('../controller/AdminEmployersController');
     const AdminVehicles = require('../controller/AdminVehiclesController');
     const AdminArticles = require('../controller/AdminArticlesController');
     const AdminOrders = require('../controller/AdminOrdersController');
+    const AdminOrderProducts = require('../controller/AdminOrderProductsController');
     const AdminProviders = require('../controller/AdminProvidersController');
 
 
@@ -26,23 +28,77 @@ module.exports = function(app) {
         .get(Users.getAllGenders);
 
     //Endpoint de admin
-    app.route('/api/admin/users')
-        .get(verifyToken, AdminUsers.getAllUsers);
+        //Endpoint de users
+        app.route('/api/admin/users')
+            .get(verifyToken, AdminUsers.getAllUsers);
 
-    app.route('/api/admin/employers')
-        .get(verifyToken, AdminUsers.getAllEmployers);
+        app.route('/api/admin/users/logicDelete/:id')
+            .get(verifyToken, AdminUsers.logicDelete);
 
-    app.route('/api/admin/vehicles')
-        .get(verifyToken, AdminVehicles.getAllVehicles);
+        app.route('/api/admin/users/reactive/:id')
+            .get(verifyToken, AdminUsers.reactive);
 
-    app.route('/api/admin/articles')
-        .get(verifyToken, AdminArticles.getAllArticles);
+        app.route('/api/admin/users/delete/:id')
+            .get(verifyToken, AdminUsers.delete);
 
-    app.route('/api/admin/orders')
-        .get(verifyToken, AdminOrders.getAllOrders);
+        //Endpoint de employers
+        app.route('/api/admin/employers')
+            .get(verifyToken, AdminEmployers.getAllEmployers);
+
+        app.route('/api/admin/employers/logicDelete/:id')
+            .get(verifyToken, AdminEmployers.logicDelete);
+
+        app.route('/api/admin/employers/reactive/:id')
+            .get(verifyToken, AdminEmployers.reactive);
+
+        app.route('/api/admin/employers/delete/:id')
+            .get(verifyToken, AdminEmployers.delete);
+
+        //Endpoints de vehicles
+        app.route('/api/admin/vehicles')
+            .get(verifyToken, AdminVehicles.getAllVehicles);
+
+        app.route('/api/admin/vehicles/logicDelete/:id')
+            .get(verifyToken, AdminVehicles.logicDelete);
+
+        app.route('/api/admin/vehicles/reactive/:id')
+            .get(verifyToken, AdminVehicles.reactive);
+
+        app.route('/api/admin/vehicles/delete/:id')
+            .get(verifyToken, AdminVehicles.delete);
+
+        //Endpoints de articles
+        app.route('/api/admin/articles')
+            .get(verifyToken, AdminArticles.getAllArticles);
+
+        app.route('/api/admin/articles/logicDelete/:id')
+            .get(verifyToken, AdminArticles.logicDelete);
+
+        app.route('/api/admin/articles/reactive/:id')
+            .get(verifyToken, AdminArticles.reactive);
+
+        app.route('/api/admin/articles/delete/:id')
+            .get(verifyToken, AdminArticles.delete);
+
+        //Endpoints de pedidos
+        app.route('/api/admin/orders')
+            .get(verifyToken, AdminOrders.getAllOrders);
+
+        app.route('/api/admin/orders/:id')
+            .get(verifyToken, AdminOrderProducts.getAll);
     
-    app.route('/api/admin/providers')
-        .get(verifyToken, AdminProviders.getAllProviders);
+        //Endpoints de proveedores
+        app.route('/api/admin/providers')
+            .get(verifyToken, AdminProviders.getAllProviders);
+
+        app.route('/api/admin/providers/logicDelete/:id')
+            .get(verifyToken, AdminProviders.logicDelete);
+
+        app.route('/api/admin/providers/reactive/:id')
+            .get(verifyToken, AdminProviders.reactive);
+
+        app.route('/api/admin/providers/delete/:id')
+            .get(verifyToken, AdminProviders.delete);
 
     //Endpoint de Images
     app.route('/api/images/product/:id')
@@ -116,12 +172,12 @@ module.exports = function(app) {
     app.route('/api/orders/history')
         .get(verifyToken, Orders.getHistoryOrders);
         
-    app.route('/api/orders/:id/products')
-        .get(verifyToken, Orders.getProductsFromAnOrder);
-    
     app.route('/api/orders/product')
         .post(verifyToken, Orders.addProductToAnOrder);
 
+    app.route('/api/orders/:id/products')
+        .get(verifyToken, Orders.getProductsFromAnOrder);
+        
     app.route('/api/orders/:id/cancel')
         .get(verifyToken, Orders.cancelOrder);
 

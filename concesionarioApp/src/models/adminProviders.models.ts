@@ -4,4 +4,5 @@ export interface AdminProvider {
   phoneNumber: string,
   email: string,
   address: string,
+  active: boolean
 }

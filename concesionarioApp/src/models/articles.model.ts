@@ -8,7 +8,8 @@ export interface ArticleCard {
   name: string,
   aname: string,
   val: number,
-  bname?: string
+  bname: string,
+  active: boolean
 }
 
 export interface Article {
@@ -22,5 +23,6 @@ export interface Article {
   description: string,
   type: string,
   cant: number,
-  val: number
+  val: number,
+  active: boolean
 }
