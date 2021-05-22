@@ -16,21 +16,31 @@ import { Permissions } from 'src/models/permissions.model';
 })
 export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
 
-  @Input() displayedColumns: string[];
-  @Input() displayedData: any[];
-  @Input() dataSource: MatTableDataSource<any>;
   @Input() volver: boolean;
   @Input() permisos: Permissions[];
+  @Input() service: any;
+  @Input() fatherId: number | string;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true }) sort: MatSort;
 
-  constructor(private _ordersService: OrdersService,
-    private _modalService: ModalService,
+  public dataSource = new MatTableDataSource<any>();
+  public displayedColumns: string[];
+  public displayedData: any[];
+
+  constructor(private _modalService: ModalService,
     private _toastService: ToastService,
     private _location: Location) { }
 
   ngOnInit(): void {
+    this.displayedColumns = this.service.orderColumns;
+    this.displayedData = this.service.orderFields;
+
+    let getData = this.fatherId ? this.service.getAll(this.fatherId) : this.service.getAll();
+
+    getData.subscribe((data) => {
+      this.dataSource.data = data;
+    });
   }
 
   ngAfterViewInit(): void {
@@ -49,7 +59,7 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
     this._modalService.show(SimpleBodyModalComponent, {
       title: 'Cancelar el <span class="text-danger">pedido</span>',
       aceptar: (component) => {
-        this._ordersService.cancelOrder(id).subscribe((data) => {
+        this.service.cancel(id).subscribe((data) => {
           if (data.ok) {
             this._toastService.show(`Se ha cancelado el pedido ${ id }`);
           } else {
@@ -85,6 +95,26 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
     res = this.permisos.find((p) => p.name == name);
 
     return res.route;
+  }
+
+  deleteElement(id: any) {
+    this.service.delete(id).subscribe((data) => {
+      this.dataSource.data = data;
+    });
+  }
+
+  logicDelete(id: any) {
+    this.service.logicDelete(id).subscribe(() => {
+      let element = this.dataSource.data.find((e) => e.id == id);
+      element.active = 0;
+    });
+  }
+
+  reactive(id: any) {
+    this.service.reactive(id).subscribe(() => {
+      let element = this.dataSource.data.find((e) => e.id == id);
+      element.active = 1;
+    });
   }
 
   goBack() {

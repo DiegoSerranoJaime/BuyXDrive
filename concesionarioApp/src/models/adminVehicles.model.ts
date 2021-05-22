@@ -7,4 +7,5 @@ export interface AdminVehicle {
   val: number,
   bname: string,
   mname: string,
+  active: boolean
 }

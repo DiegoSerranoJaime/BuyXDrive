@@ -12,28 +12,24 @@ import { Permissions } from 'src/models/permissions.model';
 })
 export class AdminArticlesComponent implements OnInit {
 
-  public displayedColumns: string[] = [];
-  public displayedData: any[] = [];
-  public dataSource = new MatTableDataSource<AdminArticle>();
   public permisos: Permissions[] = [
     {
       name: 'view',
       route: './'
     },
+    {
+      name: 'delete',
+      route: './'
+    },
+    {
+      name: 'logicDelete',
+    },
   ]
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-
-  constructor(private _adminArticlesService: AdminArticlesService) {}
+  constructor(public _adminArticlesService: AdminArticlesService) {}
 
 
   ngOnInit(): void {
-    this.displayedColumns = this._adminArticlesService.orderColumns;
-    this.displayedData = this._adminArticlesService.orderFields;
-
-    this._adminArticlesService.getAllArticles().subscribe((articles) => {
-      this.dataSource.data = articles;
-    });
   }
 
 }

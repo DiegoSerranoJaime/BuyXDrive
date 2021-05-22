@@ -12,9 +12,6 @@ import { Permissions } from 'src/models/permissions.model';
 })
 export class HistoryComponent implements OnInit {
 
-  public displayedColumns: string[] = [];
-  public displayedData: any[] = [];
-  public dataSource = new MatTableDataSource<Order>();
   public permisos: Permissions[] = [
     {
       name: 'view',
@@ -22,17 +19,8 @@ export class HistoryComponent implements OnInit {
     }
   ];
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-
-  constructor(private _ordersService: OrdersService) {}
-
+  constructor(public _ordersService: OrdersService) {}
 
   ngOnInit(): void {
-    this.displayedColumns = this._ordersService.orderColumns;
-    this.displayedData = this._ordersService.orderFields;
-
-    this._ordersService.getHistoryOrders().subscribe((orders) => {
-      this.dataSource.data = orders;
-    });
   }
 }

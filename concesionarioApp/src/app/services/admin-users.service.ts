@@ -9,9 +9,9 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class AdminUsersService {
-  baseUrl: string = `${environment.urlApi}/admin`;
+  baseUrl: string = `${environment.urlApi}/admin/users`;
 
-  public orderColumns: string[] = ['No.', 'Nombre', 'Email', 'Género', 'Dirección', 'No. Teléfono', 'Tipo', 'Acciones'];
+  public orderColumns: string[] = ['No.', 'Nombre', 'Email', 'Género', 'Dirección', 'No. Teléfono', 'Activo', 'Acciones'];
   public orderFields: any[] = [
     {
       field: 'id',
@@ -44,23 +44,34 @@ export class AdminUsersService {
       noData: false
     },
     {
-      field: 'type',
-      type: 'string',
+      field: 'active',
+      type: 'boolean',
       noData: false
-    },
+    }
   ];
 
   constructor(private _http: HttpClient,
     private _authService: AuthService) { }
 
-  getAllUsers(): Observable<AdminUsers[]> {
-    return this._http.get<AdminUsers[]>(`${this.baseUrl}/users`, {
+  getAll(): Observable<AdminUsers[]> {
+    return this._http.get<AdminUsers[]>(`${this.baseUrl}`, {
       headers: this._authService.getToken()
     });
   }
 
-  getAllEmployers(): Observable<AdminUsers[]> {
-    return this._http.get<AdminUsers[]>(`${this.baseUrl}/employers`, {
+  delete(id: number): Observable<AdminUsers> {
+    return this._http.get<AdminUsers>(`${this.baseUrl}/delete/${id}`, {
+      headers: this._authService.getToken()
+    });
+  }
+
+  logicDelete(id: number): Observable<any> {
+    return this._http.get<any>(`${this.baseUrl}/logicDelete/${id}`, {
+      headers: this._authService.getToken()
+    });
+  }
+  reactive(id: number): Observable<any> {
+    return this._http.get<any>(`${this.baseUrl}/reactive/${id}`, {
       headers: this._authService.getToken()
     });
   }

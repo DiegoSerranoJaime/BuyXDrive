@@ -1,15 +1,15 @@
-const Articles = require('../model/AdminArticlesModel');
+const AdminEmployers = require('../model/AdminEmployersModel');
 const jwt = require('jsonwebtoken');
 
-exports.getAllArticles = function(req, res) {
+exports.getAllEmployers = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
         if (authData.user.user_type == 2) {
-            Articles.getAllArticles((err, articles) => {
+            AdminEmployers.getAllEmployers((err, users) => {
                 if(err) {
                     res.send(err);
                 }
-                        
-                res.json(articles);
+                
+                res.json(users);
             });
         } else {
             res.json({ok: false, msg: 'Permission denied'});
@@ -17,11 +17,10 @@ exports.getAllArticles = function(req, res) {
     });
 };
 
-
 exports.logicDelete = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
         if (authData.user.user_type == 2) {
-            AdminUsers.logicDelete(req.params.id, (err, users) => {
+            AdminEmployers.logicDelete(req.params.id, (err, users) => {
                 if(err) {
                     res.send(err);
                 }
@@ -37,7 +36,7 @@ exports.logicDelete = function(req, res) {
 exports.reactive = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
         if (authData.user.user_type == 2) {
-            AdminUsers.reactive(req.params.id, (err, users) => {
+            AdminEmployers.reactive(req.params.id, (err, users) => {
                 if(err) {
                     res.send(err);
                 }
@@ -53,7 +52,7 @@ exports.reactive = function(req, res) {
 exports.delete = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
         if (authData.user.user_type == 2) {
-            AdminUsers.delete(req.params.id, (err, users) => {
+            AdminEmployers.delete(req.params.id, (err, users) => {
                 if(err) {
                     res.send(err);
                 }
@@ -64,4 +63,4 @@ exports.delete = function(req, res) {
             res.json({ok: false, msg: 'Permission denied'});
         }
     });
-}
+};

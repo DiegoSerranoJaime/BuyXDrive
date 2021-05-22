@@ -1,10 +1,10 @@
-const Vehicles = require('../model/AdminVehiclesModel');
+const AdminVehicles = require('../model/AdminVehiclesModel');
 const jwt = require('jsonwebtoken');
 
 exports.getAllVehicles = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
         if (authData.user.user_type == 2) {
-            Vehicles.getAllVehicles((err, vehicles) => {
+            AdminVehicles.getAllVehicles((err, vehicles) => {
                 if(err) {
                     res.send(err);
                 }
@@ -17,10 +17,50 @@ exports.getAllVehicles = function(req, res) {
     });
 };
 
-imageRoute = function(data) {
-    for (let i = 0; i < data.length; i++) {
-        data[i].image = 'http://localhost:3000/api/images/' + data[i].image;
-    }
+exports.logicDelete = function(req, res) {
+    jwt.verify(req.token, 'secretkey', (err, authData) => {
+        if (authData.user.user_type == 2) {
+            AdminVehicles.logicDelete(req.params.id, (err, users) => {
+                if(err) {
+                    res.send(err);
+                }
+                
+                res.json(users);
+            });
+        } else {
+            res.json({ok: false, msg: 'Permission denied'});
+        }
+    });
+};
 
-    return data;
-}
+exports.reactive = function(req, res) {
+    jwt.verify(req.token, 'secretkey', (err, authData) => {
+        if (authData.user.user_type == 2) {
+            AdminVehicles.reactive(req.params.id, (err, users) => {
+                if(err) {
+                    res.send(err);
+                }
+                
+                res.json(users);
+            });
+        } else {
+            res.json({ok: false, msg: 'Permission denied'});
+        }
+    });
+};
+
+exports.delete = function(req, res) {
+    jwt.verify(req.token, 'secretkey', (err, authData) => {
+        if (authData.user.user_type == 2) {
+            AdminVehicles.delete(req.params.id, (err, users) => {
+                if(err) {
+                    res.send(err);
+                }
+                
+                res.json(users);
+            });
+        } else {
+            res.json({ok: false, msg: 'Permission denied'});
+        }
+    });
+};

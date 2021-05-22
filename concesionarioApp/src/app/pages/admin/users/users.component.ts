@@ -11,27 +11,23 @@ import { Permissions } from 'src/models/permissions.model';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
-  public displayedColumns: string[] = [];
-  public displayedData: any[] = [];
-  public dataSource = new MatTableDataSource<AdminUsers>();
+
   public permisos: Permissions[] = [
     {
       name: 'view',
       route: './'
     },
+    {
+      name: 'delete'
+    },
+    {
+      name: 'logicDelete'
+    }
   ]
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-
-  constructor(private _adminUsersService: AdminUsersService) {}
+  constructor(public _adminUsersService: AdminUsersService) {}
 
 
   ngOnInit(): void {
-    this.displayedColumns = this._adminUsersService.orderColumns;
-    this.displayedData = this._adminUsersService.orderFields;
-
-    this._adminUsersService.getAllUsers().subscribe((users) => {
-      this.dataSource.data = users;
-    });
   }
 }

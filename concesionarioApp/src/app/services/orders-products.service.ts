@@ -10,7 +10,7 @@ import { AuthService } from './auth.service';
 })
 export class OrdersProductsService {
 
-  private baseUrl: string = `${ environment.urlApi }/orders`;
+  private baseUrl: string = `${ environment.urlApi }/admin/orders`;
 
   public orderColumns: string[] = ['Contador', 'Nombre', 'Cantidad', 'Precio', 'Descuento'];
   public orderFields: any[] = [
@@ -39,8 +39,8 @@ export class OrdersProductsService {
   constructor(private _http: HttpClient,
     private _authService: AuthService) { }
 
-  getProductsFromAnOrder(id: string): Observable<OrderProduct[]> {
-    return this._http.get<OrderProduct[]>(`${this.baseUrl}/${id}/products`, {
+  getAll(id: string): Observable<OrderProduct[]> {
+    return this._http.get<OrderProduct[]>(`${this.baseUrl}/${id}`, {
       headers: this._authService.getToken()
     });
   }

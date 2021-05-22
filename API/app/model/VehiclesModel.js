@@ -18,7 +18,8 @@ Vehicles.getAllVehicles = function(result) {
                     vehicles.seating,
                     vehicles.cv,
                     IF(COUNT(comments.product_id), AVG(comments.valoration), 0) AS val,
-                    brands.name AS bname
+                    brands.name AS bname,
+                    products.active
                 FROM images
                 INNER JOIN products ON images.product_id = products.id 
                 INNER JOIN vehicles ON products.id = vehicles.id 
@@ -27,6 +28,7 @@ Vehicles.getAllVehicles = function(result) {
                 INNER JOIN vehicle_type ON vehicles.type = vehicle_type.id 
                 LEFT JOIN comments ON comments.product_id = products.id 
                 GROUP BY products.id
+                HAVING products.active = 1
                 ORDER BY products.id DESC`;
 
     sql.query(query, (err, res) => {
@@ -52,7 +54,8 @@ Vehicles.getInitVehicles = function(result) {
                     vehicles.doors, 
                     vehicles.seating,
                     vehicles.cv,
-                    IF(COUNT(comments.product_id), AVG(comments.valoration), 0) AS val
+                    IF(COUNT(comments.product_id), AVG(comments.valoration), 0) AS val,
+                    products.active
                 FROM images
                 INNER JOIN products ON images.product_id = products.id 
                 INNER JOIN vehicles ON products.id = vehicles.id 
@@ -61,6 +64,7 @@ Vehicles.getInitVehicles = function(result) {
                 INNER JOIN vehicle_type ON vehicles.type = vehicle_type.id 
                 LEFT JOIN comments ON comments.product_id = products.id 
                 GROUP BY products.id
+                HAVING products.active = 1
                 ORDER BY products.id DESC 
                 LIMIT 0, 8`;
 
@@ -86,7 +90,8 @@ Vehicles.getInitVehiclesByType = function(conditions, result) {
                     vehicles.doors,
                     vehicles.seating, 
                     vehicles.cv,
-                    IF(COUNT(comments.product_id), AVG(comments.valoration), 0) AS val
+                    IF(COUNT(comments.product_id), AVG(comments.valoration), 0) AS val,
+                    products.active
                 FROM images
                 INNER JOIN products ON images.product_id = products.id 
                 INNER JOIN vehicles ON products.id = vehicles.id 
@@ -95,7 +100,7 @@ Vehicles.getInitVehiclesByType = function(conditions, result) {
                 INNER JOIN vehicle_type ON vehicles.type = vehicle_type.id 
                 LEFT JOIN comments ON comments.product_id = products.id 
                 GROUP BY products.id 
-                HAVING vehicle_type.name = ? AND products.id != ?
+                HAVING vehicle_type.name = ? AND products.id != ? AND products.active = 1
                 ORDER BY products.id, val DESC
                 LIMIT 0, 8`;
     
@@ -132,7 +137,8 @@ Vehicles.getVehicle = function(id, result) {
                     inner_materials, 
                     vehicle_type.name AS type, 
                     COUNT(comments.product_id) AS cant, 
-                    IF(COUNT(comments.product_id), AVG(comments.valoration), 0) AS val 
+                    IF(COUNT(comments.product_id), AVG(comments.valoration), 0) AS val,
+                    products.active
                 FROM products 
                 INNER JOIN vehicles ON vehicles.id = products.id 
                 INNER JOIN vehicle_type ON vehicles.type = vehicle_type.id 
@@ -140,7 +146,7 @@ Vehicles.getVehicle = function(id, result) {
                 INNER JOIN brands ON models.brand_id = brands.id 
                 LEFT JOIN comments ON comments.product_id = products.id 
                 GROUP BY products.id 
-                HAVING products.id = ?`;
+                HAVING products.id = ? AND products.active = 1`;
 
     sql.query(query, id, (err, res) => {
         if (err) {
@@ -199,7 +205,7 @@ Vehicles.getVehiclesBrands = function(result) {
 };
 
 Vehicles.getVehiclesMaxPrice = function(result) {
-    sql.query("SELECT MAX(price) AS maxPrice FROM products INNER JOIN vehicles USING (id)", (err, res) => {
+    sql.query("SELECT MAX(price) AS maxPrice FROM products INNER JOIN vehicles USING (id) WHERE active = 1", (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);

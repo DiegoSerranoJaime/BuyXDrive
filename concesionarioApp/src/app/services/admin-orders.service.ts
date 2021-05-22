@@ -59,7 +59,7 @@ export class AdminOrdersService {
   constructor(private _http: HttpClient,
     private _authService: AuthService) { }
 
-  getAllOrders(): Observable<AdminOrder[]> {
+  getAll(): Observable<AdminOrder[]> {
     return this._http.get<AdminOrder[]>(`${this.baseUrl}`, {
       headers: this._authService.getToken()
     });

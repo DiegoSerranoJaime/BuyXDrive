@@ -4,6 +4,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Subject, Subscription, timer } from 'rxjs';
 import jwt_decode from "jwt-decode";
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -15,7 +16,8 @@ export class AuthService {
   dataToken: Subject<any> = new Subject();
 
   constructor(private _http: HttpClient,
-    private _jwtHelper: JwtHelperService) { }
+    private _jwtHelper: JwtHelperService,
+    private _router: Router) { }
 
   login(user) {
     this._http.post(`${this.baseUrl}/login`, user).subscribe((data: any) => {
@@ -23,6 +25,7 @@ export class AuthService {
 
       if (this.tokenExpireSubscription && !this.tokenExpireSubscription.closed) {
         this.tokenExpireSubscription.unsubscribe();
+        this._router.navigateByUrl('/inicio');
       }
 
       const token: any = jwt_decode(data.token);
@@ -41,6 +44,7 @@ export class AuthService {
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('dataToken');
+    this._router.navigateByUrl('/inicio');
   }
 
   isAuthenticated(): boolean {
