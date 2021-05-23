@@ -28,7 +28,7 @@ AdminProviders.logicDelete = function(id, result) {
             result(err, null);
         }
 
-        result(null, res);
+        return AdminProviders.getAllProviders(result);
     });
 };
 
@@ -42,7 +42,7 @@ AdminProviders.reactive = function(id, result) {
             result(err, null);
         }
 
-        result(null, res);
+        return AdminProviders.getAllProviders(result);
     });
 };
 

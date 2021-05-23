@@ -71,8 +71,8 @@ export class OrdersService {
     });
   }
 
-  cancel(id): Observable<any> {
-    return this._http.get<any>(`${this.baseUrl}/${id}/cancel`, {
+  cancel(id): Observable<Order[]> {
+    return this._http.get<Order[]>(`${this.baseUrl}/${id}/cancel`, {
       headers: this._authService.getToken()
     });
   }

@@ -1,10 +1,10 @@
-const Articles = require('../model/AdminArticlesModel');
+const AdminArticles = require('../model/AdminArticlesModel');
 const jwt = require('jsonwebtoken');
 
 exports.getAllArticles = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
         if (authData.user.user_type == 2) {
-            Articles.getAllArticles((err, articles) => {
+            AdminArticles.getAllArticles((err, articles) => {
                 if(err) {
                     res.send(err);
                 }
@@ -21,7 +21,7 @@ exports.getAllArticles = function(req, res) {
 exports.logicDelete = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
         if (authData.user.user_type == 2) {
-            AdminUsers.logicDelete(req.params.id, (err, users) => {
+            AdminArticles.logicDelete(req.params.id, (err, users) => {
                 if(err) {
                     res.send(err);
                 }
@@ -37,7 +37,7 @@ exports.logicDelete = function(req, res) {
 exports.reactive = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
         if (authData.user.user_type == 2) {
-            AdminUsers.reactive(req.params.id, (err, users) => {
+            AdminArticles.reactive(req.params.id, (err, users) => {
                 if(err) {
                     res.send(err);
                 }
@@ -53,7 +53,7 @@ exports.reactive = function(req, res) {
 exports.delete = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
         if (authData.user.user_type == 2) {
-            AdminUsers.delete(req.params.id, (err, users) => {
+            AdminArticles.delete(req.params.id, (err, users) => {
                 if(err) {
                     res.send(err);
                 }
