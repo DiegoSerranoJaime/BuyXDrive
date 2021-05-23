@@ -18,7 +18,8 @@ AdminOrders.getAllOrders = function(result) {
                         users.phoneNumber
                 FROM orders
                 INNER JOIN status ON orders.status = status.id
-                INNER JOIN users ON users.id = orders.user_id`;
+                INNER JOIN users ON users.id = orders.user_id
+                ORDER BY orders.status, orders.id ASC `;
 
     sql.query(query, (err, res) => {
         if (err) {
@@ -29,5 +30,62 @@ AdminOrders.getAllOrders = function(result) {
         result(null, res);
     });
 };
+
+AdminOrders.accept = function(id, result) {
+
+    let query = `UPDATE orders SET status = 2 WHERE id = ?`;
+    
+    sql.query(query, id, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+
+        return AdminOrders.getAllOrders(result);
+    });
+};
+
+AdminOrders.denegate = function(id, result) {
+    
+    let query = `UPDATE orders SET status = 6 WHERE id = ?`;
+
+    sql.query(query, id, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+
+        return AdminOrders.getAllOrders(result);
+    });
+};
+
+AdminOrders.onWay = function(id, result) {
+    
+    let query = `UPDATE orders SET status = 3 WHERE id = ?`;
+
+    sql.query(query, id, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+
+        return AdminOrders.getAllOrders(result);
+    });
+};
+
+AdminOrders.deliver = function(id, result) {
+    let currentDate = new Date(); 
+    let query = `UPDATE orders SET status = 4, delivery_date = ? WHERE id = ?`;
+
+    sql.query(query, [currentDate, id], (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+
+        return AdminOrders.getAllOrders(result);
+    });
+};
+
 
 module.exports = AdminOrders;

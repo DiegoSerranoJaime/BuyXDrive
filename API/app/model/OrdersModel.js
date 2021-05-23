@@ -37,7 +37,7 @@ Orders.getOrdersNotDelivered = function(id, result) {
     let query = `SELECT orders.id AS id, status.name AS status, order_date, delivery_date
     FROM orders
     INNER JOIN status ON orders.status = status.id
-    WHERE user_id = ? AND status NOT IN (2, 4)`;
+    WHERE user_id = ? AND status NOT IN (4, 5, 6)`;
 
     sql.query(query, id, (err, res) => {
         if (err) {
@@ -53,7 +53,7 @@ Orders.getHistoryOrders = function(id, result) {
     let query = `SELECT orders.id AS id, status.name AS status, order_date, delivery_date
     FROM orders
     INNER JOIN status ON orders.status = status.id
-    WHERE user_id = ? AND status IN (2, 4)`;
+    WHERE user_id = ? AND status IN (4, 5, 6)`;
 
     sql.query(query, id, (err, res) => {
         if (err) {
@@ -79,35 +79,12 @@ Orders.cancelOrder = function(id, result) {
                     result(err, null);
                 }
 
-                result(null, res);
+                return Orders.getOrdersNotDelivered(id, result);
             });
         } else {
             result({nonExist: true, msg: 'No existe tal pedido pendiente'});
         }
     });
 }
-
-Orders.getProductsFromAnOrder = function(id, result) {
-    let query = `SELECT IF(articles.name, concat(b1.name," ",articles.name), concat(b2.name," ",models.name)) AS name, orders_products.amount, orders_products.price, orders_products.discount
-    FROM orders_products
-    INNER JOIN orders ON orders.id = orders_products.order_id
-    INNER JOIN products ON products.id = orders_products.product_id
-    LEFT JOIN articles ON products.id = articles.id
-    LEFT JOIN article_type ON articles.type = article_type.id
-    LEFT JOIN brands AS b1 ON articles.brand = b1.id
-    LEFT JOIN vehicles ON products.id = vehicles.id
-    LEFT JOIN models ON vehicles.model_id = models.id
-    LEFT JOIN brands AS b2 ON models.brand_id = b2.id
-    WHERE user_id = ? AND order_id LIKE ?;`;
-
-    sql.query(query, [id[1], id[0]], (err, res) => {
-        if (err) {
-            console.log("error: ", err);
-            result(err, null);
-        }
-
-        result(null, res);
-    });
-};
 
 module.exports = Orders;

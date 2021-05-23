@@ -1,8 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
-import { OrdersService } from 'src/app/services/orders.service';
-import { Order } from 'src/models/orders.model';
+import { Component, OnInit } from '@angular/core';
+import { HistoryService } from 'src/app/services/history.service';
 import { Permissions } from 'src/models/permissions.model';
 
 @Component({
@@ -19,7 +16,7 @@ export class HistoryComponent implements OnInit {
     }
   ];
 
-  constructor(public _ordersService: OrdersService) {}
+  constructor(public _historyService: HistoryService) {}
 
   ngOnInit(): void {
   }

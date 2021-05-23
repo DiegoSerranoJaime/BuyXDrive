@@ -41,7 +41,7 @@ AdminEmployers.logicDelete = function(id, result) {
             result(err, null);
         }
 
-        result(null, res);
+        return AdminEmployers.getAllEmployers(result);
     });
 };
 
@@ -55,7 +55,7 @@ AdminEmployers.reactive = function(id, result) {
             result(err, null);
         }
 
-        result(null, res);
+        return AdminEmployers.getAllEmployers(result);
     });
 };
 

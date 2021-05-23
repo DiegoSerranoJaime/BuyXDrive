@@ -55,30 +55,6 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
     }
   }
 
-  cancelOrder(id: string) {
-    this._modalService.show(SimpleBodyModalComponent, {
-      title: 'Cancelar el <span class="text-danger">pedido</span>',
-      aceptar: (component) => {
-        this.service.cancel(id).subscribe((data) => {
-          if (data.ok) {
-            this._toastService.show(`Se ha cancelado el pedido ${ id }`);
-          } else {
-            this._toastService.show(`No se ha podido cancelar el pedido`);
-          }
-
-          console.log(data);
-
-          this._modalService.hide();
-        }, (err) => {
-          console.log(err);
-        })
-      }
-    },
-    {
-      body: `¿Estás seguro de que deseas cancelar el pedido <span class="text-danger">${ id }</span>?`
-    })
-  }
-
   checkPermission(name: string) {
     let permiso = false;
 
@@ -97,25 +73,204 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
     return res.route;
   }
 
+  cancelOrder(id: string) {
+    this._modalService.show(SimpleBodyModalComponent, {
+      title: 'Cancelar el <span class="text-danger">pedido</span>',
+      aceptar: (component) => {
+        this.service.cancel(id).subscribe((data) => {
+          if (data.length > 0) {
+            this._toastService.show(`Se ha cancelado el pedido ${ id }`);
+          } else {
+            this._toastService.show(`No se ha podido cancelar el pedido`);
+          }
+
+          this.dataSource.data = data;
+
+          this._modalService.hide();
+        }, (err) => {
+          console.log(err);
+        })
+      }
+    },
+    {
+      body: `¿Estás seguro de que deseas cancelar el pedido <span class="text-danger">${ id }</span>?`
+    });
+  }
+
+  accept(id: string) {
+    this._modalService.show(SimpleBodyModalComponent, {
+      title: 'Aceptar el <span class="text-danger">pedido</span>',
+      aceptar: (component) => {
+        this.service.accept(id).subscribe((data) => {
+          if (data.length > 0) {
+            this._toastService.show(`Se ha aceptado el pedido ${ id }`);
+          } else {
+            this._toastService.show(`No se ha podido aceptar el pedido`);
+          }
+
+          console.log(data);
+          this.dataSource.data = data;
+
+          this._modalService.hide();
+        }, (err) => {
+          console.log(err);
+        })
+      }
+    },
+    {
+      body: `¿Estás seguro de que deseas aceptar el pedido <span class="text-danger">${ id }</span>?`
+    });
+  }
+
+  denegate(id: string) {
+    this._modalService.show(SimpleBodyModalComponent, {
+      title: 'Denegar el <span class="text-danger">pedido</span>',
+      aceptar: (component) => {
+        this.service.denegate(id).subscribe((data) => {
+          if (data.length > 0) {
+            this._toastService.show(`Se ha denegado el pedido ${ id }`);
+          } else {
+            this._toastService.show(`No se ha podido denegar el pedido`);
+          }
+
+          this.dataSource.data = data;
+
+          this._modalService.hide();
+        }, (err) => {
+          console.log(err);
+        })
+      }
+    },
+    {
+      body: `¿Estás seguro de que deseas denegar el pedido <span class="text-danger">${ id }</span>?`
+    });
+  }
+
+  onWay(id: string) {
+    this._modalService.show(SimpleBodyModalComponent, {
+      title: 'Poner en camino el <span class="text-danger">pedido</span>',
+      aceptar: (component) => {
+        this.service.onWay(id).subscribe((data) => {
+          if (data.length > 0) {
+            this._toastService.show(`Se ha puesto en camino el pedido ${ id }`);
+          } else {
+            this._toastService.show(`No se ha podido poner en camino el pedido`);
+          }
+
+          this.dataSource.data = data;
+
+          this._modalService.hide();
+        }, (err) => {
+          console.log(err);
+        })
+      }
+    },
+    {
+      body: `¿Estás seguro de que deseas poner en camino el pedido <span class="text-danger">${ id }</span>?`
+    });
+  }
+
+  deliver(id: string) {
+    this._modalService.show(SimpleBodyModalComponent, {
+      title: 'Entregar el <span class="text-danger">pedido</span>',
+      aceptar: (component) => {
+        this.service.deliver(id).subscribe((data) => {
+          if (data.length > 0) {
+            this._toastService.show(`Se ha entregado el pedido ${ id }`);
+          } else {
+            this._toastService.show(`No se ha podido entregar el pedido`);
+          }
+
+          this.dataSource.data = data;
+
+          this._modalService.hide();
+        }, (err) => {
+          console.log(err);
+        })
+      }
+    },
+    {
+      body: `¿Estás seguro de que deseas entregar el pedido <span class="text-danger">${ id }</span>?`
+    });
+  }
+
   deleteElement(id: any) {
-    this.service.delete(id).subscribe((data) => {
-      this.dataSource.data = data;
+
+    this._modalService.show(SimpleBodyModalComponent, {
+      title: 'Eliminar el <span class="text-danger">registro</span>',
+      aceptar: (component) => {
+        this.service.delete(id).subscribe((data) => {
+          if (data.length > 0) {
+            this._toastService.show(`Se ha eliminado el registro ${ id }`);
+          } else {
+            this._toastService.show(`No se ha podido eliminar el registro`);
+          }
+
+          this.dataSource.data = data;
+
+          this._modalService.hide();
+        }, (err) => {
+          console.log(err);
+        })
+      }
+    },
+    {
+      body: `¿Estás seguro de que deseas eliminar el registro <span class="text-danger">${ id }</span>?`
     });
   }
 
   logicDelete(id: any) {
-    this.service.logicDelete(id).subscribe(() => {
-      let element = this.dataSource.data.find((e) => e.id == id);
-      element.active = 0;
+
+    this._modalService.show(SimpleBodyModalComponent, {
+      title: 'Desactivar el <span class="text-danger">registro</span>',
+      aceptar: (component) => {
+        this.service.logicDelete(id).subscribe((data) => {
+          if (data.length > 0) {
+            this._toastService.show(`Se ha desactivado el registro ${ id }`);
+          } else {
+            this._toastService.show(`No se ha podido desactivar el registro`);
+          }
+
+          this.dataSource.data = data;
+
+          this._modalService.hide();
+        }, (err) => {
+          console.log(err);
+        })
+      }
+    },
+    {
+      body: `¿Estás seguro de que deseas descativar el registro <span class="text-danger">${ id }</span>?`
     });
   }
 
   reactive(id: any) {
-    this.service.reactive(id).subscribe(() => {
-      let element = this.dataSource.data.find((e) => e.id == id);
-      element.active = 1;
+
+    this._modalService.show(SimpleBodyModalComponent, {
+      title: 'Activar el <span class="text-danger">registro</span>',
+      aceptar: (component) => {
+        this.service.reactive(id).subscribe((data) => {
+          if (data.length > 0) {
+            this._toastService.show(`Se ha activado el registro ${ id }`);
+          } else {
+            this._toastService.show(`No se ha podido activar el registro`);
+          }
+
+          this.dataSource.data = data;
+
+          this._modalService.hide();
+        }, (err) => {
+          console.log(err);
+        })
+      }
+    },
+    {
+      body: `¿Estás seguro de que deseas activar el registro <span class="text-danger">${ id }</span>?`
     });
+
   }
+
+
 
   goBack() {
     this._location.back();

@@ -17,6 +17,9 @@ export class AllOrdersComponent implements OnInit {
       name: 'view',
       route: './'
     },
+    {
+      name: 'order'
+    }
   ]
 
   constructor(public _adminOrdersService: AdminOrdersService) {}

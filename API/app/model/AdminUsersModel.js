@@ -40,7 +40,7 @@ AdminUsers.logicDelete = function(id, result) {
             result(err, null);
         }
 
-        result(null, res);
+        return AdminUsers.getAllUsers(result);
     });
 };
 
@@ -54,7 +54,7 @@ AdminUsers.reactive = function(id, result) {
             result(err, null);
         }
 
-        result(null, res);
+        return AdminUsers.getAllUsers(result);
     });
 };
 

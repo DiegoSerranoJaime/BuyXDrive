@@ -45,7 +45,7 @@ AdminVehicles.logicDelete = function(id, result) {
             result(err, null);
         }
 
-        result(null, res);
+        return AdminVehicles.getAllVehicles(result);
     });
 };
 
@@ -59,7 +59,7 @@ AdminVehicles.reactive = function(id, result) {
             result(err, null);
         }
 
-        result(null, res);
+        return AdminVehicles.getAllVehicles(result);
     });
 };
 

@@ -44,7 +44,7 @@ AdminArticles.logicDelete = function(id, result) {
             result(err, null);
         }
 
-        result(null, res);
+        return AdminArticles.getAllArticles(result);
     });
 };
 
@@ -58,7 +58,7 @@ AdminArticles.reactive = function(id, result) {
             result(err, null);
         }
 
-        result(null, res);
+        return AdminArticles.getAllArticles(result);
     });
 };
 

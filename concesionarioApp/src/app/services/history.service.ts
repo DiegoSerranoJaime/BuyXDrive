@@ -41,10 +41,4 @@ export class HistoryService {
       headers: this._authService.getToken()
     });
   }
-
-  cancel(id): Observable<any> {
-    return this._http.get<any>(`${this.baseUrl}/${id}/cancel`, {
-      headers: this._authService.getToken()
-    });
-  }
 }

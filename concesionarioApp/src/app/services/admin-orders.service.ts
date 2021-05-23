@@ -64,4 +64,28 @@ export class AdminOrdersService {
       headers: this._authService.getToken()
     });
   }
+
+  accept(id: string): Observable<AdminOrder[]> {
+    return this._http.get<AdminOrder[]>(`${this.baseUrl}/${id}/accept`, {
+      headers: this._authService.getToken()
+    });
+  }
+
+  denegate(id: string): Observable<AdminOrder[]> {
+    return this._http.get<AdminOrder[]>(`${this.baseUrl}/${id}/denegate`, {
+      headers: this._authService.getToken()
+    });
+  }
+
+  onWay(id: string): Observable<AdminOrder[]> {
+    return this._http.get<AdminOrder[]>(`${this.baseUrl}/${id}/onWay`, {
+      headers: this._authService.getToken()
+    });
+  }
+
+  deliver(id: string): Observable<AdminOrder[]> {
+    return this._http.get<AdminOrder[]>(`${this.baseUrl}/${id}/deliver`, {
+      headers: this._authService.getToken()
+    });
+  }
 }
