@@ -16,7 +16,7 @@ port = process.env.PORT || 3000;
 const mc = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '',
+    password: 'root',
     database: 'buyxdrive'
 });
 
