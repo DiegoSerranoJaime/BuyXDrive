@@ -30,7 +30,7 @@ export class AdminProvidersService {
       noData: true
     },
     {
-      field: 'addres',
+      field: 'address',
       type: 'string',
       noData: true
     },
