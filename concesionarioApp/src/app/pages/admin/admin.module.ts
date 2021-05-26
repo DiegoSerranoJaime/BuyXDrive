@@ -15,6 +15,9 @@ import { ProductsComponent } from './products/products.component';
 import { AdminArticlesComponent } from './products/admin-articles/admin-articles.component';
 import { BrandsComponent } from './brands/brands.component';
 import { BrandComponent } from './brand/brand.component';
+import { ProvidersFormComponent } from './forms/providers-form/providers-form.component';
+import { MatButtonModule } from '@angular/material/button';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -31,13 +34,16 @@ import { BrandComponent } from './brand/brand.component';
     ProductsComponent,
     AdminArticlesComponent,
     BrandsComponent,
-    BrandComponent
+    BrandComponent,
+    ProvidersFormComponent
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     UserModule,
-    MatTabsModule
+    MatTabsModule,
+    MatButtonModule,
+    ReactiveFormsModule
   ]
 })
 export class AdminModule { }

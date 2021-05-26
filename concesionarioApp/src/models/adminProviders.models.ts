@@ -5,4 +5,11 @@ export interface AdminProvider {
   email: string,
   address: string,
   active: boolean
-}
+};
+
+export interface ProviderForm {
+  name: string,
+  phone_number: string,
+  email: string,
+  address: string,
+};

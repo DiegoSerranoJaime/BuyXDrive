@@ -1,0 +1,54 @@
+<div *ngIf="form">
+
+  <form [formGroup]="form">
+    <div class="mb-3">
+      <label for="name" class="form-label">Nombre</label>
+      <div [ngClass]="{'input-group': data}">
+        <input type="text" class="form-control" id="name" name="name" formControlName="name" [ngClass]="{'is-invalid': name.invalid && name.touched}">
+        <button *ngIf="data" class="btn btn-primary" (click)="name.setValue(provider.name)">
+          <i class="fas fa-sync-alt"></i>
+        </button>
+      </div>
+      <div *ngIf="name.invalid && name.touched" class="text-danger">
+        <span *ngIf="name.hasError('required')">El nomber es requerido</span>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <div [ngClass]="{'input-group': data}">
+        <input type="text" class="form-control" id="email" name="email" formControlName="email" [ngClass]="{'is-invalid': email.invalid && email.touched}">
+        <button *ngIf="data" class="btn btn-primary" (click)="email.setValue(provider.email)">
+          <i class="fas fa-sync-alt"></i>
+        </button>
+      </div>
+      <div *ngIf="email.invalid && email.touched" class="text-danger">
+        <span *ngIf="email.hasError('required')">El email es requerido</span>
+        <span *ngIf="email.hasError('pattern')">El email no tiene un formato correcto</span>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="address" class="form-label">Dirección</label>
+      <div [ngClass]="{'input-group': data}">
+        <input type="text" class="form-control" id="address" name="address" formControlName="address" [ngClass]="{'is-invalid': address.invalid && address.touched}">
+        <button *ngIf="data" class="btn btn-primary" (click)="address.setValue(provider.address)">
+          <i class="fas fa-sync-alt"></i>
+        </button>
+      </div>
+      <div *ngIf="address.invalid && address.touched" class="text-danger">
+        <span *ngIf="address.hasError('required')">La dirección es requerida</span>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="phoneNumber" class="form-label">Número de teléfono</label>
+      <div [ngClass]="{'input-group': data}">
+        <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" formControlName="phoneNumber" [ngClass]="{'is-invalid': phoneNumber.invalid && phoneNumber.touched}">
+        <button *ngIf="data" class="btn btn-primary" (click)="phoneNumber.setValue(provider.phone_number)">
+          <i class="fas fa-sync-alt"></i>
+        </button>
+      </div>
+      <div *ngIf="phoneNumber.invalid && phoneNumber.touched" class="text-danger">
+        <span *ngIf="phoneNumber.hasError('required')">El número de teléfono es requerido</span>
+      </div>
+    </div>
+  </form>
+</div>

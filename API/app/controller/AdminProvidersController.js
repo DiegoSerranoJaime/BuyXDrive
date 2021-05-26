@@ -1,10 +1,26 @@
-const Providers = require('../model/AdminProvidersModel');
+const AdminProviders = require('../model/AdminProvidersModel');
 const jwt = require('jsonwebtoken');
 
-exports.getAllProviders = function(req, res) {
+exports.getAll = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
         if (authData.user.user_type == 2) {
-            Providers.getAllProviders((err, providers) => {
+            AdminProviders.getAll((err, providers) => {
+                if(err) {
+                    res.send(err);
+                }
+                        
+                res.json(providers);
+            });
+        } else {
+            res.json({ok: false, msg: 'Permission denied'});
+        }
+    });
+};
+
+exports.getById = function(req, res) {
+    jwt.verify(req.token, 'secretkey', (err, authData) => {
+        if (authData.user.user_type == 2) {
+            AdminProviders.getById(req.params.id, (err, providers) => {
                 if(err) {
                     res.send(err);
                 }
@@ -20,12 +36,12 @@ exports.getAllProviders = function(req, res) {
 exports.logicDelete = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
         if (authData.user.user_type == 2) {
-            Providers.logicDelete(req.params.id, (err, users) => {
+            AdminProviders.logicDelete(req.params.id, (err, providers) => {
                 if(err) {
                     res.send(err);
                 }
                 
-                res.json(users);
+                res.json(providers);
             });
         } else {
             res.json({ok: false, msg: 'Permission denied'});
@@ -36,12 +52,12 @@ exports.logicDelete = function(req, res) {
 exports.reactive = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
         if (authData.user.user_type == 2) {
-            Providers.reactive(req.params.id, (err, users) => {
+            AdminProviders.reactive(req.params.id, (err, providers) => {
                 if(err) {
                     res.send(err);
                 }
                 
-                res.json(users);
+                res.json(providers);
             });
         } else {
             res.json({ok: false, msg: 'Permission denied'});
@@ -52,12 +68,48 @@ exports.reactive = function(req, res) {
 exports.delete = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
         if (authData.user.user_type == 2) {
-            Providers.delete(req.params.id, (err, users) => {
+            AdminProviders.delete(req.params.id, (err, providers) => {
                 if(err) {
                     res.send(err);
                 }
                 
-                res.json(users);
+                res.json(providers);
+            });
+        } else {
+            res.json({ok: false, msg: 'Permission denied'});
+        }
+    });
+};
+
+exports.add = function(req, res) {
+    jwt.verify(req.token, 'secretkey', (err, authData) => {
+        if (authData.user.user_type == 2) {
+            let provider = new AdminProviders(null, req.body);
+
+            AdminProviders.add(provider, (err, providers) => {
+                if(err) {
+                    res.send(err);
+                }
+                
+                res.json(providers);
+            });
+        } else {
+            res.json({ok: false, msg: 'Permission denied'});
+        }
+    });
+};
+
+exports.update = function(req, res) {
+    jwt.verify(req.token, 'secretkey', (err, authData) => {
+        if (authData.user.user_type == 2) {
+            let provider = new AdminProviders(req.params.id, req.body);
+
+            AdminProviders.update(provider, (err, providers) => {
+                if(err) {
+                    res.send(err);
+                }
+                
+                res.json(providers);
             });
         } else {
             res.json({ok: false, msg: 'Permission denied'});
