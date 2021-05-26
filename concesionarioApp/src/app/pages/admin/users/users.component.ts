@@ -23,11 +23,9 @@ export class UsersComponent implements OnInit {
     {
       name: 'logicDelete'
     }
-  ]
+  ];
 
   constructor(public _adminUsersService: AdminUsersService) {}
 
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 }

@@ -13,6 +13,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { AdminVehiclesComponent } from './products/admin-vehicles/admin-vehicles.component';
 import { ProductsComponent } from './products/products.component';
 import { AdminArticlesComponent } from './products/admin-articles/admin-articles.component';
+import { BrandsComponent } from './brands/brands.component';
+import { BrandComponent } from './brand/brand.component';
 
 
 
@@ -27,7 +29,9 @@ import { AdminArticlesComponent } from './products/admin-articles/admin-articles
     ProvidersComponent,
     AdminVehiclesComponent,
     ProductsComponent,
-    AdminArticlesComponent
+    AdminArticlesComponent,
+    BrandsComponent,
+    BrandComponent
   ],
   imports: [
     CommonModule,

@@ -15,6 +15,7 @@ module.exports = function(app) {
     const AdminOrders = require('../controller/AdminOrdersController');
     const AdminOrderProducts = require('../controller/AdminOrderProductsController');
     const AdminProviders = require('../controller/AdminProvidersController');
+    const AdminBrands = require('../controller/AdminBrandsController');
 
 
     //Endpoints de login y registro
@@ -79,6 +80,13 @@ module.exports = function(app) {
 
         app.route('/api/admin/articles/delete/:id')
             .get(verifyToken, AdminArticles.delete);
+
+        //Endpoints de articles
+        app.route('/api/admin/brands')
+            .get(verifyToken, AdminBrands.getAll);
+
+        app.route('/api/admin/brands/delete/:id')
+            .get(verifyToken, AdminBrands.delete);
 
         //Endpoints de pedidos
         app.route('/api/admin/orders')
