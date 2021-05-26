@@ -20,6 +20,7 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
   @Input() permisos: Permissions[];
   @Input() service: any;
   @Input() fatherId: number | string;
+  @Input() form: any;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true }) sort: MatSort;
@@ -266,6 +267,46 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
     },
     {
       body: `¿Estás seguro de que deseas activar el registro <span class="text-danger">${ id }</span>?`
+    });
+
+  }
+  add() {
+    this._modalService.show(this.form, {
+      title: 'Agregar <span class="text-danger">registro</span>',
+      botonAceptar: 'Agregar',
+      aceptar: (component: any) => {
+        if (component.form.valid) {
+          this.service.add(component.form.value).subscribe((data) => {
+            this.dataSource.data = data;
+            this._modalService.hide();
+          }, (err) => {
+            console.log(err);
+          });
+        }
+        component.form.markAllAsTouched();
+      }
+    });
+    
+  }
+  
+  update(id: string | number) {
+    this._modalService.show(this.form, {
+      title: 'Actualizar <span class="text-danger">registro</span>',
+      botonAceptar: 'Actualizar',
+      aceptar: (component: any) => {
+        if (component.form.valid) {
+          this.service.update(id, component.form.value).subscribe((data) => {
+            this.dataSource.data = data;
+            this._modalService.hide();
+          }, (err) => {
+            console.log(err);
+          });
+        }
+        component.form.markAllAsTouched()
+      }
+    },
+    {
+      id
     });
 
   }

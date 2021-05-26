@@ -109,16 +109,25 @@ module.exports = function(app) {
     
         //Endpoints de proveedores
         app.route('/api/admin/providers')
-            .get(verifyToken, AdminProviders.getAllProviders);
+            .get(verifyToken, AdminProviders.getAll);
 
+        app.route('/api/admin/providers/add')
+            .post(verifyToken, AdminProviders.add);
+
+        app.route('/api/admin/providers/update/:id')
+            .put(verifyToken, AdminProviders.update);
+        
         app.route('/api/admin/providers/logicDelete/:id')
             .get(verifyToken, AdminProviders.logicDelete);
-
+        
         app.route('/api/admin/providers/reactive/:id')
             .get(verifyToken, AdminProviders.reactive);
-
+        
         app.route('/api/admin/providers/delete/:id')
             .get(verifyToken, AdminProviders.delete);
+        
+        app.route('/api/admin/providers/:id')
+            .get(verifyToken, AdminProviders.getById);
 
     //Endpoint de Images
     app.route('/api/images/product/:id')

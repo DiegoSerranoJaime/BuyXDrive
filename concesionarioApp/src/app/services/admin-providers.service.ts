@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
-import { AdminProvider } from 'src/models/adminProviders.models';
+import { AdminProvider, ProviderForm } from 'src/models/adminProviders.models';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -54,6 +55,12 @@ export class AdminProvidersService {
     });
   }
 
+  getById(id: number): Observable<ProviderForm> {
+    return this._http.get<ProviderForm>(`${this.baseUrl}/${id}`, {
+      headers: this._authService.getToken()
+    }).pipe(map((data) => data[0]));
+  }
+
   delete(id: number): Observable<AdminProvider> {
     return this._http.get<AdminProvider>(`${this.baseUrl}/delete/${id}`, {
       headers: this._authService.getToken()
@@ -65,8 +72,21 @@ export class AdminProvidersService {
       headers: this._authService.getToken()
     });
   }
+  
   reactive(id: number): Observable<any> {
     return this._http.get<any>(`${this.baseUrl}/reactive/${id}`, {
+      headers: this._authService.getToken()
+    });
+  }
+
+  add(provider: ProviderForm): Observable<AdminProvider[]> {
+    return this._http.post<AdminProvider[]>(`${this.baseUrl}/add`, provider, {
+      headers: this._authService.getToken()
+    });
+  }
+
+  update(id: number, provider: ProviderForm): Observable<AdminProvider[]> {
+    return this._http.put<AdminProvider[]>(`${this.baseUrl}/update/${id}`, provider, {
       headers: this._authService.getToken()
     });
   }
