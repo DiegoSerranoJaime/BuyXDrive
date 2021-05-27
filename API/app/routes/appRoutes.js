@@ -85,9 +85,19 @@ module.exports = function(app) {
         app.route('/api/admin/brands')
             .get(verifyToken, AdminBrands.getAll);
 
+        app.route('/api/admin/brands/add')
+            .post(verifyToken, AdminBrands.add);
+
+        app.route('/api/admin/brands/update/:id')
+            .put(verifyToken, AdminBrands.update);
+
         app.route('/api/admin/brands/delete/:id')
             .get(verifyToken, AdminBrands.delete);
 
+        app.route('/api/admin/brands/:id')
+            .get(verifyToken, AdminBrands.getById);
+
+            
         //Endpoints de pedidos
         app.route('/api/admin/orders')
             .get(verifyToken, AdminOrders.getAllOrders);

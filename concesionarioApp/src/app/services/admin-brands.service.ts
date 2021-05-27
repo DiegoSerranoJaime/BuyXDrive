@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { AdminBrand } from 'src/models/adminBrands.models';
+import { AdminBrand, BrandForm } from 'src/models/adminBrands.models';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -45,8 +46,26 @@ export class AdminBrandsService {
     });
   }
 
+  getById(id: number): Observable<BrandForm> {
+    return this._http.get<BrandForm>(`${this.baseUrl}/${id}`, {
+      headers: this._authService.getToken()
+    }).pipe(map((data) => data[0]));
+  }
+
   delete(id: number): Observable<AdminBrand[]> {
     return this._http.get<AdminBrand[]>(`${this.baseUrl}/delete/${id}`, {
+      headers: this._authService.getToken()
+    });
+  }
+
+  add(brand: BrandForm): Observable<AdminBrand[]> {
+    return this._http.post<AdminBrand[]>(`${this.baseUrl}/add`, brand, {
+      headers: this._authService.getToken()
+    });
+  }
+
+  update(id: number, brand: BrandForm): Observable<AdminBrand[]> {
+    return this._http.put<AdminBrand[]>(`${this.baseUrl}/update/${id}`, brand, {
       headers: this._authService.getToken()
     });
   }
