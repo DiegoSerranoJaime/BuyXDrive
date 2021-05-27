@@ -4,3 +4,8 @@ export interface AdminBrand {
     type: string,
     products: number
 };
+
+export interface BrandForm {
+    name: string,
+    type: string
+};

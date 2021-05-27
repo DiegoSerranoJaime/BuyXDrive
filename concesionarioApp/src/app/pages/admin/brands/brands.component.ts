@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminBrandsService } from 'src/app/services/admin-brands.service';
 import { Permissions } from 'src/models/permissions.model';
+import { BrandsFormComponent } from '../forms/brands-form/brands-form.component';
 
 @Component({
   selector: 'app-brands',
@@ -9,6 +10,7 @@ import { Permissions } from 'src/models/permissions.model';
 })
 export class BrandsComponent implements OnInit {
 
+  public brandsFormComponent = BrandsFormComponent;
   public permisos: Permissions[] = [
     {
       name: 'view',
@@ -16,6 +18,12 @@ export class BrandsComponent implements OnInit {
     },
     {
       name: 'delete'
+    },
+    {
+      name: 'add'
+    },
+    {
+      name: 'update'
     }
   ];
 

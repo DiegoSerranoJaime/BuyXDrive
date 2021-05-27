@@ -18,6 +18,7 @@ import { BrandComponent } from './brand/brand.component';
 import { ProvidersFormComponent } from './forms/providers-form/providers-form.component';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BrandsFormComponent } from './forms/brands-form/brands-form.component';
 
 
 
@@ -35,7 +36,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     AdminArticlesComponent,
     BrandsComponent,
     BrandComponent,
-    ProvidersFormComponent
+    ProvidersFormComponent,
+    BrandsFormComponent
   ],
   imports: [
     CommonModule,

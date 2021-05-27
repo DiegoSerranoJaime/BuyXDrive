@@ -24,8 +24,8 @@ export class AuthService {
       localStorage.setItem('token', data['token']);
 
       if (this.tokenExpireSubscription && !this.tokenExpireSubscription.closed) {
-        this.tokenExpireSubscription.unsubscribe();
         this._router.navigateByUrl('/inicio');
+        this.tokenExpireSubscription.unsubscribe();
       }
 
       const token: any = jwt_decode(data.token);

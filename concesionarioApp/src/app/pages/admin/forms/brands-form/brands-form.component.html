@@ -1,0 +1,27 @@
+<div *ngIf="form">
+
+    <form [formGroup]="form">
+      <div class="mb-3">
+        <label for="name" class="form-label">Nombre</label>
+        <div [ngClass]="{'input-group': data}">
+          <input type="text" class="form-control" id="name" name="name" formControlName="name" [ngClass]="{'is-invalid': name.invalid && name.touched}">
+          <button *ngIf="data" class="btn btn-primary" (click)="name.setValue(brand.name)">
+            <i class="fas fa-sync-alt"></i>
+          </button>
+        </div>
+        <div *ngIf="name.invalid && name.touched" class="text-danger">
+          <span *ngIf="name.hasError('required')">El nomber es requerido</span>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="type" class="form-label">Tipo</label>
+        <select class="form-select" [formControl]="type" [ngClass]="{'is-invalid': type.invalid && type.touched}">
+            <option disabled [selected]="!type.value">Seleccione una opción</option>
+            <option *ngFor="let data of types" [ngValue]="data" [selected]="type.value == data">{{data}}</option>
+        </select>
+        <div *ngIf="type.invalid && type.touched" class="text-danger">
+          <span *ngIf="type.hasError('required')">El tipo es requerido</span>
+        </div>
+      </div>
+    </form>
+  </div>
