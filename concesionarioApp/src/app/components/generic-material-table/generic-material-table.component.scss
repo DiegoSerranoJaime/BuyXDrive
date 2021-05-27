@@ -2,6 +2,20 @@ a {
   text-decoration: none;
 }
 
-table {
+.mat-table {
   width: 100%;
+}
+
+.mat-header-cell, .mat-footer-cell, .mat-cell {
+  min-width: 80px;
+  box-sizing: border-box;
+  padding-right: 10px;
+
+  &:last-child {
+    padding-right: 8px; 
+  }
+}
+
+.scroll {
+  overflow-x: auto;
 }
