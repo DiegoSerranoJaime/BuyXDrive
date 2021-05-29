@@ -9,7 +9,7 @@ let AdminProviders = function(id, provider) {
     this.email = provider.email;
     this.address = provider.address;
     this.active = true;
-};
+}
 
 AdminProviders.getAll = function(result) {
     
@@ -23,7 +23,7 @@ AdminProviders.getAll = function(result) {
 
         result(null, res);
     });
-};
+}
 
 AdminProviders.getById = function(id, result) {
     
@@ -37,7 +37,7 @@ AdminProviders.getById = function(id, result) {
 
         result(null, res);
     });
-};
+}
 
 AdminProviders.logicDelete = function(id, result) {
     
@@ -51,7 +51,7 @@ AdminProviders.logicDelete = function(id, result) {
 
         return AdminProviders.getAll(result);
     });
-};
+}
 
 AdminProviders.reactive = function(id, result) {
     
@@ -65,7 +65,7 @@ AdminProviders.reactive = function(id, result) {
 
         return AdminProviders.getAll(result);
     });
-};
+}
 
 AdminProviders.delete = function(id, result) {
     
@@ -79,7 +79,7 @@ AdminProviders.delete = function(id, result) {
 
         return AdminProviders.getAll(result);
     });
-};
+}
 
 AdminProviders.add = function(provider, result) {
     
@@ -93,7 +93,7 @@ AdminProviders.add = function(provider, result) {
 
         return AdminProviders.getAll(result);
     });
-};
+}
 
 AdminProviders.update = function(provider, result) {
     
@@ -107,7 +107,7 @@ AdminProviders.update = function(provider, result) {
 
         return AdminProviders.getAll(result);
     });
-};
+}
 
 
 module.exports = AdminProviders;

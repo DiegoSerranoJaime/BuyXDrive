@@ -28,10 +28,19 @@ module.exports = function(app) {
     app.route('/api/user/genders')
         .get(Users.getAllGenders);
 
+    app.route('/api/user/types')
+        .get(Users.getAllEmployerTypes);
+
     //Endpoint de admin
         //Endpoint de users
         app.route('/api/admin/users')
-            .get(verifyToken, AdminUsers.getAllUsers);
+            .get(verifyToken, AdminUsers.getAll);
+
+        app.route('/api/admin/users/add')
+            .post(verifyToken, AdminUsers.add);
+
+        app.route('/api/admin/users/update/:id')
+            .put(verifyToken, AdminUsers.update);
 
         app.route('/api/admin/users/logicDelete/:id')
             .get(verifyToken, AdminUsers.logicDelete);
@@ -42,9 +51,18 @@ module.exports = function(app) {
         app.route('/api/admin/users/delete/:id')
             .get(verifyToken, AdminUsers.delete);
 
+        app.route('/api/admin/users/:id')
+            .get(verifyToken, AdminUsers.getById);
+
         //Endpoint de employers
         app.route('/api/admin/employers')
-            .get(verifyToken, AdminEmployers.getAllEmployers);
+            .get(verifyToken, AdminEmployers.getAll);
+
+        app.route('/api/admin/employers/add')
+            .post(verifyToken, AdminEmployers.add);
+
+        app.route('/api/admin/employers/update/:id')
+            .put(verifyToken, AdminEmployers.update);
 
         app.route('/api/admin/employers/logicDelete/:id')
             .get(verifyToken, AdminEmployers.logicDelete);
@@ -54,6 +72,9 @@ module.exports = function(app) {
 
         app.route('/api/admin/employers/delete/:id')
             .get(verifyToken, AdminEmployers.delete);
+
+        app.route('/api/admin/employers/:id')
+            .get(verifyToken, AdminEmployers.getById);
 
         //Endpoints de vehicles
         app.route('/api/admin/vehicles')

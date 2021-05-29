@@ -1,9 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
 import { AdminEmployersService } from 'src/app/services/admin-employers.service';
-import { AdminEmployer } from 'src/models/adminEmployers.models';
 import { Permissions } from 'src/models/permissions.model';
+import { EmployerFormComponent } from '../forms/employer-form/employer-form.component';
 
 @Component({
   selector: 'app-employers',
@@ -12,6 +10,7 @@ import { Permissions } from 'src/models/permissions.model';
 })
 export class EmployersComponent implements OnInit {
 
+  public employersFormComponent = EmployerFormComponent;
   public permisos: Permissions[] = [
     {
       name: 'view',
@@ -22,6 +21,12 @@ export class EmployersComponent implements OnInit {
     },
     {
       name: 'logicDelete'
+    },
+    {
+      name: 'add'
+    },
+    {
+      name: 'update'
     }
   ]
 

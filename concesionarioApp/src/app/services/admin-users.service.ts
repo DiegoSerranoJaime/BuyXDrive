@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { AdminUsers } from 'src/models/adminUsers.model';
+import { AdminUser, UserForm } from 'src/models/adminUsers.model';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -39,7 +40,7 @@ export class AdminUsersService {
       noData: false
     },
     {
-      field: 'phoneNumber',
+      field: 'phone_number',
       type: 'string',
       noData: false
     },
@@ -53,25 +54,46 @@ export class AdminUsersService {
   constructor(private _http: HttpClient,
     private _authService: AuthService) { }
 
-  getAll(): Observable<AdminUsers[]> {
-    return this._http.get<AdminUsers[]>(`${this.baseUrl}`, {
+  getAll(): Observable<AdminUser[]> {
+    return this._http.get<AdminUser[]>(`${this.baseUrl}`, {
       headers: this._authService.getToken()
     });
   }
 
-  delete(id: number): Observable<AdminUsers> {
-    return this._http.get<AdminUsers>(`${this.baseUrl}/delete/${id}`, {
+  getById(id: number): Observable<UserForm> {
+    return this._http.get<UserForm>(`${this.baseUrl}/${id}`, {
+      headers: this._authService.getToken()
+    }).pipe(
+      map((data) => data[0])
+    );
+  }
+
+  delete(id: number): Observable<AdminUser[]> {
+    return this._http.get<AdminUser[]>(`${this.baseUrl}/delete/${id}`, {
       headers: this._authService.getToken()
     });
   }
 
-  logicDelete(id: number): Observable<any> {
-    return this._http.get<any>(`${this.baseUrl}/logicDelete/${id}`, {
+  logicDelete(id: number): Observable<AdminUser[]> {
+    return this._http.get<AdminUser[]>(`${this.baseUrl}/logicDelete/${id}`, {
       headers: this._authService.getToken()
     });
   }
-  reactive(id: number): Observable<any> {
-    return this._http.get<any>(`${this.baseUrl}/reactive/${id}`, {
+  reactive(id: number): Observable<AdminUser[]> {
+    return this._http.get<AdminUser[]>(`${this.baseUrl}/reactive/${id}`, {
+      headers: this._authService.getToken()
+    });
+  }
+
+  add(user: UserForm): Observable<AdminUser[]> {
+    console.log(user);
+    return this._http.post<AdminUser[]>(`${this.baseUrl}/add`, user, {
+      headers: this._authService.getToken()
+    });
+  }
+
+  update(id: number, user: UserForm): Observable<AdminUser[]> {
+    return this._http.put<AdminUser[]>(`${this.baseUrl}/update/${id}`, user, {
       headers: this._authService.getToken()
     });
   }

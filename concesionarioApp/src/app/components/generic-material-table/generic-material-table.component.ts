@@ -270,6 +270,7 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
     });
 
   }
+
   add() {
     this._modalService.show(this.form, {
       title: 'Agregar <span class="text-danger">registro</span>',
@@ -277,7 +278,13 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
       aceptar: (component: any) => {
         if (component.form.valid) {
           this.service.add(component.form.value).subscribe((data) => {
-            this.dataSource.data = data;
+            if (data.ok) {
+              this.dataSource.data = data.data;
+              this._toastService.show('Se ha agregado el registro correctamente');
+            } else {
+              this._toastService.show('No se ha podido agregar el registro');
+            }
+            
             this._modalService.hide();
           }, (err) => {
             console.log(err);
@@ -296,7 +303,13 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
       aceptar: (component: any) => {
         if (component.form.valid) {
           this.service.update(id, component.form.value).subscribe((data) => {
-            this.dataSource.data = data;
+            if (data.ok) {
+              this.dataSource.data = data.data;
+              this._toastService.show(`Se ha actualizado el registro ${id} correctamente`);
+            } else {
+              this._toastService.show(`No se ha podido actualizar el registro ${id}`);
+            }
+            
             this._modalService.hide();
           }, (err) => {
             console.log(err);

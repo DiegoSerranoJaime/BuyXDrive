@@ -9,7 +9,7 @@ let Comments = function(comment, user) {
     this.body = comment.body;
     this.valoration = comment.valoration;
     this.publication_date = new Date();
-};
+}
 
 Comments.addComment = function(comment, result) {
     sql.query('SELECT * FROM comments WHERE user_id = ? AND product_id = ?', [comment.user_id, comment.product_id], (err, res) => {
@@ -28,7 +28,7 @@ Comments.addComment = function(comment, result) {
             });
         }
     });
-};
+}
 
 Comments.getCommentsOfAProduct = function(id, result) {
     let query = `SELECT email, title, body, valoration, publication_date
@@ -45,6 +45,6 @@ Comments.getCommentsOfAProduct = function(id, result) {
 
         result(null, res);
     });
-};
+}
 
 module.exports = Comments;

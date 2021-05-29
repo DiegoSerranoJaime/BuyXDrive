@@ -10,7 +10,7 @@ exports.getProductCart = function(req, res) {
 
         res.json(product);
     });
-};
+}
 
 imageRoute = function(data) {
     for (let i = 0; i < data.length; i++) {

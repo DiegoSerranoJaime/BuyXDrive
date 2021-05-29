@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit {
     private _gendersService: GendersService) { }
 
   ngOnInit(): void {
-    this._gendersService.getAllGenders().subscribe((genders) => {
+    this._gendersService.getAll().subscribe((genders) => {
       this.genders = genders;
     });
 
@@ -46,7 +46,9 @@ export class RegisterComponent implements OnInit {
     ]);
 
     this.email = new FormControl('', [
-      Validators.required
+      Validators.required,
+      Validators.pattern("^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$")
+
     ]);
 
     this.password = new FormControl('', [

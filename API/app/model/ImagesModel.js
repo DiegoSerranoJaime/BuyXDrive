@@ -2,7 +2,7 @@
 
 const sql = require('./db');
 
-let Images = function() {};
+let Images = function() {}
 
 Images.getImagesRoutes = function(id, result) {
     sql.query('SELECT image FROM images WHERE product_id = ?', id, (err, res) => {
@@ -13,7 +13,7 @@ Images.getImagesRoutes = function(id, result) {
 
         result(null, res);
     });
-};
+}
 
 
 module.exports = Images;

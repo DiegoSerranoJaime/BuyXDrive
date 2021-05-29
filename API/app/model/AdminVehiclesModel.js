@@ -2,7 +2,7 @@
 
 const sql = require('./db');
 
-let AdminVehicles = function() {};
+let AdminVehicles = function() {}
 
 AdminVehicles.getAllVehicles = function(result) {
     
@@ -33,7 +33,7 @@ AdminVehicles.getAllVehicles = function(result) {
 
         result(null, res);
     });
-};
+}
 
 AdminVehicles.logicDelete = function(id, result) {
     
@@ -47,7 +47,7 @@ AdminVehicles.logicDelete = function(id, result) {
 
         return AdminVehicles.getAllVehicles(result);
     });
-};
+}
 
 AdminVehicles.reactive = function(id, result) {
     
@@ -61,7 +61,7 @@ AdminVehicles.reactive = function(id, result) {
 
         return AdminVehicles.getAllVehicles(result);
     });
-};
+}
 
 AdminVehicles.delete = function(id, result) {
     
@@ -75,7 +75,7 @@ AdminVehicles.delete = function(id, result) {
 
         return AdminVehicles.getAllVehicles(result);
     });
-};
+}
 
 
 module.exports = AdminVehicles;

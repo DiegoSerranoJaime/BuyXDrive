@@ -15,7 +15,7 @@ exports.getAll = function(req, res) {
             res.json({ok: false, msg: 'Permission denied'});
         }
     });
-};
+}
 
 exports.getById = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
@@ -31,7 +31,7 @@ exports.getById = function(req, res) {
             res.json({ok: false, msg: 'Permission denied'});
         }
     });
-};
+}
 
 exports.logicDelete = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
@@ -47,7 +47,7 @@ exports.logicDelete = function(req, res) {
             res.json({ok: false, msg: 'Permission denied'});
         }
     });
-};
+}
 
 exports.reactive = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
@@ -63,7 +63,7 @@ exports.reactive = function(req, res) {
             res.json({ok: false, msg: 'Permission denied'});
         }
     });
-};
+}
 
 exports.delete = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
@@ -79,7 +79,7 @@ exports.delete = function(req, res) {
             res.json({ok: false, msg: 'Permission denied'});
         }
     });
-};
+}
 
 exports.add = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
@@ -91,13 +91,16 @@ exports.add = function(req, res) {
                     res.send(err);
                 }
                 
-                res.json(providers);
+                res.json({
+                    ok: true,
+                    data: providers
+                });
             });
         } else {
             res.json({ok: false, msg: 'Permission denied'});
         }
     });
-};
+}
 
 exports.update = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
@@ -109,10 +112,13 @@ exports.update = function(req, res) {
                     res.send(err);
                 }
                 
-                res.json(providers);
+                res.json({
+                    ok: true,
+                    data: providers
+                });
             });
         } else {
             res.json({ok: false, msg: 'Permission denied'});
         }
     });
-};
+}

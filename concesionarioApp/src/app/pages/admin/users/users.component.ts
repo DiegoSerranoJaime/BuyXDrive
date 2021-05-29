@@ -1,9 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
+import { Component, OnInit } from '@angular/core';
 import { AdminUsersService } from 'src/app/services/admin-users.service';
-import { AdminUsers } from 'src/models/adminUsers.model';
 import { Permissions } from 'src/models/permissions.model';
+import { UserFormComponent } from '../forms/user-form/user-form.component';
 
 @Component({
   selector: 'app-users',
@@ -12,6 +10,7 @@ import { Permissions } from 'src/models/permissions.model';
 })
 export class UsersComponent implements OnInit {
 
+  public userFormComponent = UserFormComponent;
   public permisos: Permissions[] = [
     {
       name: 'view',
@@ -22,6 +21,12 @@ export class UsersComponent implements OnInit {
     },
     {
       name: 'logicDelete'
+    },
+    {
+      name: 'add'
+    },
+    {
+      name: 'update'
     }
   ];
 

@@ -15,7 +15,7 @@ exports.getAllArticles = function(req, res) {
             res.json({ok: false, msg: 'Permission denied'});
         }
     });
-};
+}
 
 
 exports.logicDelete = function(req, res) {
@@ -32,7 +32,7 @@ exports.logicDelete = function(req, res) {
             res.json({ok: false, msg: 'Permission denied'});
         }
     });
-};
+}
 
 exports.reactive = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
@@ -48,7 +48,7 @@ exports.reactive = function(req, res) {
             res.json({ok: false, msg: 'Permission denied'});
         }
     });
-};
+}
 
 exports.delete = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {

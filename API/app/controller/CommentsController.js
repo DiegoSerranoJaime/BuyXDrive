@@ -41,7 +41,7 @@ exports.addComment = function(req, res) {
         }
     })
 
-};
+}
 
 exports.getCommentsOfAProduct = function(req, res) {
     Comments.getCommentsOfAProduct(req.params.id, (err, comments) => {
@@ -51,4 +51,4 @@ exports.getCommentsOfAProduct = function(req, res) {
         
         res.json(comments);
     });
-};
+}

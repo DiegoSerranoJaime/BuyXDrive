@@ -2,7 +2,7 @@
 
 const sql = require('./db');
 
-let AdminOrderProducts = function() {};
+let AdminOrderProducts = function() {}
 
 AdminOrderProducts.getAll = function(id, result) {
     let query = `SELECT 
@@ -29,6 +29,6 @@ AdminOrderProducts.getAll = function(id, result) {
 
         result(null, res);
     });
-};
+}
 
 module.exports = AdminOrderProducts;

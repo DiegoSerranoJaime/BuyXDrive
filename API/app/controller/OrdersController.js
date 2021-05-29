@@ -22,7 +22,7 @@ exports.createOrder = function(req, res) {
             });
         }
     });
-};
+}
 
 exports.addProductToAnOrder = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
@@ -118,7 +118,7 @@ exports.getProductsFromAnOrder = function(req, res) {
         }
     });
     
-};
+}
 
 let OrderProduct = function(product) {
     this.order_id = product.order_id;
@@ -126,4 +126,4 @@ let OrderProduct = function(product) {
     this.amount = product.amount;
     this.price = product.price;
     this.discount = product.discount;  
-};
+}

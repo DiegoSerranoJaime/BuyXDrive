@@ -11,9 +11,9 @@ let Users = function(user) {
     this.password = hash.createHash('sha256').update(user.password).digest('hex');
     this.gender = user.gender;
     this.address = user.address;
-    this.phoneNumber = user.phoneNumber;
+    this.phone_number = user.phoneNumber;
     this.user_type = 1;
-};
+}
 
 Users.login = function(user, result) {
     sql.query("SELECT * FROM users WHERE email = ? AND password = ? AND active = 1", [user.email,  hash.createHash('sha256').update(user.password).digest('hex')], (err, res) => {
@@ -26,7 +26,7 @@ Users.login = function(user, result) {
 
         result(null, res);
     });
-};
+}
 
 Users.register = function(user, result) {
     sql.query("SELECT email FROM users WHERE email = ?", user.email, (err, res) => {
@@ -46,10 +46,21 @@ Users.register = function(user, result) {
             });
         }
     });
-};
+}
 
 Users.getAllGenders = function(result) {
     sql.query("SELECT * FROM genders", (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null)
+        }
+
+        result(null, res)
+    })
+}
+
+Users.getAllEmployerTypes = function(result) {
+    sql.query("SELECT * FROM user_type WHERE id > 1", (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null)

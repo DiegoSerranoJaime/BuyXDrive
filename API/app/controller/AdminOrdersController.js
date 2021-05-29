@@ -15,7 +15,7 @@ exports.getAllOrders = function(req, res) {
             res.json({ok: false, msg: 'Permission denied'});
         }
     });
-};
+}
 
 exports.accept = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
@@ -31,7 +31,7 @@ exports.accept = function(req, res) {
             res.json({ok: false, msg: 'Permission denied'});
         }
     });
-};
+}
 
 exports.denegate = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
@@ -47,7 +47,7 @@ exports.denegate = function(req, res) {
             res.json({ok: false, msg: 'Permission denied'});
         }
     });
-};
+}
 
 exports.onWay = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
@@ -63,7 +63,7 @@ exports.onWay = function(req, res) {
             res.json({ok: false, msg: 'Permission denied'});
         }
     });
-};
+}
 
 exports.deliver = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
@@ -79,4 +79,4 @@ exports.deliver = function(req, res) {
             res.json({ok: false, msg: 'Permission denied'});
         }
     });
-};
+}

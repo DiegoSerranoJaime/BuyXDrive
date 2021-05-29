@@ -10,7 +10,7 @@ exports.getAllVehicles = function(req, res) {
         
         res.json(vehicles);
     });
-};
+}
 
 exports.getInitVehicles = function(req, res) {
     Vehicles.getInitVehicles((err, vehicles) => {
@@ -22,7 +22,7 @@ exports.getInitVehicles = function(req, res) {
         
         res.json(vehicles);
     });
-};
+}
 
 exports.getInitVehiclesByType = function(req, res) {
     Vehicles.getInitVehiclesByType([req.params.type, req.params.id], (err, vehicles) => {
@@ -34,7 +34,7 @@ exports.getInitVehiclesByType = function(req, res) {
         
         res.json(vehicles);
     });
-};
+}
 
 exports.getVehicle = function(req, res) {
     Vehicles.getVehicle(req.params.id, (err, vehicle) => {
@@ -44,7 +44,7 @@ exports.getVehicle = function(req, res) {
         
         res.json(vehicle);
     });
-};
+}
 
 exports.getVehicleCart = function(req, res) {
     Vehicles.getVehicleCart(req.params.id, (err, vehicles) => {
@@ -56,7 +56,7 @@ exports.getVehicleCart = function(req, res) {
 
         res.json(vehicles);
     });
-};
+}
 
 exports.getVehiclesTypes = function(req, res) {
     Vehicles.getVehiclesTypes((err, types) => {
@@ -66,7 +66,7 @@ exports.getVehiclesTypes = function(req, res) {
         
         res.json(types);
     });
-};
+}
 
 exports.getVehiclesBrands = function(req, res) {
     Vehicles.getVehiclesBrands((err, brands) => {
@@ -76,7 +76,7 @@ exports.getVehiclesBrands = function(req, res) {
         
         res.json(brands);
     });
-};
+}
 
 exports.getVehiclesMaxPrice = function(req, res) {
     Vehicles.getVehiclesMaxPrice((err, maxPrice) => {
@@ -86,7 +86,7 @@ exports.getVehiclesMaxPrice = function(req, res) {
         
         res.json(maxPrice);
     });
-};
+}
 
 imageRoute = function(data) {
     for (let i = 0; i < data.length; i++) {

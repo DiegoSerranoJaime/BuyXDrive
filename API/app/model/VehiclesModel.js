@@ -2,7 +2,7 @@
 
 const sql = require('./db');
 
-let Vehicles = function() {};
+let Vehicles = function() {}
 
 Vehicles.getAllVehicles = function(result) {
     
@@ -39,7 +39,7 @@ Vehicles.getAllVehicles = function(result) {
 
         result(null, res);
     });
-};
+}
 
 Vehicles.getInitVehicles = function(result) {
     
@@ -76,7 +76,7 @@ Vehicles.getInitVehicles = function(result) {
 
         result(null, res);
     });
-};
+}
 
 Vehicles.getInitVehiclesByType = function(conditions, result) {
     let query = `SELECT 
@@ -112,7 +112,7 @@ Vehicles.getInitVehiclesByType = function(conditions, result) {
 
         result(null, res);
     });
-};
+}
 
 Vehicles.getVehicle = function(id, result) {
     let query = `SELECT 
@@ -191,7 +191,7 @@ Vehicles.getVehiclesTypes = function(result) {
 
         result(null, res);
     });
-};
+}
 
 Vehicles.getVehiclesBrands = function(result) {
     sql.query("SELECT name FROM brands WHERE type = 'Vehiculo'", (err, res) => {
@@ -202,7 +202,7 @@ Vehicles.getVehiclesBrands = function(result) {
 
         result(null, res);
     });
-};
+}
 
 Vehicles.getVehiclesMaxPrice = function(result) {
     sql.query("SELECT MAX(price) AS maxPrice FROM products INNER JOIN vehicles USING (id) WHERE active = 1", (err, res) => {
@@ -213,6 +213,6 @@ Vehicles.getVehiclesMaxPrice = function(result) {
 
         result(null, res);
     });
-};
+}
 
 module.exports = Vehicles;

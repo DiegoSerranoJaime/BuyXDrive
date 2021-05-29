@@ -36,7 +36,7 @@ export class NavbarComponent implements OnInit {
         }
         componente.myForm.markAllAsTouched();
       }
-   });
+    });
   }
 
   public register() {
