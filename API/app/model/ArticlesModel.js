@@ -2,7 +2,7 @@
 
 const sql = require('./db');
 
-let Articles = function() {};
+let Articles = function() {}
 
 Articles.getAllArticles = function(result) {
     
@@ -36,7 +36,7 @@ Articles.getAllArticles = function(result) {
 
         result(null, res);
     });
-};
+}
 
 Articles.getInitArticles = function(result) {
     
@@ -71,7 +71,7 @@ Articles.getInitArticles = function(result) {
 
         result(null, res);
     });
-};
+}
 
 Articles.getInitArticlesByType = function(conditions, result) {
     let query = `SELECT 
@@ -105,7 +105,7 @@ Articles.getInitArticlesByType = function(conditions, result) {
 
         result(null, res);
     });
-};
+}
 
 
 Articles.getArticle = function(id, result) {
@@ -150,7 +150,7 @@ Articles.getArticlesTypes = function(result) {
 
         result(null, res);
     });
-};
+}
 
 Articles.getArticlesBrands = function(result) {
     sql.query("SELECT name FROM brands WHERE type = 'Articulo'", (err, res) => {
@@ -161,7 +161,7 @@ Articles.getArticlesBrands = function(result) {
 
         result(null, res);
     });
-};
+}
 
 Articles.getArticlesMaxPrice = function(result) {
     sql.query("SELECT MAX(price) AS maxPrice FROM products INNER JOIN articles USING (id) WHERE active = 1", (err, res) => {
@@ -172,6 +172,6 @@ Articles.getArticlesMaxPrice = function(result) {
 
         result(null, res);
     });
-};
+}
 
 module.exports = Articles;

@@ -2,7 +2,7 @@
 
 const sql = require('./db');
 
-let AdminArticles = function() {};
+let AdminArticles = function() {}
 
 AdminArticles.getAllArticles = function(result) {
     
@@ -32,7 +32,7 @@ AdminArticles.getAllArticles = function(result) {
 
         result(null, res);
     });
-};
+}
 
 AdminArticles.logicDelete = function(id, result) {
     
@@ -46,7 +46,7 @@ AdminArticles.logicDelete = function(id, result) {
 
         return AdminArticles.getAllArticles(result);
     });
-};
+}
 
 AdminArticles.reactive = function(id, result) {
     
@@ -60,7 +60,7 @@ AdminArticles.reactive = function(id, result) {
 
         return AdminArticles.getAllArticles(result);
     });
-};
+}
 
 AdminArticles.delete = function(id, result) {
     
@@ -74,7 +74,7 @@ AdminArticles.delete = function(id, result) {
 
         return AdminArticles.getAllArticles(result);
     });
-};
+}
 
 
 module.exports = AdminArticles;

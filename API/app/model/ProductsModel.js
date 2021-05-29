@@ -2,7 +2,7 @@
 
 const sql = require('./db');
 
-let Products = function() {};
+let Products = function() {}
 
 Products.getProductCart = function(id, result) {
     let query = `SELECT 

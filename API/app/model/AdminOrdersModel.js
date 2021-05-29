@@ -2,7 +2,7 @@
 
 const sql = require('./db');
 
-let AdminOrders = function() {};
+let AdminOrders = function() {}
 
 AdminOrders.getAllOrders = function(result) {
     
@@ -15,7 +15,7 @@ AdminOrders.getAllOrders = function(result) {
                         users.surname, 
                         users.email, 
                         users.address, 
-                        users.phoneNumber
+                        users.phone_number
                 FROM orders
                 INNER JOIN status ON orders.status = status.id
                 INNER JOIN users ON users.id = orders.user_id
@@ -29,7 +29,7 @@ AdminOrders.getAllOrders = function(result) {
 
         result(null, res);
     });
-};
+}
 
 AdminOrders.accept = function(id, result) {
 
@@ -43,7 +43,7 @@ AdminOrders.accept = function(id, result) {
 
         return AdminOrders.getAllOrders(result);
     });
-};
+}
 
 AdminOrders.denegate = function(id, result) {
     
@@ -57,7 +57,7 @@ AdminOrders.denegate = function(id, result) {
 
         return AdminOrders.getAllOrders(result);
     });
-};
+}
 
 AdminOrders.onWay = function(id, result) {
     
@@ -71,7 +71,7 @@ AdminOrders.onWay = function(id, result) {
 
         return AdminOrders.getAllOrders(result);
     });
-};
+}
 
 AdminOrders.deliver = function(id, result) {
     let currentDate = new Date(); 
@@ -85,7 +85,7 @@ AdminOrders.deliver = function(id, result) {
 
         return AdminOrders.getAllOrders(result);
     });
-};
+}
 
 
 module.exports = AdminOrders;

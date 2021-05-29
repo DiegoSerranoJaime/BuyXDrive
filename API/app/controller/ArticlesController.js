@@ -10,7 +10,7 @@ exports.getAllArticles = function(req, res) {
         
         res.json(vehicles);
     });
-};
+}
 
 exports.getInitArticles = function(req, res) {
     Articles.getInitArticles((err, vehicles) => {
@@ -22,7 +22,7 @@ exports.getInitArticles = function(req, res) {
         
         res.json(vehicles);
     });
-};
+}
 
 exports.getInitArticlesByType = function(req, res) {
     Articles.getInitArticlesByType([req.params.type, req.params.id], (err, vehicles) => {
@@ -34,7 +34,7 @@ exports.getInitArticlesByType = function(req, res) {
         
         res.json(vehicles);
     });
-};
+}
 
 exports.getArticle = function(req, res) {
     Articles.getArticle(req.params.id, (err, article) => {
@@ -44,7 +44,7 @@ exports.getArticle = function(req, res) {
         
         res.json(article);
     });
-};
+}
 
 
 exports.getArticlesTypes = function(req, res) {
@@ -55,7 +55,7 @@ exports.getArticlesTypes = function(req, res) {
         
         res.json(types);
     });
-};
+}
 
 exports.getArticlesBrands = function(req, res) {
     Articles.getArticlesBrands((err, brands) => {
@@ -65,7 +65,7 @@ exports.getArticlesBrands = function(req, res) {
         
         res.json(brands);
     });
-};
+}
 
 exports.getArticlesMaxPrice = function(req, res) {
     Articles.getArticlesMaxPrice((err, maxPrice) => {
@@ -75,7 +75,7 @@ exports.getArticlesMaxPrice = function(req, res) {
         
         res.json(maxPrice);
     });
-};
+}
 
 imageRoute = function(data) {
     for (let i = 0; i < data.length; i++) {

@@ -9,7 +9,7 @@ let Orders = function(user) {
     this.status = 1;
     this.order_date = new Date();
     this.delivery_date = null;
-};
+}
 
 Orders.createOrder = function(order, result) {
     sql.query('INSERT INTO orders SET ?', order, (err, res) => {
@@ -20,7 +20,7 @@ Orders.createOrder = function(order, result) {
         
         result(null, res);
     });
-};
+}
 
 Orders.addProductToAnOrder = function(product, result) {
     sql.query('INSERT INTO orders_products SET ?', product, (err, res) => {
@@ -31,7 +31,7 @@ Orders.addProductToAnOrder = function(product, result) {
 
         result(null, res);
     });
-};
+}
 
 Orders.getOrdersNotDelivered = function(id, result) {
     let query = `SELECT orders.id AS id, status.name AS status, order_date, delivery_date
@@ -47,7 +47,7 @@ Orders.getOrdersNotDelivered = function(id, result) {
 
         result(null, res);
     });
-};
+}
 
 Orders.getHistoryOrders = function(id, result) {
     let query = `SELECT orders.id AS id, status.name AS status, order_date, delivery_date
@@ -63,7 +63,7 @@ Orders.getHistoryOrders = function(id, result) {
 
         result(null, res);
     });
-};
+}
 
 Orders.cancelOrder = function(id, result) {
     sql.query("SELECT * FROM orders WHERE id = ? AND status = 1 AND user_id = ?", [id[0], id[1]], (err, res) => {

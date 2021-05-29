@@ -6,13 +6,13 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class GendersService {
+export class UserTypesService {
 
-  baseUrl: string = `${environment.urlApi}/user/genders`;
+  baseUrl: string = `${environment.urlApi}/user/types`;
 
   constructor(private _http: HttpClient) { }
 
-  getAll(): Observable<any[]> {
+  getAllEmployerTypes(): Observable<any[]> {
     return this._http.get<any[]>(this.baseUrl);
   }
 }

@@ -15,7 +15,7 @@ exports.getAll = function(req, res) {
             res.json({ok: false, msg: 'Permission denied'});
         }
     });
-};
+}
 
 exports.getById = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
@@ -31,7 +31,7 @@ exports.getById = function(req, res) {
             res.json({ok: false, msg: 'Permission denied'});
         }
     });
-};
+}
 
 
 exports.delete = function(req, res) {
@@ -48,7 +48,7 @@ exports.delete = function(req, res) {
             res.json({ok: false, msg: 'Permission denied'});
         }
     });
-};
+}
 
 
 exports.add = function(req, res) {
@@ -61,13 +61,16 @@ exports.add = function(req, res) {
                     res.send(err);
                 }
                 
-                res.json(brands);
+                res.json({
+                    ok: true, 
+                    data: brands
+                });
             });
         } else {
             res.json({ok: false, msg: 'Permission denied'});
         }
     });
-};
+}
 
 exports.update = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
@@ -79,10 +82,13 @@ exports.update = function(req, res) {
                     res.send(err);
                 }
                 
-                res.json(brands);
+                res.json({
+                    ok: true, 
+                    data: brands
+                });
             });
         } else {
             res.json({ok: false, msg: 'Permission denied'});
         }
     });
-};
+}

@@ -1,6 +1,5 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const mysql = require('mysql');
 const routes = require('./app/routes/appRoutes');
 const cors = require('cors');
 const app = express();
@@ -11,17 +10,6 @@ app.use(cors());
 
 // Puerto que se va a utilizar
 port = process.env.PORT || 3000;
-
-// Configuración de la base de datos
-const mc = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'root',
-    database: 'buyxdrive'
-});
-
-// Conexión de la base de datos
-mc.connect();
 
 // Arrancamos la api escuchando a dicho puerto
 app.listen(port, () => {

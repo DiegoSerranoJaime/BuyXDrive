@@ -6,7 +6,7 @@ let AdminBrands = function(id, brand) {
     this.id = id >= 0 ? id : null;
     this.name = brand.name;
     this.type = brand.type;
-};
+}
 
 AdminBrands.getAll = function(result) {
     
@@ -29,7 +29,7 @@ AdminBrands.getAll = function(result) {
 
         result(null, res);
     });
-};
+}
 
 
 AdminBrands.getById = function(id, result) {
@@ -44,7 +44,7 @@ AdminBrands.getById = function(id, result) {
 
         result(null, res);
     });
-};
+}
 
 AdminBrands.delete = function(id, result) {
     
@@ -58,7 +58,7 @@ AdminBrands.delete = function(id, result) {
 
         return AdminBrands.getAll(result);
     });
-};
+}
 
 AdminBrands.add = function(provider, result) {
     
@@ -72,7 +72,7 @@ AdminBrands.add = function(provider, result) {
 
         return AdminBrands.getAll(result);
     });
-};
+}
 
 AdminBrands.update = function(brand, result) {
     
@@ -86,7 +86,7 @@ AdminBrands.update = function(brand, result) {
 
         return AdminBrands.getAll(result);
     });
-};
+}
 
 
 module.exports = AdminBrands;
