@@ -6,7 +6,7 @@ let AdminOrderProducts = function() {}
 
 AdminOrderProducts.getAll = function(id, result) {
     let query = `SELECT 
-                    IF(articles.type, concat(b1.name," ",articles.name), concat(b2.name," ",models.name)) AS name, 
+                    IF(articles.id, concat(b1.name," ",articles.name), concat(b2.name," ",models.name)) AS name, 
                     orders_products.amount,
                     orders_products.price, 
                     orders_products.discount

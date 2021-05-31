@@ -21,6 +21,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrandsFormComponent } from './forms/brands-form/brands-form.component';
 import { UserFormComponent } from './forms/user-form/user-form.component';
 import { EmployerFormComponent } from './forms/employer-form/employer-form.component';
+import { ProvidersProductsComponent } from './providers-products/providers-products.component';
+import { ProvidersProductsFormComponent } from './forms/providers-products-form/providers-products-form.component';
 
 
 
@@ -41,7 +43,9 @@ import { EmployerFormComponent } from './forms/employer-form/employer-form.compo
     ProvidersFormComponent,
     BrandsFormComponent,
     UserFormComponent,
-    EmployerFormComponent
+    EmployerFormComponent,
+    ProvidersProductsComponent,
+    ProvidersProductsFormComponent
   ],
   imports: [
     CommonModule,
