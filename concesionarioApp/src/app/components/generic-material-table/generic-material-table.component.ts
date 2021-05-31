@@ -37,7 +37,7 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
     this.displayedColumns = this.service.orderColumns;
     this.displayedData = this.service.orderFields;
 
-    let getData = this.fatherId ? this.service.getAll(this.fatherId) : this.service.getAll();
+    let getData = this.fatherId >= 0 ? this.service.getAll(this.fatherId) : this.service.getAll();
 
     getData.subscribe((data) => {
       this.dataSource.data = data;
@@ -78,7 +78,9 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
     this._modalService.show(SimpleBodyModalComponent, {
       title: 'Cancelar el <span class="text-danger">pedido</span>',
       aceptar: (component) => {
-        this.service.cancel(id).subscribe((data) => {
+        const cancelMethod = this.fatherId >= 0 ? this.service.cancel(this.fatherId, id) : this.service.cancel(id);
+
+        cancelMethod.subscribe((data) => {
           if (data.length > 0) {
             this._toastService.show(`Se ha cancelado el pedido ${ id }`);
           } else {
@@ -175,7 +177,9 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
     this._modalService.show(SimpleBodyModalComponent, {
       title: 'Entregar el <span class="text-danger">pedido</span>',
       aceptar: (component) => {
-        this.service.deliver(id).subscribe((data) => {
+        const deliverMethod = this.fatherId >= 0 ? this.service.deliver(this.fatherId, id) : this.service.deliver(id);
+
+        deliverMethod.subscribe((data) => {
           if (data.length > 0) {
             this._toastService.show(`Se ha entregado el pedido ${ id }`);
           } else {
@@ -200,8 +204,10 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
     this._modalService.show(SimpleBodyModalComponent, {
       title: 'Eliminar el <span class="text-danger">registro</span>',
       aceptar: (component) => {
-        this.service.delete(id).subscribe((data) => {
-          if (data.length > 0) {
+        const deleteMethod = this.fatherId >= 0 ? this.service.delete(this.fatherId, id) : this.service.delete(id);
+
+        deleteMethod.subscribe((data) => {
+          if (data.length >= 0) {
             this._toastService.show(`Se ha eliminado el registro ${ id }`);
           } else {
             this._toastService.show(`No se ha podido eliminar el registro`);
@@ -276,8 +282,10 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
       title: 'Agregar <span class="text-danger">registro</span>',
       botonAceptar: 'Agregar',
       aceptar: (component: any) => {
+        
         if (component.form.valid) {
-          this.service.add(component.form.value).subscribe((data) => {
+          const addMethod = this.fatherId >= 0 ? this.service.add(this.fatherId, component.form.value) : this.service.add(component.form.value);
+          addMethod.subscribe((data) => {
             if (data.ok) {
               this.dataSource.data = data.data;
               this._toastService.show('Se ha agregado el registro correctamente');
@@ -301,8 +309,10 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
       title: 'Actualizar <span class="text-danger">registro</span>',
       botonAceptar: 'Actualizar',
       aceptar: (component: any) => {
+        
         if (component.form.valid) {
-          this.service.update(id, component.form.value).subscribe((data) => {
+          const updateMethod = this.fatherId >= 0 ? this.service.update(this.fatherId, id, component.form.value) : this.service.update(id, component.form.value);
+          updateMethod.subscribe((data) => {
             if (data.ok) {
               this.dataSource.data = data.data;
               this._toastService.show(`Se ha actualizado el registro ${id} correctamente`);
@@ -319,12 +329,10 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
       }
     },
     {
-      id
+      id,
+      fatherId: this.fatherId
     });
-
   }
-
-
 
   goBack() {
     this._location.back();

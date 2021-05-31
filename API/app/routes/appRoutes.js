@@ -15,6 +15,7 @@ module.exports = function(app) {
     const AdminOrders = require('../controller/AdminOrdersController');
     const AdminOrderProducts = require('../controller/AdminOrderProductsController');
     const AdminProviders = require('../controller/AdminProvidersController');
+    const AdminProvidersProducts = require('../controller/AdminProvidersProductsController');
     const AdminBrands = require('../controller/AdminBrandsController');
 
 
@@ -160,6 +161,25 @@ module.exports = function(app) {
         app.route('/api/admin/providers/:id')
             .get(verifyToken, AdminProviders.getById);
 
+        //Endpoints de proveedores
+        app.route('/api/admin/providers/:providerId/info')
+            .get(verifyToken, AdminProvidersProducts.getAll);
+
+        app.route('/api/admin/providers/:providerId/info/add')
+            .post(verifyToken, AdminProvidersProducts.add);
+
+        app.route('/api/admin/providers/:providerId/info/delete/:productId')
+            .get(verifyToken, AdminProvidersProducts.delete);
+        
+        app.route('/api/admin/providers/:providerId/info/product/:productId')
+            .get(verifyToken, AdminProvidersProducts.getById);
+
+        app.route('/api/admin/providers/:providerId/info/cancel/:productId')
+            .get(verifyToken, AdminProvidersProducts.cancel);
+
+        app.route('/api/admin/providers/:providerId/info/deliver/:productId')
+            .get(verifyToken, AdminProvidersProducts.deliver);
+
     //Endpoint de Images
     app.route('/api/images/product/:id')
         .get(Images.getImagesRoutes);
@@ -212,6 +232,9 @@ module.exports = function(app) {
         .get(Articles.getInitArticlesByType);
 
     //Endpoint de productso
+    app.route('/api/products')
+        .get(verifyToken, Products.getAll);
+
     app.route('/api/products/cart/:id')
         .get(Products.getProductCart);
 
