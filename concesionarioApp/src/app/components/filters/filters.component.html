@@ -43,6 +43,24 @@
         <ngx-slider [options]="valorationOptions" [value]="0" [highValue]="5" #valoration (valueChange)="filterByValoration(valoration)"></ngx-slider>
       </div>
     </div>
+    <div class="mb-2" *ngIf="maxCv">
+      <label for="valoration" class="form-label">Caballos (CV)</label>
+      <div class="custom-slider">
+        <ngx-slider [options]="cvOptions" [value]="0" [highValue]="maxCv" #cv (valueChange)="filterByCv(cv)"></ngx-slider>
+      </div>
+    </div>
+    <div class="mb-2" *ngIf="maxDoors">
+      <label for="valoration" class="form-label">Puertas</label>
+      <div class="custom-slider">
+        <ngx-slider [options]="doorsOptions" [value]="0" [highValue]="maxDoors" #doors (valueChange)="filterByDoors(doors)"></ngx-slider>
+      </div>
+    </div>
+    <div class="mb-2" *ngIf="maxSeating">
+      <label for="valoration" class="form-label">Asientos</label>
+      <div class="custom-slider">
+        <ngx-slider [options]="seatingOptions" [value]="0" [highValue]="maxSeating" #seating (valueChange)="filterBySeating(seating)"></ngx-slider>
+      </div>
+    </div>
     <div class="mb-2">
       <label for="amountPerPage" class="form-label">Productos a mostrar</label>
       <select name="amountPerPage" #amountPerPage class="form-select form-select-sm" (change)="emitProductsPerPage($event.target['value'])">
