@@ -12,7 +12,7 @@
         <span *ngIf="name.hasError('required')">El nombre es requerido</span>
       </div>
     </div>
-    <div class="mb-3">
+    <div class="mb-3" *ngIf="!data">
       <label for="type" class="form-label">Tipo</label>
       <select class="form-select" [formControl]="type" [ngClass]="{'is-invalid': type.invalid && type.touched}">
           <option disabled [selected]="!type.value">Seleccione una opción</option>
