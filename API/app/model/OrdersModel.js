@@ -37,7 +37,7 @@ Orders.getOrdersNotDelivered = function(id, result) {
     let query = `SELECT orders.id AS id, status.name AS status, order_date, delivery_date
     FROM orders
     INNER JOIN status ON orders.status = status.id
-    WHERE user_id = ? AND status NOT IN (4, 5, 6)`;
+    WHERE user_id = ? AND status IN (1, 2, 3)`;
 
     sql.query(query, id, (err, res) => {
         if (err) {
@@ -53,7 +53,7 @@ Orders.getHistoryOrders = function(id, result) {
     let query = `SELECT orders.id AS id, status.name AS status, order_date, delivery_date
     FROM orders
     INNER JOIN status ON orders.status = status.id
-    WHERE user_id = ? AND status IN (4, 5, 6)`;
+    WHERE user_id = ? AND status NOT IN (1, 2, 3)`;
 
     sql.query(query, id, (err, res) => {
         if (err) {
@@ -73,13 +73,13 @@ Orders.cancelOrder = function(id, result) {
         }
 
         if (res.length != 0) {
-            sql.query("UPDATE orders SET status = 2 WHERE id = ? AND user_id = ?", [id[0], id[1]], (err, res) => {
+            sql.query("UPDATE orders SET status = 5 WHERE id = ? AND user_id = ?", [id[0], id[1]], (err, res) => {
                 if (err) {
                     console.log("error: ", err);
                     result(err, null);
                 }
 
-                return Orders.getOrdersNotDelivered(id, result);
+                return Orders.getOrdersNotDelivered(id[1], result);
             });
         } else {
             result({nonExist: true, msg: 'No existe tal pedido pendiente'});

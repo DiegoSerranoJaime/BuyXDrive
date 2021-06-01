@@ -5,7 +5,6 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { SimpleBodyModalComponent } from 'src/app/components/modals/simple-body-modal/simple-body-modal.component';
 import { ModalService } from 'src/app/services/modal.service';
-import { OrdersService } from 'src/app/services/orders.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { Permissions } from 'src/models/permissions.model';
 
@@ -21,6 +20,7 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
   @Input() service: any;
   @Input() fatherId: number | string;
   @Input() form: any;
+  @Input() claveCompuesta: boolean = false;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true }) sort: MatSort;
@@ -37,7 +37,7 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
     this.displayedColumns = this.service.orderColumns;
     this.displayedData = this.service.orderFields;
 
-    let getData = this.fatherId >= 0 ? this.service.getAll(this.fatherId) : this.service.getAll();
+    let getData = typeof this.fatherId === 'number' && this.fatherId >= 0 || this.fatherId ? this.service.getAll(this.fatherId) : this.service.getAll();
 
     getData.subscribe((data) => {
       this.dataSource.data = data;
@@ -78,16 +78,16 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
     this._modalService.show(SimpleBodyModalComponent, {
       title: 'Cancelar el <span class="text-danger">pedido</span>',
       aceptar: (component) => {
-        const cancelMethod = this.fatherId >= 0 ? this.service.cancel(this.fatherId, id) : this.service.cancel(id);
+        const cancelMethod = this.claveCompuesta ? this.service.cancel(this.fatherId, id) : this.service.cancel(id);
 
         cancelMethod.subscribe((data) => {
-          if (data.length > 0) {
+          if (data.ok) {
             this._toastService.show(`Se ha cancelado el pedido ${ id }`);
           } else {
             this._toastService.show(`No se ha podido cancelar el pedido`);
           }
 
-          this.dataSource.data = data;
+          this.dataSource.data = data.data;
 
           this._modalService.hide();
         }, (err) => {
@@ -177,7 +177,7 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
     this._modalService.show(SimpleBodyModalComponent, {
       title: 'Entregar el <span class="text-danger">pedido</span>',
       aceptar: (component) => {
-        const deliverMethod = this.fatherId >= 0 ? this.service.deliver(this.fatherId, id) : this.service.deliver(id);
+        const deliverMethod = this.claveCompuesta ? this.service.deliver(this.fatherId, id) : this.service.deliver(id);
 
         deliverMethod.subscribe((data) => {
           if (data.length > 0) {
@@ -204,7 +204,7 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
     this._modalService.show(SimpleBodyModalComponent, {
       title: 'Eliminar el <span class="text-danger">registro</span>',
       aceptar: (component) => {
-        const deleteMethod = this.fatherId >= 0 ? this.service.delete(this.fatherId, id) : this.service.delete(id);
+        const deleteMethod = this.claveCompuesta ? this.service.delete(this.fatherId, id) : this.service.delete(id);
 
         deleteMethod.subscribe((data) => {
           if (data.length >= 0) {
@@ -282,9 +282,8 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
       title: 'Agregar <span class="text-danger">registro</span>',
       botonAceptar: 'Agregar',
       aceptar: (component: any) => {
-        
         if (component.form.valid) {
-          const addMethod = this.fatherId >= 0 ? this.service.add(this.fatherId, component.form.value) : this.service.add(component.form.value);
+          const addMethod = this.claveCompuesta ? this.service.add(this.fatherId, component.form.value) : this.service.add(component.form.value);
           addMethod.subscribe((data) => {
             if (data.ok) {
               this.dataSource.data = data.data;
@@ -311,7 +310,7 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
       aceptar: (component: any) => {
         
         if (component.form.valid) {
-          const updateMethod = this.fatherId >= 0 ? this.service.update(this.fatherId, id, component.form.value) : this.service.update(id, component.form.value);
+          const updateMethod = this.claveCompuesta ? this.service.update(this.fatherId, id, component.form.value) : this.service.update(id, component.form.value);
           updateMethod.subscribe((data) => {
             if (data.ok) {
               this.dataSource.data = data.data;

@@ -92,7 +92,7 @@ exports.cancelOrder = function(req, res) {
                 if(err) {
                     res.send(err);
                 }
-
+                console.log(data);
                 if(data.nonExist) {
                     res.send({ok: false, msg: data.msg});
                 } else {
