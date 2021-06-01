@@ -30,46 +30,46 @@
     <ng-container matColumnDef="Acciones">
       <th mat-header-cell *matHeaderCellDef> Acciones </th>
       <td mat-cell *matCellDef="let element">
-        <button type="button" *ngIf="checkPermission('view')" [disabled]="element.type && element.type === 'Articulo'" class="btn btn-light me-1" [routerLink]="[getRouteFromPermission('view'), element.id]">
+        <button type="button" *ngIf="checkPermission('view')" [disabled]="element.type && element.type === 'Articulo'" class="btn btn-light me-1" [routerLink]="[getRouteFromPermission('view'), element.id]" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver">
           <i class="fas fa-eye"></i>
         </button>
-        <button type="button" *ngIf="checkPermission('update')" class="btn btn-light me-1" (click)="update(element.id)">
+        <button type="button" *ngIf="checkPermission('update')" class="btn btn-light me-1" (click)="update(element.id)" data-bs-toggle="tooltip" data-bs-placement="top" title="Actualizar">
           <i class="fas fa-pen"></i>
         </button>
-        <button type="button" *ngIf="checkPermission('cancel') && element.status == 'Pendiente'" class="btn btn-danger me-1" (click)="cancelOrder(element.id)">
+        <button type="button" *ngIf="checkPermission('cancel') && element.status == 'Pendiente'" class="btn btn-danger me-1" (click)="cancelOrder(element.id)" data-bs-toggle="tooltip" data-bs-placement="top" title="Cancelar">
           <i class="fas fa-times"></i>
         </button> 
         <div *ngIf="checkPermission('order')" class="d-inline">
-          <button type="button" *ngIf="element.status == 'Pendiente'" class="btn btn-success me-1" (click)="accept(element.id)">
+          <button type="button" *ngIf="element.status == 'Pendiente'" class="btn btn-success me-1" (click)="accept(element.id)" data-bs-toggle="tooltip" data-bs-placement="top" title="Aceptar">
             <i class="fas fa-check"></i>
           </button>
-          <button type="button" *ngIf="element.status == 'Pendiente'" class="btn btn-danger me-1" (click)="denegate(element.id)">
+          <button type="button" *ngIf="element.status == 'Pendiente'" class="btn btn-danger me-1" (click)="denegate(element.id)" data-bs-toggle="tooltip" data-bs-placement="top" title="Denegar">
             <i class="fas fa-times"></i>
           </button>
-          <button type="button" *ngIf="element.status == 'Aceptado'" class="btn btn-light me-1" (click)="onWay(element.id)">
+          <button type="button" *ngIf="element.status == 'Aceptado'" class="btn btn-light me-1" (click)="onWay(element.id)" data-bs-toggle="tooltip" data-bs-placement="top" title="Enviar">
             <i class="fas fa-truck"></i>
           </button>
-          <button type="button" *ngIf="element.status == 'En Camino'" class="btn btn-primary me-1" (click)="deliver(element.id)">
+          <button type="button" *ngIf="element.status == 'En Camino'" class="btn btn-primary me-1" (click)="deliver(element.id)" data-bs-toggle="tooltip" data-bs-placement="top" title="Entregar">
             <i class="far fa-handshake"></i>
           </button>
         </div>
         <div *ngIf="checkPermission('externalOrder')" class="d-inline">
-          <button type="button" *ngIf="element.status == 'Pendiente'" class="btn btn-danger me-1" (click)="cancelOrder(element.id)">
+          <button type="button" *ngIf="element.status == 'Pendiente'" class="btn btn-danger me-1" (click)="cancelOrder(element.id)" data-bs-toggle="tooltip" data-bs-placement="top" title="Cancelar">
             <i class="fas fa-times"></i>
           </button>
-          <button type="button" *ngIf="element.status == 'Pendiente'" class="btn btn-primary me-1" (click)="deliver(element.id)">
+          <button type="button" *ngIf="element.status == 'Pendiente'" class="btn btn-primary me-1" (click)="deliver(element.id)" data-bs-toggle="tooltip" data-bs-placement="top" title="Entregar">
             <i class="far fa-handshake"></i>
           </button>
         </div>
         <div *ngIf="checkPermission('logicDelete')" class="d-inline">
-          <button type="button" class="btn btn-secondary me-1" *ngIf="element.active" (click)="logicDelete(element.id)">
+          <button type="button" class="btn btn-secondary me-1" *ngIf="element.active" (click)="logicDelete(element.id)" data-bs-toggle="tooltip" data-bs-placement="top" title="Eliminado lógico">
             <i class="fas fa-trash-alt"></i>
           </button>
-          <button type="button" class="btn btn-light me-1" *ngIf="!element.active" (click)="reactive(element.id)">
+          <button type="button" class="btn btn-light me-1" *ngIf="!element.active" (click)="reactive(element.id)" data-bs-toggle="tooltip" data-bs-placement="top" title="Reactivar">
             <i class="fas fa-trash-restore"></i>
           </button>
         </div>
-        <button type="button" *ngIf="checkPermission('delete')" [disabled]="element.status && element.status == 'Entregado'" class="btn btn-danger me-1" (click)="deleteElement(element.id)">
+        <button type="button" *ngIf="checkPermission('delete')" [disabled]="element.status && element.status == 'Entregado'" class="btn btn-danger me-1" (click)="deleteElement(element.id)" data-bs-toggle="tooltip" data-bs-placement="top" title="Eliminado físico">
           <i class="fas fa-trash-alt"></i>
         </button>
       </td>
