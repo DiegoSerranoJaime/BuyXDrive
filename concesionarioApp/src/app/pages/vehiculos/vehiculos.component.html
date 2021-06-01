@@ -9,10 +9,16 @@
                     (typesEmit)="filterTypes($event)"
                     (valorationEmit)="filterValoration($event)"
                     (productsPerPageEmit)="productsPerPage($event)"
+                    (cvEmit)="filterCv($event)"
+                    (doorsEmit)="filterDoors($event)"
+                    (seatingEmit)="filterSeating($event)"
                     [maxPrice]="maxPrice"
                     [brands]="brands"
                     [types]="types"
-                    [title]="'Vehiculos'">
+                    [title]="'Vehiculos'"
+                    [maxCv]="maxCv"
+                    [maxDoors]="maxDoors"
+                    [maxSeating]="maxSeating">
       </app-filters>
     </div>
     <div class="col-12 col-md">
@@ -21,11 +27,11 @@
           No se encuentran vehiculos disponibles
         </div>
       </ng-template>
-      <div *ngIf="vehiculos && (vehiculos | filterProducts:name:prices:selectedBrands:selectedTypes:valoration).length > 0; else noVehicles">
-        <app-init-products class="flex-grow-1" [products]="vehiculos | filterProducts:name:prices:selectedBrands:selectedTypes:valoration | slice: (page-1) * pageSize : page * pageSize" [type]="'vehiculo'"></app-init-products>
+      <div *ngIf="vehiculos && (vehiculos | filterProducts:name:prices:selectedBrands:selectedTypes:valoration:selectedCv:selectedDoors:selectedSeating).length > 0; else noVehicles">
+        <app-init-products class="flex-grow-1" [products]="vehiculos | filterProducts:name:prices:selectedBrands:selectedTypes:valoration:selectedCv:selectedDoors:selectedSeating | slice: (page-1) * pageSize : page * pageSize" [type]="'vehiculo'"></app-init-products>
 
         <div class="d-flex justify-content-center mt-4">
-          <ngb-pagination [collectionSize]="(vehiculos | filterProducts:name:prices:selectedBrands:selectedTypes:valoration).length" [(page)]="page" [maxSize]="5" [pageSize]="pageSize" [boundaryLinks]="true"></ngb-pagination>
+          <ngb-pagination [collectionSize]="(vehiculos | filterProducts:name:prices:selectedBrands:selectedTypes:valoration:selectedCv:selectedDoors:selectedSeating).length" [(page)]="page" [maxSize]="5" [pageSize]="pageSize" [boundaryLinks]="true"></ngb-pagination>
         </div>
       </div>
     </div>

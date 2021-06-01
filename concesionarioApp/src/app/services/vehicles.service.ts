@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Vehicle, VehicleCard } from 'src/models/vehicles.model';
-import { CartProduct } from 'src/models/products.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -43,6 +42,24 @@ export class VehiclesService {
 
   getVehiclesMaxPrice(): Observable<any> {
     return this._http.get<any>(`${this.baseUrl}/maxPrice`).pipe(
+      map((p) => p[0])
+    );
+  }
+
+  getVehiclesMaxCv(): Observable<any> {
+    return this._http.get<any>(`${this.baseUrl}/maxCv`).pipe(
+      map((p) => p[0])
+    );
+  }
+
+  getVehiclesMaxDoors(): Observable<any> {
+    return this._http.get<any>(`${this.baseUrl}/maxDoors`).pipe(
+      map((p) => p[0])
+    );
+  }
+
+  getVehiclesMaxSeating(): Observable<any> {
+    return this._http.get<any>(`${this.baseUrl}/maxSeating`).pipe(
       map((p) => p[0])
     );
   }

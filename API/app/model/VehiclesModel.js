@@ -215,4 +215,37 @@ Vehicles.getVehiclesMaxPrice = function(result) {
     });
 }
 
+Vehicles.getVehiclesMaxCv = function(result) {
+    sql.query("SELECT MAX(cv) AS maxCv FROM products INNER JOIN vehicles USING (id) WHERE active = 1", (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+
+        result(null, res);
+    });
+}
+
+Vehicles.getVehiclesMaxDoors = function(result) {
+    sql.query("SELECT MAX(doors) AS maxDoors FROM products INNER JOIN vehicles USING (id) WHERE active = 1", (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+
+        result(null, res);
+    });
+}
+
+Vehicles.getVehiclesMaxSeating = function(result) {
+    sql.query("SELECT MAX(seating) AS maxSeating FROM products INNER JOIN vehicles USING (id) WHERE active = 1", (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+
+        result(null, res);
+    });
+}
+
 module.exports = Vehicles;

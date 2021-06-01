@@ -15,11 +15,17 @@ export class VehiculosComponent implements OnInit {
   valoration: number[] = [];
   selectedBrands: any[] = [];
   selectedTypes: any[] = [];
+  selectedCv: number[] = [];
+  selectedDoors: number[] = [];
+  selectedSeating: number[] = [];
 
   allFilterData = false;
   brands: any[] = [];
   types: any[] = [];
   maxPrice: number = 0;
+  maxCv: number = 0;
+  maxDoors: number = 0;
+  maxSeating: number = 0;
 
   vehiculos: VehicleCard[] = [];
 
@@ -33,12 +39,16 @@ export class VehiculosComponent implements OnInit {
       this.vehiculos = res;
     });
 
-    combineLatest(this._vehiclesService.getVehiclesBrands(), this._vehiclesService.getVehiclesTypes(), this._vehiclesService.getVehiclesMaxPrice())
-    .subscribe(([brands, types, price]) => {
+    combineLatest(this._vehiclesService.getVehiclesBrands(), this._vehiclesService.getVehiclesTypes(), this._vehiclesService.getVehiclesMaxPrice(),
+    this._vehiclesService.getVehiclesMaxCv(), this._vehiclesService.getVehiclesMaxDoors(), this._vehiclesService.getVehiclesMaxSeating())
+    .subscribe(([brands, types, price, cv, doors, seating]) => {
       this.brands = brands;
       this.types = types;
       this.maxPrice = Math.ceil(price['maxPrice']);
       this.allFilterData = true;
+      this.maxCv = cv['maxCv'];
+      this.maxDoors = doors['maxDoors'];
+      this.maxSeating = seating['maxSeating'];
     });
   }
 
@@ -48,6 +58,18 @@ export class VehiculosComponent implements OnInit {
 
   filterPrice(event: any) {
     this.prices = event;
+  }
+
+  filterCv(event: any) {
+    this.selectedCv = event;
+  }
+
+  filterDoors(event: any) {
+    this.selectedDoors = event;
+  }
+
+  filterSeating(event: any) {
+    this.selectedSeating = event;
   }
 
   filterBrands(event: any[]) {

@@ -10,6 +10,9 @@ export class FiltersComponent implements OnInit {
 
   @Output() nameEmit = new EventEmitter<string>();
   @Output() priceEmit = new EventEmitter<number[]>();
+  @Output() cvEmit = new EventEmitter<number[]>();
+  @Output() doorsEmit = new EventEmitter<number[]>();
+  @Output() seatingEmit = new EventEmitter<number[]>();
   @Output() brandsEmit = new EventEmitter<string[]>();
   @Output() typesEmit = new EventEmitter<string[]>();
   @Output() valorationEmit = new EventEmitter<number[]>();
@@ -18,11 +21,17 @@ export class FiltersComponent implements OnInit {
   @Input() brands: any[];
   @Input() types: any[];
   @Input() maxPrice: number;
+  @Input() maxCv: number;
+  @Input() maxDoors: number;
+  @Input() maxSeating: number;
   @Input() title: string;
 
   collapse: boolean = false;
 
   priceOptions: Options;
+  cvOptions: Options;
+  doorsOptions: Options;
+  seatingOptions: Options;
   valorationOptions: Options;
 
   selectedBrands: any[] = [];
@@ -48,6 +57,45 @@ export class FiltersComponent implements OnInit {
       }
     };
 
+    this.cvOptions = {
+      minLimit: 0,
+      maxLimit: this.maxCv,
+      floor: 0,
+      ceil: this.maxCv,
+      tickStep: this.maxCv / 5,
+      showTicks: true,
+      minRange: 1,
+      noSwitching: true,
+      autoHideLimitLabels: true,
+      translate: (value: number): string => {
+        return value + ' CV';
+      }
+    };
+
+    this.doorsOptions = {
+      minLimit: 0,
+      maxLimit: this.maxDoors,
+      floor: 0,
+      ceil: this.maxDoors,
+      tickStep: this.maxDoors / 5,
+      showTicks: true,
+      minRange: 1,
+      noSwitching: true,
+      autoHideLimitLabels: true,
+    };
+
+    this.seatingOptions = {
+      minLimit: 0,
+      maxLimit: this.maxSeating,
+      floor: 0,
+      ceil: this.maxSeating,
+      tickStep: this.maxSeating / 5,
+      showTicks: true,
+      minRange: 1,
+      noSwitching: true,
+      autoHideLimitLabels: true,
+    };
+
     this.valorationOptions = {
       minLimit: 0,
       maxLimit: 5,
@@ -68,6 +116,18 @@ export class FiltersComponent implements OnInit {
 
   filterByPrice(price: any) {
     this.priceEmit.emit([price.value, price.highValue]);
+  }
+  
+  filterByCv(cv: any) {
+    this.cvEmit.emit([cv.value, cv.highValue]);
+  }
+
+  filterByDoors(doors: any) {
+    this.doorsEmit.emit([doors.value, doors.highValue]);
+  }
+
+  filterBySeating(seating: any) {
+    this.seatingEmit.emit([seating.value, seating.highValue]);
   }
 
   filterByValoration(valoration: any) {

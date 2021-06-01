@@ -88,6 +88,36 @@ exports.getVehiclesMaxPrice = function(req, res) {
     });
 }
 
+exports.getVehiclesMaxCv = function(req, res) {
+    Vehicles.getVehiclesMaxCv((err, cv) => {
+        if(err) {
+            res.send(err);
+        }
+        
+        res.json(cv);
+    });
+}
+
+exports.getVehiclesMaxDoors = function(req, res) {
+    Vehicles.getVehiclesMaxDoors((err, doors) => {
+        if(err) {
+            res.send(err);
+        }
+        
+        res.json(doors);
+    });
+}
+
+exports.getVehiclesMaxSeating = function(req, res) {
+    Vehicles.getVehiclesMaxSeating((err, seating) => {
+        if(err) {
+            res.send(err);
+        }
+        
+        res.json(seating);
+    });
+}
+
 imageRoute = function(data) {
     for (let i = 0; i < data.length; i++) {
         data[i].image = 'http://localhost:3000/api/images/' + data[i].image;

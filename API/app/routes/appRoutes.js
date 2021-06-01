@@ -203,6 +203,15 @@ module.exports = function(app) {
     app.route('/api/vehicles/maxPrice')
         .get(Vehicles.getVehiclesMaxPrice);
 
+    app.route('/api/vehicles/maxCv')
+        .get(Vehicles.getVehiclesMaxCv);
+
+    app.route('/api/vehicles/maxDoors')
+        .get(Vehicles.getVehiclesMaxDoors);
+
+    app.route('/api/vehicles/maxSeating')
+        .get(Vehicles.getVehiclesMaxSeating);
+
     app.route('/api/vehicles/:id')
         .get(Vehicles.getVehicle);
 
