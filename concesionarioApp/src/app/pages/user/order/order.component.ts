@@ -11,7 +11,6 @@ export class OrderComponent implements OnInit {
 
   public id: string;
 
-
   constructor(private _activatedRoute: ActivatedRoute,
     public _ordersProductsService: OrdersProductsService) { }
 

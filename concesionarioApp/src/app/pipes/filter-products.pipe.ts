@@ -12,7 +12,7 @@ export class FilterProductsPipe implements PipeTransform {
     res = products.filter((v) => {
       let ret: boolean = true;
 
-      if (name && !v.name.toLowerCase().includes(name)) {
+      if (name && !v.name.toLowerCase().includes(name.toLocaleLowerCase())) {
         ret = false;
       } else if (Number(v.price) < prices[0] || Number(v.price) > prices[1]) {
         ret = false;
