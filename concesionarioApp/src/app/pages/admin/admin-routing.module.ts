@@ -14,7 +14,7 @@ import { AdminVehiclesComponent } from './products/admin-vehicles/admin-vehicles
 import { AdminArticlesComponent } from './products/admin-articles/admin-articles.component';
 import { OrderComponent } from '../user/order/order.component';
 import { BrandsComponent } from './brands/brands.component';
-import { BrandComponent } from './brand/brand.component';
+import { ModelsComponent } from './models/models.component';
 
 const ADMIN_ROUTES: Routes = [
   { path: '', component: AdminComponent, children: [
@@ -28,7 +28,7 @@ const ADMIN_ROUTES: Routes = [
     { path: 'employers', component: EmployersComponent },
     { path: 'employers/:id', component: UserPageComponent },
     { path: 'brands', component: BrandsComponent },
-    { path: 'brands/:id', component: BrandComponent },
+    { path: 'brands/:id', component: ModelsComponent },
     { path: 'products', component: ProductsComponent, children:
     [
       { path: 'vehicles', component: AdminVehiclesComponent },
