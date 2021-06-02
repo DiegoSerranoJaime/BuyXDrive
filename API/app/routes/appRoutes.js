@@ -21,6 +21,7 @@ module.exports = function(app) {
     const AdminVehiclesTypes = require('../controller/AdminVehiclesTypesController');
     const AdminArticlesTypes = require('../controller/AdminArticlesTypesController');
 
+    const upload = require('../libs/storage')
 
     //Endpoints de login y registro
     app.route('/api/user/login')
@@ -186,7 +187,11 @@ module.exports = function(app) {
 
         app.route('/api/admin/articlesTypes/:id')
             .get(verifyToken, AdminArticlesTypes.getById);
-            
+        
+        //Enpoints products imagenes
+        app.route('/api/admin/products/:id/image')
+            .post(upload.single('image'), Images.saveImages);
+
         //Endpoints de pedidos
         app.route('/api/admin/orders')
             .get(verifyToken, AdminOrders.getAllOrders);
