@@ -34,6 +34,30 @@ AdminArticles.getAllArticles = function(result) {
     });
 }
 
+AdminArticles.getById = function(id, result) {
+    
+    let query = `SELECT 
+                    name,
+                    brand,
+                    type, 
+                    products.price, 
+                    products.amount, 
+                    products.discount, 
+                    products.description
+                FROM products
+                INNER JOIN articles ON articles.id = products.id
+                WHERE products.id = ?`;
+
+    sql.query(query, id, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+
+        result(null, res);
+    });
+}
+
 AdminArticles.logicDelete = function(id, result) {
     
     let query = `UPDATE products SET active = 0 WHERE id = ?`;
@@ -76,5 +100,38 @@ AdminArticles.delete = function(id, result) {
     });
 }
 
+AdminArticles.getAllBrands = function(result) {
+    
+    let query = `SELECT 
+                    id,
+                    name
+                FROM brands
+                WHERE type = 'Articulo'`;
+
+    sql.query(query, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+
+        result(null, res);
+    });
+}
+
+AdminArticles.getAllTypes = function(result) {
+    
+    let query = `SELECT 
+                    *
+                FROM article_type`;
+
+    sql.query(query, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+
+        result(null, res);
+    });
+}
 
 module.exports = AdminArticles;

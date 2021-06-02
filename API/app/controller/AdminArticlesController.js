@@ -17,6 +17,22 @@ exports.getAllArticles = function(req, res) {
     });
 }
 
+exports.getById = function(req, res) {
+    jwt.verify(req.token, 'secretkey', (err, authData) => {
+        if (authData.user.user_type == 2) {
+            AdminArticles.getById(req.params.id ,(err, article) => {
+                if(err) {
+                    res.send(err);
+                }
+                        
+                res.json(article);
+            });
+        } else {
+            res.json({ok: false, msg: 'Permission denied'});
+        }
+    });
+}
+
 
 exports.logicDelete = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
@@ -59,6 +75,38 @@ exports.delete = function(req, res) {
                 }
                 
                 res.json(users);
+            });
+        } else {
+            res.json({ok: false, msg: 'Permission denied'});
+        }
+    });
+}
+
+exports.getAllTypes = function(req, res) {
+    jwt.verify(req.token, 'secretkey', (err, authData) => {
+        if (authData.user.user_type == 2) {
+            AdminArticles.getAllTypes((err, types) => {
+                if(err) {
+                    res.send(err);
+                }
+                        
+                res.json(types);
+            });
+        } else {
+            res.json({ok: false, msg: 'Permission denied'});
+        }
+    });
+}
+
+exports.getAllBrands = function(req, res) {
+    jwt.verify(req.token, 'secretkey', (err, authData) => {
+        if (authData.user.user_type == 2) {
+            AdminArticles.getAllBrands((err, brands) => {
+                if(err) {
+                    res.send(err);
+                }
+                        
+                res.json(brands);
             });
         } else {
             res.json({ok: false, msg: 'Permission denied'});

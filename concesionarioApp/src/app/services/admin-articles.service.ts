@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { AdminArticle } from 'src/models/adminArticles.models';
+import { AdminArticle, ArticleForm } from 'src/models/adminArticles.models';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -69,19 +70,38 @@ export class AdminArticlesService {
     });
   }
 
+  getById(id: number): Observable<ArticleForm> {
+    return this._http.get<ArticleForm>(`${this.baseUrl}/${id}`, {
+      headers: this._authService.getToken()
+    }).pipe(map((a) => a[0]));
+  }
+
   delete(id: number): Observable<AdminArticle[]> {
     return this._http.get<AdminArticle[]>(`${this.baseUrl}/delete/${id}`, {
       headers: this._authService.getToken()
     });
   }
 
-  logicDelete(id: number): Observable<any> {
-    return this._http.get<any>(`${this.baseUrl}/logicDelete/${id}`, {
+  logicDelete(id: number): Observable<AdminArticle[]> {
+    return this._http.get<AdminArticle[]>(`${this.baseUrl}/logicDelete/${id}`, {
       headers: this._authService.getToken()
     });
   }
-  reactive(id: number): Observable<any> {
-    return this._http.get<any>(`${this.baseUrl}/reactive/${id}`, {
+
+  reactive(id: number): Observable<AdminArticle[]> {
+    return this._http.get<AdminArticle[]>(`${this.baseUrl}/reactive/${id}`, {
+      headers: this._authService.getToken()
+    });
+  }
+
+  getAllBrands(): Observable<any> {
+    return this._http.get<any>(`${this.baseUrl}/brands`, {
+      headers: this._authService.getToken()
+    });
+  }
+
+  getAllTypes(): Observable<any> {
+    return this._http.get<any>(`${this.baseUrl}/types`, {
       headers: this._authService.getToken()
     });
   }

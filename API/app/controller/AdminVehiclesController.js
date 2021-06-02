@@ -17,6 +17,22 @@ exports.getAllVehicles = function(req, res) {
     });
 }
 
+exports.getById = function(req, res) {
+    jwt.verify(req.token, 'secretkey', (err, authData) => {
+        if (authData.user.user_type == 2) {
+            AdminVehicles.getById(req.params.id, (err, vehicle) => {
+                if(err) {
+                    res.send(err);
+                }
+                        
+                res.json(vehicle);
+            });
+        } else {
+            res.json({ok: false, msg: 'Permission denied'});
+        }
+    });
+}
+
 exports.logicDelete = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
         if (authData.user.user_type == 2) {
@@ -58,6 +74,38 @@ exports.delete = function(req, res) {
                 }
                 
                 res.json(users);
+            });
+        } else {
+            res.json({ok: false, msg: 'Permission denied'});
+        }
+    });
+}
+
+exports.getAllModels = function(req, res) {
+    jwt.verify(req.token, 'secretkey', (err, authData) => {
+        if (authData.user.user_type == 2) {
+            AdminVehicles.getAllModels((err, models) => {
+                if(err) {
+                    res.send(err);
+                }
+                        
+                res.json(models);
+            });
+        } else {
+            res.json({ok: false, msg: 'Permission denied'});
+        }
+    });
+}
+
+exports.getAllTypes = function(req, res) {
+    jwt.verify(req.token, 'secretkey', (err, authData) => {
+        if (authData.user.user_type == 2) {
+            AdminVehicles.getAllTypes((err, types) => {
+                if(err) {
+                    res.send(err);
+                }
+                        
+                res.json(types);
             });
         } else {
             res.json({ok: false, msg: 'Permission denied'});
