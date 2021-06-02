@@ -12,7 +12,7 @@ import { map } from 'rxjs/operators';
 export class AdminArticlesTypesService {
   baseUrl: string = `${environment.urlApi}/admin/articlesTypes`;
 
-  public orderColumns: string[] = ['No.', 'Nombre', 'Vehiculos', 'Acciones'];
+  public orderColumns: string[] = ['No.', 'Nombre', 'Articulos', 'Acciones'];
   public orderFields: any[] = [
     {
       field: 'id',
@@ -25,7 +25,7 @@ export class AdminArticlesTypesService {
       noData: true
     },
     {
-      field: 'vehicles',
+      field: 'articles',
       type: 'number',
       noData: false
     },
