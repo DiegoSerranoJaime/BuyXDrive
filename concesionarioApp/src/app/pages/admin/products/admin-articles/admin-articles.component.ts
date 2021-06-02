@@ -1,8 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
-import { AdminArticlesService } from 'src/app/services/products/admin-articles.service';
-import { AdminArticle } from 'src/models/adminArticles.models';
+import { Component, OnInit } from '@angular/core';
+import { AdminArticlesService } from 'src/app/services/admin-articles.service';
 import { Permissions } from 'src/models/permissions.model';
 
 @Component({

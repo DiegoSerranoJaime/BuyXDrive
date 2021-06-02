@@ -15,6 +15,9 @@ import { AdminArticlesComponent } from './products/admin-articles/admin-articles
 import { OrderComponent } from '../user/order/order.component';
 import { BrandsComponent } from './brands/brands.component';
 import { ModelsComponent } from './models/models.component';
+import { TypesComponent } from './types/types.component';
+import { ArticlesTypesComponent } from './types/articles-types/articles-types.component';
+import { VehiclesTypesComponent } from './types/vehicles-types/vehicles-types.component';
 
 const ADMIN_ROUTES: Routes = [
   { path: '', component: AdminComponent, children: [
@@ -33,6 +36,11 @@ const ADMIN_ROUTES: Routes = [
     [
       { path: 'vehicles', component: AdminVehiclesComponent },
       { path: 'articles', component: AdminArticlesComponent },
+    ]},
+    { path: 'types', component: TypesComponent, children:
+    [
+      { path: 'vehicles', component: VehiclesTypesComponent },
+      { path: 'articles', component: ArticlesTypesComponent },
     ]},
     { path: '**', pathMatch: 'full', redirectTo: 'users' }
   ]},

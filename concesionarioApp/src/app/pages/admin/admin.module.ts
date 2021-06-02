@@ -24,6 +24,12 @@ import { ProvidersProductsComponent } from './providers-products/providers-produ
 import { ProvidersProductsFormComponent } from './forms/providers-products-form/providers-products-form.component';
 import { ModelsComponent } from './models/models.component';
 import { ModelFormComponent } from './forms/model-form/model-form.component';
+import { VehiclesFormComponent } from './forms/vehicles-form/vehicles-form.component';
+import { TypesComponent } from './types/types.component';
+import { ArticlesTypesComponent } from './types/articles-types/articles-types.component';
+import { VehiclesTypesComponent } from './types/vehicles-types/vehicles-types.component';
+import { VehiclesTypesFormComponent } from './forms/vehicles-types-form/vehicles-types-form.component';
+import { ArticlesTypesFormComponent } from './forms/articles-types-form/articles-types-form.component';
 
 
 
@@ -47,7 +53,13 @@ import { ModelFormComponent } from './forms/model-form/model-form.component';
     ProvidersProductsComponent,
     ProvidersProductsFormComponent,
     ModelsComponent,
-    ModelFormComponent
+    ModelFormComponent,
+    VehiclesFormComponent,
+    TypesComponent,
+    ArticlesTypesComponent,
+    VehiclesTypesComponent,
+    VehiclesTypesFormComponent,
+    ArticlesTypesFormComponent
   ],
   imports: [
     CommonModule,

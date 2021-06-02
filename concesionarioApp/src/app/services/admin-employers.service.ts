@@ -94,7 +94,6 @@ export class AdminEmployersService {
   }
 
   add(user: EmployerForm): Observable<AdminEmployer[]> {
-    console.log(user);
     return this._http.post<AdminEmployer[]>(`${this.baseUrl}/add`, user, {
       headers: this._authService.getToken()
     });

@@ -22,8 +22,6 @@ Users.login = function(user, result) {
             result(err, null);
         }
 
-        console.log(res);
-
         result(null, res);
     });
 }
