@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AdminVehicle } from 'src/models/adminVehicles.model';
-import { AuthService } from '../auth.service';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'

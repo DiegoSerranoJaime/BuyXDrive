@@ -10,11 +10,12 @@ export class AdminComponent implements OnInit {
 
   links = [
     {route: 'users', name: 'Usuarios'},
-    {route: 'products', name: 'Productos'},
-    {route: 'orders', name: 'Pedidos'},
     {route: 'employers', name: 'Empleados'},
     {route: 'providers', name: 'Proveedores'},
+    {route: 'orders', name: 'Pedidos'},
     {route: 'brands', name: 'Marcas'},
+    {route: 'types', name: 'Tipos'},
+    {route: 'products', name: 'Productos'},
   ];
   activeLink = this.links[0];
 

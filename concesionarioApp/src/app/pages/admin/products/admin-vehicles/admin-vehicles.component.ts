@@ -1,9 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
-import { AdminVehiclesService } from 'src/app/services/products/admin-vehicles.service';
-import { AdminVehicle } from 'src/models/adminVehicles.model';
+import { Component, OnInit } from '@angular/core';
+import { AdminVehiclesService } from 'src/app/services/admin-vehicles.service';
 import { Permissions } from 'src/models/permissions.model';
+import { VehiclesFormComponent } from '../../forms/vehicles-form/vehicles-form.component';
 
 @Component({
   selector: 'app-admin-vehicles',
@@ -12,6 +10,7 @@ import { Permissions } from 'src/models/permissions.model';
 })
 export class AdminVehiclesComponent implements OnInit {
 
+  public vehiclesFormComponent = VehiclesFormComponent;
   public permisos: Permissions[] = [
     {
       name: 'view',
@@ -22,6 +21,12 @@ export class AdminVehiclesComponent implements OnInit {
     },
     {
       name: 'logicDelete'
+    },
+    {
+      name: 'add'
+    },
+    {
+      name: 'update'
     }
   ]
 

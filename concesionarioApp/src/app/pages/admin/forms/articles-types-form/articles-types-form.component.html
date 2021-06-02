@@ -1,0 +1,13 @@
+<div *ngIf="form">
+    <form [formGroup]="form">
+        <div class="mb-3">
+            <label for="name" class="form-label">Nombre</label>
+            <div [ngClass]="{'input-group': data}">
+                <input type="text" class="form-control" id="name" formControlName="name" [ngClass]="{'is-invalid': name.touched && name.invalid}">
+                <button *ngIf="data" class="btn btn-primary" (click)="name.setValue(articleType.name)">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

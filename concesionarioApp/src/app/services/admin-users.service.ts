@@ -86,7 +86,6 @@ export class AdminUsersService {
   }
 
   add(user: UserForm): Observable<AdminUser[]> {
-    console.log(user);
     return this._http.post<AdminUser[]>(`${this.baseUrl}/add`, user, {
       headers: this._authService.getToken()
     });

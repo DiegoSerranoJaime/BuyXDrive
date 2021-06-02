@@ -18,6 +18,8 @@ module.exports = function(app) {
     const AdminProvidersProducts = require('../controller/AdminProvidersProductsController');
     const AdminBrands = require('../controller/AdminBrandsController');
     const AdminModels = require('../controller/AdminModelsController');
+    const AdminVehiclesTypes = require('../controller/AdminVehiclesTypesController');
+    const AdminArticlesTypes = require('../controller/AdminArticlesTypesController');
 
 
     //Endpoints de login y registro
@@ -135,7 +137,37 @@ module.exports = function(app) {
         app.route('/api/admin/brands/:id')
             .get(verifyToken, AdminBrands.getById);
         
+        //Endpoints de Tipos de vehiculos
+        app.route('/api/admin/vehiclesTypes')
+            .get(verifyToken, AdminVehiclesTypes.getAll);
 
+        app.route('/api/admin/vehiclesTypes/add')
+            .post(verifyToken, AdminVehiclesTypes.add);
+
+        app.route('/api/admin/vehiclesTypes/update/:id')
+            .put(verifyToken, AdminVehiclesTypes.update);
+
+        app.route('/api/admin/vehiclesTypes/delete/:id')
+            .get(verifyToken, AdminVehiclesTypes.delete);
+
+        app.route('/api/admin/vehiclesTypes/:id')
+            .get(verifyToken, AdminVehiclesTypes.getById);
+
+        //Endpoints de Tipos de articulos
+        app.route('/api/admin/articlesTypes')
+            .get(verifyToken, AdminArticlesTypes.getAll);
+
+        app.route('/api/admin/articlesTypes/add')
+            .post(verifyToken, AdminArticlesTypes.add);
+
+        app.route('/api/admin/articlesTypes/update/:id')
+            .put(verifyToken, AdminArticlesTypes.update);
+
+        app.route('/api/admin/articlesTypes/delete/:id')
+            .get(verifyToken, AdminArticlesTypes.delete);
+
+        app.route('/api/admin/articlesTypes/:id')
+            .get(verifyToken, AdminArticlesTypes.getById);
             
         //Endpoints de pedidos
         app.route('/api/admin/orders')
