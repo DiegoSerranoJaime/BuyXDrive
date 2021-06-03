@@ -29,6 +29,48 @@ exports.getProductCart = function(req, res) {
     });
 }
 
+exports.add = function(req, res) {
+    jwt.verify(req.token, 'secretkey', (err, authData) => {
+        if (authData.user.user_type == 2) {
+            let product = new Products(null, req.body);
+
+            Products.add(product, (err, product) => {
+                if(err) {
+                    res.send(err);
+                }
+                
+                res.json({
+                    ok: true, 
+                    data: product
+                });
+            });
+        } else {
+            res.json({ok: false, msg: 'Permission denied'});
+        }
+    });
+}
+
+exports.update = function(req, res) {
+    jwt.verify(req.token, 'secretkey', (err, authData) => {
+        if (authData.user.user_type == 2) {
+            let product = new Products(req.params.id, req.body);
+
+            Products.update(product, (err, product) => {
+                if(err) {
+                    res.send(err);
+                }
+                
+                res.json({
+                    ok: true, 
+                    data: product
+                });
+            });
+        } else {
+            res.json({ok: false, msg: 'Permission denied'});
+        }
+    });
+}
+
 imageRoute = function(data) {
     for (let i = 0; i < data.length; i++) {
         data[i].image = 'http://localhost:3000/api/images/' + data[i].image;

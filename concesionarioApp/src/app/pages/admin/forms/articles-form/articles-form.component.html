@@ -1,5 +1,5 @@
 <div *ngIf="form">
-    <form [formGroup]="form">
+    <form [formGroup]="form" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="name" class="form-label">Nombre</label>
             <div [ngClass]="{'input-group': data}">

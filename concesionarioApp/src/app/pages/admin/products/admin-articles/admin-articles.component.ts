@@ -24,7 +24,7 @@ export class AdminArticlesComponent implements OnInit {
       name: 'logicDelete',
     },
     {
-      name: 'add'
+      name: 'addWithFiles'
     },
     {
       name: 'update'

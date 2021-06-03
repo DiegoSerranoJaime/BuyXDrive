@@ -106,6 +106,9 @@ module.exports = function(app) {
         //Endpoints de articles
         app.route('/api/admin/articles')
             .get(verifyToken, AdminArticles.getAllArticles);
+
+        app.route('/api/admin/articles')
+            .post(verifyToken, AdminArticles.add);
             
         app.route('/api/admin/articles/logicDelete/:id')
             .get(verifyToken, AdminArticles.logicDelete);
@@ -316,10 +319,16 @@ module.exports = function(app) {
     app.route('/api/products')
         .get(verifyToken, Products.getAll);
 
+    app.route('/api/products/add')
+        .post(verifyToken, Products.add);
+        
     app.route('/api/products/cart/:id')
         .get(Products.getProductCart);
-
-    //Endpoints de comentarios    
+        
+    app.route('/api/products/:id')
+        .put(verifyToken, Products.update);
+    
+        //Endpoints de comentarios    
     app.route('/api/comments/products/:id')
         .get(Comments.getCommentsOfAProduct);
     

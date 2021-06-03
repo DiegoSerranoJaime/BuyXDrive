@@ -2,7 +2,12 @@
 
 const sql = require('./db');
 
-let AdminArticles = function() {}
+let AdminArticles = function(article) {
+    this.id = article.id;
+    this.name = article.name;
+    this.type = article.type;
+    this.brand = article.brand;
+}
 
 AdminArticles.getAllArticles = function(result) {
     
@@ -125,6 +130,23 @@ AdminArticles.getAllTypes = function(result) {
                 FROM article_type`;
 
     sql.query(query, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+
+        result(null, res);
+    });
+}
+
+AdminArticles.getAllImages = function(id, result) {
+    
+    let query = `SELECT 
+                    *
+                FROM images
+                WHERE product_id = ?`;
+
+    sql.query(query, id, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);

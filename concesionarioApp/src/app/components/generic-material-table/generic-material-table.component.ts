@@ -302,6 +302,32 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
     });
     
   }
+
+  addWithFiles() {
+    this._modalService.show(this.form, {
+      title: 'Agregar <span class="text-danger">registro</span>',
+      botonAceptar: 'Agregar',
+      aceptar: (component: any) => {
+        if (component.form.valid) {
+          const addMethod = this.claveCompuesta ? this.service.add(this.fatherId, component.form) : this.service.add(component.form);
+          addMethod.subscribe((data) => {
+            if (data.ok) {
+              this.dataSource.data = data.data;
+              this._toastService.show('Se ha agregado el registro correctamente');
+            } else {
+              this._toastService.show('No se ha podido agregar el registro');
+            }
+            
+            this._modalService.hide();
+          }, (err) => {
+            console.log(err);
+          });
+        }
+        component.form.markAllAsTouched();
+      }
+    });
+    
+  }
   
   update(id: string | number) {
     this._modalService.show(this.form, {
