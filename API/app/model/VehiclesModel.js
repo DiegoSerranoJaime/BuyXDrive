@@ -41,6 +41,45 @@ Vehicles.getAllVehicles = function(result) {
     });
 }
 
+Vehicles.getTopVehicles = function(result) {
+    
+    let query = `SELECT 
+                    products.id, 
+                    products.price, 
+                    products.amount, 
+                    products.discount, 
+                    images.image, 
+                    vehicle_type.name as type, 
+                    concat(brands.name," ",models.name) as name,
+                    vehicles.doors, 
+                    vehicles.seating,
+                    vehicles.cv,
+                    IF(COUNT(comments.product_id), AVG(comments.valoration), 0) AS val,
+                    products.active,
+                    COUNT(orders_products.product_id) AS total
+                FROM images
+                INNER JOIN products ON images.product_id = products.id 
+                INNER JOIN vehicles ON products.id = vehicles.id 
+                INNER JOIN models ON vehicles.model_id = models.id 
+                INNER JOIN brands ON models.brand_id = brands.id 
+                INNER JOIN vehicle_type ON vehicles.type = vehicle_type.id 
+                LEFT JOIN comments ON comments.product_id = products.id
+                INNER JOIN orders_products ON orders_products.product_id = products.id
+                GROUP BY products.id
+                HAVING products.active = 1
+                ORDER BY total, products.id DESC 
+                LIMIT 0, 3`;
+
+    sql.query(query, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+
+        result(null, res);
+    });
+}
+
 Vehicles.getInitVehicles = function(result) {
     
     let query = `SELECT 

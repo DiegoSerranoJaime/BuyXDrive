@@ -39,11 +39,15 @@ import { UserModule } from './pages/user/user.module';
 import { FiltersComponent } from './components/filters/filters.component';
 import { FilterProductsPipe } from './pipes/filter-products.pipe';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
-import { NgbModule, NgbPaginationModule, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCarouselModule, NgbModule, NgbPaginationModule, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 import { ArticleCardComponent } from './components/article-card/article-card.component';
 import { ArticulosComponent } from './pages/articulos/articulos.component';
 import { ArticuloComponent } from './pages/articulo/articulo.component';
 import { InitProductsComponent } from './components/init-products/init-products.component';
+import { SwiperModule } from 'swiper/angular';
+import { SlideshowComponent } from './components/slideshow/slideshow.component';
+import { SlideshowTopComponent } from './components/slideshow-top/slideshow-top.component';
+
 
 const JWT_Module_Options: JwtModuleOptions = {
   config: {
@@ -79,7 +83,9 @@ const JWT_Module_Options: JwtModuleOptions = {
     ArticleCardComponent,
     ArticulosComponent,
     ArticuloComponent,
-    InitProductsComponent
+    InitProductsComponent,
+    SlideshowComponent,
+    SlideshowTopComponent
   ],
   imports: [
     BrowserModule,
@@ -100,6 +106,7 @@ const JWT_Module_Options: JwtModuleOptions = {
     NgbModule,
     NgbPaginationModule,
     NgbRatingModule,
+    SwiperModule,
     JwtModule.forRoot(JWT_Module_Options)
   ],
   providers: [],

@@ -13,16 +13,18 @@ import { VehicleCard } from 'src/models/vehicles.model';
 export class InicioComponent implements OnInit {
 
   public vehicles: VehicleCard[] = [];
+  public topVehicles: VehicleCard[] = [];
   public articles: ArticleCard[] = [];
 
   constructor(private _vehiclesService: VehiclesService,
     private _articlesService: ArticlesService) { }
 
   ngOnInit(): void {
-    combineLatest(this._vehiclesService.getInitVehicles(), this._articlesService.getInitArticles()).subscribe(
-      ([vehicles, articles]) => {
+    combineLatest(this._vehiclesService.getInitVehicles(), this._articlesService.getInitArticles(), this._vehiclesService.getTopVehicles()).subscribe(
+      ([vehicles, articles, topVehicles]) => {
         this.vehicles = vehicles;
         this.articles = articles;
+        this.topVehicles = topVehicles;
       }
     );
   }

@@ -12,6 +12,18 @@ exports.getAllVehicles = function(req, res) {
     });
 }
 
+exports.getTopVehicles = function(req, res) {
+    Vehicles.getTopVehicles((err, vehicles) => {
+        if(err) {
+            res.send(err);
+        }
+
+        vehicles = imageRoute(vehicles);
+        
+        res.json(vehicles);
+    });
+}
+
 exports.getInitVehicles = function(req, res) {
     Vehicles.getInitVehicles((err, vehicles) => {
         if(err) {

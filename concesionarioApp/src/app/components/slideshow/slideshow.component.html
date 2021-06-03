@@ -1,0 +1,22 @@
+<swiper
+    *ngIf="images.length > 1; else noImages"
+    class="w-100"
+    [pagination]="{
+        dynamicBullets: true
+    }"
+    style="--swiper-navigation-color: #0d6efd;--swiper-pagination-color: #0d6efd"
+    [effect]="'coverflow'"
+    [navigation]="true"
+    [loop]="true"
+    [autoplay]="{
+        delay: 2500,
+        disableOnInteraction: false
+    }">
+    <ng-template swiperSlide *ngFor="let image of images">
+        <img [src]="image.image" class="w-100">
+    </ng-template>  
+</swiper>
+
+<ng-template #noImages>
+    <img [src]="images[0].image" class="w-100">
+</ng-template>

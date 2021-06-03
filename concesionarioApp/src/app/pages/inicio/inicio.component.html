@@ -1,6 +1,12 @@
-<div>
-  <app-init-products [categoryTitle]="'Vehículos destacados'" [products]="vehicles" [type]="'vehiculo'"></app-init-products>
-</div>
-<div>
-  <app-init-products [categoryTitle]="'Artículos destacados'" [products]="articles" [type]="'articulo'"></app-init-products>
+<div class="mb-4">
+  <app-slideshow-top [vehicles]="topVehicles"></app-slideshow-top>  
+
+  <hr>
+
+  <div class="mt-3">
+    <app-init-products [categoryTitle]="'Vehículos destacados'" [products]="vehicles" [type]="'vehiculo'"></app-init-products>
+  </div>
+  <div class="mt-3">
+    <app-init-products [categoryTitle]="'Artículos destacados'" [products]="articles" [type]="'articulo'"></app-init-products>
+  </div>
 </div>

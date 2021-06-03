@@ -25,7 +25,7 @@ export interface Vehicle {
 };
 export interface VehicleCard {
   id: number,
-  price: string,
+  price: number,
   amount: number,
   discount: number,
   image: string,
