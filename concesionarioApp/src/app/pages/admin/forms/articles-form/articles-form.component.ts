@@ -87,15 +87,37 @@ export class ArticlesFormComponent implements OnInit {
   }
 
   buildFormGroup() {
-    this.form = new FormGroup({
-      name: this.name,
-      brand: this.brand,
-      type: this.type,
-      images: this.images,
-      price: this.price,
-      amount: this.amount,
-      discount: this.discount,
-      description: this.description
-    });
+    if (this.data) {
+      this.form = new FormGroup({
+        name: this.name,
+        brand: this.brand,
+        type: this.type,
+        price: this.price,
+        amount: this.amount,
+        discount: this.discount,
+        description: this.description
+      });
+    } else {
+      this.form = new FormGroup({
+        name: this.name,
+        brand: this.brand,
+        type: this.type,
+        images: this.images,
+        price: this.price,
+        amount: this.amount,
+        discount: this.discount,
+        description: this.description
+      });
+    }
+  }
+
+  uploadImages(event) {
+    const images = (event.target as HTMLInputElement).files;
+
+    if (images.length > 0) {
+      this.form.patchValue({
+        images: images
+      });
+    }
   }
 }

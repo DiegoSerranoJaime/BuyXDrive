@@ -72,7 +72,7 @@ exports.delete = function(req, res) {
         if (authData.user.user_type == 2) {
             AdminArticles.getAllImages(req.params.id, (err, images) => {
                 let remImages = [];
-                images.foreach((image) => {
+                images.forEach((image) => {
                     remImages.push(`./assets/images/${image.image}`);
                 });
 
@@ -100,6 +100,27 @@ exports.add = function(req, res) {
             let article = new AdminArticles(req.body);
 
             AdminArticles.add(article, (err, articles) => {
+                if(err) {
+                    res.send(err);
+                }
+                
+                res.json({
+                    ok: true, 
+                    data: articles
+                });
+            });
+        } else {
+            res.json({ok: false, msg: 'Permission denied'});
+        }
+    });
+}
+
+exports.update = function(req, res) {
+    jwt.verify(req.token, 'secretkey', (err, authData) => {
+        if (authData.user.user_type == 2) {
+            let article = new AdminArticles(req.body);
+
+            AdminArticles.update(article, (err, articles) => {
                 if(err) {
                     res.send(err);
                 }

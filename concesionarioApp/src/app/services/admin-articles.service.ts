@@ -97,47 +97,87 @@ export class AdminArticlesService {
     });
   }
 
-  add(form: any) {
-    console.log(form);
-
-    // const product = {
-    //   price: form.price,
-    //   amount: form.amount,
-    //   discount: form.discount,
-    //   description: form.description,
-    // };
+  add(form: any): Observable<AdminArticle[]> {
+    const product = {
+      price: form.price,
+      amount: form.amount,
+      discount: form.discount,
+      description: form.description,
+    };
     
-    // let subject = new Subject<AdminArticle[]>();
+    let subject = new Subject<any>();
 
-    // this._http.post<any>(`${this.productUrl}/add`, product, {
-    //   headers: this._authService.getToken()
-    // }).subscribe((data) => {
-    //   console.log(data);
-    //   if (data.ok) {
-    //     const article = {
-    //       id: data,
-    //       name: form.name,
-    //       type: form.type,
-    //       brand: form.brand,
-    //     };
+    this._http.post<any>(`${this.productUrl}/add`, product, {
+      headers: this._authService.getToken()
+    }).subscribe((data) => {
+      if (data.ok) {
+        const article = {
+          id: data.data,
+          name: form.name,
+          type: form.type,
+          brand: form.brand,
+        };
 
-    //     this._http.post<any>(`${this.baseUrl}/add`, article, {
-    //       headers: this._authService.getToken()
-    //     }).subscribe(() => {
-    //       this.getAll().subscribe((data) => {
-    //         subject.next(data);
-    //       });
-    //     });
+        this._http.post<any>(`${this.baseUrl}/add`, article, {
+          headers: this._authService.getToken()
+        }).subscribe(() => {
+          this.getAll().subscribe((data) => {
+            subject.next({
+              ok: true,
+              data: data
+            });
+          });
+        });
 
-    //     console.log(form);
+        const imagesData = form.images as File[];
+        
 
-    //     form.images.foreach((image) => {
-    //       this._imagesService.uploadImage(article.id, image).subscribe();
-    //     });
-    //   }
-    // }); 
+        for(let i = 0; i < imagesData.length; i++) {
+          const formData = new FormData();
+          formData.append('image', imagesData[i], imagesData[i].name);
+          this._imagesService.uploadImage(article.id, formData).subscribe();
+        }
+      }
+    }); 
 
-    // return subject;
+    return subject;
+  }
+
+  update(id: number, form: any): Observable<AdminArticle[]> {
+    const product = {
+      price: form.price,
+      amount: form.amount,
+      discount: form.discount,
+      description: form.description,
+    };
+    
+    let subject = new Subject<any>();
+
+    this._http.put<any>(`${this.productUrl}/update/${id}`, product, {
+      headers: this._authService.getToken()
+    }).subscribe((data) => {
+      if (data.ok) {
+        const article = {
+          id: id,
+          name: form.name,
+          type: form.type,
+          brand: form.brand,
+        };
+
+        this._http.put<any>(`${this.baseUrl}/update/:id`, article, {
+          headers: this._authService.getToken()
+        }).subscribe(() => {
+          this.getAll().subscribe((data) => {
+            subject.next({
+              ok: true,
+              data: data
+            });
+          });
+        });
+      }
+    }); 
+
+    return subject;
   }
 
   getAllBrands(): Observable<any> {

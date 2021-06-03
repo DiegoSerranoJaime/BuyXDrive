@@ -77,6 +77,34 @@ AdminArticles.logicDelete = function(id, result) {
     });
 }
 
+AdminArticles.add = function(article, result) {
+    
+    let query = `INSERT INTO articles SET ?`;
+
+    sql.query(query, article, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+
+        return AdminArticles.getAllArticles(result);
+    });
+}
+
+AdminArticles.update = function(article, result) {
+    
+    let query = `UPDATE articles SET ? WHERE id = ?`;
+
+    sql.query(query, [article, article.id], (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+
+        return AdminArticles.getAllArticles(result);
+    });
+}
+
 AdminArticles.reactive = function(id, result) {
     
     let query = `UPDATE products SET active = 1 WHERE id = ?`;

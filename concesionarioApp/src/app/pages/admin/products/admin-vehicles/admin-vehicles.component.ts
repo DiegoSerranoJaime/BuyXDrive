@@ -23,7 +23,7 @@ export class AdminVehiclesComponent implements OnInit {
       name: 'logicDelete'
     },
     {
-      name: 'addWithFiles'
+      name: 'add'
     },
     {
       name: 'update'

@@ -1,9 +1,6 @@
-<div class="row d-flex justify-content-end my-2">
+<div class="row d-flex justify-content-end my-2" *ngIf="checkPermission('add')">
   <div class="col-auto">
-    <button mat-raised-button (click)="add()" *ngIf="checkPermission('add')">
-      + Nuevo
-    </button>
-    <button mat-raised-button (click)="addWithFiles()" *ngIf="checkPermission('addWithFiles')">
+    <button mat-raised-button (click)="add()">
       + Nuevo
     </button>
   </div>
