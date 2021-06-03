@@ -1,7 +1,7 @@
-<div class="container">
+<div class="container my-4">
   <div class="row">
     <!-- Filtros -->
-    <div class="col-12 col-md-3 mt-5">
+    <div class="col-12 col-md-3">
       <app-filters *ngIf="allFilterData"
                     (nameEmit)="filterName($event)"
                     (priceEmit)="filterPrice($event)"
@@ -23,12 +23,12 @@
     </div>
     <div class="col-12 col-md">
       <ng-template #noVehicles>
-        <div class="alert alert-info mt-5" role="alert">
+        <div class="alert alert-info" role="alert">
           No se encuentran vehiculos disponibles
         </div>
       </ng-template>
       <div *ngIf="vehiculos && (vehiculos | filterProducts:name:prices:selectedBrands:selectedTypes:valoration:selectedCv:selectedDoors:selectedSeating).length > 0; else noVehicles">
-        <app-init-products class="flex-grow-1" [products]="vehiculos | filterProducts:name:prices:selectedBrands:selectedTypes:valoration:selectedCv:selectedDoors:selectedSeating | slice: (page-1) * pageSize : page * pageSize" [type]="'vehiculo'"></app-init-products>
+        <app-init-products [products]="vehiculos | filterProducts:name:prices:selectedBrands:selectedTypes:valoration:selectedCv:selectedDoors:selectedSeating | slice: (page-1) * pageSize : page * pageSize" [type]="'vehiculo'"></app-init-products>
 
         <div class="d-flex justify-content-center mt-4">
           <ngb-pagination [collectionSize]="(vehiculos | filterProducts:name:prices:selectedBrands:selectedTypes:valoration:selectedCv:selectedDoors:selectedSeating).length" [(page)]="page" [maxSize]="5" [pageSize]="pageSize" [boundaryLinks]="true"></ngb-pagination>

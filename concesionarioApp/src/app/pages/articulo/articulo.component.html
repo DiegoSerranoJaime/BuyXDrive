@@ -1,91 +1,94 @@
-<div class="row d-flex align-items-center position-relative">
-  <div class="col-auto position-absolute">
-    <a routerLink="/articulos" class="btn btn-primary"><i class="fas fa-arrow-left"></i></a>
-  </div>
-  <div class="col mx-auto" *ngIf="article">
-    <h4 class="d-flex justify-content-center">{{ article.name }}</h4>
-  </div>
-</div>
+<div class="my-4">
 
-<!-- Información del vehículo -->
-<div class="row mt-3 mb-3" *ngIf="article">
-  <div class="col-12 col-md-4 mb-4">
-    <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-ride="carousel">
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-      </div>
-      <div class="carousel-inner">
-        <div class="carousel-item" [ngClass]="{'active': first}" *ngFor="let image of images; first as first">
-          <img [src]="image.image" class="d-block w-100" alt="...">
+  <div class="row d-flex align-items-center position-relative">
+    <div class="col-auto position-absolute">
+      <a routerLink="/articulos" class="btn btn-primary"><i class="fas fa-arrow-left"></i></a>
+    </div>
+    <div class="col mx-auto" *ngIf="article">
+      <h4 class="d-flex justify-content-center">{{ article.name }}</h4>
+    </div>
+  </div>
+  
+  <!-- Información del vehículo -->
+  <div class="row mt-3 mb-3" *ngIf="article">
+    <div class="col-12 col-md-4 mb-4">
+      <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"  data-bs-slide="prev">
+        <div class="carousel-inner">
+          <div class="carousel-item" [ngClass]="{'active': first}" *ngFor="let image of images; first as first">
+            <img [src]="image.image" class="d-block w-100" alt="...">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"  data-bs-slide="prev">
           <div class="bg-dark rounded-circle p-1 d-flex" style="height: 40px;">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           </div>
           <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"  data-bs-slide="next">
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"  data-bs-slide="next">
           <div class="bg-dark rounded-circle p-1 d-flex" style="height: 40px;">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
           </div>
           <span class="visually-hidden">Next</span>
-      </button>
+        </button>
+      </div>
+      <div class="col-12 col-sm-12 col-md-12 mt-4">
+        <h5 class="d-flex justify-content-center">Descripción</h5>
+        <p class="text-center">
+          {{ article.description ? article.description : 'No hay una descripción disponible actualmente' }}
+        </p>
+      </div>
+      
+      <div class="text-center mt-4">
+        <p>Un total de {{ article.cant }} valoracion/es</p>
+        <p>Estrellas: <span class="text-warning"><app-stars [valoration]="article.val"></app-stars></span> ({{ article.val | number:'.0-1'}} / 5)</p>
+      </div>
+      
     </div>
-    <div class="col-12 col-sm-12 col-md-12 mt-4">
-      <h5 class="d-flex justify-content-center">Descripción</h5>
-      <p>
-        {{ article.description }}
-      </p>
-    </div>
-
-    <div class="text-center mt-4">
-      <p>Un total de {{ article.cant }} valoracion/es</p>
-      <p>Estrellas: <span class="text-warning"><app-stars [valoration]="article.val"></app-stars></span> ({{ article.val | number:'.0-1'}} / 5)</p>
-    </div>
-
-  </div>
-  <div class="col-12 col-md-4 mb-4">
-    <div class="row d-flex justify-content-start">
-      <div class="col-12">
-        <h5 class="d-flex justify-content-center">Caracteristicas</h5>
-        <ul class="list-group">
-          <li class="list-group-item d-flex justify-content-between">Marca: <span>{{ article.bname }}</span></li>
-          <li class="list-group-item d-flex justify-content-between">Nomber: <span>{{ article.aname }}</span></li>
-          <li class="list-group-item d-flex justify-content-between">Tipo: <span>{{ article.type }}</span></li>
-        </ul>
+    <div class="col-12 col-md-4 mb-4">
+      <div class="row d-flex justify-content-start">
+        <div class="col-12">
+          <h5 class="d-flex justify-content-center">Caracteristicas</h5>
+          <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between">Marca: <span>{{ article.bname }}</span></li>
+            <li class="list-group-item d-flex justify-content-between">Nomber: <span>{{ article.aname }}</span></li>
+            <li class="list-group-item d-flex justify-content-between">Tipo: <span>{{ article.type }}</span></li>
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="col-12 col-md-4">
-    <div class="card mx-0 mt-4">
-      <div class="card-body">
-        <p class="d-flex justify-content-between">Precio: <span>{{ article.price }}€</span></p>
-        <p class="d-flex justify-content-between">Descuento: <span>{{ article.discount }}%</span></p>
-        <hr>
-        <p class="d-flex justify-content-between">Precio Final: <span>{{ article.price | discount:article.discount | number:'.2-2' }}€</span></p>
-        <div class="d-grid">
-          <button type="button" class="btn btn-primary" (click)="addProduct()">Agregar al carrito</button>
+    <div class="col-12 col-md-4">
+      <div class="card mx-0 mt-4">
+        <div class="card-body">
+          <p class="d-flex justify-content-between">Precio: <span>{{ article.price }}€</span></p>
+          <p class="d-flex justify-content-between">Descuento: <span>{{ article.discount }}%</span></p>
+          <hr>
+          <p class="d-flex justify-content-between">Precio Final: <span>{{ article.price | discount:article.discount | number:'.2-2' }}€</span></p>
+          <div class="d-grid">
+            <button type="button" class="btn btn-primary" (click)="addProduct()">Agregar al carrito</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+    
+  <hr>
 
-<hr>
+  <app-init-products [products]="articleRel" [type]="'articulo'" [categoryTitle]="'Artículos relacionados'"></app-init-products>
 
-<app-init-products [products]="articleRel" [type]="'articulo'" [categoryTitle]="'Artículos relacionados'"></app-init-products>
+  <hr>
 
-<hr>
+  <div class="my-4">
+    <app-comments-form [product_id]="id"></app-comments-form>
+  </div>
 
-<div class="my-4">
-  <app-comments-form [product_id]="id"></app-comments-form>
-</div>
+  <hr>
 
-<hr>
-
-<div class="col-12 my-4">
-  <app-comments [comments]="comments"></app-comments>
+  <div class="col-12 my-4">
+    <app-comments [comments]="comments"></app-comments>
+  </div>
 </div>

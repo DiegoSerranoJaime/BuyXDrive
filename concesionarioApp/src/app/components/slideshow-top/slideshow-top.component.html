@@ -1,0 +1,23 @@
+<swiper
+    *ngIf="vehicles.length > 0"
+    class="w-100"
+    [pagination]="{
+        dynamicBullets: true
+    }"
+    style="--swiper-navigation-color: #0d6efd;--swiper-pagination-color: #0d6efd"
+    [effect]="'cube'"
+    [navigation]="true"
+    [loop]="true"
+    [autoplay]="{
+        delay: 4000,
+        disableOnInteraction: false
+    }">
+    <ng-template swiperSlide *ngFor="let vehicle of vehicles">
+        <div style="background-image: url({{vehicle.image}}); background-size: cover; height: 550px; background-position: center center;" >
+            <div class="p-5 w-100 h-100 d-flex flex-column justify-content-end align-items-center" [routerLink]="['vehiculos', vehicle.id]" slot="container-center">
+                <h4 class="text-white">{{ vehicle.name }}</h4>
+                <p class="text-white">Obtenlo ahora por {{vehicle.price}}€ {{ vehicle.discount ? '({{vehicle.discount}}% de descuento)' : ''}}</p>
+            </div>
+        </div>
+    </ng-template>  
+</swiper>

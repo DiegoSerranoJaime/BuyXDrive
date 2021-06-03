@@ -243,6 +243,9 @@ module.exports = function(app) {
     app.route('/api/vehicles/init')
         .get(Vehicles.getInitVehicles);
 
+    app.route('/api/vehicles/top')
+        .get(Vehicles.getTopVehicles);
+
     app.route('/api/vehicles/brands')
         .get(Vehicles.getVehiclesBrands);
 

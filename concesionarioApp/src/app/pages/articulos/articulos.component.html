@@ -1,7 +1,7 @@
-<div class="container">
+<div class="container my-4">
   <div class="row">
     <!-- Filtros -->
-    <div class="col-12 col-md-3 mt-5">
+    <div class="col-12 col-md-3">
       <app-filters *ngIf="allFilterData"
                     (nameEmit)="filterName($event)"
                     (priceEmit)="filterPrice($event)"
@@ -17,7 +17,7 @@
     </div>
     <div class="col-12 col-md">
       <ng-template #noVehicles>
-        <div class="alert alert-info mt-5" role="alert">
+        <div class="alert alert-info" role="alert">
           No se encuentran articulos disponibles
         </div>
       </ng-template>

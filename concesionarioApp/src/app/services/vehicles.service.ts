@@ -18,6 +18,10 @@ export class VehiclesService {
     return this._http.get<VehicleCard[]>(`${this.baseUrl}`);
   }
 
+  getTopVehicles(): Observable<VehicleCard[]> {
+    return this._http.get<VehicleCard[]>(`${this.baseUrl}/top`);
+  }
+
   getInitVehicles(): Observable<VehicleCard[]> {
     return this._http.get<VehicleCard[]>(`${this.baseUrl}/init`);
   }

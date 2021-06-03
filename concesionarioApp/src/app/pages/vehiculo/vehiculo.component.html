@@ -1,106 +1,85 @@
-<div class="row d-flex align-items-center position-relative">
-  <div class="col-auto position-absolute">
-    <a routerLink="/vehiculos" class="btn btn-primary"><i class="fas fa-arrow-left"></i></a>
-  </div>
-  <div class="col mx-auto" *ngIf="vehicle">
-    <h4 class="d-flex justify-content-center">{{ vehicle.name }}</h4>
-  </div>
-</div>
-
-<!-- Información del vehículo -->
-<div class="row mt-3 mb-3" *ngIf="vehicle">
-  <div class="col-12 col-md-4 mb-4">
-    <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-ride="carousel">
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-      </div>
-      <div class="carousel-inner">
-        <div class="carousel-item" [ngClass]="{'active': first}" *ngFor="let image of images; first as first">
-          <img [src]="image.image" class="d-block w-100" alt="...">
-        </div>
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"  data-bs-slide="prev">
-          <div class="bg-dark rounded-circle p-1 d-flex" style="height: 40px;">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          </div>
-          <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"  data-bs-slide="next">
-          <div class="bg-dark rounded-circle p-1 d-flex" style="height: 40px;">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          </div>
-          <span class="visually-hidden">Next</span>
-      </button>
-    </div>
-    <div class="col-12 col-sm-12 col-md-12 mt-4">
-      <h5 class="d-flex justify-content-center">Descripción</h5>
-      <p>
-        {{ vehicle.description }}
-      </p>
-    </div>
-
-    <div class="text-center mt-4">
-      <p>Un total de {{ vehicle.cant }} valoracion/es</p>
-      <p>Estrellas: <span class="text-warning"><app-stars [valoration]="vehicle.val"></app-stars></span> ({{ vehicle.val | number:'.0-1'}} / 5)</p>
-    </div>
-
-  </div>
-  <div class="col-12 col-md-4 mb-4">
-    <div class="row d-flex justify-content-start">
-      <div class="col-12">
-        <h5 class="d-flex justify-content-center">Caracteristicas</h5>
-        <ul class="list-group">
-          <li class="list-group-item d-flex justify-content-between">Marca: <span>{{ vehicle.bname }}</span></li>
-          <li class="list-group-item d-flex justify-content-between">Modelo: <span>{{ vehicle.mname }}</span></li>
-          <li class="list-group-item d-flex justify-content-between">Tipo: <span>{{ vehicle.type }}</span></li>
-          <li class="list-group-item d-flex justify-content-between">Estado: <span>{{ vehicle.status }}</span></li>
-          <li class="list-group-item d-flex justify-content-between">Kilometraje: <span>{{ vehicle.km }} KMs</span></li>
-          <li class="list-group-item d-flex justify-content-between">Combustible: <span>{{ vehicle.fuel }}</span></li>
-        </ul>
-      </div>
-      <div class="col-12 mt-4">
-        <h5 class="d-flex justify-content-center">Especificaciones</h5>
-        <ul class="list-group">
-          <li class="list-group-item d-flex justify-content-between">Caballos: <span>{{ vehicle.cv }} CV</span></li>
-          <li class="list-group-item d-flex justify-content-between">Tracción: <span>{{ vehicle.traction }}</span></li>
-          <li class="list-group-item d-flex justify-content-between">Puertas: <span>{{ vehicle.doors }}</span></li>
-          <li class="list-group-item d-flex justify-content-between">Asientos: <span>{{ vehicle.seating }}</span></li>
-          <li class="list-group-item d-flex justify-content-between">Material del interior: <span>{{ vehicle.inner_materials }}</span></li>
-          <li class="list-group-item d-flex justify-content-between">Peso: <span>{{ vehicle.weight }} Kg</span></li>
-          <li class="list-group-item d-flex justify-content-between">Consumo: <span>{{ vehicle.consumption }}</span></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div class="col-12 col-md-4">
-    <div class="card mx-0 mt-4">
-      <div class="card-body">
-        <p class="d-flex justify-content-between">Precio: <span>{{ vehicle.price }}€</span></p>
-        <p class="d-flex justify-content-between">Descuento: <span>{{ vehicle.discount }}%</span></p>
-        <hr>
-        <p class="d-flex justify-content-between">Precio Final: <span>{{ vehicle.price | discount:vehicle.discount | number:'.2-2' }}€</span></p>
-        <div class="d-grid">
-          <button type="button" class="btn btn-primary" (click)="addProduct()">Agregar al carrito</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<hr>
-
-<app-init-products [products]="vehicleRel" [type]="'vehiculo'" [categoryTitle]="'Vehículos relacionados'"></app-init-products>
-
-<hr>
-
 <div class="my-4">
-  <app-comments-form [product_id]="id"></app-comments-form>
-</div>
+  <div class="row d-flex align-items-center position-relative">
+    <div class="col-auto position-absolute">
+      <a routerLink="/vehiculos" class="btn btn-primary"><i class="fas fa-arrow-left"></i></a>
+    </div>
+    <div class="col mx-auto" *ngIf="vehicle">
+      <h4 class="d-flex justify-content-center">{{ vehicle.name }}</h4>
+    </div>
+  </div>
 
-<hr>
+  <!-- Información del vehículo -->
+  <div class="row mt-3 mb-3" *ngIf="vehicle">
+    <div class="col-12 col-md-4 mb-4">
+      <app-slideshow [images]="images"></app-slideshow>
+      <div class="col-12 col-sm-12 col-md-12 mt-4">
+        <h5 class="d-flex justify-content-center">Descripción</h5>
+        <p class="text-center">
+          {{ vehicle.description ? vehicle.description : 'No hay una descripción disponible actualmente' }}
+        </p>
+      </div>
 
-<div class="col-12 my-4">
-  <app-comments [comments]="comments"></app-comments>
+      <div class="text-center mt-4">
+        <p>Un total de {{ vehicle.cant }} valoracion/es</p>
+        <p>Estrellas: <span class="text-warning"><app-stars [valoration]="vehicle.val"></app-stars></span> ({{ vehicle.val | number:'.0-1'}} / 5)</p>
+      </div>
+
+    </div>
+    <div class="col-12 col-md-4 mb-4">
+      <div class="row d-flex justify-content-start">
+        <div class="col-12">
+          <h5 class="d-flex justify-content-center">Caracteristicas</h5>
+          <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between">Marca: <span>{{ vehicle.bname }}</span></li>
+            <li class="list-group-item d-flex justify-content-between">Modelo: <span>{{ vehicle.mname }}</span></li>
+            <li class="list-group-item d-flex justify-content-between">Tipo: <span>{{ vehicle.type }}</span></li>
+            <li class="list-group-item d-flex justify-content-between">Estado: <span>{{ vehicle.status }}</span></li>
+            <li class="list-group-item d-flex justify-content-between">Kilometraje: <span>{{ vehicle.km }} KMs</span></li>
+            <li class="list-group-item d-flex justify-content-between">Combustible: <span>{{ vehicle.fuel }}</span></li>
+          </ul>
+        </div>
+        <div class="col-12 mt-4">
+          <h5 class="d-flex justify-content-center">Especificaciones</h5>
+          <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between">Caballos: <span>{{ vehicle.cv }} CV</span></li>
+            <li class="list-group-item d-flex justify-content-between">Tracción: <span>{{ vehicle.traction }}</span></li>
+            <li class="list-group-item d-flex justify-content-between">Puertas: <span>{{ vehicle.doors }}</span></li>
+            <li class="list-group-item d-flex justify-content-between">Asientos: <span>{{ vehicle.seating }}</span></li>
+            <li class="list-group-item d-flex justify-content-between">Material del interior: <span>{{ vehicle.inner_materials }}</span></li>
+            <li class="list-group-item d-flex justify-content-between">Peso: <span>{{ vehicle.weight }} Kg</span></li>
+            <li class="list-group-item d-flex justify-content-between">Consumo: <span>{{ vehicle.consumption }}</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-4">
+      <div class="card mx-0 mt-4">
+        <div class="card-body">
+          <p class="d-flex justify-content-between">Precio: <span>{{ vehicle.price }}€</span></p>
+          <p class="d-flex justify-content-between">Descuento: <span>{{ vehicle.discount }}%</span></p>
+          <hr>
+          <p class="d-flex justify-content-between">Precio Final: <span>{{ vehicle.price | discount:vehicle.discount | number:'.2-2' }}€</span></p>
+          <div class="d-grid">
+            <button type="button" class="btn btn-primary" (click)="addProduct()">Agregar al carrito</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <app-init-products [products]="vehicleRel" [type]="'vehiculo'" [categoryTitle]="'Vehículos relacionados'"></app-init-products>
+
+  <hr>
+
+  <div class="my-4">
+    <app-comments-form [product_id]="id"></app-comments-form>
+  </div>
+
+  <hr>
+
+  <div class="col-12 my-4">
+    <app-comments [comments]="comments"></app-comments>
+  </div>
 </div>
