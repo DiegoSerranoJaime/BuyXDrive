@@ -84,6 +84,12 @@ module.exports = function(app) {
         //Endpoints de vehicles
         app.route('/api/admin/vehicles')
             .get(verifyToken, AdminVehicles.getAllVehicles);
+
+        app.route('/api/admin/vehicles/add')
+            .post(verifyToken, AdminVehicles.add);
+
+        app.route('/api/admin/vehicles/update/:id')
+            .put(verifyToken, AdminVehicles.update);
             
         app.route('/api/admin/vehicles/logicDelete/:id')
             .get(verifyToken, AdminVehicles.logicDelete);

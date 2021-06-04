@@ -22,9 +22,9 @@
         </div>
         <div class="mb-3" *ngIf="!data">
             <label for="images" class="form-label">Seleccionar Imagen</label>
-            <input class="form-control" type="file" id="images" accept="image/png, image/jpeg" formControlName="images" [ngClass]="{'is-invalid': images.invalid && images.touched}" multiple>
+            <input class="form-control" type="file" id="images" accept="image/png, image/jpeg" [ngClass]="{'is-invalid': images.invalid && images.touched}" multiple required (change)="uploadImages($event)">
             <div *ngIf="images.invalid && images.touched" class="text-danger">
-                <span *ngIf="images.hasError('required')">La imagen es requerido</span>
+                <span *ngIf="images.hasError('required')">La imagen es requerida</span>
             </div>
         </div>
         <div class="mb-3">
