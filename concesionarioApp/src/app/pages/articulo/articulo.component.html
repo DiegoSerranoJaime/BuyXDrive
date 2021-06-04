@@ -12,30 +12,7 @@
   <!-- Información del vehículo -->
   <div class="row mt-3 mb-3" *ngIf="article">
     <div class="col-12 col-md-4 mb-4">
-      <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        </div>
-        <div class="carousel-inner">
-          <div class="carousel-item" [ngClass]="{'active': first}" *ngFor="let image of images; first as first">
-            <img [src]="image.image" class="d-block w-100" alt="...">
-          </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"  data-bs-slide="prev">
-          <div class="bg-dark rounded-circle p-1 d-flex" style="height: 40px;">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          </div>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"  data-bs-slide="next">
-          <div class="bg-dark rounded-circle p-1 d-flex" style="height: 40px;">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          </div>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
+      <app-slideshow [images]="images"></app-slideshow>
       <div class="col-12 col-sm-12 col-md-12 mt-4">
         <h5 class="d-flex justify-content-center">Descripción</h5>
         <p class="text-center">
