@@ -2,7 +2,12 @@
 
 const sql = require('./db');
 
-let AdminArticles = function() {}
+let AdminArticles = function(article) {
+    this.id = article.id;
+    this.name = article.name;
+    this.type = article.type;
+    this.brand = article.brand;
+}
 
 AdminArticles.getAllArticles = function(result) {
     
@@ -34,11 +39,63 @@ AdminArticles.getAllArticles = function(result) {
     });
 }
 
+AdminArticles.getById = function(id, result) {
+    
+    let query = `SELECT 
+                    name,
+                    brand,
+                    type, 
+                    products.price, 
+                    products.amount, 
+                    products.discount, 
+                    products.description
+                FROM products
+                INNER JOIN articles ON articles.id = products.id
+                WHERE products.id = ?`;
+
+    sql.query(query, id, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+
+        result(null, res);
+    });
+}
+
 AdminArticles.logicDelete = function(id, result) {
     
     let query = `UPDATE products SET active = 0 WHERE id = ?`;
 
     sql.query(query, id ,(err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+
+        return AdminArticles.getAllArticles(result);
+    });
+}
+
+AdminArticles.add = function(article, result) {
+    
+    let query = `INSERT INTO articles SET ?`;
+
+    sql.query(query, article, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+
+        return AdminArticles.getAllArticles(result);
+    });
+}
+
+AdminArticles.update = function(article, result) {
+    
+    let query = `UPDATE articles SET ? WHERE id = ?`;
+
+    sql.query(query, [article, article.id], (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -76,5 +133,55 @@ AdminArticles.delete = function(id, result) {
     });
 }
 
+AdminArticles.getAllBrands = function(result) {
+    
+    let query = `SELECT 
+                    id,
+                    name
+                FROM brands
+                WHERE type = 'Articulo'`;
+
+    sql.query(query, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+
+        result(null, res);
+    });
+}
+
+AdminArticles.getAllTypes = function(result) {
+    
+    let query = `SELECT 
+                    *
+                FROM article_type`;
+
+    sql.query(query, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+
+        result(null, res);
+    });
+}
+
+AdminArticles.getAllImages = function(id, result) {
+    
+    let query = `SELECT 
+                    *
+                FROM images
+                WHERE product_id = ?`;
+
+    sql.query(query, id, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+
+        result(null, res);
+    });
+}
 
 module.exports = AdminArticles;

@@ -30,6 +30,7 @@ import { ArticlesTypesComponent } from './types/articles-types/articles-types.co
 import { VehiclesTypesComponent } from './types/vehicles-types/vehicles-types.component';
 import { VehiclesTypesFormComponent } from './forms/vehicles-types-form/vehicles-types-form.component';
 import { ArticlesTypesFormComponent } from './forms/articles-types-form/articles-types-form.component';
+import { ArticlesFormComponent } from './forms/articles-form/articles-form.component';
 
 
 
@@ -59,7 +60,8 @@ import { ArticlesTypesFormComponent } from './forms/articles-types-form/articles
     ArticlesTypesComponent,
     VehiclesTypesComponent,
     VehiclesTypesFormComponent,
-    ArticlesTypesFormComponent
+    ArticlesTypesFormComponent,
+    ArticlesFormComponent
   ],
   imports: [
     CommonModule,

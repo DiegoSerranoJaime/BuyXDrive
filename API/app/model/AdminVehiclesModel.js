@@ -35,6 +35,39 @@ AdminVehicles.getAllVehicles = function(result) {
     });
 }
 
+AdminVehicles.getById = function(id, result) {
+    
+    let query = `SELECT 
+                    products.price, 
+                    products.amount, 
+                    products.discount, 
+                    model_id,
+                    type, 
+                    cv,
+                    traction,
+                    transmission,
+                    km,
+                    fuel,
+                    consumption,
+                    doors,
+                    weight,
+                    seating,
+                    inner_materials,
+                    description
+                FROM products
+                INNER JOIN vehicles ON products.id = vehicles.id 
+                WHERE products.id = ?`;
+
+    sql.query(query, id, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+
+        result(null, res);
+    });
+}
+
 AdminVehicles.logicDelete = function(id, result) {
     
     let query = `UPDATE products SET active = 0 WHERE id = ?`;
@@ -77,5 +110,38 @@ AdminVehicles.delete = function(id, result) {
     });
 }
 
+AdminVehicles.getAllModels = function(result) {
+    
+    let query = `SELECT
+                    models.id,
+                    concat(brands.name, ' ', models.name) as name
+                FROM brands
+                INNER JOIN models ON models.brand_id = brands.id`;
+
+    sql.query(query, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+
+        result(null, res);
+    });
+}
+
+AdminVehicles.getAllTypes = function(result) {
+    
+    let query = `SELECT
+                    *
+                FROM vehicle_type`;
+
+    sql.query(query, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+
+        result(null, res);
+    });
+}
 
 module.exports = AdminVehicles;

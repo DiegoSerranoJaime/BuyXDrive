@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { AdminVehicle } from 'src/models/adminVehicles.model';
+import { AdminVehicle, VehicleForm } from 'src/models/adminVehicles.model';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -69,19 +70,37 @@ export class AdminVehiclesService {
     });
   }
 
-  delete(id: number): Observable<AdminVehicle> {
-    return this._http.get<AdminVehicle>(`${this.baseUrl}/delete/${id}`, {
+  getById(id: number): Observable<VehicleForm> {
+    return this._http.get<VehicleForm>(`${this.baseUrl}/${id}`, {
+      headers: this._authService.getToken()
+    }).pipe(map((v) => v[0]));
+  }
+
+  delete(id: number): Observable<AdminVehicle[]> {
+    return this._http.get<AdminVehicle[]>(`${this.baseUrl}/delete/${id}`, {
       headers: this._authService.getToken()
     });
   }
 
-  logicDelete(id: number): Observable<any> {
-    return this._http.get<any>(`${this.baseUrl}/logicDelete/${id}`, {
+  logicDelete(id: number): Observable<AdminVehicle[]> {
+    return this._http.get<AdminVehicle[]>(`${this.baseUrl}/logicDelete/${id}`, {
       headers: this._authService.getToken()
     });
   }
-  reactive(id: number): Observable<any> {
-    return this._http.get<any>(`${this.baseUrl}/reactive/${id}`, {
+  reactive(id: number): Observable<AdminVehicle[]> {
+    return this._http.get<AdminVehicle[]>(`${this.baseUrl}/reactive/${id}`, {
+      headers: this._authService.getToken()
+    });
+  }
+
+  getAllModels(): Observable<any> {
+    return this._http.get<any>(`${this.baseUrl}/models`, {
+      headers: this._authService.getToken()
+    });
+  }
+
+  getAllTypes(): Observable<any> {
+    return this._http.get<any>(`${this.baseUrl}/types`, {
       headers: this._authService.getToken()
     });
   }

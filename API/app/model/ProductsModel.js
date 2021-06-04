@@ -2,7 +2,14 @@
 
 const sql = require('./db');
 
-let Products = function() {}
+let Products = function(id, product) {
+    this.id = id >= 0 ? id : null;
+    this.price = product.price;
+    this.amount = product.amount;
+    this.discount = product.discount;
+    this.description = product.description;
+    this.active = product.amount > 0 ? true : false;
+}
 
 Products.getAll = function(result) {
     let query = `SELECT 
@@ -44,6 +51,32 @@ Products.getProductCart = function(id, result) {
                 GROUP BY products.id`;
 
     sql.query(query, id, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+
+        result(null, res);
+    });
+}
+
+Products.add = function(product, result) {
+    let query = `INSERT INTO products SET ?`;
+
+    sql.query(query, product, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+
+        result(null, res.insertId);
+    });
+}
+
+Products.update = function(product, result) {
+    let query = `UPDATE products SET ? WHERE id = ?`;
+
+    sql.query(query, [product, product.id], (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);

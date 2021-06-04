@@ -20,3 +20,16 @@ exports.getImage = function(req, res) {
     let pathRes = (path.resolve(`./assets/images/${req.params.image}`));
     res.sendFile(pathRes);
 }
+
+exports.saveImages = function(req, res) {
+    let file = req.file;
+    let image = new Images(req.params.id, file.filename);
+
+    Images.saveImage(image, (err, image) => {
+        if(err) {
+            res.send(err);
+        }
+    
+        res.send({ok: true});
+    });
+}

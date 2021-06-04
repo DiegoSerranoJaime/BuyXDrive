@@ -21,6 +21,7 @@ module.exports = function(app) {
     const AdminVehiclesTypes = require('../controller/AdminVehiclesTypesController');
     const AdminArticlesTypes = require('../controller/AdminArticlesTypesController');
 
+    const upload = require('../libs/storage')
 
     //Endpoints de login y registro
     app.route('/api/user/login')
@@ -83,28 +84,52 @@ module.exports = function(app) {
         //Endpoints de vehicles
         app.route('/api/admin/vehicles')
             .get(verifyToken, AdminVehicles.getAllVehicles);
-
+            
         app.route('/api/admin/vehicles/logicDelete/:id')
             .get(verifyToken, AdminVehicles.logicDelete);
-
+            
         app.route('/api/admin/vehicles/reactive/:id')
             .get(verifyToken, AdminVehicles.reactive);
-
+            
         app.route('/api/admin/vehicles/delete/:id')
             .get(verifyToken, AdminVehicles.delete);
+        
+        app.route('/api/admin/vehicles/types')
+            .get(verifyToken, AdminVehicles.getAllTypes);
+            
+        app.route('/api/admin/vehicles/models')
+            .get(verifyToken, AdminVehicles.getAllModels);
 
+        app.route('/api/admin/vehicles/:id')
+            .get(verifyToken, AdminVehicles.getById);
+            
         //Endpoints de articles
         app.route('/api/admin/articles')
             .get(verifyToken, AdminArticles.getAllArticles);
 
+        app.route('/api/admin/articles/add')
+            .post(verifyToken, AdminArticles.add);
+
+        app.route('/api/admin/articles/update/:id')
+            .put(verifyToken, AdminArticles.update);
+            
         app.route('/api/admin/articles/logicDelete/:id')
             .get(verifyToken, AdminArticles.logicDelete);
-
+            
         app.route('/api/admin/articles/reactive/:id')
             .get(verifyToken, AdminArticles.reactive);
-
+            
         app.route('/api/admin/articles/delete/:id')
             .get(verifyToken, AdminArticles.delete);
+
+        app.route('/api/admin/articles/brands')
+            .get(verifyToken, AdminArticles.getAllBrands);
+            
+        app.route('/api/admin/articles/types')
+            .get(verifyToken, AdminArticles.getAllTypes);
+            
+        app.route('/api/admin/articles/:id')
+            .get(verifyToken, AdminArticles.getById);
 
         //Endpoints de brands
         app.route('/api/admin/brands')
@@ -168,7 +193,11 @@ module.exports = function(app) {
 
         app.route('/api/admin/articlesTypes/:id')
             .get(verifyToken, AdminArticlesTypes.getById);
-            
+        
+        //Enpoints products imagenes
+        app.route('/api/admin/products/:id/image')
+            .post(upload.single('image'), Images.saveImages);
+
         //Endpoints de pedidos
         app.route('/api/admin/orders')
             .get(verifyToken, AdminOrders.getAllOrders);
@@ -296,10 +325,19 @@ module.exports = function(app) {
     app.route('/api/products')
         .get(verifyToken, Products.getAll);
 
+    app.route('/api/products/add')
+        .post(verifyToken, Products.add);
+
+    app.route('/api/products/update/:id')
+        .put(verifyToken, Products.update);
+        
     app.route('/api/products/cart/:id')
         .get(Products.getProductCart);
-
-    //Endpoints de comentarios    
+        
+    app.route('/api/products/:id')
+        .put(verifyToken, Products.update);
+    
+        //Endpoints de comentarios    
     app.route('/api/comments/products/:id')
         .get(Comments.getCommentsOfAProduct);
     

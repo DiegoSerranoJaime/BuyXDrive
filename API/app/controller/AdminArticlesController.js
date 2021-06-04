@@ -1,5 +1,6 @@
 const AdminArticles = require('../model/AdminArticlesModel');
 const jwt = require('jsonwebtoken');
+const fs = require('fs').promises;
 
 exports.getAllArticles = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
@@ -10,6 +11,22 @@ exports.getAllArticles = function(req, res) {
                 }
                         
                 res.json(articles);
+            });
+        } else {
+            res.json({ok: false, msg: 'Permission denied'});
+        }
+    });
+}
+
+exports.getById = function(req, res) {
+    jwt.verify(req.token, 'secretkey', (err, authData) => {
+        if (authData.user.user_type == 2) {
+            AdminArticles.getById(req.params.id ,(err, article) => {
+                if(err) {
+                    res.send(err);
+                }
+                        
+                res.json(article);
             });
         } else {
             res.json({ok: false, msg: 'Permission denied'});
@@ -53,12 +70,97 @@ exports.reactive = function(req, res) {
 exports.delete = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
         if (authData.user.user_type == 2) {
-            AdminArticles.delete(req.params.id, (err, users) => {
+            AdminArticles.getAllImages(req.params.id, (err, images) => {
+                let remImages = [];
+                images.forEach((image) => {
+                    remImages.push(`./assets/images/${image.image}`);
+                });
+
+                Promise.all(remImages.map(file => fs.unlink(file)))
+                .then(() => { 
+                    AdminArticles.delete(req.params.id, (err, articles) => {
+                        if(err) {
+                            res.send(err);
+                        }
+                        
+                        res.json(articles);
+                    });
+                });
+            });
+
+        } else {
+            res.json({ok: false, msg: 'Permission denied'});
+        }
+    });
+}
+
+exports.add = function(req, res) {
+    jwt.verify(req.token, 'secretkey', (err, authData) => {
+        if (authData.user.user_type == 2) {
+            let article = new AdminArticles(req.body);
+
+            AdminArticles.add(article, (err, articles) => {
                 if(err) {
                     res.send(err);
                 }
                 
-                res.json(users);
+                res.json({
+                    ok: true, 
+                    data: articles
+                });
+            });
+        } else {
+            res.json({ok: false, msg: 'Permission denied'});
+        }
+    });
+}
+
+exports.update = function(req, res) {
+    jwt.verify(req.token, 'secretkey', (err, authData) => {
+        if (authData.user.user_type == 2) {
+            let article = new AdminArticles(req.body);
+
+            AdminArticles.update(article, (err, articles) => {
+                if(err) {
+                    res.send(err);
+                }
+                
+                res.json({
+                    ok: true, 
+                    data: articles
+                });
+            });
+        } else {
+            res.json({ok: false, msg: 'Permission denied'});
+        }
+    });
+}
+
+exports.getAllTypes = function(req, res) {
+    jwt.verify(req.token, 'secretkey', (err, authData) => {
+        if (authData.user.user_type == 2) {
+            AdminArticles.getAllTypes((err, types) => {
+                if(err) {
+                    res.send(err);
+                }
+                        
+                res.json(types);
+            });
+        } else {
+            res.json({ok: false, msg: 'Permission denied'});
+        }
+    });
+}
+
+exports.getAllBrands = function(req, res) {
+    jwt.verify(req.token, 'secretkey', (err, authData) => {
+        if (authData.user.user_type == 2) {
+            AdminArticles.getAllBrands((err, brands) => {
+                if(err) {
+                    res.send(err);
+                }
+                        
+                res.json(brands);
             });
         } else {
             res.json({ok: false, msg: 'Permission denied'});

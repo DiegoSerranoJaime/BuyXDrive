@@ -1,1 +1,202 @@
-<p>vehicles-form works!</p>
+<div *ngIf="form">
+    <form [formGroup]="form">
+        <div class="mb-3">
+            <label for="modelId" class="form-label">Vehiculo</label>
+            <select class="form-select" [formControl]="modelId" [ngClass]="{'is-invalid': modelId.invalid && modelId.touched}">
+                <option disabled [selected]="!modelId.value">Seleccione una opción</option>
+                <option *ngFor="let data of models" [ngValue]="data.id" [selected]="modelId.value == data.id">{{data.id}} - {{data.name}}</option>
+            </select>
+            <div *ngIf="modelId.invalid && modelId.touched" class="text-danger">
+                <span *ngIf="modelId.hasError('required')">El vehiculo es requerido</span>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="type" class="form-label">Tipo</label>
+            <select class="form-select" [formControl]="type" [ngClass]="{'is-invalid': type.invalid && type.touched}">
+                <option disabled [selected]="!type.value">Seleccione una opción</option>
+                <option *ngFor="let data of types" [ngValue]="data.id" [selected]="type.value == data.id">{{data.id}} - {{data.name}}</option>
+            </select>
+            <div *ngIf="type.invalid && type.touched" class="text-danger">
+              <span *ngIf="type.hasError('required')">El tipo es requerido</span>
+            </div>
+        </div>
+        <div class="mb-3" *ngIf="!data">
+            <label for="images" class="form-label">Seleccionar Imagen</label>
+            <input class="form-control" type="file" id="images" accept="image/png, image/jpeg" formControlName="images" [ngClass]="{'is-invalid': images.invalid && images.touched}" multiple>
+            <div *ngIf="images.invalid && images.touched" class="text-danger">
+                <span *ngIf="images.hasError('required')">La imagen es requerido</span>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="price" class="form-label">Precio</label>
+            <div [ngClass]="{'input-group': data}">
+                <input type="text" class="form-control" id="price" name="price" formControlName="price" [ngClass]="{'is-invalid': price.invalid && price.touched}">
+                <button *ngIf="data" class="btn btn-primary" (click)="price.setValue(vehicle.price)">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+            <div *ngIf="price.invalid && price.touched" class="text-danger">
+                <span *ngIf="price.hasError('required')">El precio es requerido</span>
+                <span *ngIf="price.hasError('min')">El precio mínimo es de 0</span>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="amount" class="form-label">Cantidad</label>
+            <div [ngClass]="{'input-group': data}">
+                <input type="text" class="form-control" id="amount" name="amount" formControlName="amount" [ngClass]="{'is-invalid': amount.invalid && amount.touched}">
+                <button *ngIf="data" class="btn btn-primary" (click)="amount.setValue(vehicle.amount)">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+            <div *ngIf="amount.invalid && amount.touched" class="text-danger">
+                <span *ngIf="amount.hasError('required')">La cantidad es requerida</span>
+                <span *ngIf="amount.hasError('min')">La cantidad mínima es de 1</span>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="discount" class="form-label">Descuento</label>
+            <div [ngClass]="{'input-group': data}">
+                <input type="text" class="form-control" id="discount" name="discount" formControlName="discount" [ngClass]="{'is-invalid': discount.invalid && discount.touched}">
+                <button *ngIf="data" class="btn btn-primary" (click)="discount.setValue(vehicle.discount)">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+            <div *ngIf="discount.invalid && discount.touched" class="text-danger">
+                <span *ngIf="discount.hasError('required')">El descuento es requerido</span>
+                <span *ngIf="discount.hasError('min')">El descuento mínimo es de 0</span>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="cv" class="form-label">Caballos (C.V.)</label>
+            <div [ngClass]="{'input-group': data}">
+                <input type="text" class="form-control" id="cv" name="cv" formControlName="cv" [ngClass]="{'is-invalid': cv.invalid && cv.touched}">
+                <button *ngIf="data" class="btn btn-primary" (click)="cv.setValue(vehicle.cv)">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+            <div *ngIf="cv.invalid && cv.touched" class="text-danger">
+                <span *ngIf="cv.hasError('required')">Los caballos son requeridos</span>
+                <span *ngIf="cv.hasError('min')">Los caballos minimos son de 0</span>
+            </div>
+        </div>
+        <div class="mb-3" *ngIf="!data">
+            <label for="traction" class="form-label">Tracción</label>
+            <select class="form-select" [formControl]="traction" [ngClass]="{'is-invalid': traction.invalid && traction.touched}">
+                <option disabled [selected]="!traction.value">Seleccione una opción</option>
+                <option *ngFor="let data of selectTractions" [ngValue]="data" [selected]="traction.value == data">{{data}}</option>
+            </select>
+            <div *ngIf="traction.invalid && traction.touched" class="text-danger">
+              <span *ngIf="traction.hasError('required')">La tracción es requerido</span>
+            </div>
+        </div>
+        <div class="mb-3" *ngIf="!data">
+            <label for="transmission" class="form-label">Transmision</label>
+            <select class="form-select" [formControl]="transmission" [ngClass]="{'is-invalid': transmission.invalid && transmission.touched}">
+                <option disabled [selected]="!transmission.value">Seleccione una opción</option>
+                <option *ngFor="let data of selectTransmissions" [ngValue]="data" [selected]="transmission.value == data">{{data}}</option>
+            </select>
+            <div *ngIf="transmission.invalid && transmission.touched" class="text-danger">
+              <span *ngIf="transmission.hasError('required')">La transmisión es requerido</span>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="km" class="form-label">Kilometraje</label>
+            <div [ngClass]="{'input-group': data}">
+                <input type="text" class="form-control" id="km" name="km" formControlName="km" [ngClass]="{'is-invalid': km.invalid && km.touched}">
+                <button *ngIf="data" class="btn btn-primary" (click)="km.setValue(vehicle.km)">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+            <div *ngIf="km.invalid && km.touched" class="text-danger">
+                <span *ngIf="km.hasError('required')">El kilometraje es requerido</span>
+                <span *ngIf="km.hasError('min')">El kilometraje mínimo es de 0</span>
+            </div>
+        </div>
+        <div class="mb-3" *ngIf="!data">
+            <label for="fuel" class="form-label">Combustible</label>
+            <select class="form-select" [formControl]="fuel" [ngClass]="{'is-invalid': fuel.invalid && fuel.touched}">
+                <option disabled [selected]="!fuel.value">Seleccione una opción</option>
+                <option *ngFor="let data of selectFuel" [ngValue]="data" [selected]="fuel.value == data">{{data}}</option>
+            </select>
+            <div *ngIf="fuel.invalid && fuel.touched" class="text-danger">
+              <span *ngIf="fuel.hasError('required')">La transmisión es requerido</span>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="consumption" class="form-label">Consumo</label>
+            <div [ngClass]="{'input-group': data}">
+                <input type="text" class="form-control" id="consumption" name="consumption" formControlName="consumption" [ngClass]="{'is-invalid': consumption.invalid && consumption.touched}">
+                <button *ngIf="data" class="btn btn-primary" (click)="consumption.setValue(vehicle.consumption)">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+            <div *ngIf="consumption.invalid && consumption.touched" class="text-danger">
+                <span *ngIf="consumption.hasError('required')">El consumo es requerido</span>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="doors" class="form-label">Nº de puertas</label>
+            <div [ngClass]="{'input-group': data}">
+                <input type="text" class="form-control" id="doors" name="doors" formControlName="doors" [ngClass]="{'is-invalid': doors.invalid && doors.touched}">
+                <button *ngIf="data" class="btn btn-primary" (click)="doors.setValue(vehicle.doors)">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+            <div *ngIf="doors.invalid && doors.touched" class="text-danger">
+                <span *ngIf="doors.hasError('required')">El número de puertas es requerido</span>
+                <span *ngIf="doors.hasError('min')">El número de puertas mínimo es de 0</span>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="weight" class="form-label">Peso</label>
+            <div [ngClass]="{'input-group': data}">
+                <input type="text" class="form-control" id="weight" name="weight" formControlName="weight" [ngClass]="{'is-invalid': weight.invalid && weight.touched}">
+                <button *ngIf="data" class="btn btn-primary" (click)="weight.setValue(vehicle.weight)">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+            <div *ngIf="weight.invalid && weight.touched" class="text-danger">
+                <span *ngIf="weight.hasError('required')">El peso requerido</span>
+                <span *ngIf="weight.hasError('min')">El peso mínimo es de 0</span>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="seating" class="form-label">Asientos</label>
+            <div [ngClass]="{'input-group': data}">
+                <input type="text" class="form-control" id="seating" name="seating" formControlName="seating" [ngClass]="{'is-invalid': seating.invalid && seating.touched}">
+                <button *ngIf="data" class="btn btn-primary" (click)="seating.setValue(vehicle.seating)">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+            <div *ngIf="seating.invalid && seating.touched" class="text-danger">
+                <span *ngIf="seating.hasError('required')">El número de asientos es requerido</span>
+                <span *ngIf="seating.hasError('min')">El número de asientos mínimo es de 0</span>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="innerMaterials" class="form-label">Material interior</label>
+            <div [ngClass]="{'input-group': data}">
+                <input type="text" class="form-control" id="innerMaterials" name="innerMaterials" formControlName="innerMaterials" [ngClass]="{'is-invalid': innerMaterials.invalid && innerMaterials.touched}">
+                <button *ngIf="data" class="btn btn-primary" (click)="innerMaterials.setValue(vehicle.inner_materials)">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+            <div *ngIf="innerMaterials.invalid && innerMaterials.touched" class="text-danger">
+                <span *ngIf="innerMaterials.hasError('required')">El número de asientos es requerido</span>
+                <span *ngIf="innerMaterials.hasError('min')">El número de asientos mínimo es de 0</span>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Descripción</label>
+            <div [ngClass]="{'input-group': data}">
+                <textarea type="text" class="form-control" id="description" name="description" formControlName="description" [ngClass]="{'is-invalid': description.invalid && description.touched}"></textarea>
+                <button *ngIf="data" class="btn btn-primary" (click)="description.setValue(vehicle.description)">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+            <div *ngIf="description.invalid && description.touched" class="text-danger">
+                <span *ngIf="description.hasError('required')">La descripción es requerida</span>
+            </div>
+        </div>
+    </form>
+  </div>

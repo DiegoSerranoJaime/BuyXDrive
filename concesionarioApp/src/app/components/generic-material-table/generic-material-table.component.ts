@@ -308,7 +308,6 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
       title: 'Actualizar <span class="text-danger">registro</span>',
       botonAceptar: 'Actualizar',
       aceptar: (component: any) => {
-        
         if (component.form.valid) {
           const updateMethod = this.claveCompuesta ? this.service.update(this.fatherId, id, component.form.value) : this.service.update(id, component.form.value);
           updateMethod.subscribe((data) => {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminArticlesService } from 'src/app/services/admin-articles.service';
 import { Permissions } from 'src/models/permissions.model';
+import { ArticlesFormComponent } from '../../forms/articles-form/articles-form.component';
 
 @Component({
   selector: 'app-admin-articles',
@@ -9,6 +10,7 @@ import { Permissions } from 'src/models/permissions.model';
 })
 export class AdminArticlesComponent implements OnInit {
 
+  public articlesFormComponent = ArticlesFormComponent;
   public permisos: Permissions[] = [
     {
       name: 'view',
@@ -21,6 +23,12 @@ export class AdminArticlesComponent implements OnInit {
     {
       name: 'logicDelete',
     },
+    {
+      name: 'add'
+    },
+    {
+      name: 'update'
+    }
   ]
 
   constructor(public _adminArticlesService: AdminArticlesService) {}
