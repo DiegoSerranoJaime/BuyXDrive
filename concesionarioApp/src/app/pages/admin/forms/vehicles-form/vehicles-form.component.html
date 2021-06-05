@@ -29,8 +29,9 @@
         </div>
         <div class="mb-3">
             <label for="price" class="form-label">Precio</label>
-            <div [ngClass]="{'input-group': data}">
+            <div class="input-group">
                 <input type="text" class="form-control" id="price" name="price" formControlName="price" [ngClass]="{'is-invalid': price.invalid && price.touched}">
+                <span class="input-group-text">€</span>
                 <button *ngIf="data" class="btn btn-primary" (click)="price.setValue(vehicle.price)">
                     <i class="fas fa-sync-alt"></i>
                 </button>
@@ -55,8 +56,9 @@
         </div>
         <div class="mb-3">
             <label for="discount" class="form-label">Descuento</label>
-            <div [ngClass]="{'input-group': data}">
+            <div class="input-group">
                 <input type="text" class="form-control" id="discount" name="discount" formControlName="discount" [ngClass]="{'is-invalid': discount.invalid && discount.touched}">
+                <span class="input-group-text">%</span>
                 <button *ngIf="data" class="btn btn-primary" (click)="discount.setValue(vehicle.discount)">
                     <i class="fas fa-sync-alt"></i>
                 </button>
@@ -67,9 +69,10 @@
             </div>
         </div>
         <div class="mb-3">
-            <label for="cv" class="form-label">Caballos (C.V.)</label>
-            <div [ngClass]="{'input-group': data}">
+            <label for="cv" class="form-label">Potencia</label>
+            <div class="input-group">
                 <input type="text" class="form-control" id="cv" name="cv" formControlName="cv" [ngClass]="{'is-invalid': cv.invalid && cv.touched}">
+                <span class="input-group-text">C.V.</span>
                 <button *ngIf="data" class="btn btn-primary" (click)="cv.setValue(vehicle.cv)">
                     <i class="fas fa-sync-alt"></i>
                 </button>
@@ -101,8 +104,9 @@
         </div>
         <div class="mb-3">
             <label for="km" class="form-label">Kilometraje</label>
-            <div [ngClass]="{'input-group': data}">
+            <div class="input-group">
                 <input type="text" class="form-control" id="km" name="km" formControlName="km" [ngClass]="{'is-invalid': km.invalid && km.touched}">
+                <span class="input-group-text">Km</span>
                 <button *ngIf="data" class="btn btn-primary" (click)="km.setValue(vehicle.km)">
                     <i class="fas fa-sync-alt"></i>
                 </button>
@@ -149,8 +153,9 @@
         </div>
         <div class="mb-3">
             <label for="weight" class="form-label">Peso</label>
-            <div [ngClass]="{'input-group': data}">
+            <div class="input-group">
                 <input type="text" class="form-control" id="weight" name="weight" formControlName="weight" [ngClass]="{'is-invalid': weight.invalid && weight.touched}">
+                <span class="input-group-text">Kg</span>
                 <button *ngIf="data" class="btn btn-primary" (click)="weight.setValue(vehicle.weight)">
                     <i class="fas fa-sync-alt"></i>
                 </button>

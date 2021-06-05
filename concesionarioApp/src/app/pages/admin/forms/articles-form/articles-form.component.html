@@ -41,8 +41,9 @@
         </div>
         <div class="mb-3">
             <label for="price" class="form-label">Precio</label>
-            <div [ngClass]="{'input-group': data}">
+            <div class="input-group">
                 <input type="text" class="form-control" id="price" name="price" formControlName="price" [ngClass]="{'is-invalid': price.invalid && price.touched}">
+                <span class="input-group-text">€</span>
                 <button *ngIf="data" class="btn btn-primary" (click)="price.setValue(article.price)">
                     <i class="fas fa-sync-alt"></i>
                 </button>
@@ -67,8 +68,9 @@
         </div>
         <div class="mb-3">
             <label for="discount" class="form-label">Descuento</label>
-            <div [ngClass]="{'input-group': data}">
+            <div class="input-group">
                 <input type="text" class="form-control" id="discount" name="discount" formControlName="discount" [ngClass]="{'is-invalid': discount.invalid && discount.touched}">
+                <span class="input-group-text">%</span>
                 <button *ngIf="data" class="btn btn-primary" (click)="discount.setValue(article.discount)">
                     <i class="fas fa-sync-alt"></i>
                 </button>
