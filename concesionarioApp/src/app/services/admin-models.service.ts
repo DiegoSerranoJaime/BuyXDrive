@@ -28,7 +28,7 @@ export class AdminModelsService {
     {
       field: 'vehicles',
       type: 'number',
-      noData: true
+      noData: false
     }
   ];
 

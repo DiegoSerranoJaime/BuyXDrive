@@ -13,6 +13,7 @@ module.exports = function(app) {
     const AdminVehicles = require('../controller/AdminVehiclesController');
     const AdminArticles = require('../controller/AdminArticlesController');
     const AdminOrders = require('../controller/AdminOrdersController');
+    const AdminUserOrders = require('../controller/AdminUserOrdersController');
     const AdminOrderProducts = require('../controller/AdminOrderProductsController');
     const AdminProviders = require('../controller/AdminProvidersController');
     const AdminProvidersProducts = require('../controller/AdminProvidersProductsController');
@@ -58,6 +59,21 @@ module.exports = function(app) {
 
         app.route('/api/admin/users/:id')
             .get(verifyToken, AdminUsers.getById);
+
+        app.route('/api/admin/users/:userId/orders')
+            .get(verifyToken, AdminUserOrders.getAll);
+            
+        app.route('/api/admin/users/:userId/orders/:orderId/accept')
+            .get(verifyToken, AdminUserOrders.accept);
+
+        app.route('/api/admin/users/:userId/orders/:orderId/denegate')
+            .get(verifyToken, AdminUserOrders.denegate);
+
+        app.route('/api/admin/users/:userId/orders/:orderId/onWay')
+            .get(verifyToken, AdminUserOrders.onWay);
+
+        app.route('/api/admin/users/:userId/orders/:orderId/deliver')
+            .get(verifyToken, AdminUserOrders.deliver);
 
         //Endpoint de employers
         app.route('/api/admin/employers')

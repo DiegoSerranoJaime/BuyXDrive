@@ -1,8 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
+import { Component, OnInit } from '@angular/core';
 import { AdminOrdersService } from 'src/app/services/admin-orders.service';
-import { AdminOrder } from 'src/models/adminOrders.models';
 import { Permissions } from 'src/models/permissions.model';
 
 @Component({
@@ -20,7 +17,7 @@ export class AllOrdersComponent implements OnInit {
     {
       name: 'order'
     }
-  ]
+  ];
 
   constructor(public _adminOrdersService: AdminOrdersService) {}
 

@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin.component';
 import { UsersComponent } from './users/users.component';
 import { UserPageComponent } from './user-page/user-page.component';
-import { UserOrdersComponent } from './user-orders/user-orders.component';
 import { AllOrdersComponent } from './all-orders/all-orders.component';
 import { ProvidersComponent } from './providers/providers.component';
 import { ProvidersProductsComponent } from './providers-products/providers-products.component';
@@ -23,7 +22,7 @@ const ADMIN_ROUTES: Routes = [
   { path: '', component: AdminComponent, children: [
     { path: 'users', component: UsersComponent },
     { path: 'users/:id', component: UserPageComponent },
-    { path: 'users/:id/orders', component: UserOrdersComponent },
+    { path: 'users/:userId/order/:id', component: OrderComponent },
     { path: 'orders', component: AllOrdersComponent },
     { path: 'orders/:id', component: OrderComponent },
     { path: 'providers', component: ProvidersComponent },

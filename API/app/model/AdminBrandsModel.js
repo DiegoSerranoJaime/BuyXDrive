@@ -14,10 +14,11 @@ AdminBrands.getAll = function(result) {
                     brands.id,
                     brands.name,
                     brands.type,
-                    COUNT(brands.id) AS products
+                    IF((COUNT(articles.brand) + COUNT(vehicles.model_id) > 0), (COUNT(articles.brand) + COUNT(vehicles.model_id)), 0) AS products
                 FROM brands
                 LEFT JOIN models ON models.brand_id = brands.id
                 LEFT JOIN articles ON articles.brand = brands.id
+                LEFT JOIN vehicles ON vehicles.model_id = models.id
                 GROUP BY brands.id
                 ORDER BY type, brands.id ASC`;
 
