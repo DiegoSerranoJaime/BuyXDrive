@@ -283,6 +283,9 @@ module.exports = function(app) {
     //Endpoint de Images
     app.route('/api/images/product/:id')
         .get(Images.getImagesRoutes);
+
+    app.route('/api/images/product/:productId/image/:name')
+        .get(Images.delete);
         
     app.route('/api/images/:image')
         .get(Images.getImage);

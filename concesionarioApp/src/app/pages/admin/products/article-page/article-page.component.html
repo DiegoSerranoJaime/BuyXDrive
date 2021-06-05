@@ -1,0 +1,45 @@
+<div class="mb-4">
+    <div class="my-4">
+        <div class="row d-flex align-items-center position-relative">
+            <div class="col-auto position-absolute">
+                <a routerLink="/admin/products/articles" class="btn btn-primary"><i class="fas fa-arrow-left"></i></a>
+            </div>
+            <div class="col mx-auto" *ngIf="article">
+                <h4 class="d-flex justify-content-center">{{ article.name }}</h4>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3 mb-3" *ngIf="article">
+        <div class="col-12 col-md-6 mb-4">
+            <div class="row d-flex justify-content-start">
+                <div class="col-12">
+                <h5 class="d-flex justify-content-center">Caracteristicas</h5>
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between">Marca: <span>{{ article.bname }}</span></li>
+                    <li class="list-group-item d-flex justify-content-between">Modelo: <span>{{ article.aname }}</span></li>
+                    <li class="list-group-item d-flex justify-content-between">Tipo: <span>{{ article.type }}</span></li>
+                </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 mb-4">
+            <div class="row d-flex justify-content-start">
+                <div class="col-12">
+                    <h5 class="d-flex justify-content-center">Información de la venta</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between">Valoración: <span>{{ article.val }}</span></li>
+                        <li class="list-group-item d-flex justify-content-between">Cantidad de valoraciones: <span>{{ article.cant }}</span></li>
+                        <li class="list-group-item d-flex justify-content-between">Descripción: <span>{{ article.description ? article.description : 'No hay una descripción disponible actualmente' }}</span></li>
+                        <li class="list-group-item d-flex justify-content-between">Cantidad: <span>{{ article.amount }}</span></li>
+                        <li class="list-group-item d-flex justify-content-between">Precio: <span>{{ article.price }}€</span></li>
+                        <li class="list-group-item d-flex justify-content-between">Descuento: <span>{{ article.discount }}%</span></li>
+                        <li class="list-group-item d-flex justify-content-between">Precio Final: <span>{{ article.price | discount:article.discount | number:'.2-2' }}€</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <app-images-manager [id]="id"></app-images-manager>
+    </div>
+</div>

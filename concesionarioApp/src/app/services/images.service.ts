@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -22,6 +22,23 @@ export class ImagesService {
   }
 
   uploadImage(id: number, image: any): Observable<any> {
-    return this._http.post(`${this.productUrl}/${id}/image`, image);
+    const formData = new FormData();
+    formData.append('image', image, image.name);
+
+    return this._http.post(`${this.productUrl}/${id}/image`, formData);
+  }
+
+  delete(id: number, images: any[]): Observable<any> {
+    let subject = new Subject<any[]>();
+
+    for(let i = 0; i < images.length; i++) {
+      this._http.get<any[]>(`${this.baseUrl}/product/${id}/image/${images[i]}`).subscribe((data) => {
+        if (i === (images.length - 1)) {
+          subject.next(data);
+        }
+      })
+    }
+
+    return subject;
   }
 }

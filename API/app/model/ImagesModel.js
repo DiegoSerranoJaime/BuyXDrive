@@ -9,7 +9,7 @@ let Images = function(id, image) {
 }
 
 Images.getImagesRoutes = function(id, result) {
-    sql.query('SELECT image FROM images WHERE product_id = ?', id, (err, res) => {
+    sql.query('SELECT id, image as name, image FROM images WHERE product_id = ?', id, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -26,7 +26,18 @@ Images.saveImage = function(image, result) {
             result(err, null);
         }
 
-        result(null, res);
+        return Images.getImagesRoutes(image.product_id, result);
+    });
+}
+
+Images.delete = function(data, result) {
+    sql.query('DELETE FROM images WHERE product_id = ? AND image = ?', [data.productId, data.name], (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+
+        return Images.getImagesRoutes(data.productId, result);
     });
 }
 

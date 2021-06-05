@@ -1,0 +1,60 @@
+<div class="mb-4">
+    <div class="my-4">
+        <div class="row d-flex align-items-center position-relative">
+            <div class="col-auto position-absolute">
+                <a routerLink="/admin/products/vehicles" class="btn btn-primary"><i class="fas fa-arrow-left"></i></a>
+            </div>
+            <div class="col mx-auto" *ngIf="vehicle">
+                <h4 class="d-flex justify-content-center">{{ vehicle.name }}</h4>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3 mb-3" *ngIf="vehicle">
+        <div class="col-12 col-md-6 mb-4">
+            <div class="row d-flex justify-content-start">
+                <div class="col-12">
+                <h5 class="d-flex justify-content-center">Caracteristicas</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between">Marca: <span>{{ vehicle.bname }}</span></li>
+                        <li class="list-group-item d-flex justify-content-between">Modelo: <span>{{ vehicle.mname }}</span></li>
+                        <li class="list-group-item d-flex justify-content-between">Tipo: <span>{{ vehicle.type }}</span></li>
+                        <li class="list-group-item d-flex justify-content-between">Estado: <span>{{ vehicle.status }}</span></li>
+                        <li class="list-group-item d-flex justify-content-between">Kilometraje: <span>{{ vehicle.km }} KMs</span></li>
+                        <li class="list-group-item d-flex justify-content-between">Combustible: <span>{{ vehicle.fuel }}</span></li>
+                    </ul>
+                </div>
+                <div class="col-12 mt-4">
+                    <h5 class="d-flex justify-content-center">Especificaciones</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between">Caballos: <span>{{ vehicle.cv }} CV</span></li>
+                        <li class="list-group-item d-flex justify-content-between">Tracción: <span>{{ vehicle.traction }}</span></li>
+                        <li class="list-group-item d-flex justify-content-between">Puertas: <span>{{ vehicle.doors }}</span></li>
+                        <li class="list-group-item d-flex justify-content-between">Asientos: <span>{{ vehicle.seating }}</span></li>
+                        <li class="list-group-item d-flex justify-content-between">Material del interior: <span>{{ vehicle.inner_materials }}</span></li>
+                        <li class="list-group-item d-flex justify-content-between">Peso: <span>{{ vehicle.weight }} Kg</span></li>
+                        <li class="list-group-item d-flex justify-content-between">Consumo: <span>{{ vehicle.consumption }}</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 mb-4">
+            <div class="row d-flex justify-content-start">
+                <div class="col-12">
+                    <h5 class="d-flex justify-content-center">Información de la venta</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between">Valoración: <span>{{ vehicle.val }}</span></li>
+                        <li class="list-group-item d-flex justify-content-between">Cantidad de valoraciones: <span>{{ vehicle.cant }}</span></li>
+                        <li class="list-group-item d-flex justify-content-between">Descripción: <span>{{ vehicle.description ? vehicle.description : 'No hay una descripción disponible actualmente' }}</span></li>
+                        <li class="list-group-item d-flex justify-content-between">Cantidad: <span>{{ vehicle.amount }}</span></li>
+                        <li class="list-group-item d-flex justify-content-between">Precio: <span>{{ vehicle.price }}€</span></li>
+                        <li class="list-group-item d-flex justify-content-between">Descuento: <span>{{ vehicle.discount }}%</span></li>
+                        <li class="list-group-item d-flex justify-content-between">Precio Final: <span>{{ vehicle.price | discount:vehicle.discount | number:'.2-2' }}€</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <app-images-manager [id]="id"></app-images-manager>
+    </div>
+</div>
