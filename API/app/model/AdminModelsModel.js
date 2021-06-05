@@ -13,7 +13,7 @@ AdminModels.getAll = function(id, result) {
     let query = `SELECT  
                     models.id,
                     name,
-                    IF(COUNT(models.id) > 0, COUNT(models.id), 0) AS vehicles
+                    IF(COUNT(vehicles.model_id) > 0, COUNT(vehicles.model_id), 0) AS vehicles
                 FROM models
                 LEFT JOIN vehicles ON models.id = vehicles.model_id
                 WHERE brand_id = ?

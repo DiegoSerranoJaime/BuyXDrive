@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { AdminUserAppraisalService } from 'src/app/services/admin-user-appraisal.service';
+import { AdminUserOrdersService } from 'src/app/services/admin-user-orders.service';
+import { Permissions } from 'src/models/permissions.model';
 
 @Component({
   selector: 'app-user-page',
@@ -7,9 +11,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserPageComponent implements OnInit {
 
-  constructor() { }
+  public id: number;
+
+  public permisosOrders: Permissions[] = [
+    {
+      name: 'view',
+      route: './order'
+    },
+    {
+      name: 'order'
+    }
+  ];
+
+  constructor(public _adminUserOrdersService: AdminUserOrdersService,
+    public _adminUserAppraisalService: AdminUserAppraisalService,
+    public _activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.id = this._activatedRoute.snapshot.params.id;
   }
 
 }

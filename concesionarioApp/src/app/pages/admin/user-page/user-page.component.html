@@ -1,1 +1,8 @@
-<p>user-page works!</p>
+<div class="mb-4">
+    <h5>Pedidos</h5>
+    <app-generic-material-table [permisos]="permisosOrders" [service]="_adminUserOrdersService" [fatherId]="id" [claveCompuesta]="true"></app-generic-material-table>
+</div>
+<!-- <div>
+    <h5>Tasaciones</h5>
+    <app-generic-material-table></app-generic-material-table>
+</div> -->
