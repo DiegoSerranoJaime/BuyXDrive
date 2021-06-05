@@ -10,8 +10,6 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { AdHostDirective } from './components/modals/modal/ad-host.directive';
 
-import { DiscountPipe } from './pipes/discount.pipe';
-
 import { AppComponent } from './app.component';
 import { InicioComponent } from './pages/inicio/inicio.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -37,9 +35,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSliderModule } from '@angular/material/slider';
 import { UserModule } from './pages/user/user.module';
 import { FiltersComponent } from './components/filters/filters.component';
-import { FilterProductsPipe } from './pipes/filter-products.pipe';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
-import { NgbCarouselModule, NgbModule, NgbPaginationModule, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbPaginationModule, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 import { ArticleCardComponent } from './components/article-card/article-card.component';
 import { ArticulosComponent } from './pages/articulos/articulos.component';
 import { ArticuloComponent } from './pages/articulo/articulo.component';
@@ -47,6 +44,8 @@ import { InitProductsComponent } from './components/init-products/init-products.
 import { SwiperModule } from 'swiper/angular';
 import { SlideshowComponent } from './components/slideshow/slideshow.component';
 import { SlideshowTopComponent } from './components/slideshow-top/slideshow-top.component';
+import { AdminModule } from './pages/admin/admin.module';
+import { PipesModule } from './pipes/pipes.module';
 
 
 const JWT_Module_Options: JwtModuleOptions = {
@@ -68,7 +67,6 @@ const JWT_Module_Options: JwtModuleOptions = {
     LoginComponent,
     ModalComponent,
     AdHostDirective,
-    DiscountPipe,
     VehicleCardComponent,
     StarsComponent,
     CommentsFormComponent,
@@ -79,7 +77,6 @@ const JWT_Module_Options: JwtModuleOptions = {
     SimpleBodyModalComponent,
     RegisterComponent,
     FiltersComponent,
-    FilterProductsPipe,
     ArticleCardComponent,
     ArticulosComponent,
     ArticuloComponent,
@@ -107,7 +104,9 @@ const JWT_Module_Options: JwtModuleOptions = {
     NgbPaginationModule,
     NgbRatingModule,
     SwiperModule,
-    JwtModule.forRoot(JWT_Module_Options)
+    JwtModule.forRoot(JWT_Module_Options),
+    AdminModule,
+    PipesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

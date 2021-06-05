@@ -1,0 +1,25 @@
+<div class="d-flex flex-row justify-content-between">
+    <h4>Imagenes</h4>
+    <div>
+        <button mat-raised-button [disabled]="selectedImages.length === 0" class="me-2" color="warn" (click)="delete()">
+            Eliminar imagenes
+        </button>
+        <button mat-raised-button (click)="add()">
+            Agregar imagenes
+        </button>
+    </div>
+</div>
+<div class="mt-3">        
+    <div *ngIf="images && images.length; else noImages">
+        <div class="row row-cols-1 row-cols-md-4 g-4">
+            <div *ngFor="let image of images" >
+                <img [src]="image.image" class="card-img" [alt]="image.name" [ngClass]="{'border border-primary border-3': checkSelected(image.name)} " (click)="selectImage(image.name)">
+            </div>
+        </div>
+    </div>
+    <ng-template #noImages>
+        <div class="alert alert-info" role="alert">
+            No hay disponible actualmente imagenes de este vehículo
+        </div>
+    </ng-template>
+</div>

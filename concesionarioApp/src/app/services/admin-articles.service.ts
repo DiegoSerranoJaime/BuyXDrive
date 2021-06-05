@@ -131,11 +131,9 @@ export class AdminArticlesService {
 
         const imagesData = form.images as File[];
         
-
         for(let i = 0; i < imagesData.length; i++) {
-          const formData = new FormData();
-          formData.append('image', imagesData[i], imagesData[i].name);
-          this._imagesService.uploadImage(article.id, formData).subscribe();
+          this._imagesService.uploadImage(article.id, imagesData[i]).subscribe();
+
         }
       }
     }); 

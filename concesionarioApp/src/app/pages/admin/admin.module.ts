@@ -30,8 +30,11 @@ import { VehiclesTypesComponent } from './types/vehicles-types/vehicles-types.co
 import { VehiclesTypesFormComponent } from './forms/vehicles-types-form/vehicles-types-form.component';
 import { ArticlesTypesFormComponent } from './forms/articles-types-form/articles-types-form.component';
 import { ArticlesFormComponent } from './forms/articles-form/articles-form.component';
-
-
+import { VehiclePageComponent } from './products/vehicle-page/vehicle-page.component';
+import { ArticlePageComponent } from './products/article-page/article-page.component';
+import { ImagesFormComponent } from './forms/images-form/images-form.component';
+import { ImagesManagerComponent } from 'src/app/components/images-manager/images-manager.component';
+import { PipesModule } from 'src/app/pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -59,7 +62,11 @@ import { ArticlesFormComponent } from './forms/articles-form/articles-form.compo
     VehiclesTypesComponent,
     VehiclesTypesFormComponent,
     ArticlesTypesFormComponent,
-    ArticlesFormComponent
+    ArticlesFormComponent,
+    VehiclePageComponent,
+    ArticlePageComponent,
+    ImagesFormComponent,
+    ImagesManagerComponent
   ],
   imports: [
     CommonModule,
@@ -67,7 +74,8 @@ import { ArticlesFormComponent } from './forms/articles-form/articles-form.compo
     UserModule,
     MatTabsModule,
     MatButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PipesModule
   ]
 })
 export class AdminModule { }

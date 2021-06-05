@@ -17,6 +17,8 @@ import { ModelsComponent } from './models/models.component';
 import { TypesComponent } from './types/types.component';
 import { ArticlesTypesComponent } from './types/articles-types/articles-types.component';
 import { VehiclesTypesComponent } from './types/vehicles-types/vehicles-types.component';
+import { VehiclePageComponent } from './products/vehicle-page/vehicle-page.component';
+import { ArticlePageComponent } from './products/article-page/article-page.component';
 
 const ADMIN_ROUTES: Routes = [
   { path: '', component: AdminComponent, children: [
@@ -34,7 +36,9 @@ const ADMIN_ROUTES: Routes = [
     { path: 'products', component: ProductsComponent, children:
     [
       { path: 'vehicles', component: AdminVehiclesComponent },
+      { path: 'vehicles/:id', component: VehiclePageComponent },
       { path: 'articles', component: AdminArticlesComponent },
+      { path: 'articles/:id', component: ArticlePageComponent },
     ]},
     { path: 'types', component: TypesComponent, children:
     [
