@@ -86,4 +86,17 @@ Products.update = function(product, result) {
     });
 }
 
+Products.amountValidation = function(product, result) {
+    let query = `SELECT * FROM products WHERE id = ? AND amount >= ?`;
+
+    sql.query(query, [product.id, product.amount], (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+
+        result(null, res);
+    });
+}
+
 module.exports = Products;

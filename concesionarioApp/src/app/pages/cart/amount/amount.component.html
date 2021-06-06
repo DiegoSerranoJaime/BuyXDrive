@@ -7,5 +7,6 @@
   <div *ngIf="amountInput.touched && amountInput.invalid" class="text-danger">
     <span *ngIf="amountInput.errors['required']">Se necesita una cantidad</span>
     <span *ngIf="amountInput.errors['min']">La cantidad mínima es de 1</span>
+    <span *ngIf="amountInput.errors['amountAvailable']">La cantidad introducida no es válida</span>
   </div>
 </form>

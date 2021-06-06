@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ValidationsService } from 'src/app/services/validations.service';
 
 export type ProductUpdate = {
   product: number;
@@ -20,7 +21,9 @@ export class AmountComponent implements OnInit {
   amountForm: FormGroup;
   amountInput: FormControl;
 
-  constructor() { }
+  constructor(
+    private _validationsService: ValidationsService
+  ) { }
 
   ngOnInit(): void {
     this.formControls();
@@ -31,6 +34,8 @@ export class AmountComponent implements OnInit {
     this.amountInput = new FormControl(this.amount, [
       Validators.required,
       Validators.min(1)
+    ], [
+      this._validationsService.amountValidation(this.product)
     ]);
   }
 

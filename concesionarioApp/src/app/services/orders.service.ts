@@ -45,7 +45,6 @@ export class OrdersService {
       headers: this._authService.getToken()
     }).subscribe((data: any) => {
       products.forEach((product) => {
-
         let dataEnvio = {
           order_id: data.order_id,
           product_id: product.id,

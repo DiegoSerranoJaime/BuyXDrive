@@ -71,6 +71,20 @@ exports.update = function(req, res) {
     });
 }
 
+exports.amountValidation = function(req, res) {
+    Products.amountValidation(req.params, (err, product) => {
+        if(err) {
+            res.send(err);
+        }
+                
+        if (product.length) {
+            res.send({ok: false});
+        } else {
+            res.send({ok: true});
+        }
+    });
+}
+
 imageRoute = function(data) {
     for (let i = 0; i < data.length; i++) {
         data[i].image = 'http://localhost:3000/api/images/' + data[i].image;

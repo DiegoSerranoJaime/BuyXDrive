@@ -388,6 +388,13 @@ module.exports = function(app) {
     app.route('/api/orders/:id/cancel')
         .get(verifyToken, Orders.cancelOrder);
 
+    //Endpoints de validaciones
+    app.route('/api/email/:email')
+        .get(Users.emailValidation);
+
+    app.route('/api/products/:id/amount/:amount')
+        .get(Products.amountValidation);
+
     function verifyToken(req, res, next) {
         const bearerHeader = req.headers['authorization'];
         

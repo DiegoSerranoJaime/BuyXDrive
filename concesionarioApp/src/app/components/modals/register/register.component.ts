@@ -48,7 +48,8 @@ export class RegisterComponent implements OnInit {
     this.email = new FormControl('', [
       Validators.required,
       Validators.pattern("^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$")
-
+    ], [
+      this._validationsService.emailValidation()
     ]);
 
     this.password = new FormControl('', [

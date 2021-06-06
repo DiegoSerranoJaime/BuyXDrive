@@ -14,7 +14,7 @@
     }">
     <ng-template swiperSlide *ngFor="let vehicle of vehicles">
         <div style="background-image: url({{vehicle.image}}); background-size: cover; height: 550px; background-position: center center;" >
-            <div class="p-5 w-100 h-100 d-flex flex-column justify-content-end align-items-center" [routerLink]="['vehiculos', vehicle.id]" slot="container-center">
+            <div class="p-5 w-100 h-100 d-flex flex-column justify-content-end align-items-center" slot="container-center" [routerLink]="['/vehiculos', vehicle.id]">
                 <h4 class="text-white">{{ vehicle.name }}</h4>
                 <p class="text-white">Obtenlo ahora por {{vehicle.price | discount:vehicle.discount | number:'.2-2'}}€ {{ vehicle.discount ? "(" + vehicle.discount + "% de descuento)" : ''}}</p>
             </div>

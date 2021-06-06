@@ -1,4 +1,4 @@
-<h2 class="d-flex justify-content-center fw-normal">{{ categoryTitle }}</h2>
+<h2 class="d-flex justify-content-center fw-normal mb-3">{{ categoryTitle }}</h2>
 <div class="row row-cols-1 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 g-4" *ngIf="products.length; else noProducts">
   <div class="col mt-3" *ngFor="let product of products">
     <app-vehicle-card *ngIf="type === 'vehiculo'" [vehicle]="product"></app-vehicle-card>

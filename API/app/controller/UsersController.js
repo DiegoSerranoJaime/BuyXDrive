@@ -70,7 +70,7 @@ exports.register = function(req, res) {
 
 exports.getAllGenders = function(req, res) {
     Users.getAllGenders((err, genders) => {
-        if(err) {
+        if (err) {
             res.send(err);
         }
 
@@ -80,11 +80,28 @@ exports.getAllGenders = function(req, res) {
 
 exports.getAllEmployerTypes = function(req, res) {
     Users.getAllEmployerTypes((err, userTypes) => {
-        if(err) {
+        if (err) {
             res.send(err);
         }
 
         res.send(userTypes);
+    });
+}
+
+exports.emailValidation = function(req, res) {
+    Users.emailValidation(req.params.email, (err, email) => {
+        if (err) {
+            res.send(err);
+        }
+        if (email.length) {
+            res.send({
+                ok: true
+            });
+        } else {
+            res.send({
+                ok: false
+            });
+        }
     });
 }
 

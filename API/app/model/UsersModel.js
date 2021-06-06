@@ -54,7 +54,7 @@ Users.getAllGenders = function(result) {
         }
 
         result(null, res)
-    })
+    });
 }
 
 Users.getAllEmployerTypes = function(result) {
@@ -65,7 +65,18 @@ Users.getAllEmployerTypes = function(result) {
         }
 
         result(null, res)
-    })
+    });
+}
+
+Users.emailValidation = function(email, result) {
+    sql.query("SELECT * FROM users WHERE email = ?", email, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null)
+        }
+
+        result(null, res)
+    });
 }
 
 module.exports = Users;
