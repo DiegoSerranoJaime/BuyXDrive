@@ -89,7 +89,6 @@ export class ArticlesFormComponent implements OnInit {
   buildFormGroup() {
     if (this.data) {
       this.form = new FormGroup({
-        name: this.name,
         brand: this.brand,
         type: this.type,
         price: this.price,

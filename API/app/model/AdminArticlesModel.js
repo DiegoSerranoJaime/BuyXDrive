@@ -4,7 +4,9 @@ const sql = require('./db');
 
 let AdminArticles = function(article) {
     this.id = article.id;
-    this.name = article.name;
+    if (article.name) {
+        this.name = article.name;
+    }
     this.type = article.type;
     this.brand = article.brand;
 }

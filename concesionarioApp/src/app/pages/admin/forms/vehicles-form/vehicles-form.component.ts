@@ -142,7 +142,6 @@ export class VehiclesFormComponent implements OnInit {
   buildFormGroup() {
     if (this.data) {
       this.form = new FormGroup({
-        modelId: this.modelId,
         type: this.type,
         price: this.price,
         amount: this.amount,

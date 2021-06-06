@@ -1,6 +1,6 @@
 <div *ngIf="form">
     <form [formGroup]="form">
-        <div class="mb-3">
+        <div class="mb-3" *ngIf="!data">
             <label for="modelId" class="form-label">Vehiculo</label>
             <select class="form-select" [formControl]="modelId" [ngClass]="{'is-invalid': modelId.invalid && modelId.touched}">
                 <option disabled [selected]="!modelId.value">Seleccione una opción</option>

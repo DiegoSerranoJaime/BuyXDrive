@@ -77,11 +77,12 @@ export class FiltersComponent implements OnInit {
       maxLimit: this.maxDoors,
       floor: 0,
       ceil: this.maxDoors,
-      tickStep: this.maxDoors / 5,
+      tickStep: 1,
       showTicks: true,
       minRange: 1,
       noSwitching: true,
       autoHideLimitLabels: true,
+      
     };
 
     this.seatingOptions = {
@@ -89,7 +90,7 @@ export class FiltersComponent implements OnInit {
       maxLimit: this.maxSeating,
       floor: 0,
       ceil: this.maxSeating,
-      tickStep: this.maxSeating / 5,
+      tickStep: 1,
       showTicks: true,
       minRange: 1,
       noSwitching: true,

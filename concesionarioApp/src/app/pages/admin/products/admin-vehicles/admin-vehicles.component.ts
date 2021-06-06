@@ -18,9 +18,6 @@ export class AdminVehiclesComponent implements OnInit {
       route: './'
     },
     {
-      name: 'delete'
-    },
-    {
       name: 'logicDelete'
     },
     {

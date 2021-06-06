@@ -18,10 +18,6 @@ export class AdminArticlesComponent implements OnInit {
       route: './'
     },
     {
-      name: 'delete',
-      route: './'
-    },
-    {
       name: 'logicDelete',
     },
     {

@@ -4,7 +4,9 @@ const sql = require('./db');
 
 let AdminVehicles = function(vehicle) {
     this.id = vehicle.id;
-    this.model_id = vehicle.modelId;
+    if (vehicle.modelId) {
+        this.model_id = vehicle.modelId;
+    }
     this.type = vehicle.type;
     this.cv = vehicle.cv;
     this.traction = vehicle.traction;

@@ -1,6 +1,6 @@
 <div *ngIf="form">
     <form [formGroup]="form" enctype="multipart/form-data">
-        <div class="mb-3">
+        <div class="mb-3" *ngIf="!data">
             <label for="name" class="form-label">Nombre</label>
             <div [ngClass]="{'input-group': data}">
                 <input type="text" class="form-control" id="name" name="name" formControlName="name" [ngClass]="{'is-invalid': name.invalid && name.touched}">
