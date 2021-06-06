@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AdminUserAppraisalService } from 'src/app/services/admin-user-appraisal.service';
 import { AdminUserOrdersService } from 'src/app/services/admin-user-orders.service';
 import { Permissions } from 'src/models/permissions.model';
+import { Entity } from 'src/models/entities.models';
 
 @Component({
   selector: 'app-user-page',
@@ -22,6 +23,10 @@ export class UserPageComponent implements OnInit {
       name: 'order'
     }
   ];
+
+  public entity: Entity = {
+    entityName: 'Pedidos'
+  }
 
   constructor(public _adminUserOrdersService: AdminUserOrdersService,
     public _adminUserAppraisalService: AdminUserAppraisalService,

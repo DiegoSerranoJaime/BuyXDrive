@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminUsersService } from 'src/app/services/admin-users.service';
+import { Entity } from 'src/models/entities.models';
 import { Permissions } from 'src/models/permissions.model';
 import { UserFormComponent } from '../forms/user-form/user-form.component';
 
@@ -29,6 +30,11 @@ export class UsersComponent implements OnInit {
       name: 'update'
     }
   ];
+
+  public entity: Entity = {
+    entityInfo: 'usuario',
+    entityText: 'el usuario'
+  };
 
   constructor(public _adminUsersService: AdminUsersService) {}
 

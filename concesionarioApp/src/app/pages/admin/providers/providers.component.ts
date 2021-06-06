@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminProvidersService } from 'src/app/services/admin-providers.service';
+import { Entity } from 'src/models/entities.models';
 import { Permissions } from 'src/models/permissions.model';
 import { ProvidersFormComponent } from '../forms/providers-form/providers-form.component';
 
@@ -29,6 +30,11 @@ export class ProvidersComponent implements OnInit {
       name: 'update'
     }
   ];
+
+  public entity: Entity = {
+    entityInfo: 'proveedor',
+    entityText: 'el proveedor'
+  };
 
   constructor(public _adminProvidersService: AdminProvidersService) {}
 

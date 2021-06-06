@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminArticlesTypesService } from 'src/app/services/admin-articles-types.service';
+import { Entity } from 'src/models/entities.models';
 import { Permissions } from 'src/models/permissions.model';
 import { ArticlesTypesFormComponent } from '../../forms/articles-types-form/articles-types-form.component';
 
@@ -21,8 +22,13 @@ export class ArticlesTypesComponent implements OnInit {
     {
       name: 'update'
     }
-  ]
+  ];
 
+  public entity: Entity = {
+    entityInfo: 'tipo',
+    entityText: 'el tipo'
+  };
+  
   constructor(public _adminArticlesTypesService: AdminArticlesTypesService) {}
 
   ngOnInit(): void {

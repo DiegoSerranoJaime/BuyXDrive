@@ -1,5 +1,8 @@
-<div class="row d-flex justify-content-end my-2" *ngIf="checkPermission('add')">
-  <div class="col-auto">
+<div class="row d-flex my-2" [ngClass]="{'justify-content-between': entity && entity.entityName, 'justify-content-end': !entity || !entity.entityName}">
+  <div *ngIf="entity && entity.entityName" class="col-auto">
+    <h4>{{ entity.entityName }}</h4>
+  </div>
+  <div class="col-auto" *ngIf="checkPermission('add')">
     <button mat-raised-button (click)="add()">
       + Nuevo
     </button>

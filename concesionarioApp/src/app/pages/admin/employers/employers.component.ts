@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AdminEmployersService } from 'src/app/services/admin-employers.service';
+import { Entity } from 'src/models/entities.models';
 import { Permissions } from 'src/models/permissions.model';
 import { EmployerFormComponent } from '../forms/employer-form/employer-form.component';
 
@@ -30,9 +31,12 @@ export class EmployersComponent implements OnInit {
     }
   ]
 
+  public entity: Entity = {
+    entityInfo: 'empleado',
+    entityText: 'el empleado'
+  };
 
   constructor(public _adminEmployersService: AdminEmployersService) {}
-
 
   ngOnInit(): void {
   }
