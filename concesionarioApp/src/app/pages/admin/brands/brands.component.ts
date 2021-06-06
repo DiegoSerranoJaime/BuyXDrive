@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminBrandsService } from 'src/app/services/admin-brands.service';
+import { Entity } from 'src/models/entities.models';
 import { Permissions } from 'src/models/permissions.model';
 import { BrandsFormComponent } from '../forms/brands-form/brands-form.component';
 
@@ -26,6 +27,11 @@ export class BrandsComponent implements OnInit {
       name: 'update'
     }
   ];
+
+  public entity: Entity = {
+    entityInfo: 'marca',
+    entityText: 'la marca'
+  };
 
   constructor(public _adminBrandsService: AdminBrandsService) {}
 

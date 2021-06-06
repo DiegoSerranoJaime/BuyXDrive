@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AdminModelsService } from 'src/app/services/admin-models.service';
+import { Entity } from 'src/models/entities.models';
 import { Permissions } from 'src/models/permissions.model';
 import { ModelFormComponent } from '../forms/model-form/model-form.component';
 
@@ -25,6 +26,12 @@ export class ModelsComponent implements OnInit {
       name: 'update'
     }
   ];
+
+  public entity: Entity = {
+    entityName: 'Modelos',
+    entityInfo: 'modelo',
+    entityText: 'el modelo'
+  };
 
   constructor(public _adminModelsService: AdminModelsService,
     private _activatedRoute: ActivatedRoute) {}

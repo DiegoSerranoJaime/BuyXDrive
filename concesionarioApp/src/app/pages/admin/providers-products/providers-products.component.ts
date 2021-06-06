@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AdminProvidersProductsService } from 'src/app/services/admin-providers-products.service';
+import { Entity } from 'src/models/entities.models';
 import { Permissions } from 'src/models/permissions.model';
 import { ProvidersProductsFormComponent } from '../forms/providers-products-form/providers-products-form.component';
 
@@ -24,12 +25,15 @@ export class ProvidersProductsComponent implements OnInit {
     {
       name: 'externalOrder'
     }
-  ]
+  ];
 
+  public entity: Entity = {
+    entityInfo: 'producto',
+    entityText: 'el producto'
+  };
 
   constructor(public _adminProvidersProductsService: AdminProvidersProductsService,
     private _activatedRoute: ActivatedRoute) {}
-
 
   ngOnInit(): void {
     this.id = this._activatedRoute.snapshot.params.id;

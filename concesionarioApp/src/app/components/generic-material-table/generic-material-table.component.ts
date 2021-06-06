@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SimpleBodyModalComponent } from 'src/app/components/modals/simple-body-modal/simple-body-modal.component';
 import { ModalService } from 'src/app/services/modal.service';
 import { ToastService } from 'src/app/services/toast.service';
+import { Entity } from 'src/models/entities.models';
 import { Permissions } from 'src/models/permissions.model';
 
 @Component({
@@ -16,6 +17,7 @@ import { Permissions } from 'src/models/permissions.model';
 export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
 
   @Input() volver: boolean;
+  @Input() entity: Entity;
   @Input() permisos: Permissions[];
   @Input() service: any;
   @Input() fatherId: number | string;
@@ -203,14 +205,14 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
 
   deleteElement(id: any) {
     this._modalService.show(SimpleBodyModalComponent, {
-      title: 'Eliminar el <span class="text-danger">registro</span>',
+      title: `Eliminar el <span class="text-danger">${this.entity && this.entity.entityInfo ? this.entity.entityInfo : 'registro'}</span>`,
       aceptar: (component) => {
         const deleteMethod = this.claveCompuesta ? this.service.delete(this.fatherId, id) : this.service.delete(id);
         deleteMethod.subscribe((data) => {
           if (data.length >= 0) {
-            this._toastService.show(`Se ha eliminado el registro ${ id }`);
+            this._toastService.show(`Se ha eliminado ${this.entity && this.entity.entityText ? this.entity.entityText : 'el registro'} ${ id }`);
           } else {
-            this._toastService.show(`No se ha podido eliminar el registro`);
+            this._toastService.show(`No se ha podido eliminar ${this.entity && this.entity.entityText ? this.entity.entityText : 'el registro'}`);
           }
 
           this.dataSource.data = data;
@@ -222,20 +224,20 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
       }
     },
     {
-      body: `¿Estás seguro de que deseas eliminar el registro <span class="text-danger">${ id }</span>?`
+      body: `¿Estás seguro de que deseas eliminar ${this.entity && this.entity.entityText ? this.entity.entityText : 'el registro'} <span class="text-danger">${ id }</span>?`
     });
   }
 
   logicDelete(id: any) {
 
     this._modalService.show(SimpleBodyModalComponent, {
-      title: 'Desactivar el <span class="text-danger">registro</span>',
+      title: `Desactivar el <span class="text-danger">${this.entity && this.entity.entityInfo ? this.entity.entityInfo : 'registro'}</span>`,
       aceptar: (component) => {
         this.service.logicDelete(id).subscribe((data) => {
           if (data.length > 0) {
-            this._toastService.show(`Se ha desactivado el registro ${ id }`);
+            this._toastService.show(`Se ha desactivado ${this.entity && this.entity.entityText ? this.entity.entityText : 'el registro'} ${ id }`);
           } else {
-            this._toastService.show(`No se ha podido desactivar el registro`);
+            this._toastService.show(`No se ha podido desactivar ${this.entity && this.entity.entityText ? this.entity.entityText : 'el registro'}`);
           }
 
           this.dataSource.data = data;
@@ -247,20 +249,20 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
       }
     },
     {
-      body: `¿Estás seguro de que deseas descativar el registro <span class="text-danger">${ id }</span>?`
+      body: `¿Estás seguro de que deseas descativar ${this.entity && this.entity.entityText ? this.entity.entityText : 'registro'} <span class="text-danger">${ id }</span>?`
     });
   }
 
   reactive(id: any) {
 
     this._modalService.show(SimpleBodyModalComponent, {
-      title: 'Activar el <span class="text-danger">registro</span>',
+      title: `Activar el <span class="text-danger">${this.entity && this.entity.entityText ? this.entity.entityText : 'registro'}</span>`,
       aceptar: (component) => {
         this.service.reactive(id).subscribe((data) => {
           if (data.length > 0) {
-            this._toastService.show(`Se ha activado el registro ${ id }`);
+            this._toastService.show(`Se ha activado ${this.entity && this.entity.entityText ? this.entity.entityText : 'el registro'} ${ id }`);
           } else {
-            this._toastService.show(`No se ha podido activar el registro`);
+            this._toastService.show(`No se ha podido activar ${this.entity && this.entity.entityText ? this.entity.entityText : 'el registro'}`);
           }
 
           this.dataSource.data = data;
@@ -272,14 +274,14 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
       }
     },
     {
-      body: `¿Estás seguro de que deseas activar el registro <span class="text-danger">${ id }</span>?`
+      body: `¿Estás seguro de que deseas activar ${this.entity && this.entity.entityText ? this.entity.entityText : 'el registro'} <span class="text-danger">${ id }</span>?`
     });
 
   }
 
   add() {
     this._modalService.show(this.form, {
-      title: 'Agregar <span class="text-danger">registro</span>',
+      title: `Agregar <span class="text-danger">${this.entity && this.entity.entityInfo ? this.entity.entityInfo : 'registro'}</span>`,
       botonAceptar: 'Agregar',
       aceptar: (component: any) => {
         if (component.form.valid) {
@@ -287,9 +289,9 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
           addMethod.subscribe((data) => {
             if (data.ok) {
               this.dataSource.data = data.data;
-              this._toastService.show('Se ha agregado el registro correctamente');
+              this._toastService.show(`Se ha agregado ${this.entity && this.entity.entityText ? this.entity.entityText : 'el registro'}`);
             } else {
-              this._toastService.show('No se ha podido agregar el registro');
+              this._toastService.show(`No se ha podido agregar ${this.entity && this.entity.entityText ? this.entity.entityText : 'el registro'}`);
             }
             
             this._modalService.hide();
@@ -305,7 +307,7 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
   
   update(id: string | number) {
     this._modalService.show(this.form, {
-      title: 'Actualizar <span class="text-danger">registro</span>',
+      title: `Actualizar <span class="text-danger">${this.entity && this.entity.entityInfo ? this.entity.entityInfo : 'registro'}</span>`,
       botonAceptar: 'Actualizar',
       aceptar: (component: any) => {
         if (component.form.valid) {
@@ -313,9 +315,9 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
           updateMethod.subscribe((data) => {
             if (data.ok) {
               this.dataSource.data = data.data;
-              this._toastService.show(`Se ha actualizado el registro ${id} correctamente`);
+              this._toastService.show(`Se ha actualizado ${this.entity && this.entity.entityText ? this.entity.entityText : 'el registro'} ${id} correctamente`);
             } else {
-              this._toastService.show(`No se ha podido actualizar el registro ${id}`);
+              this._toastService.show(`No se ha podido actualizar${this.entity && this.entity.entityText ? this.entity.entityText : 'el registro'} ${id}`);
             }
             
             this._modalService.hide();
