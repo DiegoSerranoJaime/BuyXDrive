@@ -46,6 +46,7 @@ import { SlideshowComponent } from './components/slideshow/slideshow.component';
 import { SlideshowTopComponent } from './components/slideshow-top/slideshow-top.component';
 import { AdminModule } from './pages/admin/admin.module';
 import { PipesModule } from './pipes/pipes.module';
+import { BuyButtonComponent } from './components/buy-button/buy-button.component';
 
 
 const JWT_Module_Options: JwtModuleOptions = {
@@ -82,7 +83,8 @@ const JWT_Module_Options: JwtModuleOptions = {
     ArticuloComponent,
     InitProductsComponent,
     SlideshowComponent,
-    SlideshowTopComponent
+    SlideshowTopComponent,
+    BuyButtonComponent
   ],
   imports: [
     BrowserModule,

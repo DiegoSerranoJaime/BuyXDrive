@@ -55,13 +55,18 @@
     <div class="col-12 col-md-4">
       <div class="card mx-0 mt-4">
         <div class="card-body">
+          <div class="d-flex justify-content-end mb-2">
+            <span class="badge" [ngClass]="{'bg-success': vehicle.amount > 0, 'bg-danger': vehicle.amount <= 0}">Stock: {{vehicle.amount <= 0 ? 'No disponible' : 'Disponible'}}</span>
+          </div>
+
           <p class="d-flex justify-content-between">Precio: <span>{{ vehicle.price }}€</span></p>
           <p class="d-flex justify-content-between">Descuento: <span>{{ vehicle.discount }}%</span></p>
+          
           <hr>
+          
           <p class="d-flex justify-content-between">Precio Final: <span>{{ vehicle.price | discount:vehicle.discount | number:'.2-2' }}€</span></p>
-          <div class="d-grid">
-            <button type="button" class="btn btn-primary" (click)="addProduct()">Agregar al carrito</button>
-          </div>
+          
+          <app-buy-button [product]="vehicle.id" (addToCart)="addProduct()"></app-buy-button>
         </div>
       </div>
     </div>
