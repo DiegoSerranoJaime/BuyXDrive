@@ -44,12 +44,15 @@
                     <ul class="list-group">
                         <li class="list-group-item d-flex justify-content-between">Valoración: <span>{{ vehicle.val }}</span></li>
                         <li class="list-group-item d-flex justify-content-between">Cantidad de valoraciones: <span>{{ vehicle.cant }}</span></li>
-                        <li class="list-group-item d-flex justify-content-between">Descripción: <span>{{ vehicle.description ? vehicle.description : 'No hay una descripción disponible actualmente' }}</span></li>
                         <li class="list-group-item d-flex justify-content-between">Cantidad: <span>{{ vehicle.amount }}</span></li>
                         <li class="list-group-item d-flex justify-content-between">Precio: <span>{{ vehicle.price }}€</span></li>
                         <li class="list-group-item d-flex justify-content-between">Descuento: <span>{{ vehicle.discount }}%</span></li>
                         <li class="list-group-item d-flex justify-content-between">Precio Final: <span>{{ vehicle.price | discount:vehicle.discount | number:'.2-2' }}€</span></li>
                     </ul>
+                </div>
+                <div class="col-12 mt-4">
+                    <h5 class="d-flex justify-content-center">Descripción</h5>
+                    <p class="text-center">{{ vehicle.description ? vehicle.description : 'No hay una descripción disponible actualmente' }}</p>
                 </div>
             </div>
         </div>
