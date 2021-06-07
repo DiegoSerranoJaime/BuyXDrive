@@ -4,6 +4,7 @@ import { AbstractControl, AsyncValidatorFn, ValidationErrors } from '@angular/fo
 import { Observable, of, timer } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,16 +14,17 @@ export class ValidationsService {
   private baseUrl: string = `${ environment.urlApi }`;
 
   constructor(
-    private _http: HttpClient
+    private _http: HttpClient,
+    private _authService: AuthService
   ) { }
 
-  public passwordValidation(password: AbstractControl): AsyncValidatorFn {
+  public passwordValidation(): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
-      const pass: boolean = control.value == password.value;
+      const pass: boolean = control.get('password').value == control.get('passwordConfirmation').value;
 
       let err: ValidationErrors = { differents: true };
 
-      return pass ? of(null) : of(err);
+      return of(pass ? null : err);
     }
   }
 

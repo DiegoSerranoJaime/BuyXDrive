@@ -43,7 +43,7 @@ exports.register = function(req, res) {
         res.send({ok: false,  msg: 'No data send'});
     } else if(user.password.length < 8 || user.password > 16) {
         res.send({ok: false,  msg: 'Password length doesn\'t in the limit'});
-    } else if(req.body.password != req.body.passwordConfirmation) {
+    } else if(req.body.passwords.password != req.body.passwords.passwordConfirmation) {
         res.send({ok: false,  msg: 'Las contraseñas no coinciden'});
     } else if(!validateEmail(user.email)) {
         res.send({ok: false,  msg: 'Email format is incorrect'});
@@ -93,6 +93,7 @@ exports.emailValidation = function(req, res) {
         if (err) {
             res.send(err);
         }
+        
         if (email.length) {
             res.send({
                 ok: true

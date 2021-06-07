@@ -22,23 +22,27 @@
       <span *ngIf="email.hasError('emailRegistered')">El Email introducido ya está en uso</span>
     </div>
   </div>
-  <div class="mb-3">
-    <label for="password" class="form-label">Contraseña</label>
-    <input type="password" class="form-control" id="password" formControlName="password" [ngClass]="{'is-invalid': password.touched && password.invalid}">
-    <div class="text-danger" *ngIf="password.touched && password.invalid">
-      <span *ngIf="password.hasError('required')">La contraseña es requerida</span>
-      <span *ngIf="password.hasError('minlength')">La contraseña tiene una longitud mínima de 8 carácteres</span>
-      <span *ngIf="password.hasError('maxlength')">La contraseña tiene una longitud máxima de 16 carácteres</span>
+  <div [formGroup]="passwords">
+    <div class="mb-3">
+      <label for="password" class="form-label">Contraseña</label>
+      <input type="password" class="form-control" id="password" formControlName="password" [ngClass]="{'is-invalid': password.touched && password.invalid}">
+      <div class="text-danger" *ngIf="password.touched && password.invalid">
+        <span *ngIf="password.hasError('required')">La contraseña es requerida</span>
+        <span *ngIf="password.hasError('minlength')">La contraseña tiene una longitud mínima de 8 carácteres</span>
+        <span *ngIf="password.hasError('maxlength')">La contraseña tiene una longitud máxima de 16 carácteres</span>
+      </div>
     </div>
-  </div>
-  <div class="mb-3">
-    <label for="c-password" class="form-label">Confirmar Contraseña</label>
-    <input type="password" class="form-control" id="c-password" formControlName="passwordConfirmation" [ngClass]="{'is-invalid': passwordConfirmation.touched && passwordConfirmation.invalid}">
-    <div class="text-danger" *ngIf="passwordConfirmation.touched && passwordConfirmation.invalid">
-      <span *ngIf="passwordConfirmation.hasError('required')">La contraseña es requerida</span>
-      <span *ngIf="passwordConfirmation.hasError('minlength')">La contraseña tiene una longitud mínima de 8 carácteres</span>
-      <span *ngIf="passwordConfirmation.hasError('maxlength')">La contraseña tiene una longitud máxima de 16 carácteres</span>
-      <span *ngIf="passwordConfirmation.hasError('differents')">La confirmación de la contraseña ha de ser igual que la contraseña</span>
+    <div class="mb-3">
+      <label for="c-password" class="form-label">Confirmar Contraseña</label>
+      <input type="password" class="form-control" id="c-password" formControlName="passwordConfirmation" [ngClass]="{'is-invalid': passwordConfirmation.touched && passwordConfirmation.invalid || passwords.hasError('differents')}">
+      <div class="text-danger" *ngIf="passwordConfirmation.touched && passwordConfirmation.invalid">
+        <span *ngIf="passwordConfirmation.hasError('required')">La contraseña es requerida</span>
+        <span *ngIf="passwordConfirmation.hasError('minlength')">La contraseña tiene una longitud mínima de 8 carácteres</span>
+        <span *ngIf="passwordConfirmation.hasError('maxlength')">La contraseña tiene una longitud máxima de 16 carácteres</span>
+      </div>
+      <div class="text-danger" *ngIf="passwords.touched && passwords.invalid">
+        <span *ngIf="passwords.errors && passwords.errors.differents">Las contraseñas no son iguales</span>
+      </div>
     </div>
   </div>
   <div class="mb-3">

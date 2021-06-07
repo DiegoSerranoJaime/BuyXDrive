@@ -317,7 +317,7 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
               this.dataSource.data = data.data;
               this._toastService.show(`Se ha actualizado ${this.entity && this.entity.entityText ? this.entity.entityText : 'el registro'} ${id} correctamente`);
             } else {
-              this._toastService.show(`No se ha podido actualizar${this.entity && this.entity.entityText ? this.entity.entityText : 'el registro'} ${id}`);
+              this._toastService.show(`No se ha podido actualizar ${this.entity && this.entity.entityText ? this.entity.entityText : 'el registro'} ${id}`);
             }
             
             this._modalService.hide();

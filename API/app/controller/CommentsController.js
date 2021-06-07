@@ -52,3 +52,23 @@ exports.getCommentsOfAProduct = function(req, res) {
         res.json(comments);
     });
 }
+
+exports.commentAlreadyExistValidation = function(req, res) {
+    jwt.verify(req.token, 'secretkey', (err, authData) => {
+        Comments.commentAlreadyExistValidation([authData.user.id, req.params.productId], (err, comment) => {
+            if(err) {
+                res.send(err);
+            }
+            
+            if (comment.length) {
+                res.send({
+                    ok: true
+                });
+            } else {
+                res.send({
+                    ok: false
+                });
+            }
+        });   
+    });
+}
