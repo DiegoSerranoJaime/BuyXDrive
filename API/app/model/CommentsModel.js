@@ -47,4 +47,15 @@ Comments.getCommentsOfAProduct = function(id, result) {
     });
 }
 
+Comments.commentAlreadyExistValidation = function(id, result) {
+    sql.query('SELECT * FROM comments WHERE user_id = ? AND product_id = ?', [id[0], id[1]], (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+
+        result(null, res);
+    });
+}
+
 module.exports = Comments;

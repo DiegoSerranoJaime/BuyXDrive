@@ -15,6 +15,7 @@ export class RegisterComponent implements OnInit {
   genders: any[] = [];
 
   myForm: FormGroup;
+  passwords: FormGroup;
   name: FormControl;
   surname: FormControl;
   email: FormControl;
@@ -62,8 +63,6 @@ export class RegisterComponent implements OnInit {
       Validators.required,
       Validators.minLength(8),
       Validators.maxLength(16),
-    ], [
-      this._validationsService.passwordValidation(this.password)
     ]);
 
     this.gender = new FormControl('', [
@@ -80,12 +79,19 @@ export class RegisterComponent implements OnInit {
   }
 
   buildFormGroup() {
+    this.passwords = new FormGroup({
+      password: this.password,
+       passwordConfirmation: this.passwordConfirmation,
+    }, [
+    ], [
+      this._validationsService.passwordValidation()
+    ]);
+
     this.myForm = new FormGroup({
       name: this.name,
       surname: this.surname,
       email: this.email,
-      password: this.password,
-      passwordConfirmation: this.passwordConfirmation,
+      passwords: this.passwords,
       gender: this.gender,
       address: this.address,
       phoneNumber: this.phoneNumber

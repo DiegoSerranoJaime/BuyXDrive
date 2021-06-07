@@ -1,66 +1,72 @@
 <div *ngIf="_authService.isAuthenticated(); else noAuth">
-
-  <h4 class="d-flex justify-content-center fw-normal mb-4">Deja tu comentario</h4>
-  <div class="row d-flex justify-content-between">
-    <div class="col-12">
-      <form (ngSubmit)="submit()" [formGroup]="myForm">
-        <div class="form-floating mb-3">
-          <input type="text" id="title" class="form-control" placeholder="Título del comentario" formControlName="title" [ngClass]="{'is-invalid': title.invalid && title.touched}">
-          <label for="title">Título (50 Carácteres máx.)</label>
-          <div *ngIf="title.invalid && title.touched" class="text-danger">
-            <span *ngIf="title.getError('required')">Se requiere de un título</span>
-            <span *ngIf="title.getError('minlength')">El título debe tener como mínimo una longitud de 5 caracteres</span>
-            <span *ngIf="title.getError('maxlength')">El título debe tener como máximo una longitud de 50 caracteres</span>
-          </div>
-        </div>
-        <div class="form-floating">
-          <textarea class="form-control" id="body" placeholder="Cuerpo del comentario" formControlName="body" [ngClass]="{'is-invalid': body.invalid && body.touched}"></textarea>
-          <label for="body">Comentario (255 Carácteres máx.)</label>
-          <div *ngIf="body.invalid && body.touched" class="text-danger">
-            <span *ngIf="body.getError('required')">Se requiere de un comentario</span>
-            <span *ngIf="body.getError('minlength')">El comentario debe tener como mínimo una longitud de 10 caracteres</span>
-            <span *ngIf="body.getError('maxlength')">El comentario debe tener como máximo una longitud de 255 caracteres</span>
-          </div>
-        </div>
-        <div class="row mt-3 d-flex align-items-center">
-          <div class="col">
-            <div class="row d-flex align-items-center justify-content-start">
-              <label class="col-auto">
-                Valoración:
-              </label>
-              <div class="col-auto px-0">
-                <ngb-rating [formControl]="valoration" [rate]="valoration.value" [max]="5"></ngb-rating>
-              </div>
-              <span class="col-auto">
-                <div class="row d-flex align-items-center">
-                  <div class="col-auto px-1">
-                    [
-                  </div>
-                  <div class="col-2 px-1">
-                    <input type="text" class="form-control py-0 px-1" formControlName="valoration" [value]="valoration.value" [ngClass]="{'border border-danger': valoration.invalid && valoration.touched}">
-                  </div>
-                  <div class="col-auto px-1">
-                    / 5 ]
-                  </div>
-                </div>
-              </span>
-            </div>
-            <div *ngIf="valoration.invalid && valoration.touched" class="text-danger">
-              <span *ngIf="valoration.getError('required')">Se requiere de una valoración</span>
-              <span *ngIf="valoration.getError('min')">La valoración mínima es de 0</span>
-              <span *ngIf="valoration.getError('max')">La valoración máxima es de 5</span>
-            </div>
-          </div>
-          <div class="col-auto">
-            <button type="submit" class="btn btn-primary">
-              Publicar
-            </button>
-          </div>
-        </div>
-      </form>
+  <div *ngIf="exist; else noComment">
+    <div class="alert alert-danger">
+      No puedes agregar un comentario sobre este proyecto porque ya tienes uno
     </div>
   </div>
+  <ng-template #noComment>
 
+    <h4 class="d-flex justify-content-center fw-normal mb-4">Deja tu comentario</h4>
+    <div class="row d-flex justify-content-between">
+      <div class="col-12">
+        <form (ngSubmit)="submit()" [formGroup]="myForm">
+          <div class="form-floating mb-3">
+            <input type="text" id="title" class="form-control" placeholder="Título del comentario" formControlName="title" [ngClass]="{'is-invalid': title.invalid && title.touched}">
+            <label for="title">Título (50 Carácteres máx.)</label>
+            <div *ngIf="title.invalid && title.touched" class="text-danger">
+              <span *ngIf="title.getError('required')">Se requiere de un título</span>
+              <span *ngIf="title.getError('minlength')">El título debe tener como mínimo una longitud de 5 caracteres</span>
+              <span *ngIf="title.getError('maxlength')">El título debe tener como máximo una longitud de 50 caracteres</span>
+            </div>
+          </div>
+          <div class="form-floating">
+            <textarea class="form-control" id="body" placeholder="Cuerpo del comentario" formControlName="body" [ngClass]="{'is-invalid': body.invalid && body.touched}"></textarea>
+            <label for="body">Comentario (255 Carácteres máx.)</label>
+            <div *ngIf="body.invalid && body.touched" class="text-danger">
+              <span *ngIf="body.getError('required')">Se requiere de un comentario</span>
+              <span *ngIf="body.getError('minlength')">El comentario debe tener como mínimo una longitud de 10 caracteres</span>
+              <span *ngIf="body.getError('maxlength')">El comentario debe tener como máximo una longitud de 255 caracteres</span>
+            </div>
+          </div>
+          <div class="row mt-3 d-flex align-items-center">
+            <div class="col">
+              <div class="row d-flex align-items-center justify-content-start">
+                <label class="col-auto">
+                  Valoración:
+                </label>
+                <div class="col-auto px-0">
+                  <ngb-rating [formControl]="valoration" [rate]="valoration.value" [max]="5"></ngb-rating>
+                </div>
+                <span class="col-auto">
+                  <div class="row d-flex align-items-center">
+                    <div class="col-auto px-1">
+                      [
+                    </div>
+                    <div class="col-2 px-1">
+                      <input type="text" class="form-control py-0 px-1" formControlName="valoration" [value]="valoration.value" [ngClass]="{'border border-danger': valoration.invalid && valoration.touched}">
+                    </div>
+                    <div class="col-auto px-1">
+                      / 5 ]
+                    </div>
+                  </div>
+                </span>
+              </div>
+              <div *ngIf="valoration.invalid && valoration.touched" class="text-danger">
+                <span *ngIf="valoration.getError('required')">Se requiere de una valoración</span>
+                <span *ngIf="valoration.getError('min')">La valoración mínima es de 0</span>
+                <span *ngIf="valoration.getError('max')">La valoración máxima es de 5</span>
+              </div>
+            </div>
+            <div class="col-auto">
+              <button type="submit" class="btn btn-primary">
+                Publicar
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </ng-template>
 </div>
 <ng-template #noAuth>
   <div role="alert" class="alert alert-warning">

@@ -24,4 +24,10 @@ export class CommentsService {
       headers: this._authService.getToken()
     });
   }
+
+  public commentAlreadyExistValidation(product: number): Observable<any>{
+    return this._http.get(`${this.baseUrl}/exist/product/${product}`, {
+      headers: this._authService.getToken()
+    });
+  }
 }

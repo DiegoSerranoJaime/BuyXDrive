@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { CommentsService } from 'src/app/services/comments.service';
 import { ToastService } from 'src/app/services/toast.service';
+import { ValidationsService } from 'src/app/services/validations.service';
 import { CommentSend } from 'src/models/comments.model';
 
 @Component({
@@ -10,9 +11,11 @@ import { CommentSend } from 'src/models/comments.model';
   templateUrl: './comments-form.component.html',
   styleUrls: ['./comments-form.component.scss']
 })
-export class CommentsFormComponent implements OnInit {
+export class CommentsFormComponent implements OnInit, OnChanges {
 
   @Input() product_id: number;
+
+  public exist: boolean;
 
   myForm: FormGroup;
   title: FormControl;
@@ -24,6 +27,13 @@ export class CommentsFormComponent implements OnInit {
     private _toastService: ToastService) { }
 
   ngOnInit(): void {
+  }
+
+  ngOnChanges() {
+    this._commentsService.commentAlreadyExistValidation(this.product_id).subscribe((data) => {
+      this.exist = data.ok;
+    });
+    
     this.createFormControls();
     this.createForm();
   }

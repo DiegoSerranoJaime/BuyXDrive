@@ -122,12 +122,10 @@ exports.update = function(req, res) {
         if (authData.user.user_type == 2) {
             let user = new AdminUsers(req.params.id, req.body);
 
-            if (!user.email || !user.password || !user.name || !user.surname || !user.gender || !user.address || !user.phone_number) {
+            if (!user.password || !user.name || !user.surname || !user.gender || !user.address || !user.phone_number) {
                 res.send({error: true,  msg: 'No data send'});
             } else if(user.password.length < 8 || user.password > 16) {
                 res.send({error: true,  msg: 'Password length doesn\'t in the limit'});
-            } else if(!validateEmail(user.email)) {
-                res.send({error: true,  message: 'Email format is incorrect'});
             } else {
                 AdminUsers.update(user, (err, users) => {
                     if(err) {
