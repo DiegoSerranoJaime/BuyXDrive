@@ -39,11 +39,13 @@ const ADMIN_ROUTES: Routes = [
       { path: 'vehicles/:id', component: VehiclePageComponent },
       { path: 'articles', component: AdminArticlesComponent },
       { path: 'articles/:id', component: ArticlePageComponent },
+      { path: '**', redirectTo: 'vehicles' }
     ]},
     { path: 'types', component: TypesComponent, children:
     [
       { path: 'vehicles', component: VehiclesTypesComponent },
       { path: 'articles', component: ArticlesTypesComponent },
+      { path: '**', redirectTo: 'vehicles' }
     ]},
     { path: '**', pathMatch: 'full', redirectTo: 'users' }
   ]},
