@@ -41,13 +41,18 @@
     <div class="col-12 col-md-4">
       <div class="card mx-0 mt-4">
         <div class="card-body">
+          <div class="d-flex justify-content-end mb-2">
+            <span class="badge" [ngClass]="{'bg-success': article.amount > 0, 'bg-danger': article.amount <= 0}">Stock: {{article.amount <= 0 ? 'No disponible' : 'Disponible'}}</span>
+          </div>
+
           <p class="d-flex justify-content-between">Precio: <span>{{ article.price }}€</span></p>
           <p class="d-flex justify-content-between">Descuento: <span>{{ article.discount }}%</span></p>
+          
           <hr>
+          
           <p class="d-flex justify-content-between">Precio Final: <span>{{ article.price | discount:article.discount | number:'.2-2' }}€</span></p>
-          <div class="d-grid">
-            <button type="button" class="btn btn-primary" (click)="addProduct()">Agregar al carrito</button>
-          </div>
+          
+          <app-buy-button [product]="article.id" (addToCart)="addProduct()"></app-buy-button>
         </div>
       </div>
     </div>

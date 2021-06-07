@@ -50,4 +50,16 @@ export class ValidationsService {
     }
   }
 
+  public stockValidation(id: number): AsyncValidatorFn {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      return timer(100).pipe(
+        switchMap(() => {
+          return this._http.get<any>(`${this.baseUrl}/products/${id}/amount/1`).pipe(
+            map(data => !data.ok ? null : { amountAvailable: true })
+          );
+        })
+      );
+    }
+  }
+
 }
