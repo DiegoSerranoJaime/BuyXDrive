@@ -35,6 +35,10 @@ import { ArticlePageComponent } from './products/article-page/article-page.compo
 import { ImagesFormComponent } from './forms/images-form/images-form.component';
 import { ImagesManagerComponent } from 'src/app/components/images-manager/images-manager.component';
 import { PipesModule } from 'src/app/pipes/pipes.module';
+import { AllCommentsComponent } from './all-comments/all-comments.component';
+import { CommentPageComponent } from './comment-page/comment-page.component';
+import { StarsComponent } from 'src/app/components/stars/stars.component';
+
 
 @NgModule({
   declarations: [
@@ -66,7 +70,10 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
     VehiclePageComponent,
     ArticlePageComponent,
     ImagesFormComponent,
-    ImagesManagerComponent
+    ImagesManagerComponent,
+    AllCommentsComponent,
+    CommentPageComponent,
+    StarsComponent
   ],
   imports: [
     CommonModule,
@@ -75,7 +82,10 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
     MatTabsModule,
     MatButtonModule,
     ReactiveFormsModule,
-    PipesModule
+    PipesModule, 
+  ],
+  exports: [
+    StarsComponent
   ]
 })
 export class AdminModule { }

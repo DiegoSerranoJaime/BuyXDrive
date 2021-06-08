@@ -23,6 +23,7 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
   @Input() fatherId: number | string;
   @Input() form: any;
   @Input() claveCompuesta: boolean = false;
+  @Input() keys: Array<string>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true }) sort: MatSort;

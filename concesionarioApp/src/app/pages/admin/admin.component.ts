@@ -16,6 +16,7 @@ export class AdminComponent implements OnInit {
     {route: 'brands', name: 'Marcas'},
     {route: 'types', name: 'Tipos'},
     {route: 'products', name: 'Productos'},
+    {route: 'comments', name: 'Comentarios'},
   ];
   activeLink = this.links[0];
 

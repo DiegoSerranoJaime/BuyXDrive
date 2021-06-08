@@ -1,1 +1,13 @@
-<app-generic-material-table [permisos]="permisosOrders" [service]="_adminUserOrdersService" [fatherId]="id" [claveCompuesta]="true" [entity]="entity"></app-generic-material-table>
+<div class="my-4">
+    <div class="row d-flex align-items-start position-relative mb-4">
+        <div class="col-auto">
+            <a (click)="back()" class="btn btn-primary"><i class="fas fa-arrow-left"></i></a>
+        </div>
+    </div>
+    <div>
+        <app-generic-material-table [permisos]="permisosOrders" [service]="_adminUserOrdersService" [fatherId]="id" [claveCompuesta]="true" [entity]="entityOrder"></app-generic-material-table>
+    </div>
+    <div class="mt-4">
+        <app-generic-material-table [permisos]="permisosComments" [service]="_adminUserCommentsService" [fatherId]="id" [claveCompuesta]="true" [entity]="entityComment"></app-generic-material-table>
+    </div>
+</div>
