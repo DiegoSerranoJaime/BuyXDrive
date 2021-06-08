@@ -19,7 +19,6 @@ import { VehiculoComponent } from './pages/vehiculo/vehiculo.component';
 import { LoginComponent } from './components/modals/login/login.component';
 import { ModalComponent } from './components/modals/modal/modal.component';
 import { VehicleCardComponent } from './components/vehicle-card/vehicle-card.component';
-import { StarsComponent } from './components/stars/stars.component';
 import { CommentsFormComponent } from './components/comments-form/comments-form.component';
 import { CommentsComponent } from './components/comments/comments.component';
 import { CartComponent } from './pages/cart/cart.component';
@@ -69,7 +68,6 @@ const JWT_Module_Options: JwtModuleOptions = {
     ModalComponent,
     AdHostDirective,
     VehicleCardComponent,
-    StarsComponent,
     CommentsFormComponent,
     CommentsComponent,
     CartComponent,
@@ -111,6 +109,6 @@ const JWT_Module_Options: JwtModuleOptions = {
     PipesModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

@@ -1,0 +1,36 @@
+<div class="row d-flex align-items-start position-relative my-4">
+    <div class="col-auto">
+        <a (click)="back()" class="btn btn-primary"><i class="fas fa-arrow-left"></i></a>
+    </div>
+</div>
+<div *ngIf="comment; else noComments">
+    <div class="row d-flex justify-content-between mb-4">
+      <div class="col-12 col-md-3">
+        <div class="col-12 text-center mt-2">
+          <p>{{ comment.email }}</p>
+          <p>Valoración: <span class="text-warning"><app-stars [valoration]="comment.valoration"></app-stars></span> ({{ comment.valoration }} / 5)</p>
+        </div>
+      </div>
+      <div class="col-12 col-md-9">
+        <div class="card">
+          <div class="card-header">
+            {{ comment.title }}
+          </div>
+          <div class="card-body">
+            <p class="card-text">
+              {{ comment.body }}
+            </p>
+          </div>
+          <div class="card-footer">
+            Publicado el: {{ comment.publication_date | date:'dd-MM-YYYY'}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <ng-template #noComments>
+    <div class="alert alert-info" role="alert">
+      No hay comentarios de este producto
+    </div>
+  </ng-template>

@@ -4,6 +4,8 @@ import { AdminUserAppraisalService } from 'src/app/services/admin-user-appraisal
 import { AdminUserOrdersService } from 'src/app/services/admin-user-orders.service';
 import { Permissions } from 'src/models/permissions.model';
 import { Entity } from 'src/models/entities.models';
+import { Location } from '@angular/common';
+import { AdminUserCommentsService } from 'src/app/services/admin-user-comments.service';
 
 @Component({
   selector: 'app-user-page',
@@ -23,17 +25,30 @@ export class UserPageComponent implements OnInit {
       name: 'order'
     }
   ];
+  public permisosComments: Permissions[] = [
+    {
+      name: 'view',
+      route: './product'
+    }
+  ];
 
-  public entity: Entity = {
+  public entityOrder: Entity = {
     entityName: 'Pedidos'
+  }
+  public entityComment: Entity = {
+    entityName: 'Comentarios'
   }
 
   constructor(public _adminUserOrdersService: AdminUserOrdersService,
-    public _adminUserAppraisalService: AdminUserAppraisalService,
-    public _activatedRoute: ActivatedRoute) { }
+    public _adminUserCommentsService: AdminUserCommentsService,
+    public _activatedRoute: ActivatedRoute,
+    private _location: Location) { }
 
   ngOnInit(): void {
     this.id = this._activatedRoute.snapshot.params.id;
   }
 
+  back() {
+    this._location.back();
+  }
 }

@@ -17,6 +17,7 @@ module.exports = function(app) {
     const AdminOrderProducts = require('../controller/AdminOrderProductsController');
     const AdminProviders = require('../controller/AdminProvidersController');
     const AdminProvidersProducts = require('../controller/AdminProvidersProductsController');
+    const AdminComments = require('../controller/AdminCommentsController');
     const AdminBrands = require('../controller/AdminBrandsController');
     const AdminModels = require('../controller/AdminModelsController');
     const AdminVehiclesTypes = require('../controller/AdminVehiclesTypesController');
@@ -60,6 +61,7 @@ module.exports = function(app) {
         app.route('/api/admin/users/:id')
             .get(verifyToken, AdminUsers.getById);
 
+        //Endpoints para el manejo de pedidos de un usuario
         app.route('/api/admin/users/:userId/orders')
             .get(verifyToken, AdminUserOrders.getAll);
             
@@ -152,6 +154,16 @@ module.exports = function(app) {
             
         app.route('/api/admin/articles/:id')
             .get(verifyToken, AdminArticles.getById);
+
+        //Endpoints de comentarios de administración
+        app.route('/api/admin/comments')
+            .get(verifyToken, AdminComments.getAll);
+
+        app.route('/api/admin/comments/user/:id')
+            .get(verifyToken, AdminComments.getAllByUser);
+
+        app.route('/api/admin/comments/product/:productId/user/:userId')
+            .get(AdminComments.getById);
 
         //Endpoints de brands
         app.route('/api/admin/brands')

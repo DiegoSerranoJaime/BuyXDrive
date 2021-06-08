@@ -19,18 +19,23 @@ import { ArticlesTypesComponent } from './types/articles-types/articles-types.co
 import { VehiclesTypesComponent } from './types/vehicles-types/vehicles-types.component';
 import { VehiclePageComponent } from './products/vehicle-page/vehicle-page.component';
 import { ArticlePageComponent } from './products/article-page/article-page.component';
+import { AllCommentsComponent } from './all-comments/all-comments.component';
+import { CommentPageComponent } from './comment-page/comment-page.component';
 
 const ADMIN_ROUTES: Routes = [
   { path: '', component: AdminComponent, children: [
     { path: 'users', component: UsersComponent },
     { path: 'users/:id', component: UserPageComponent },
     { path: 'users/:userId/order/:id', component: OrderComponent },
+    { path: 'users/:userId/product/:productId', component: CommentPageComponent },
     { path: 'orders', component: AllOrdersComponent },
     { path: 'orders/:id', component: OrderComponent },
     { path: 'providers', component: ProvidersComponent },
     { path: 'providers/:id', component: ProvidersProductsComponent },
     { path: 'employers', component: EmployersComponent },
     { path: 'employers/:id', component: UserPageComponent },
+    { path: 'employers/:userId/order/:id', component: OrderComponent },
+    { path: 'employers/:userId/product/:productId', component: CommentPageComponent },
     { path: 'brands', component: BrandsComponent },
     { path: 'brands/:id', component: ModelsComponent },
     { path: 'products', component: ProductsComponent, children:
@@ -47,6 +52,8 @@ const ADMIN_ROUTES: Routes = [
       { path: 'articles', component: ArticlesTypesComponent },
       { path: '**', redirectTo: 'vehicles' }
     ]},
+    { path: 'comments', component: AllCommentsComponent },
+    { path: 'comments/:userId/:productId', component: CommentPageComponent },
     { path: '**', pathMatch: 'full', redirectTo: 'users' }
   ]},
   { path: '**', pathMatch: 'full', redirectTo: 'users' }
