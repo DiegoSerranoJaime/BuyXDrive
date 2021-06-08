@@ -112,7 +112,7 @@ exports.emailExceptionValidation = function(req, res) {
             res.send(err);
         }
         
-        if (email.length) {
+        if (email.length && req.params.email != req.params.exception) {
             res.send({
                 ok: true
             });

@@ -71,6 +71,22 @@ exports.update = function(req, res) {
     });
 }
 
+exports.restoreStock = function(req, res) {
+    jwt.verify(req.token, 'secretkey', (err, authData) => {
+        Products.restoreStock(req.body, (err, product) => {
+            if(err) {
+                res.send(err);
+            }
+            
+            res.json({
+                ok: true, 
+                data: product
+            });
+        });
+
+    });
+}
+
 exports.amountValidation = function(req, res) {
     Products.amountValidation(req.params, (err, product) => {
         if(err) {

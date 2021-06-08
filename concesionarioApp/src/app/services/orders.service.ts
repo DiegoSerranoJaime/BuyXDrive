@@ -5,6 +5,8 @@ import { environment } from 'src/environments/environment';
 import { Order } from 'src/models/orders.model';
 import { CartProduct } from 'src/models/products.model';
 import { AuthService } from './auth.service';
+import { OrdersProductsService } from './orders-products.service';
+import { ProductsService } from './products.service';
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +38,9 @@ export class OrdersService {
   ];
 
   constructor(private _http: HttpClient,
-    private _authService: AuthService) { }
+    private _authService: AuthService,
+    private _ordersProductsService: OrdersProductsService,
+    private _productsService: ProductsService) { }
 
   buyProducts(products: CartProduct[]): Observable<string> {
     let order = new Subject<string>();
@@ -70,9 +74,24 @@ export class OrdersService {
     });
   }
 
-  cancel(id): Observable<Order[]> {
-    return this._http.get<Order[]>(`${this.baseUrl}/${id}/cancel`, {
+  cancel(id: string): Observable<Order[]> {
+    const subject = new Subject<Order[]>();
+
+    this._http.get<Order[]>(`${this.baseUrl}/${id}/cancel`, {
       headers: this._authService.getToken()
+    }).subscribe((data: any) => {
+      this._ordersProductsService.getAll(id).subscribe((products) => {
+        products.forEach((p, i) => {
+          this._productsService.restoreStock(p).subscribe((res) => {
+          });
+
+          if (i == (products.length - 1)) {
+            subject.next(data);
+          }
+        });
+      })
     });
+
+    return subject;
   }
 }

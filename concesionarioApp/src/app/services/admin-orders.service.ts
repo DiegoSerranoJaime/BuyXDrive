@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AdminOrder } from 'src/models/adminOrders.models';
 import { AuthService } from './auth.service';
+import { OrdersProductsService } from './orders-products.service';
+import { ProductsService } from './products.service';
 
 @Injectable({
   providedIn: 'root'
@@ -57,7 +59,9 @@ export class AdminOrdersService {
   ];
 
   constructor(private _http: HttpClient,
-    private _authService: AuthService) { }
+    private _authService: AuthService,
+    private _ordersProductsService: OrdersProductsService,
+    private _productsService: ProductsService) { }
 
   getAll(): Observable<AdminOrder[]> {
     return this._http.get<AdminOrder[]>(`${this.baseUrl}`, {
@@ -72,9 +76,24 @@ export class AdminOrdersService {
   }
 
   denegate(id: string): Observable<AdminOrder[]> {
-    return this._http.get<AdminOrder[]>(`${this.baseUrl}/${id}/denegate`, {
+    const subject = new Subject<AdminOrder[]>();
+
+    this._http.get<AdminOrder[]>(`${this.baseUrl}/${id}/denegate`, {
       headers: this._authService.getToken()
+    }).subscribe((data: any) => {
+      this._ordersProductsService.getAll(id).subscribe((products) => {
+        products.forEach((p, i) => {
+          this._productsService.restoreStock(p).subscribe((res) => {
+          });
+
+          if (i == (products.length - 1)) {
+            subject.next(data);
+          }
+        });
+      })
     });
+
+    return subject;
   }
 
   onWay(id: string): Observable<AdminOrder[]> {

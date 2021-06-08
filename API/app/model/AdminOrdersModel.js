@@ -19,7 +19,7 @@ AdminOrders.getAllOrders = function(result) {
                 FROM orders
                 INNER JOIN status ON orders.status = status.id
                 INNER JOIN users ON users.id = orders.user_id
-                ORDER BY orders.status, orders.id ASC `;
+                ORDER BY orders.status, users.email, delivery_date ASC, order_date DESC`;
 
     sql.query(query, (err, res) => {
         if (err) {

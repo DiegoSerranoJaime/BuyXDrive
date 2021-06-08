@@ -26,4 +26,12 @@ export class ProductsService {
       headers: this._authService.getToken()
     });
   }
+
+  restoreStock(product: any): Observable<any> {
+    return this._http.put<any>(`${this.baseUrl}/restoreStock`, product, {
+      headers: this._authService.getToken()
+    });
+  }
+
+
 }
