@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { combineLatest } from 'rxjs';
 import { VehiclesService } from 'src/app/services/vehicles.service';
 import { Vehicle } from 'src/models/vehicles.model';
 

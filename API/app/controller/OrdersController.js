@@ -82,12 +82,11 @@ exports.getHistoryOrders = function(req, res) {
 
 exports.cancelOrder = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-
-        let id = [req.params.id, authData.user.id];
-
         if (err) {
             res.sendStatus(403);
         } else {
+            let id = [req.params.id, authData.user.id];
+
             Orders.cancelOrder(id, (err, data) => {
                 if(err) {
                     res.send(err);

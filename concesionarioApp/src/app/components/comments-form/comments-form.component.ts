@@ -30,9 +30,11 @@ export class CommentsFormComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    this._commentsService.commentAlreadyExistValidation(this.product_id).subscribe((data) => {
-      this.exist = data.ok;
-    });
+    if (this._authService.isAuthenticated()) {
+      this._commentsService.commentAlreadyExistValidation(this.product_id).subscribe((data) => {
+        this.exist = data.ok;
+      });
+    }
     
     this.createFormControls();
     this.createForm();
