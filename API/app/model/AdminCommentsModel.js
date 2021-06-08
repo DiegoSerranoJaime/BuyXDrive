@@ -54,8 +54,7 @@ AdminComments.getAllByUser = function(id, result) {
                 LEFT JOIN articles ON articles.id = products.id
                 LEFT JOIN brands AS b2 ON b2.id = articles.brand
                 WHERE user_id = ?
-                ORDER BY publication_date DESC
-                `;
+                ORDER BY publication_date DESC`;
 
     sql.query(query, id, (err, res) => {
         if (err) {
