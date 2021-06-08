@@ -14,8 +14,7 @@ export class ValidationsService {
   private baseUrl: string = `${ environment.urlApi }`;
 
   constructor(
-    private _http: HttpClient,
-    private _authService: AuthService
+    private _http: HttpClient
   ) { }
 
   public passwordValidation(): AsyncValidatorFn {

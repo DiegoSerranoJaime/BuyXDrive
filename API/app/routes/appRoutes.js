@@ -346,12 +346,15 @@ module.exports = function(app) {
     app.route('/api/articles/types/:type/selected_article/:id')
         .get(Articles.getInitArticlesByType);
 
-    //Endpoint de productso
+    //Endpoint de productos
     app.route('/api/products')
         .get(verifyToken, Products.getAll);
 
     app.route('/api/products/add')
         .post(verifyToken, Products.add);
+        
+    app.route('/api/products/restoreStock')
+        .put(verifyToken, Products.restoreStock);
 
     app.route('/api/products/update/:id')
         .put(verifyToken, Products.update);

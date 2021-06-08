@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
 import { Order } from '../../models/orders.model';
+import { OrdersProductsService } from './orders-products.service';
+import { ProductsService } from './products.service';
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +38,9 @@ export class AdminUserOrdersService {
   ];
 
   constructor(private _http: HttpClient,
-    private _authService: AuthService) { }
+    private _authService: AuthService,
+    private _ordersProductsService: OrdersProductsService,
+    private _productsService: ProductsService) { }
 
   getAll(id: number): Observable<Order[]> {
     return this._http.get<Order[]>(`${this.baseUrl}/${id}/orders`, {
@@ -51,9 +55,24 @@ export class AdminUserOrdersService {
   }
 
   denegate(userId: number, orderId: string): Observable<Order[]> {
-    return this._http.get<Order[]>(`${this.baseUrl}/${userId}/orders/${orderId}/denegate`, {
+    const subject = new Subject<Order[]>();
+
+    this._http.get<Order[]>(`${this.baseUrl}/${userId}/orders/${orderId}/denegate`, {
       headers: this._authService.getToken()
+    }).subscribe((data: any) => {
+      this._ordersProductsService.getAll(orderId).subscribe((products) => {
+        products.forEach((p, i) => {
+          this._productsService.restoreStock(p).subscribe((res) => {
+          });
+
+          if (i == (products.length - 1)) {
+            subject.next(data);
+          }
+        });
+      })
     });
+
+    return subject;
   }
 
   onWay(userId: number, orderId: string): Observable<Order[]> {

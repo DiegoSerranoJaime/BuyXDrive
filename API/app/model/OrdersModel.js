@@ -71,18 +71,18 @@ Orders.cancelOrder = function(id, result) {
             console.log("error: ", err);
             result(err, null);
         }
-
+        
         if (res.length != 0) {
             sql.query("UPDATE orders SET status = 5 WHERE id = ? AND user_id = ?", [id[0], id[1]], (err, res) => {
                 if (err) {
                     console.log("error: ", err);
                     result(err, null);
                 }
-
+                
                 return Orders.getOrdersNotDelivered(id[1], result);
             });
         } else {
-            result({nonExist: true, msg: 'No existe tal pedido pendiente'});
+            result(null, null);
         }
     });
 }

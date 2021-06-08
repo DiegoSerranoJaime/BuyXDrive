@@ -83,6 +83,7 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
         const cancelMethod = this.claveCompuesta ? this.service.cancel(this.fatherId, id) : this.service.cancel(id);
 
         cancelMethod.subscribe((data) => {
+          console.log(data);
           if (data.ok) {
             this._toastService.show(`Se ha cancelado el pedido ${ id }`);
           } else {

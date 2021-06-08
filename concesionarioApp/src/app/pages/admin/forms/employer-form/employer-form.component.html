@@ -35,6 +35,7 @@
         <div class="text-danger" *ngIf="email.touched && email.invalid">
           <span *ngIf="email.hasError('required')">El Email es requerido</span>
           <span *ngIf="email.hasError('pattern')">El Email introducido no tiene el formato correcto</span>
+          <span *ngIf="email.hasError('emailRegistered')">El Email introducido ya está en uso</span>
         </div>
       </div>
       <div class="mb-3">
