@@ -106,24 +106,6 @@ exports.emailValidation = function(req, res) {
     });
 }
 
-exports.emailExceptionValidation = function(req, res) {
-    Users.emailExceptionValidation(req.params, (err, email) => {
-        if (err) {
-            res.send(err);
-        }
-        
-        if (email.length && req.params.email != req.params.exception) {
-            res.send({
-                ok: true
-            });
-        } else {
-            res.send({
-                ok: false
-            });
-        }
-    });
-}
-
 function validateEmail(email) {
     let reg = new RegExp("^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$");
     return reg.test(email);

@@ -43,8 +43,8 @@ export class ValidationsService {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
       return timer(100).pipe(
         switchMap(() => {
-          return this._http.get<any>(`${this.baseUrl}/email/${control.value}/except/${email}`).pipe(
-            map(data => data && !data.ok ? null : { emailRegistered: true })
+          return this._http.get<any>(`${this.baseUrl}/email/${control.value}`).pipe(
+            map(data => email == control.value || data && !data.ok ? null : { emailRegistered: true })
           );
         })
       );
