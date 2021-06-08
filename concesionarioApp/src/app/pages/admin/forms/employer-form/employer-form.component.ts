@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AdminEmployersService } from 'src/app/services/admin-employers.service';
 import { GendersService } from 'src/app/services/genders.service';
 import { UserTypesService } from 'src/app/services/user-types.service';
+import { ValidationsService } from 'src/app/services/validations.service';
 import { EmployerForm } from 'src/models/adminEmployers.models';
 
 @Component({
@@ -29,7 +30,8 @@ export class EmployerFormComponent implements OnInit {
 
   constructor(private _adminEmployersService: AdminEmployersService,
     private _gendersService: GendersService,
-    private _userTypesService: UserTypesService) { }
+    private _userTypesService: UserTypesService,
+    private _validationsService: ValidationsService) { }
 
   ngOnInit(): void {
     this._gendersService.getAll().subscribe((genders) => {
@@ -50,7 +52,6 @@ export class EmployerFormComponent implements OnInit {
       this.buildFormControls();
       this.buildFormGroup();
     }
-  
   }
 
   buildFormControls() {
@@ -65,6 +66,8 @@ export class EmployerFormComponent implements OnInit {
     this.email = new FormControl(this.user ? this.user.email : '', [
       Validators.required,
       Validators.pattern("^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$")
+    ], [
+      this.user ? this._validationsService.emailExceptionValidation(this.user.email) : this._validationsService.emailValidation()
     ]);
 
     this.password = new FormControl('', [
