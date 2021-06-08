@@ -16,8 +16,7 @@ export class VehiclePageComponent implements OnInit {
 
   constructor(
     private _activatedRoute: ActivatedRoute,
-    private _vehiclesService: VehiclesService,
-
+    private _vehiclesService: VehiclesService
   ) { }
 
   ngOnInit(): void {
