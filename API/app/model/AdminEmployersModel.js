@@ -135,23 +135,15 @@ AdminEmployers.add = function(user, result) {
 AdminEmployers.update = function(user, result) {
     let query = `UPDATE users SET name = ?, surname = ?, email = ?, password = ?, address = ?, phone_number = ?, user_type = ?, gender = ? , active = ? WHERE id = ?`;
 
-    sql.query("SELECT email FROM users WHERE email = ? AND id <> ?", [user.email, user.id], (err, res) => {
-        if (res.length == 0) {
-            sql.query(query, [user.name, user.surname, user.email, user.password, user.address, user.phone_number, user.user_type, user.gender, user.active, user.id] ,(err, res) => {
-                if (err) {
-                    console.log("error: ", err);
-                    result(err, null);
-                }
-        
-                return AdminEmployers.getAll(result);
-            });
-        } else {
-            result(null, {
-                duplicate: true,
-                msg: 'El correó electrónico ya existe'
-            });
+    sql.query(query, [user.name, user.surname, user.email, user.password, user.address, user.phone_number, user.user_type, user.gender, user.active, user.id] ,(err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
         }
+
+        return AdminEmployers.getAll(result);
     });
+
 }
 
 module.exports = AdminEmployers;

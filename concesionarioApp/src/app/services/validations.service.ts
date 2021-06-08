@@ -40,6 +40,18 @@ export class ValidationsService {
     }
   }
 
+  public emailExceptionValidation(email: string): AsyncValidatorFn {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      return timer(100).pipe(
+        switchMap(() => {
+          return this._http.get<any>(`${this.baseUrl}/email/${control.value}/except/${email}`).pipe(
+            map(data => data && !data.ok ? null : { emailRegistered: true })
+          );
+        })
+      );
+    }
+  }
+
   public amountValidation(id: number): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
       return timer(100).pipe(

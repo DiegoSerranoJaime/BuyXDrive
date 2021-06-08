@@ -4,16 +4,10 @@ const sql = require('./db');
 const hash = require('crypto');
 
 let AdminUsers = function(id, user) {
-    console.log(user);
-    console.log(id);
     this.id = id >= 0 ? id : null;
     this.name = user.name;
     this.surname = user.surname;
-
-    if (user.email) {
-        this.email = user.email;
-    }
-
+    this.email = user.email;
     this.password = hash.createHash('sha256').update(user.password).digest('hex');
     this.gender = user.gender;
     this.address = user.address;
@@ -136,9 +130,9 @@ AdminUsers.add = function(user, result) {
 }
 
 AdminUsers.update = function(user, result) {
-    let query = `UPDATE users SET name = ?, surname = ?, password = ?, address = ?, phone_number = ?, gender = ? WHERE id = ?`;
+    let query = `UPDATE users SET name = ?, surname = ?, email = ?, password = ?, address = ?, phone_number = ?, user_type = ?, gender = ? , active = ? WHERE id = ?`;
 
-    sql.query(query, [user.name, user.surname,   user.password, user.address, user.phone_number, user.gender, user.id] ,(err, res) => {
+    sql.query(query, [user.name, user.surname, user.email, user.password, user.address, user.phone_number, user.user_type, user.gender, user.active, user.id] ,(err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);

@@ -79,4 +79,16 @@ Users.emailValidation = function(email, result) {
     });
 }
 
+Users.emailExceptionValidation = function(email, result) {
+    sql.query("SELECT * FROM users WHERE email = ? AND email != ?", [email.email, email.exception], (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null)
+        }
+        console.log(res);
+
+        result(null, res)
+    });
+}
+
 module.exports = Users;

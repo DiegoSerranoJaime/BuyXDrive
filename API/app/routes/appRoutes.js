@@ -392,6 +392,9 @@ module.exports = function(app) {
     app.route('/api/email/:email')
         .get(Users.emailValidation);
 
+    app.route('/api/email/:email/except/:exception')
+        .get(Users.emailExceptionValidation);
+
     app.route('/api/comments/exist/product/:productId')
         .get(verifyToken, Comments.commentAlreadyExistValidation);
 

@@ -61,7 +61,7 @@ export class UserFormComponent implements OnInit {
       Validators.required,
       Validators.pattern("^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$")
     ], [
-      this._validationsService.emailValidation()
+      this.user ? this._validationsService.emailExceptionValidation(this.user.email) : this._validationsService.emailValidation()
     ]);
 
     this.password = new FormControl('', [
@@ -84,25 +84,15 @@ export class UserFormComponent implements OnInit {
   }
 
   buildFormGroup() {
-    if (this.data) {
-      this.form = new FormGroup({
-        name: this.name,
-        surname: this.surname,
-        password: this.password,
-        gender: this.gender,
-        address: this.address,
-        phoneNumber: this.phoneNumber
-      });
-    } else {
-      this.form = new FormGroup({
-        name: this.name,
-        surname: this.surname,
-        email: this.email,
-        password: this.password,
-        gender: this.gender,
-        address: this.address,
-        phoneNumber: this.phoneNumber
-      });
-    }
+
+    this.form = new FormGroup({
+      name: this.name,
+      surname: this.surname,
+      email: this.email,
+      password: this.password,
+      gender: this.gender,
+      address: this.address,
+      phoneNumber: this.phoneNumber
+    });
   }
 }
