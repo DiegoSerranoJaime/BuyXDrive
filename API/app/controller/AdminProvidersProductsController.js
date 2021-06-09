@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 
 exports.getAll = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             AdminProvidersProducts.getAll(req.params.providerId,(err, providers) => {
                 if(err) {
                     res.send(err);
@@ -19,7 +19,7 @@ exports.getAll = function(req, res) {
 
 exports.getById = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             AdminProvidersProducts.getById(req.params, (err, providers) => {
                 if(err) {
                     res.send(err);
@@ -35,7 +35,7 @@ exports.getById = function(req, res) {
 
 exports.delete = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             AdminProvidersProducts.delete(req.params, (err, providers) => {
                 if(err) {
                     res.send(err);
@@ -51,7 +51,7 @@ exports.delete = function(req, res) {
 
 exports.add = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             let product = new AdminProvidersProducts(req.params, req.body);
 
             AdminProvidersProducts.add(product, (err, products) => {
@@ -72,7 +72,7 @@ exports.add = function(req, res) {
 
 exports.deliver = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             AdminProvidersProducts.deliver(req.params, (err, products) => {
                 if(err) {
                     res.send(err);
@@ -88,7 +88,7 @@ exports.deliver = function(req, res) {
 
 exports.cancel = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             AdminProvidersProducts.cancel(req.params, (err, products) => {
                 if(err) {
                     res.send(err);

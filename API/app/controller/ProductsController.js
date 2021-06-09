@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 
 exports.getAll = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             Products.getAll((err, products) => {
                 if(err) {
                     res.send(err);
@@ -31,7 +31,7 @@ exports.getProductCart = function(req, res) {
 
 exports.add = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             let product = new Products(null, req.body);
 
             Products.add(product, (err, product) => {
@@ -52,7 +52,7 @@ exports.add = function(req, res) {
 
 exports.update = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             let product = new Products(req.params.id, req.body);
 
             Products.update(product, (err, product) => {

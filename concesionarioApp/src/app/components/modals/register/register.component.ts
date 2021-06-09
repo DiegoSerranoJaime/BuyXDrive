@@ -74,14 +74,15 @@ export class RegisterComponent implements OnInit {
     ]);
 
     this.phoneNumber = new FormControl('', [
-      Validators.required
+      Validators.required,
+      Validators.pattern('[0-9]{9}')
     ]);
   }
 
   buildFormGroup() {
     this.passwords = new FormGroup({
       password: this.password,
-       passwordConfirmation: this.passwordConfirmation,
+      passwordConfirmation: this.passwordConfirmation,
     }, [
     ], [
       this._validationsService.passwordValidation()

@@ -83,6 +83,7 @@
       </div>
       <div class="text-danger" *ngIf="phoneNumber.touched && phoneNumber.invalid">
         <span *ngIf="phoneNumber.hasError('required')">El número de teléfono es requerido</span>
+        <span *ngIf="phoneNumber.hasError('pattern')">El número de teléfono no tiene el formato correcto</span>
       </div>
     </div>
   </form>

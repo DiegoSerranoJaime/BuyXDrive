@@ -15,8 +15,8 @@
         <div class="mb-3">
             <label for="modelId" class="form-label">Marca</label>
             <select class="form-select" [formControl]="brand" [ngClass]="{'is-invalid': brand.invalid && brand.touched}">
-                <option disabled [selected]="!brand.value">Seleccione una opción</option>
-                <option *ngFor="let data of brands" [ngValue]="data.id" [selected]="brand.value == data.id">{{data.id}} - {{data.name}}</option>
+                <option disabled value="">Seleccione una opción</option>
+                <option *ngFor="let data of brands" [ngValue]="data.id">{{data.id}} - {{data.name}}</option>
             </select>
             <div *ngIf="brand.invalid && brand.touched" class="text-danger">
                 <span *ngIf="brand.hasError('required')">La marca es requerida</span>
@@ -25,8 +25,8 @@
         <div class="mb-3">
             <label for="type" class="form-label">Tipo</label>
             <select class="form-select" [formControl]="type" [ngClass]="{'is-invalid': type.invalid && type.touched}">
-                <option disabled [selected]="!type.value">Seleccione una opción</option>
-                <option *ngFor="let data of types" [ngValue]="data.id" [selected]="type.value == data.id">{{data.id}} - {{data.name}}</option>
+                <option disabled value="">Seleccione una opción</option>
+                <option *ngFor="let data of types" [ngValue]="data.id">{{data.id}} - {{data.name}}</option>
             </select>
             <div *ngIf="type.invalid && type.touched" class="text-danger">
               <span *ngIf="type.hasError('required')">El tipo es requerido</span>

@@ -46,7 +46,8 @@ export class ProvidersFormComponent implements OnInit {
     ]);
 
     this.phoneNumber = new FormControl(this.provider ? this.provider.phone_number : '', [
-      Validators.required
+      Validators.required,
+      Validators.pattern('[0-9]{9}')
     ]);
 
     this.address = new FormControl(this.provider ? this.provider.address : '', [

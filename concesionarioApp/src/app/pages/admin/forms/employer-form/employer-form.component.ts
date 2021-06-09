@@ -85,7 +85,8 @@ export class EmployerFormComponent implements OnInit {
     ]);
 
     this.phoneNumber = new FormControl(this.user ? this.user.phone_number : '', [
-      Validators.required
+      Validators.required,
+      Validators.pattern('[0-9]{9}')
     ]);
     
     this.userType = new FormControl(this.user ? this.user.user_type : '', [

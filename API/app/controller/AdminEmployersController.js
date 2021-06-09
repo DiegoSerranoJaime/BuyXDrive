@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 
 exports.getAll = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             AdminEmployers.getAll((err, users) => {
                 if(err) {
                     res.send(err);
@@ -19,7 +19,7 @@ exports.getAll = function(req, res) {
 
 exports.getById = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             AdminEmployers.getById(req.params.id, (err, user) => {
                 if(err) {
                     res.send(err);
@@ -35,7 +35,7 @@ exports.getById = function(req, res) {
 
 exports.logicDelete = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             AdminEmployers.logicDelete(req.params.id, (err, users) => {
                 if(err) {
                     res.send(err);
@@ -51,7 +51,7 @@ exports.logicDelete = function(req, res) {
 
 exports.reactive = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             AdminEmployers.reactive(req.params.id, (err, users) => {
                 if(err) {
                     res.send(err);
@@ -67,7 +67,7 @@ exports.reactive = function(req, res) {
 
 exports.delete = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             AdminEmployers.delete(req.params.id, (err, users) => {
                 if(err) {
                     res.send(err);
@@ -83,7 +83,7 @@ exports.delete = function(req, res) {
 
 exports.add = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             let user = new AdminEmployers(null, req.body);
             
             if (!user.email || !user.password || !user.name || !user.surname || !user.gender || !user.address || !user.phone_number) {
@@ -121,7 +121,7 @@ exports.add = function(req, res) {
 
 exports.update = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             let user = new AdminEmployers(req.params.id, req.body);
 
             if (!user.email || !user.password || !user.name || !user.surname || !user.gender || !user.address || !user.phone_number) {

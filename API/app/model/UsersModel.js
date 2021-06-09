@@ -57,8 +57,96 @@ Users.getAllGenders = function(result) {
     });
 }
 
+Users.getGenderById = function(id, result) {
+    sql.query("SELECT * FROM genders", id, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null)
+        }
+
+        result(null, res)
+    });
+}
+
 Users.getAllEmployerTypes = function(result) {
     sql.query("SELECT * FROM user_type WHERE id > 1", (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null)
+        }
+
+        result(null, res)
+    });
+}
+
+Users.updateName = function(user, result) {
+    sql.query("UPDATE users SET name = ?, surname = ? WHERE id = ?", [user.name, user.surname, user.id], (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null)
+        }
+
+        result(null, res)
+    });
+}
+
+Users.updateEmail = function(user, result) {
+    sql.query("UPDATE users SET email = ? WHERE id = ?", [user.email, user.id], (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null)
+        }
+
+        result(null, res)
+    });
+}
+
+Users.updatePassword = function(user, result) {
+    sql.query("UPDATE users SET password = ? WHERE id = ?", [hash.createHash('sha256').update(user.password).digest('hex'), user.id], (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null)
+        }
+
+        result(null, res)
+    });
+}
+
+Users.updateGender = function(user, result) {
+    sql.query("UPDATE users SET gender = ? WHERE id = ?", [user.gender, user.id], (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null)
+        }
+
+        result(null, res)
+    });
+}
+
+Users.updateAddress = function(user, result) {
+    sql.query("UPDATE users SET address = ? WHERE id = ?", [user.address, user.id], (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null)
+        }
+
+        result(null, res)
+    });
+}
+
+Users.updatePhoneNumber = function(user, result) {
+    sql.query("UPDATE users SET phone_number = ? WHERE id = ?", [user.phoneNumber, user.id], (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null)
+        }
+
+        result(null, res)
+    });
+}
+
+Users.logicDelete = function(id, result) {
+    sql.query("UPDATE users SET active = 0 WHERE id = ?", id, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null)

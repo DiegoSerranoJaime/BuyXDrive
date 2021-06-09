@@ -13,6 +13,13 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { GenericMaterialTableComponent } from 'src/app/components/generic-material-table/generic-material-table.component';
 import { MatSortModule } from '@angular/material/sort';
+import { UpdateNameComponent } from './forms/update-name/update-name.component';
+import { UpdateEmailComponent } from './forms/update-email/update-email.component';
+import { UpdateAddressComponent } from './forms/update-address/update-address.component';
+import { UpdatePhoneNumberComponent } from './forms/update-phone-number/update-phone-number.component';
+import { UpdateGenderComponent } from './forms/update-gender/update-gender.component';
+import { UpdatePasswordComponent } from './forms/update-password/update-password.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -22,7 +29,13 @@ import { MatSortModule } from '@angular/material/sort';
     HistoryComponent,
     OrdersComponent,
     OrderComponent,
-    GenericMaterialTableComponent
+    GenericMaterialTableComponent,
+    UpdateNameComponent,
+    UpdateEmailComponent,
+    UpdateAddressComponent,
+    UpdatePhoneNumberComponent,
+    UpdateGenderComponent,
+    UpdatePasswordComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +45,8 @@ import { MatSortModule } from '@angular/material/sort';
     MatPaginatorModule,
     MatIconModule,
     MatButtonModule,
-    MatSortModule
+    MatSortModule,
+    ReactiveFormsModule
   ],
   exports: [
     GenericMaterialTableComponent

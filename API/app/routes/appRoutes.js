@@ -35,8 +35,32 @@ module.exports = function(app) {
     app.route('/api/user/genders')
         .get(Users.getAllGenders);
 
+    app.route('/api/user/genders/:id')
+        .get(Users.getGenderById);
+
     app.route('/api/user/types')
         .get(Users.getAllEmployerTypes);
+
+    app.route('/api/user/update/name')
+        .put(verifyToken, Users.updateName);
+
+    app.route('/api/user/update/email')
+        .put(verifyToken, Users.updateEmail);
+        
+    app.route('/api/user/update/password')
+        .put(verifyToken, Users.updatePassword);
+        
+    app.route('/api/user/update/address')
+        .put(verifyToken, Users.updateAddress);
+        
+    app.route('/api/user/update/phoneNumber')
+        .put(verifyToken, Users.updatePhoneNumber);
+        
+    app.route('/api/user/update/gender')
+        .put(verifyToken, Users.updateGender);
+        
+    app.route('/api/user/logicDelete')
+        .get(verifyToken, Users.logicDelete);
 
     //Endpoint de admin
         //Endpoint de users

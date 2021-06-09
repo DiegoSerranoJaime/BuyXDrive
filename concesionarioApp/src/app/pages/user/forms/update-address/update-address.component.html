@@ -1,0 +1,16 @@
+<div *ngIf="form">
+    <form [formGroup]="form">
+        <div>
+            <label for="address" class="form-label">Dirección</label>
+            <div [ngClass]="{'input-group': data}">
+                <input type="text" class="form-control" id="address" formControlName="address" [ngClass]="{'is-invalid': address.touched && address.invalid}">
+                <button *ngIf="data" class="btn btn-primary" (click)="address.setValue(data.address)">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+            <div class="text-danger" *ngIf="address.touched && address.invalid">
+                <span *ngIf="address.hasError('required')">La dirección es requerida</span>
+            </div>
+        </div>
+    </form>
+</div>

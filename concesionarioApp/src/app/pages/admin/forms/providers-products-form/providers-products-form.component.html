@@ -3,8 +3,8 @@
         <div class="mb-3">
             <label for="products" class="form-label">Productos</label>
             <select class="form-select" [formControl]="productId" [ngClass]="{'is-invalid': productId.invalid && productId.touched}">
-                <option disabled [selected]="!productId.value">Seleccione una opción</option>
-                <option *ngFor="let data of products" [ngValue]="data.id" [selected]="productId.value == data.id">{{data.id}} - {{data.name}}</option>
+                <option disabled value="">Seleccione una opción</option>
+                <option *ngFor="let data of products" [ngValue]="data.id">{{data.id}} - {{data.name}}</option>
             </select>
             <div *ngIf="productId.invalid && productId.touched" class="text-danger">
                 <span *ngIf="productId.hasError('required')">El producto es requerido</span>

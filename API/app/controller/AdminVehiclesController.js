@@ -4,7 +4,7 @@ const fs = require('fs').promises;
 
 exports.getAllVehicles = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             AdminVehicles.getAllVehicles((err, vehicles) => {
                 if(err) {
                     res.send(err);
@@ -20,7 +20,7 @@ exports.getAllVehicles = function(req, res) {
 
 exports.getById = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             AdminVehicles.getById(req.params.id, (err, vehicle) => {
                 if(err) {
                     res.send(err);
@@ -36,7 +36,7 @@ exports.getById = function(req, res) {
 
 exports.add = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             let vehicle = new AdminVehicles(req.body);
 
             AdminVehicles.add(vehicle, (err, vehicles) => {
@@ -57,7 +57,7 @@ exports.add = function(req, res) {
 
 exports.update = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             let vehicle = new AdminVehicles(req.body);
 
             AdminVehicles.update(vehicle, (err, vehicles) => {
@@ -78,7 +78,7 @@ exports.update = function(req, res) {
 
 exports.logicDelete = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             AdminVehicles.logicDelete(req.params.id, (err, users) => {
                 if(err) {
                     res.send(err);
@@ -94,7 +94,7 @@ exports.logicDelete = function(req, res) {
 
 exports.reactive = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             AdminVehicles.reactive(req.params.id, (err, users) => {
                 if(err) {
                     res.send(err);
@@ -110,7 +110,7 @@ exports.reactive = function(req, res) {
 
 exports.delete = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             let remImages = [];
             images.forEach((image) => {
                 remImages.push(`./assets/images/${image.image}`);
@@ -134,7 +134,7 @@ exports.delete = function(req, res) {
 
 exports.getAllModels = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             AdminVehicles.getAllModels((err, models) => {
                 if(err) {
                     res.send(err);
@@ -150,7 +150,7 @@ exports.getAllModels = function(req, res) {
 
 exports.getAllTypes = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             AdminVehicles.getAllTypes((err, types) => {
                 if(err) {
                     res.send(err);
