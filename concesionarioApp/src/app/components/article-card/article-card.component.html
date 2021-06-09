@@ -1,5 +1,8 @@
 <div class="card position-relative" [routerLink]="['/articulos', article.id]">
-  <img [src]="article.image" class="card-img-top" alt="...">
+  <div class="position-relative">
+    <img [src]="article.image" class="card-img-top" alt="...">    
+    <span class="badge position-absolute bottom-0 end-0 mb-2 me-2" [ngClass]="{'bg-success': article.amount > 0 ,'bg-danger': article.amount <= 0}">Stock</span>
+  </div>
   <div class="card-body">
     <h5 class="card-title">{{ article.name }}</h5>
     <p class="card-subtitle mb-2 text-muted">{{ article.bname }} | {{ article.type }}</p>
