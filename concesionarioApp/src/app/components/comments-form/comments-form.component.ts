@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { CommentsService } from 'src/app/services/comments.service';
 import { ToastService } from 'src/app/services/toast.service';
+import { ValidationsService } from 'src/app/services/validations.service';
 import { CommentSend } from 'src/models/comments.model';
 
 @Component({
@@ -25,7 +26,8 @@ export class CommentsFormComponent implements OnInit, OnChanges {
 
   constructor(public _authService: AuthService,
     private _commentsService: CommentsService,
-    private _toastService: ToastService) { }
+    private _toastService: ToastService,
+    private _validationsService: ValidationsService) { }
 
   ngOnInit(): void {
   }
@@ -39,7 +41,7 @@ export class CommentsFormComponent implements OnInit, OnChanges {
   createFormControls() {
     this.title = new FormControl('', [Validators.required, Validators.maxLength(50), Validators.minLength(5)]);
     this.body = new FormControl('', [Validators.required, Validators.maxLength(255), Validators.minLength(10)]);
-    this.valoration = new FormControl(0, [Validators.required, Validators.max(5), Validators.min(0)]);
+    this.valoration = new FormControl(0, [Validators.required, Validators.max(5), Validators.min(0), Validators.pattern('^\\d+$')]);
   }
 
   createForm() {

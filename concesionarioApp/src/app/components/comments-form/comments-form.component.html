@@ -51,10 +51,11 @@
                   </div>
                 </span>
               </div>
-              <div *ngIf="valoration.invalid && valoration.touched" class="text-danger">
+              <div *ngIf="valoration.invalid && valoration.touched" class="text-danger d-flex flex-column">
                 <span *ngIf="valoration.getError('required')">Se requiere de una valoración</span>
                 <span *ngIf="valoration.getError('min')">La valoración mínima es de 0</span>
                 <span *ngIf="valoration.getError('max')">La valoración máxima es de 5</span>
+                <span *ngIf="valoration.getError('pattern')">La valoración ha de ser un número</span>
               </div>
             </div>
             <div class="col-auto">
