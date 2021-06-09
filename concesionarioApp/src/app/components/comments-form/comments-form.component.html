@@ -35,7 +35,7 @@
                   Valoración:
                 </label>
                 <div class="col-auto px-0">
-                  <ngb-rating [formControl]="valoration" [rate]="valoration.value" [max]="5"></ngb-rating>
+                  <ngb-rating [formControl]="valoration" [ngModel]="valoration.value"  [max]="5" [resettable]="true"></ngb-rating>
                 </div>
                 <span class="col-auto">
                   <div class="row d-flex align-items-center">

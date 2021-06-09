@@ -1,9 +1,8 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { CommentsService } from 'src/app/services/comments.service';
 import { ToastService } from 'src/app/services/toast.service';
-import { ValidationsService } from 'src/app/services/validations.service';
 import { CommentSend } from 'src/models/comments.model';
 
 @Component({
@@ -15,12 +14,14 @@ export class CommentsFormComponent implements OnInit, OnChanges {
 
   @Input() product_id: number;
 
+  @Output() add = new EventEmitter<void>();
+
   public exist: boolean;
 
-  myForm: FormGroup;
-  title: FormControl;
-  body: FormControl;
-  valoration: FormControl;
+  public myForm: FormGroup;
+  public title: FormControl;
+  public body: FormControl;
+  public valoration: FormControl;
 
   constructor(public _authService: AuthService,
     private _commentsService: CommentsService,
@@ -30,12 +31,7 @@ export class CommentsFormComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    if (this._authService.isAuthenticated()) {
-      this._commentsService.commentAlreadyExistValidation(this.product_id).subscribe((data) => {
-        this.exist = data.ok;
-      });
-    }
-    
+    this.checkCommentExist();
     this.createFormControls();
     this.createForm();
   }
@@ -54,6 +50,14 @@ export class CommentsFormComponent implements OnInit, OnChanges {
     });
   }
 
+  checkCommentExist() {
+    if (this._authService.isAuthenticated()) {
+      this._commentsService.commentAlreadyExistValidation(this.product_id).subscribe((data) => {
+        this.exist = data.ok;
+      });
+    }
+  }
+
   submit() {
     if (this.myForm.valid) {
       let comment: CommentSend = {
@@ -63,6 +67,9 @@ export class CommentsFormComponent implements OnInit, OnChanges {
 
       this._commentsService.insertCommentOfAProduct(comment).subscribe((data) => {
         this._toastService.show(data.msg);
+        this.myForm.reset();
+        this.exist = true;
+        this.add.emit();
       }, (err) => {
         this._toastService.show('No se ha podido agregar el comentario');
       });
