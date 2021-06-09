@@ -5,6 +5,7 @@ import { Subject, Subscription, timer } from 'rxjs';
 import jwt_decode from "jwt-decode";
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
+import { ToastService } from './toast.service';
 
 
 @Injectable({
@@ -17,23 +18,28 @@ export class AuthService {
 
   constructor(private _http: HttpClient,
     private _jwtHelper: JwtHelperService,
-    private _router: Router) { }
+    private _router: Router,
+    private _toastService: ToastService) { }
 
   login(user) {
     this._http.post(`${this.baseUrl}/login`, user).subscribe((data: any) => {
-      localStorage.setItem('token', data['token']);
-
-      if (this.tokenExpireSubscription && !this.tokenExpireSubscription.closed) {
-        this._router.navigateByUrl('/inicio');
-        this.tokenExpireSubscription.unsubscribe();
+      if (data.ok) {
+        localStorage.setItem('token', data['token']);
+  
+        if (this.tokenExpireSubscription && !this.tokenExpireSubscription.closed) {
+          this._router.navigateByUrl('/inicio');
+          this.tokenExpireSubscription.unsubscribe();
+        }
+  
+        const token: any = jwt_decode(data.token);
+  
+        this.dataToken.next(token);
+        this.saveDataToken(token);
+  
+        this.tokenExpireSubscription = timer(new Date(token.exp * 1000)).subscribe(() => this.logout());
+      } else {
+        this._toastService.show(data.msg);
       }
-
-      const token: any = jwt_decode(data.token);
-
-      this.dataToken.next(token);
-      this.saveDataToken(token);
-
-      this.tokenExpireSubscription = timer(new Date(token.exp * 1000)).subscribe(() => this.logout());
     });
   }
 

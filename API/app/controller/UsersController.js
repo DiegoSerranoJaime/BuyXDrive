@@ -25,11 +25,12 @@ exports.login = function(req, res) {
     
                 jwt.sign({user: trueUser}, 'secretkey', { expiresIn: '1h' }, (err, token) => {
                     res.json({
+                        ok: true,
                         token
                     });
                 });
             } else {
-                res.sendStatus(404);
+                res.send({ok: false, msg: 'No se ha podido iniciar sesión'});
             }
         });
     }

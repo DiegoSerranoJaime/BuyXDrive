@@ -26,8 +26,7 @@ export class CommentsFormComponent implements OnInit, OnChanges {
 
   constructor(public _authService: AuthService,
     private _commentsService: CommentsService,
-    private _toastService: ToastService,
-    private _validationsService: ValidationsService) { }
+    private _toastService: ToastService) { }
 
   ngOnInit(): void {
   }
