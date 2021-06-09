@@ -8,7 +8,7 @@ import { CartService } from 'src/app/services/cart.service';
 import { ImagesService } from 'src/app/services/images.service';
 import { combineLatest } from 'rxjs';
 import { ToastService } from 'src/app/services/toast.service';
-import { Location } from '@angular/common';
+import { getLocaleDateFormat, Location } from '@angular/common';
 
 @Component({
   selector: 'app-vehiculo',
@@ -35,17 +35,7 @@ export class VehiculoComponent implements OnInit {
     this._activatedRoute.params.subscribe((params) => {
       this.id = params.id;
 
-      combineLatest(this._vehiclesService.getVehicle(this.id),  this._imagesService.getImagesOfAProduct(this.id), this._commentsService.getCommentsOfAProduct(this.id))
-      .subscribe(([vehicle, images, comments]) => {
-        this.vehicle = vehicle;
-
-        this._vehiclesService.getInitVehiclesByType(vehicle.type, this.id).subscribe((data: VehicleCard[]) => {
-          this.vehicleRel = data;
-        });
-
-        this.images = images;
-        this.comments = comments;
-      });
+      this.getData();
     });
   }
 
@@ -60,5 +50,19 @@ export class VehiculoComponent implements OnInit {
     }
 
     this._toastService.show(message);
+  }
+
+  getData() {
+    combineLatest(this._vehiclesService.getVehicle(this.id),  this._imagesService.getImagesOfAProduct(this.id), this._commentsService.getCommentsOfAProduct(this.id))
+    .subscribe(([vehicle, images, comments]) => {
+      this.vehicle = vehicle;
+
+      this._vehiclesService.getInitVehiclesByType(vehicle.type, this.id).subscribe((data: VehicleCard[]) => {
+        this.vehicleRel = data;
+      });
+
+      this.images = images;
+      this.comments = comments;
+    });
   }
 }

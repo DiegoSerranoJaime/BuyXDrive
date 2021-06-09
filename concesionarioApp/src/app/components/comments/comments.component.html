@@ -1,5 +1,5 @@
 <div *ngIf="comments.length > 0; else noComments">
-  <div class="row d-flex justify-content-between mb-4" *ngFor="let comment of comments">
+  <div class="row d-flex justify-content-between mb-4" *ngFor="let comment of comments | slice:0:loadComments*page">
     <div class="col-12 col-md-3">
       <div class="col-12 text-center mt-2">
         <p>{{ comment.email }}</p>
@@ -20,6 +20,14 @@
           Publicado el: {{ comment.publication_date | date:'dd-MM-YYYY'}}
         </div>
       </div>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col text-center">
+        <button type="button" class="btn btn-primary" (click)="incrementPage()" [disabled]="!loadMore()">
+            Cargar más
+        </button>
     </div>
   </div>
 </div>

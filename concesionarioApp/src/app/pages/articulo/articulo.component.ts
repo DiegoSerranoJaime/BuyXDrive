@@ -33,17 +33,7 @@ export class ArticuloComponent implements OnInit {
     this._activatedRoute.params.subscribe((params) => {
       this.id = params.id;
 
-      combineLatest(this._articlesService.getArticle(this.id),  this._imagesService.getImagesOfAProduct(this.id), this._commentsService.getCommentsOfAProduct(this.id))
-      .subscribe(([article, images, comments]) => {
-        this.article = article;
-
-        this._articlesService.getInitArticlesByType(article.type, this.id).subscribe((data: ArticleCard[]) => {
-          this.articleRel = data;
-        });
-
-        this.images = images;
-        this.comments = comments;
-      });
+      this.getData();
     });
   }
 
@@ -58,5 +48,19 @@ export class ArticuloComponent implements OnInit {
     }
 
     this._toastService.show(message);
+  }
+
+  getData() {
+    combineLatest(this._articlesService.getArticle(this.id),  this._imagesService.getImagesOfAProduct(this.id), this._commentsService.getCommentsOfAProduct(this.id))
+    .subscribe(([article, images, comments]) => {
+      this.article = article;
+
+      this._articlesService.getInitArticlesByType(article.type, this.id).subscribe((data: ArticleCard[]) => {
+        this.articleRel = data;
+      });
+
+      this.images = images;
+      this.comments = comments;
+    });
   }
 }
