@@ -10,7 +10,7 @@ export class AdminGuard implements CanActivate {
     private _router: Router) {}
 
   canActivate() {
-    if (!this._authService.isAuthenticated() || this._authService.getDecodedToken().user_type !== 2) {
+    if (!this._authService.isAuthenticated() || this._authService.getDecodedToken().userType !== 2) {
       this._router.navigateByUrl('/home');
       return false;
     } else {

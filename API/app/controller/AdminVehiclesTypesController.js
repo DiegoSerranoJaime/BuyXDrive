@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 
 exports.getAll = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             AdminVehiclesTypes.getAll((err, vehiclesTypes) => {
                 if(err) {
                     res.send(err);
@@ -19,7 +19,7 @@ exports.getAll = function(req, res) {
 
 exports.getById = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             AdminVehiclesTypes.getById(req.params.id, (err, vehiclesTypes) => {
                 if(err) {
                     res.send(err);
@@ -35,7 +35,7 @@ exports.getById = function(req, res) {
 
 exports.delete = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             AdminVehiclesTypes.delete(req.params.id, (err, vehiclesTypes) => {
                 if(err) {
                     res.send(err);
@@ -52,7 +52,7 @@ exports.delete = function(req, res) {
 
 exports.add = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             let vehicleType = new AdminVehiclesTypes(null, req.body);
 
             AdminVehiclesTypes.add(vehicleType, (err, vehiclesTypes) => {
@@ -73,7 +73,7 @@ exports.add = function(req, res) {
 
 exports.update = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             let vehicleType = new AdminVehiclesTypes(req.params.id, req.body);
 
             AdminVehiclesTypes.update(vehicleType, (err, vehiclesTypes) => {

@@ -1,1 +1,37 @@
-<p>profile works!</p>
+<div class="d-flex flex-column">
+    <div class="flex-row d-flex justify-content-between mt-2 mb-4">
+        <div>
+            <h4>Perfil del usuario</h4>
+        </div>
+        <div class="d-flex">
+            <div class="col-auto">
+                <button mat-raised-button (click)="updatePassword()">
+                    Cambiar Contraseña
+                </button>
+            </div>
+            <div class="col-auto ms-2">
+                <button mat-raised-button color="warn" (click)="deactivate()">
+                    Desactivar Cuenta
+                </button>
+            </div>
+        </div>
+    </div>
+    <div>
+        <p><span class="fw-bold me-2">Nombre: </span> <span>{{ userData.name ? userData.name : 'Sin datos' }}</span> <a class="ms-2 fs-6 text-decoration-none" (click)="updateName()"><small>Editar</small></a></p>
+    </div>
+    <div>
+        <p><span class="fw-bold me-2">Apellidos: </span> <span>{{ userData.surname ? userData.surname : 'Sin datos' }}</span></p>
+    </div>
+    <div>
+        <p><span class="fw-bold me-2">Correo Electrónico: </span> <span>{{ userData.email ? userData.email : 'Sin datos' }}</span> <a class="ms-2 fs-6 text-decoration-none" (click)="updateEmail()"><small>Editar</small></a></p>
+    </div>
+    <div>
+        <p><span class="fw-bold me-2">Género: </span> <span>{{ gender ? gender.name : 'Sin datos' }}</span> <a class="ms-2 fs-6 text-decoration-none" (click)="updateGender()"><small>Editar</small></a></p>
+    </div>
+    <div>
+        <p><span class="fw-bold me-2">Dirección: </span> <span>{{ userData.address ? userData.address : 'Sin datos' }}</span> <a class="ms-2 fs-6 text-decoration-none" (click)="updateAddress()"><small>Editar</small></a></p>
+    </div>
+    <div>
+        <p><span class="fw-bold me-2">Número de Teléfono: </span> <span>{{ userData.phoneNumber ? userData.phoneNumber : 'Sin datos' }}</span> <a class="ms-2 fs-6 text-decoration-none" (click)="updatePhoneNumber()"><small>Editar</small></a></p>
+    </div>
+</div>

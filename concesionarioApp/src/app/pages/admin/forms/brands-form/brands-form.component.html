@@ -15,8 +15,8 @@
     <div class="mb-3" *ngIf="!data">
       <label for="type" class="form-label">Tipo</label>
       <select class="form-select" [formControl]="type" [ngClass]="{'is-invalid': type.invalid && type.touched}">
-          <option disabled [selected]="!type.value">Seleccione una opción</option>
-          <option *ngFor="let data of types" [ngValue]="data" [selected]="type.value == data">{{data}}</option>
+          <option disabled value="">Seleccione una opción</option>
+          <option *ngFor="let data of types" [ngValue]="data">{{data}}</option>
       </select>
       <div *ngIf="type.invalid && type.touched" class="text-danger">
         <span *ngIf="type.hasError('required')">El tipo es requerido</span>

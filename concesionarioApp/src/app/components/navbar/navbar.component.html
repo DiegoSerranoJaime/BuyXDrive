@@ -52,7 +52,7 @@
                   <li><a class="dropdown-item" routerLink="/user/profile">Perfil</a></li>
                   <li><a class="dropdown-item" routerLink="/user/history">Historial</a></li>
                   <li><a class="dropdown-item" routerLink="/user/orders">Pedidos</a></li>
-                  <li><a class="dropdown-item" routerLink="/admin/users" *ngIf="userData.user_type === 2">Administración</a></li>
+                  <li><a class="dropdown-item" routerLink="/admin/users" *ngIf="userData.userType === 2">Administración</a></li>
                   <li><hr></li>
                   <li><a class="dropdown-item text-danger" (click)="logout()">Cerrar Sesión</a></li>
                 </ul>

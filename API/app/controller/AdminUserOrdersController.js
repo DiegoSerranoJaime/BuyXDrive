@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 
 exports.getAll = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             AdminUserOrders.getAll(req.params, (err, orders) => {
                 if(err) {
                     res.send(err);
@@ -19,7 +19,7 @@ exports.getAll = function(req, res) {
 
 exports.accept = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             AdminUserOrders.accept(req.params, (err, orders) => {
                 if(err) {
                     res.send(err);
@@ -35,7 +35,7 @@ exports.accept = function(req, res) {
 
 exports.denegate = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             AdminUserOrders.denegate(req.params, (err, orders) => {
                 if(err) {
                     res.send(err);
@@ -51,7 +51,7 @@ exports.denegate = function(req, res) {
 
 exports.onWay = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             AdminUserOrders.onWay(req.params, (err, orders) => {
                 if(err) {
                     res.send(err);
@@ -67,7 +67,7 @@ exports.onWay = function(req, res) {
 
 exports.deliver = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             AdminUserOrders.deliver(req.params, (err, orders) => {
                 if(err) {
                     res.send(err);

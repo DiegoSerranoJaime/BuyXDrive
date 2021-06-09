@@ -1,19 +1,20 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { Subject, Subscription, timer } from 'rxjs';
+import { Observable, of, Subject, Subscription, timer } from 'rxjs';
 import jwt_decode from "jwt-decode";
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { ToastService } from './toast.service';
+import { User } from 'src/models/user.model';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  tokenExpireSubscription: Subscription;
   baseUrl: string = `${environment.urlApi}/user`;
+  tokenExpireSubscription: Subscription;
   dataToken: Subject<any> = new Subject();
 
   constructor(private _http: HttpClient,
@@ -23,23 +24,7 @@ export class AuthService {
 
   login(user) {
     this._http.post(`${this.baseUrl}/login`, user).subscribe((data: any) => {
-      if (data.ok) {
-        localStorage.setItem('token', data['token']);
-  
-        if (this.tokenExpireSubscription && !this.tokenExpireSubscription.closed) {
-          this._router.navigateByUrl('/inicio');
-          this.tokenExpireSubscription.unsubscribe();
-        }
-  
-        const token: any = jwt_decode(data.token);
-  
-        this.dataToken.next(token);
-        this.saveDataToken(token);
-  
-        this.tokenExpireSubscription = timer(new Date(token.exp * 1000)).subscribe(() => this.logout());
-      } else {
-        this._toastService.show(data.msg);
-      }
+      this.manageToken(data);
     });
   }
 
@@ -51,6 +36,25 @@ export class AuthService {
     localStorage.removeItem('token');
     localStorage.removeItem('dataToken');
     this._router.navigateByUrl('/inicio');
+  }
+
+  manageToken(data: any) {
+    if (data.ok) {
+      localStorage.setItem('token', data['token']);
+
+      if (this.tokenExpireSubscription && !this.tokenExpireSubscription.closed) {
+        this.tokenExpireSubscription.unsubscribe();
+      }
+
+      const token: any = jwt_decode(data.token);
+
+      this.dataToken.next(token);
+      this.saveDataToken(token);
+
+      this.tokenExpireSubscription = timer(new Date(token.exp * 1000)).subscribe(() => this.logout());
+    } else {
+      this._toastService.show(data.msg);
+    }
   }
 
   isAuthenticated(): boolean {
@@ -69,7 +73,7 @@ export class AuthService {
     return false;
   }
 
-  getDecodedToken(): any{
+  getDecodedToken(): User{
     let token
 
     if (localStorage.getItem('dataToken')) {
@@ -95,5 +99,89 @@ export class AuthService {
     }
 
     return null;
+  }
+
+  updateName(formData: any): Observable<any> {
+    const subject = new Subject<boolean>();
+
+    this._http.put(`${this.baseUrl}/update/name`, formData, {
+      headers: this.getToken()
+    }).subscribe((data: any) => {
+      this.manageToken(data);
+      subject.next(data);
+    });
+    
+    return subject;
+  }
+  
+  updateEmail(formData: any): Observable<any> {
+    const subject = new Subject<boolean>();
+
+    this._http.put(`${this.baseUrl}/update/email`, formData, {
+      headers: this.getToken()
+    }).subscribe((data: any) => {
+      this.manageToken(data);
+      subject.next(data);
+    });
+    
+    return subject;
+  }
+  
+  updatePassword(formData: any): Observable<any> {
+    const subject = new Subject<boolean>();
+
+    this._http.put(`${this.baseUrl}/update/password`, formData, {
+      headers: this.getToken()
+    }).subscribe((data: any) => {
+      this.manageToken(data);
+      subject.next(data);
+    });
+    
+    return subject;
+  }
+  
+  updateGender(formData: any): Observable<any> {
+    const subject = new Subject<boolean>();
+
+    this._http.put(`${this.baseUrl}/update/gender`, formData, {
+      headers: this.getToken()
+    }).subscribe((data: any) => {
+      this.manageToken(data);
+      subject.next(data);
+    });
+    
+    return subject;
+  }
+  
+  updateAddress(formData: any): Observable<any> {
+    const subject = new Subject<boolean>();
+
+    this._http.put(`${this.baseUrl}/update/address`, formData, {
+      headers: this.getToken()
+    }).subscribe((data: any) => {
+      this.manageToken(data);
+      subject.next(data);
+    });
+    
+    return subject;
+  }
+  
+  updatePhoneNumber(formData: any): Observable<any> {
+    const subject = new Subject<boolean>();
+
+    this._http.put(`${this.baseUrl}/update/phoneNumber`, formData, {
+      headers: this.getToken()
+    }).subscribe((data: any) => {
+      this.manageToken(data);
+      subject.next(data);
+    }); 
+    
+    return subject;
+  }
+
+  logicDelete(): Observable<any> {
+    return this._http.get(`${this.baseUrl}/logicDelete`, {
+      headers: this.getToken()
+    }); 
   }
 }

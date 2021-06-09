@@ -79,12 +79,12 @@ export class UserFormComponent implements OnInit {
     ]);
 
     this.phoneNumber = new FormControl(this.user ? this.user.phone_number : '', [
-      Validators.required
+      Validators.required,
+      Validators.pattern('[0-9]{9}')
     ]);
   }
 
   buildFormGroup() {
-
     this.form = new FormGroup({
       name: this.name,
       surname: this.surname,

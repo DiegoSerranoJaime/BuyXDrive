@@ -39,8 +39,7 @@ exports.addComment = function(req, res) {
                 });
             }
         }
-    })
-
+    });
 }
 
 exports.getCommentsOfAProduct = function(req, res) {

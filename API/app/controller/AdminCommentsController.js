@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 
 exports.getAll = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             AdminComments.getAll((err, brands) => {
                 if(err) {
                     res.send(err);
@@ -19,7 +19,7 @@ exports.getAll = function(req, res) {
 
 exports.getAllByUser = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             AdminComments.getAllByUser(req.params.id, (err, brands) => {
                 if(err) {
                     res.send(err);

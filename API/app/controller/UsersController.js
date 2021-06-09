@@ -20,7 +20,7 @@ exports.login = function(req, res) {
                     gender: user[0].gender,
                     address: user[0].address,
                     phoneNumber: user[0].phone_number,
-                    user_type: user[0].user_type,
+                    userType: user[0].user_type,
                 };
     
                 jwt.sign({user: trueUser}, 'secretkey', { expiresIn: '1h' }, (err, token) => {
@@ -79,6 +79,16 @@ exports.getAllGenders = function(req, res) {
     });
 }
 
+exports.getGenderById = function(req, res) {
+    Users.getGenderById(req.params.id, (err, gender) => {
+        if (err) {
+            res.send(err);
+        }
+        
+        res.send(gender);
+    });
+}
+
 exports.getAllEmployerTypes = function(req, res) {
     Users.getAllEmployerTypes((err, userTypes) => {
         if (err) {
@@ -86,6 +96,313 @@ exports.getAllEmployerTypes = function(req, res) {
         }
 
         res.send(userTypes);
+    });
+}
+
+exports.updateName = function(req, res) {
+    jwt.verify(req.token, 'secretkey', (err, authData) => {
+
+        if (err) {
+            res.sendStatus(403);
+        } else {
+            let user = req.body;
+            user.id = authData.user.id;
+        
+            if (!user.name || !user.surname) {
+                res.send({ok: false,  msg: 'No data send'});
+            } else {
+                Users.updateName(user, (err, data) => {    
+                    if (err) {
+                        res.send(err);
+                    }
+
+                    if (data) {
+                        const trueUser = {
+                            id: authData.user.id,
+                            name: user.name,
+                            surname: user.surname,
+                            email: authData.user.email,
+                            gender: authData.user.gender,
+                            address: authData.user.address,
+                            phoneNumber: authData.user.phoneNumber,
+                            userType: authData.user.userType,
+                        };
+            
+                        jwt.sign({user: trueUser}, 'secretkey', { expiresIn: '1h' }, (err, token) => {
+                            res.json({
+                                ok: true,
+                                token
+                            });
+                        });
+                    } else {
+                        res.send({
+                            ok: false
+                        });
+                    }
+                });
+            }
+        }
+    });
+}
+
+exports.updateEmail = function(req, res) {
+    jwt.verify(req.token, 'secretkey', (err, authData) => {
+
+        if (err) {
+            res.sendStatus(403);
+        } else {
+            let user = req.body;
+            user.id = authData.user.id;
+        
+            if (!user.email) {
+                res.send({ok: false,  msg: 'No data send'});
+            } else if (!validateEmail(user.email)) {
+                res.send({ok: false,  msg: 'Email format is incorrect'});
+            } else {
+                Users.updateEmail(user, (err, data) => {    
+                    if (err) {
+                        res.send(err);
+                    }
+
+                    if (data) {
+                        const trueUser = {
+                            id: authData.user.id,
+                            name: authData.user.name,
+                            surname: authData.user.surname,
+                            email: user.email,
+                            gender: authData.user.gender,
+                            address: authData.user.address,
+                            phoneNumber: authData.user.phoneNumber,
+                            userType: authData.user.userType,
+                        };
+            
+                        jwt.sign({user: trueUser}, 'secretkey', { expiresIn: '1h' }, (err, token) => {
+                            res.json({
+                                ok: true,
+                                token
+                            });
+                        });
+                    } else {
+                        res.send({
+                            ok: false
+                        });
+                    }
+                });
+            }
+        }
+    });
+}
+
+exports.updatePassword = function(req, res) {
+    jwt.verify(req.token, 'secretkey', (err, authData) => {
+
+        if (err) {
+            res.sendStatus(403);
+        } else {
+            let user = req.body;
+            user.id = authData.user.id;
+        
+            if (!user.password || !user.passwordConfirmation) {
+                res.send({ok: false,  msg: 'No data send'});
+            } else if(user.password != user.passwordConfirmation) {
+                res.send({ok: false,  msg: 'Las contraseñas no coinciden'});
+            } else {
+                Users.updatePassword(user, (err, data) => {    
+                    if (err) {
+                        res.send(err);
+                    }
+
+                    if (data) {
+                        const trueUser = {
+                            id: authData.user.id,
+                            name: authData.user.name,
+                            surname: authData.user.surname,
+                            email: authData.user.email,
+                            gender: authData.user.gender,
+                            address: authData.user.address,
+                            phoneNumber: authData.user.phoneNumber,
+                            userType: authData.user.userType,
+                        };
+            
+                        jwt.sign({user: trueUser}, 'secretkey', { expiresIn: '1h' }, (err, token) => {
+                            res.json({
+                                ok: true,
+                                token
+                            });
+                        });
+                    } else {
+                        res.send({
+                            ok: false
+                        });
+                    }
+                });
+            }
+        }
+    });
+}
+
+exports.updateGender = function(req, res) {
+    jwt.verify(req.token, 'secretkey', (err, authData) => {
+
+        if (err) {
+            res.sendStatus(403);
+        } else {
+            let user = req.body;
+            user.id = authData.user.id;
+        
+            if (!user.gender) {
+                res.send({ok: false,  msg: 'No data send'});
+            } else {
+                Users.updateGender(user, (err, data) => {    
+                    if (err) {
+                        res.send(err);
+                    }
+        
+                    if (data) {
+                        const trueUser = {
+                            id: authData.user.id,
+                            name: authData.user.name,
+                            surname: authData.user.surname,
+                            email: authData.user.email,
+                            gender: user.gender,
+                            address: authData.user.address,
+                            phoneNumber: authData.user.phoneNumber,
+                            userType: authData.user.userType,
+                        };
+            
+                        jwt.sign({user: trueUser}, 'secretkey', { expiresIn: '1h' }, (err, token) => {
+                            res.json({
+                                ok: true,
+                                token
+                            });
+                        });
+                    } else {
+                        res.send({
+                            ok: false
+                        });
+                    }
+                });
+            }
+        }
+    });
+}
+
+exports.updateAddress = function(req, res) {
+    jwt.verify(req.token, 'secretkey', (err, authData) => {
+
+        if (err) {
+            res.sendStatus(403);
+        } else {
+            let user = req.body;
+            user.id = authData.user.id;
+        
+            if (!user.address) {
+                res.send({ok: false,  msg: 'No data send'});
+            } else {
+                Users.updateAddress(user, (err, data) => {    
+                    if (err) {
+                        res.send(err);
+                    }
+        
+                    if (data) {
+                        const trueUser = {
+                            id: authData.user.id,
+                            name: authData.user.name,
+                            surname: authData.user.surname,
+                            email: authData.user.email,
+                            gender: authData.user.gender,
+                            address: user.address,
+                            phoneNumber: authData.user.phoneNumber,
+                            userType: authData.user.userType,
+                        };
+            
+                        jwt.sign({user: trueUser}, 'secretkey', { expiresIn: '1h' }, (err, token) => {
+                            res.json({
+                                ok: true,
+                                token
+                            });
+                        });
+                    } else {
+                        res.send({
+                            ok: false
+                        });
+                    }
+                });
+            }
+        }
+    });
+}
+
+exports.updatePhoneNumber = function(req, res) {
+    jwt.verify(req.token, 'secretkey', (err, authData) => {
+
+        if (err) {
+            res.sendStatus(403);
+        } else {
+            let user = req.body;
+            user.id = authData.user.id;
+        
+            if (!user.phoneNumber) {
+                res.send({ok: false,  msg: 'No data send'});
+            } else {
+                Users.updatePhoneNumber(user, (err, data) => {    
+                    if(err) {
+                        res.send(err);
+                    }
+        
+                    if (data) {
+                        const trueUser = {
+                            id: authData.user.id,
+                            name: authData.user.name,
+                            surname: authData.user.surname,
+                            email: authData.user.email,
+                            gender: authData.user.gender,
+                            address: authData.user.address,
+                            phoneNumber: user.phoneNumber,
+                            userType: authData.user.userType,
+                        };
+            
+                        jwt.sign({user: trueUser}, 'secretkey', { expiresIn: '1h' }, (err, token) => {
+                            res.json({
+                                ok: true,
+                                token
+                            });
+                        });
+                    } else {
+                        res.send({
+                            ok: false
+                        });
+                    }
+                });
+            }
+        }
+    });
+}
+
+exports.logicDelete = function(req, res) {
+    jwt.verify(req.token, 'secretkey', (err, authData) => {
+
+        if (err) {
+            res.sendStatus(403);
+        } else {
+            Users.logicDelete(authData.user.id, (err, user) => {    
+                if (err) {
+                    res.send(err);
+                }
+    
+                if (user) {
+                    res.send({
+                        ok: true,
+                        msg: 'Cuenta desactivada'
+                    });
+                } else {
+                    res.send({
+                        ok: false,
+                        msg: 'No se ha podido desactivar la cuenta'
+                    });
+                }
+            });
+        }
     });
 }
 

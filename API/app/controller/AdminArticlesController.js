@@ -4,7 +4,7 @@ const fs = require('fs').promises;
 
 exports.getAllArticles = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             AdminArticles.getAllArticles((err, articles) => {
                 if(err) {
                     res.send(err);
@@ -20,7 +20,7 @@ exports.getAllArticles = function(req, res) {
 
 exports.getById = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             AdminArticles.getById(req.params.id ,(err, article) => {
                 if(err) {
                     res.send(err);
@@ -37,7 +37,7 @@ exports.getById = function(req, res) {
 
 exports.logicDelete = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             AdminArticles.logicDelete(req.params.id, (err, users) => {
                 if(err) {
                     res.send(err);
@@ -53,7 +53,7 @@ exports.logicDelete = function(req, res) {
 
 exports.reactive = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             AdminArticles.reactive(req.params.id, (err, users) => {
                 if(err) {
                     res.send(err);
@@ -69,7 +69,7 @@ exports.reactive = function(req, res) {
 
 exports.delete = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             AdminArticles.getAllImages(req.params.id, (err, images) => {
                 let remImages = [];
                 images.forEach((image) => {
@@ -96,7 +96,7 @@ exports.delete = function(req, res) {
 
 exports.add = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             let article = new AdminArticles(req.body);
 
             AdminArticles.add(article, (err, articles) => {
@@ -117,7 +117,7 @@ exports.add = function(req, res) {
 
 exports.update = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             let article = new AdminArticles(req.body);
 
             AdminArticles.update(article, (err, articles) => {
@@ -138,7 +138,7 @@ exports.update = function(req, res) {
 
 exports.getAllTypes = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             AdminArticles.getAllTypes((err, types) => {
                 if(err) {
                     res.send(err);
@@ -154,7 +154,7 @@ exports.getAllTypes = function(req, res) {
 
 exports.getAllBrands = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.user_type == 2) {
+        if (authData.user.userType == 2) {
             AdminArticles.getAllBrands((err, brands) => {
                 if(err) {
                     res.send(err);

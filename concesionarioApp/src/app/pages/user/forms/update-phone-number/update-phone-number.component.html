@@ -1,0 +1,16 @@
+<div *ngIf="form">
+    <form [formGroup]="form">
+        <div>
+            <label for="phoneNumber" class="form-label">Número de teléfono</label>
+            <div [ngClass]="{'input-group': data}">
+                <input type="text" class="form-control" id="phoneNumber" formControlName="phoneNumber" [ngClass]="{'is-invalid': phoneNumber.touched && phoneNumber.invalid}">
+                <button *ngIf="data" class="btn btn-primary" (click)="phoneNumber.setValue(data.phoneNumber)">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+            <div class="text-danger" *ngIf="phoneNumber.touched && phoneNumber.invalid">
+                <span *ngIf="phoneNumber.hasError('required')">El número de teléfono es requerido</span>
+            </div>
+        </div>
+    </form>
+</div>
