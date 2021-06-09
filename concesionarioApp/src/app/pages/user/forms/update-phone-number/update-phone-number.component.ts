@@ -22,7 +22,8 @@ export class UpdatePhoneNumberComponent implements OnInit {
 
   buildFormControls() {
     this.phoneNumber = new FormControl(this.data.phoneNumber, [
-      Validators.required
+      Validators.required,
+      Validators.pattern('[0-9]{9}')
     ]);
   }
 
