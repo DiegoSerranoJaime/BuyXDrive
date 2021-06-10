@@ -128,7 +128,7 @@ Articles.getArticle = function(id, result) {
                 INNER JOIN brands ON articles.brand = brands.id 
                 LEFT JOIN comments ON comments.product_id = products.id 
                 GROUP BY products.id 
-                HAVING products.id = ? AND products.active = 1`;
+                HAVING products.id = ?`;
 
     sql.query(query, id, (err, res) => {
         if (err) {
