@@ -99,6 +99,19 @@ Products.restoreStock = function(product, result) {
     });
 }
 
+Products.reduceStock = function(product, result) {
+    let query = `UPDATE products SET amount = (amount - ?) WHERE id = ?`;
+
+    sql.query(query, [product.amount, product.product_id], (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+
+        result(null, res);
+    });
+}
+
 Products.amountValidation = function(product, result) {
     let query = `SELECT * FROM products WHERE id = ? AND amount >= ?`;
 

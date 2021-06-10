@@ -389,6 +389,9 @@ module.exports = function(app) {
     app.route('/api/products/restoreStock')
         .put(verifyToken, Products.restoreStock);
 
+    app.route('/api/products/reduceStock')
+        .put(verifyToken, Products.reduceStock);
+
     app.route('/api/products/update/:id')
         .put(verifyToken, Products.update);
         

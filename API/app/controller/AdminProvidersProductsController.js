@@ -43,10 +43,17 @@ exports.add = function(req, res) {
                     res.send(err);
                 }
                 
-                res.json({
-                    ok: true,
-                    data: products
-                });
+                if (products && products.duplicate) {
+                    res.json({
+                        ok: false
+                    });
+                } else {
+                    res.json({
+                        ok: true,
+                        data: products
+                    });
+                }
+
             });
         } else {
             res.json({ok: false, msg: 'Permission denied'});

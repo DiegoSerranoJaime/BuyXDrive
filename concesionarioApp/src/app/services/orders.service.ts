@@ -14,6 +14,7 @@ import { ProductsService } from './products.service';
 export class OrdersService {
 
   private baseUrl: string = `${ environment.urlApi }/orders`;
+  private productUrl: string = `${ environment.urlApi }/products`;
   public orderColumns: string[] = ['Código', 'Estado', 'Fecha del pedido', 'Fecha de entrega', 'Acciones'];
   public orderFields: any[] = [
     {
@@ -58,6 +59,10 @@ export class OrdersService {
         };
 
         this._http.post(`${this.baseUrl}/product`, dataEnvio, {
+          headers: this._authService.getToken()
+        }).subscribe();
+
+        this._http.put(`${this.productUrl}/reduceStock`, dataEnvio, {
           headers: this._authService.getToken()
         }).subscribe();
       });

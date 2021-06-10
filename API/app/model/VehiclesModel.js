@@ -67,7 +67,7 @@ Vehicles.getTopVehicles = function(result) {
                 INNER JOIN orders_products ON orders_products.product_id = products.id
                 GROUP BY products.id
                 HAVING products.active = 1
-                ORDER BY total, products.id DESC 
+                ORDER BY total DESC 
                 LIMIT 0, 3`;
 
     sql.query(query, (err, res) => {

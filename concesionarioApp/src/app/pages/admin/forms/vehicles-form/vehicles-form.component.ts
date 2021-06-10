@@ -17,7 +17,7 @@ export class VehiclesFormComponent implements OnInit {
   public models: any[] = [];
   public types: any[] = [];
 
-  public selectTractions = ['Trasera', 'Delantera'];
+  public selectTractions = ['Trasera', 'Delantera', 'Total'];
   public selectTransmissions = ['Manual', 'Automática'];
   public selectFuel = ['Eléctrico', 'Diesel', 'Gasolina'];
 

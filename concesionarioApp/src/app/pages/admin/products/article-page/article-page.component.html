@@ -30,7 +30,7 @@
                         <li class="list-group-item d-flex justify-content-between">Valoración: <span>{{ article.val }}</span></li>
                         <li class="list-group-item d-flex justify-content-between">Cantidad de valoraciones: <span>{{ article.cant }}</span></li>
                         <li class="list-group-item d-flex justify-content-between">Cantidad: <span>{{ article.amount }}</span></li>
-                        <li class="list-group-item d-flex justify-content-between">Precio: <span>{{ article.price }}€</span></li>
+                        <li class="list-group-item d-flex justify-content-between">Precio: <span>{{ article.price | number:'.2-2' }}€</span></li>
                         <li class="list-group-item d-flex justify-content-between">Descuento: <span>{{ article.discount }}%</span></li>
                         <li class="list-group-item d-flex justify-content-between">Precio Final: <span>{{ article.price | discount:article.discount | number:'.2-2' }}€</span></li>
                     </ul>

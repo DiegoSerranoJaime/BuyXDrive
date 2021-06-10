@@ -23,7 +23,7 @@ exports.login = function(req, res) {
                     userType: user[0].user_type,
                 };
     
-                jwt.sign({user: trueUser}, 'secretkey', { expiresIn: '1h' }, (err, token) => {
+                jwt.sign({user: trueUser}, 'secretkey', { expiresIn: '1w' }, (err, token) => {
                     res.json({
                         ok: true,
                         token

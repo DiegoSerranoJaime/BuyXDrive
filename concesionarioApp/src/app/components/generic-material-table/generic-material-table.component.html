@@ -17,7 +17,7 @@
     </ng-container>
 
     <ng-container [matColumnDef]="displayedColumns[0] == 'Contador' ? displayedColumns[i + 1] : displayedColumns[i]" *ngFor="let data of displayedData; index as i; first as first">
-      <th mat-header-cell *matHeaderCellDef [mat-sort-header]="data.field" > {{ displayedColumns[0] == 'Contador' ? displayedColumns[i + 1] : displayedColumns[i] }} </th>
+      <th mat-header-cell *matHeaderCellDef [mat-sort-header]="data.field"> {{ displayedColumns[0] == 'Contador' ? displayedColumns[i + 1] : displayedColumns[i] }} </th>
       <td mat-cell *matCellDef="let element; index as contador">
         <span *ngIf="data.type == 'string' || data.type == 'number'">{{ element[data.field] }}</span>
         <span *ngIf="data.type == 'date'">{{ element[data.field] | date:'dd-MM-YYYY' }}</span>

@@ -32,7 +32,8 @@ AdminProvidersProducts.getAll = function(id, result) {
                 LEFT JOIN models ON vehicles.model_id = models.id
                 LEFT JOIN brands AS b2 ON models.brand_id = b2.id
                 LEFT JOIN status ON providers_products.status = status.id
-                WHERE provider_id = ?`;
+                WHERE provider_id = ?
+                ORDER BY status.id ASC`;
 
     sql.query(query, id, (err, res) => {
         if (err) {
@@ -59,17 +60,25 @@ AdminProvidersProducts.delete = function(id, result) {
 }
 
 AdminProvidersProducts.add = function(product, result) {
-    
+
+    let checkQuery = 'SELECT * FROM providers_products WHERE product_id = ? AND provider_id = ? AND order_date = ?';
     let query = `INSERT INTO providers_products SET ?`;
 
-    sql.query(query, product ,(err, res) => {
-        if (err) {
-            console.log("error: ", err);
-            result(err, null);
+    sql.query(checkQuery, [product.product_id, product.provider_id, dateformat(product.order_date, "yyyy-mm-dd")], (err, data) => {
+        if (data.length == 0) {
+            sql.query(query, product ,(err, res) => {
+                if (err) {
+                    console.log("error: ", err);
+                    result(err, null);
+                }
+        
+                return AdminProvidersProducts.getAll(product.provider_id, result);
+            });
+        } else {
+            result(null, {duplicate: true});
         }
-
-        return AdminProvidersProducts.getAll(product.provider_id, result);
     });
+
 }
 
 AdminProvidersProducts.deliver = function(id, result) {

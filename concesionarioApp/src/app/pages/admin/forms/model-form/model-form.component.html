@@ -8,6 +8,9 @@
                     <i class="fas fa-sync-alt"></i>
                 </button>
             </div>
+            <div class="text-danger" *ngIf="name.touched && name.invalid">
+                <span *ngIf="name.hasError('required')">El nombre es requerido</span>
+            </div>
         </div>
     </form>
 </div>
