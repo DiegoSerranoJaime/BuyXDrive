@@ -1,6 +1,7 @@
 "use strict";
 
 const sql = require('./db');
+const dateformat = require('dateformat');
 
 let AdminProvidersProducts = function(ids, product) {
     this.provider_id = ids.providerId;
@@ -43,30 +44,11 @@ AdminProvidersProducts.getAll = function(id, result) {
     });
 }
 
-AdminProvidersProducts.getById = function(id, result) {
-    
-    let query = `SELECT 
-                    product_id,
-                    amount,
-                    price
-                FROM providers_products
-                WHERE provider_id = ? AND product_id = ?`;
-
-    sql.query(query, [id.providerId, id.productId], (err, res) => {
-        if (err) {
-            console.log("error: ", err);
-            result(err, null);
-        }
-
-        result(null, res);
-    });
-}
-
 AdminProvidersProducts.delete = function(id, result) {
     
-    let query = `DELETE FROM providers_products WHERE provider_id = ? AND product_id = ?`;
+    let query = `DELETE FROM providers_products WHERE provider_id = ? AND product_id = ? AND order_date = ?`;
 
-    sql.query(query, [id.providerId, id.productId] ,(err, res) => {
+    sql.query(query, [id.providerId, id.productId, dateformat(id.orderDate, "yyyy-mm-dd")] ,(err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -91,10 +73,9 @@ AdminProvidersProducts.add = function(product, result) {
 }
 
 AdminProvidersProducts.deliver = function(id, result) {
-
-    let query = `UPDATE providers_products SET status = 4, delivery_date = ? WHERE provider_id = ? AND product_id = ?`;
+    let query = `UPDATE providers_products SET status = 4, delivery_date = ? WHERE provider_id = ? AND product_id = ? AND order_date = ?`;
     
-    sql.query(query, [new Date(), id.providerId, id.productId], (err, res) => {
+    sql.query(query, [new Date(), id.providerId, id.productId, dateformat(id.orderDate, "yyyy-mm-dd")], (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -106,9 +87,9 @@ AdminProvidersProducts.deliver = function(id, result) {
 
 AdminProvidersProducts.cancel = function(id, result) {
 
-    let query = `UPDATE providers_products SET status = 5 WHERE provider_id = ? AND product_id = ?`;
+    let query = `UPDATE providers_products SET status = 5 WHERE provider_id = ? AND product_id = ? AND order_date = ?`;
     
-    sql.query(query, [id.providerId, id.productId], (err, res) => {
+    sql.query(query, [id.providerId, id.productId, dateformat(id.orderDate, "yyyy-mm-dd")], (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);

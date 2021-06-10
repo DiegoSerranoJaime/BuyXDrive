@@ -59,7 +59,7 @@
             <span class="badge" [ngClass]="{'bg-success': vehicle.amount > 0, 'bg-danger': vehicle.amount <= 0}">Stock: {{vehicle.amount <= 0 ? 'No disponible' : 'Disponible'}}</span>
           </div>
 
-          <p class="d-flex justify-content-between">Precio: <span>{{ vehicle.price }}€</span></p>
+          <p class="d-flex justify-content-between">Precio: <span>{{ vehicle.price | number:'.2-2' }}€</span></p>
           <p class="d-flex justify-content-between">Descuento: <span>{{ vehicle.discount }}%</span></p>
           
           <hr>

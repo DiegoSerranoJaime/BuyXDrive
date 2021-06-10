@@ -60,11 +60,14 @@
           </button>
         </div>
         <div *ngIf="checkPermission('externalOrder')" class="d-inline">
-          <button type="button" *ngIf="element.status == 'Pendiente'" class="btn btn-danger me-1" (click)="cancelOrder(element.id)" data-bs-toggle="tooltip" data-bs-placement="top" title="Cancelar">
+          <button type="button" *ngIf="element.status == 'Pendiente'" class="btn btn-danger me-1" (click)="cancelOrder(element.id, element.order_date)" data-bs-toggle="tooltip" data-bs-placement="top" title="Cancelar">
             <i class="fas fa-times"></i>
           </button>
-          <button type="button" *ngIf="element.status == 'Pendiente'" class="btn btn-primary me-1" (click)="deliver(element.id)" data-bs-toggle="tooltip" data-bs-placement="top" title="Entregar">
+          <button type="button" *ngIf="element.status == 'Pendiente'" class="btn btn-primary me-1" (click)="deliver(element.id, element.order_date)" data-bs-toggle="tooltip" data-bs-placement="top" title="Entregar">
             <i class="far fa-handshake"></i>
+          </button>
+          <button type="button" [disabled]="element.status && element.status == 'Entregado'" class="btn btn-danger me-1" (click)="deleteElement(element.id, element.order_date)" data-bs-toggle="tooltip" data-bs-placement="top" title="Eliminado físico">
+            <i class="fas fa-trash-alt"></i>
           </button>
         </div>
         <div *ngIf="checkPermission('logicDelete')" class="d-inline">

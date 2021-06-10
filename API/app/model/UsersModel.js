@@ -58,7 +58,7 @@ Users.getAllGenders = function(result) {
 }
 
 Users.getGenderById = function(id, result) {
-    sql.query("SELECT * FROM genders", id, (err, res) => {
+    sql.query("SELECT * FROM genders WHERE id = ?", id, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null)

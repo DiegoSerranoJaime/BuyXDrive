@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { AdminProviderPorduct, ProviderPorductForm } from 'src/models/adminProvidersProducts.models';
 import { AuthService } from './auth.service';
+import { ProductsService } from './products.service';
 
 @Injectable({
   providedIn: 'root'
@@ -53,8 +54,8 @@ export class AdminProvidersProductsService {
   ];
 
   constructor(private _http: HttpClient,
-    private _authService: AuthService) { }
-
+    private _authService: AuthService,
+    private _productsService: ProductsService) { }
 
   getAll(id: number): Observable<AdminProviderPorduct[]> {
     return this._http.get<AdminProviderPorduct[]>(`${this.baseUrl}/${id}/info`, {
@@ -62,16 +63,8 @@ export class AdminProvidersProductsService {
     });
   }
 
-  getById(providerId: number, productId: number): Observable<ProviderPorductForm> {
-    return this._http.get<ProviderPorductForm>(`${this.baseUrl}/${providerId}/info/product/${productId}`, {
-      headers: this._authService.getToken()
-    }).pipe(
-      map((data) => data[0])
-    );
-  }
-
-  delete(providerId: number, productId: number): Observable<AdminProviderPorduct[]> {
-    return this._http.get<AdminProviderPorduct[]>(`${this.baseUrl}/${providerId}/info/delete/${productId}`, {
+  delete(providerId: number, productId: number, orderDate: Date): Observable<AdminProviderPorduct[]> {
+    return this._http.get<AdminProviderPorduct[]>(`${this.baseUrl}/${providerId}/info/delete/${productId}/${orderDate}`, {
       headers: this._authService.getToken()
     });
   }
@@ -82,15 +75,29 @@ export class AdminProvidersProductsService {
     });
   }
 
-  cancel(providerId: number, productId: number): Observable<AdminProviderPorduct[]> {
-    return this._http.get<AdminProviderPorduct[]>(`${this.baseUrl}/${providerId}/info/cancel/${productId}`, {
+  cancel(providerId: number, productId: number, orderDate: Date): Observable<AdminProviderPorduct[]> {
+    return this._http.get<AdminProviderPorduct[]>(`${this.baseUrl}/${providerId}/info/cancel/${productId}/${orderDate}`, {
       headers: this._authService.getToken()
     });
   }
 
-  deliver(providerId: number, productId: number): Observable<AdminProviderPorduct[]> {
-    return this._http.get<AdminProviderPorduct[]>(`${this.baseUrl}/${providerId}/info/deliver/${productId}`, {
-      headers: this._authService.getToken()
-    });
+  deliver(providerId: number, productId: number, orderDate: Date): Observable<AdminProviderPorduct[]> {
+    const subject = new Subject<AdminProviderPorduct[]>();
+
+    if (orderDate) {
+      this._http.get<AdminProviderPorduct[]>(`${this.baseUrl}/${providerId}/info/deliver/${productId}/${orderDate}`, {
+        headers: this._authService.getToken()
+      }).subscribe((data: any) => {
+        if (data.ok) {
+          const product = data.data.find((d) => d.id == productId);
+      
+          this._productsService.restoreStock(product).subscribe(() => {
+            subject.next(data.data);
+          });
+        }
+      });
+    }
+    
+    return subject;
   }
 }

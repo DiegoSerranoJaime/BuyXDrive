@@ -17,22 +17,6 @@ exports.getAll = function(req, res) {
     });
 }
 
-exports.getById = function(req, res) {
-    jwt.verify(req.token, 'secretkey', (err, authData) => {
-        if (authData.user.userType == 2) {
-            AdminProvidersProducts.getById(req.params, (err, providers) => {
-                if(err) {
-                    res.send(err);
-                }
-                        
-                res.json(providers);
-            });
-        } else {
-            res.json({ok: false, msg: 'Permission denied'});
-        }
-    });
-}
-
 exports.delete = function(req, res) {
     jwt.verify(req.token, 'secretkey', (err, authData) => {
         if (authData.user.userType == 2) {
@@ -78,7 +62,7 @@ exports.deliver = function(req, res) {
                     res.send(err);
                 }
                 
-                res.json(products);
+                res.json({ok: true, data: products});
             });
         } else {
             res.json({ok: false, msg: 'Permission denied'});
@@ -94,7 +78,7 @@ exports.cancel = function(req, res) {
                     res.send(err);
                 }
                 
-                res.json(products);
+                res.json({ok: true, data: products});
             });
         } else {
             res.json({ok: false, msg: 'Permission denied'});

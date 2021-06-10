@@ -12,11 +12,9 @@
         </div>
         <div class="mb-3">
             <label for="price" class="form-label">Precio</label>
-            <div [ngClass]="{'input-group': data}">
+            <div class="input-group">
                 <input type="text" class="form-control" id="price" name="price" formControlName="price" [ngClass]="{'is-invalid': price.invalid && price.touched}">
-                <button *ngIf="data" class="btn btn-primary" (click)="price.setValue(product.price)">
-                    <i class="fas fa-sync-alt"></i>
-                </button>
+                <span class="input-group-text">€</span>
             </div>
             <div *ngIf="price.invalid && price.touched" class="text-danger">
                 <span *ngIf="price.hasError('required')">El precio es requerido</span>
@@ -25,12 +23,7 @@
         </div>
         <div class="mb-3">
             <label for="amount" class="form-label">Cantidad</label>
-            <div [ngClass]="{'input-group': data}">
-                <input type="text" class="form-control" id="amount" name="amount" formControlName="amount" [ngClass]="{'is-invalid': amount.invalid && amount.touched}">
-                <button *ngIf="data" class="btn btn-primary" (click)="amount.setValue(product.amount)">
-                    <i class="fas fa-sync-alt"></i>
-                </button>
-            </div>
+            <input type="text" class="form-control" id="amount" name="amount" formControlName="amount" [ngClass]="{'is-invalid': amount.invalid && amount.touched}">
             <div *ngIf="amount.invalid && amount.touched" class="text-danger">
                 <span *ngIf="amount.hasError('required')">La cantidad es requerida</span>
                 <span *ngIf="amount.hasError('min')">La cantidad mínima es de 1</span>

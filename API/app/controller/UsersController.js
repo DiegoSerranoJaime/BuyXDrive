@@ -89,6 +89,7 @@ exports.getGenderById = function(req, res) {
     });
 }
 
+
 exports.getAllEmployerTypes = function(req, res) {
     Users.getAllEmployerTypes((err, userTypes) => {
         if (err) {

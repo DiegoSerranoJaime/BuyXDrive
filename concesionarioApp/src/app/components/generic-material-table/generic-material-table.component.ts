@@ -77,14 +77,14 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
     return res.route;
   }
 
-  cancelOrder(id: string) {
+  cancelOrder(id: string, thirdId?: any) {
     this._modalService.show(SimpleBodyModalComponent, {
       title: 'Cancelar el <span class="text-danger">pedido</span>',
       aceptar: (component) => {
-        const cancelMethod = this.claveCompuesta ? this.service.cancel(this.fatherId, id) : this.service.cancel(id);
+        let cancelMethod = this.claveCompuesta ? this.service.cancel(this.fatherId, id) : this.service.cancel(id);
+        cancelMethod = this.claveCompuesta && thirdId ? this.service.cancel(this.fatherId, id, thirdId) : cancelMethod;
 
         cancelMethod.subscribe((data) => {
-          console.log(data);
           if (data.ok) {
             this._toastService.show(`Se ha cancelado el pedido ${ id }`);
           } else {
@@ -116,7 +116,6 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
             this._toastService.show(`No se ha podido aceptar el pedido`);
           }
 
-          console.log(data);
           this.dataSource.data = data;
 
           this._modalService.hide();
@@ -130,7 +129,7 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
     });
   }
 
-  denegate(id: string) {
+  denegate(id: string, thirdId?: any) {
     this._modalService.show(SimpleBodyModalComponent, {
       title: 'Denegar el <span class="text-danger">pedido</span>',
       aceptar: (component) => {
@@ -180,19 +179,20 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
     });
   }
 
-  deliver(id: string) {
+  deliver(id: string, thirdId?: any) {
     this._modalService.show(SimpleBodyModalComponent, {
       title: 'Entregar el <span class="text-danger">pedido</span>',
       aceptar: (component) => {
-        const deliverMethod = this.claveCompuesta ? this.service.deliver(this.fatherId, id) : this.service.deliver(id);
+        let deliverMethod = this.claveCompuesta ? this.service.deliver(this.fatherId, id) : this.service.deliver(id);
+        deliverMethod = this.claveCompuesta && thirdId ? this.service.deliver(this.fatherId, id, thirdId) : deliverMethod;
+        
         deliverMethod.subscribe((data) => {
           if (data.length > 0) {
+            this.dataSource.data = data;
             this._toastService.show(`Se ha entregado el pedido ${ id }`);
           } else {
             this._toastService.show(`No se ha podido entregar el pedido`);
           }
-
-          this.dataSource.data = data;
 
           this._modalService.hide();
         }, (err) => {
@@ -205,19 +205,20 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
     });
   }
 
-  deleteElement(id: any) {
+  deleteElement(id: any, thirdId?: any) {
     this._modalService.show(SimpleBodyModalComponent, {
       title: `Eliminar el <span class="text-danger">${this.entity && this.entity.entityInfo ? this.entity.entityInfo : 'registro'}</span>`,
       aceptar: (component) => {
-        const deleteMethod = this.claveCompuesta ? this.service.delete(this.fatherId, id) : this.service.delete(id);
+        let deleteMethod = this.claveCompuesta ? this.service.delete(this.fatherId, id) : this.service.delete(id);
+        deleteMethod = this.claveCompuesta && thirdId ? this.service.delete(this.fatherId, id, thirdId) : deleteMethod;
+
         deleteMethod.subscribe((data) => {
           if (data.length >= 0) {
             this._toastService.show(`Se ha eliminado ${this.entity && this.entity.entityText ? this.entity.entityText : 'el registro'} ${ id }`);
+            this.dataSource.data = data;
           } else {
             this._toastService.show(`No se ha podido eliminar ${this.entity && this.entity.entityText ? this.entity.entityText : 'el registro'}`);
           }
-
-          this.dataSource.data = data;
 
           this._modalService.hide();
         }, (err) => {
@@ -238,11 +239,10 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
         this.service.logicDelete(id).subscribe((data) => {
           if (data.length > 0) {
             this._toastService.show(`Se ha desactivado ${this.entity && this.entity.entityText ? this.entity.entityText : 'el registro'} ${ id }`);
+            this.dataSource.data = data;
           } else {
             this._toastService.show(`No se ha podido desactivar ${this.entity && this.entity.entityText ? this.entity.entityText : 'el registro'}`);
           }
-
-          this.dataSource.data = data;
 
           this._modalService.hide();
         }, (err) => {
@@ -263,11 +263,10 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
         this.service.reactive(id).subscribe((data) => {
           if (data.length > 0) {
             this._toastService.show(`Se ha activado ${this.entity && this.entity.entityText ? this.entity.entityText : 'el registro'} ${ id }`);
+            this.dataSource.data = data;
           } else {
             this._toastService.show(`No se ha podido activar ${this.entity && this.entity.entityText ? this.entity.entityText : 'el registro'}`);
           }
-
-          this.dataSource.data = data;
 
           this._modalService.hide();
         }, (err) => {

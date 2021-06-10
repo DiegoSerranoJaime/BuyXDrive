@@ -45,7 +45,7 @@
             <span class="badge" [ngClass]="{'bg-success': article.amount > 0, 'bg-danger': article.amount <= 0}">Stock: {{article.amount <= 0 ? 'No disponible' : 'Disponible'}}</span>
           </div>
 
-          <p class="d-flex justify-content-between">Precio: <span>{{ article.price }}€</span></p>
+          <p class="d-flex justify-content-between">Precio: <span>{{ article.price | number:'.2-2' }}€</span></p>
           <p class="d-flex justify-content-between">Descuento: <span>{{ article.discount }}%</span></p>
           
           <hr>

@@ -85,18 +85,18 @@
         <div class="mb-3" *ngIf="!data">
             <label for="traction" class="form-label">Tracción</label>
             <select class="form-select" [formControl]="traction" [ngClass]="{'is-invalid': traction.invalid && traction.touched}">
-                <option disabled [selected]="!traction.value">Seleccione una opción</option>
-                <option *ngFor="let data of selectTractions" [ngValue]="data" [selected]="traction.value == data">{{data}}</option>
+                <option disabled value="">Seleccione una opción</option>
+                <option *ngFor="let data of selectTractions" [ngValue]="data">{{data}}</option>
             </select>
             <div *ngIf="traction.invalid && traction.touched" class="text-danger">
               <span *ngIf="traction.hasError('required')">La tracción es requerido</span>
             </div>
         </div>
-        <div class="mb-3" *ngIf="!data">
+        <div class="mb-3">
             <label for="transmission" class="form-label">Transmision</label>
             <select class="form-select" [formControl]="transmission" [ngClass]="{'is-invalid': transmission.invalid && transmission.touched}">
-                <option disabled [selected]="!transmission.value">Seleccione una opción</option>
-                <option *ngFor="let data of selectTransmissions" [ngValue]="data" [selected]="transmission.value == data">{{data}}</option>
+                <option disabled value="">Seleccione una opción</option>
+                <option *ngFor="let data of selectTransmissions" [ngValue]="data">{{data}}</option>
             </select>
             <div *ngIf="transmission.invalid && transmission.touched" class="text-danger">
               <span *ngIf="transmission.hasError('required')">La transmisión es requerido</span>
@@ -116,11 +116,11 @@
                 <span *ngIf="km.hasError('min')">El kilometraje mínimo es de 0</span>
             </div>
         </div>
-        <div class="mb-3" *ngIf="!data">
+        <div class="mb-3">
             <label for="fuel" class="form-label">Combustible</label>
             <select class="form-select" [formControl]="fuel" [ngClass]="{'is-invalid': fuel.invalid && fuel.touched}">
-                <option disabled [selected]="!fuel.value">Seleccione una opción</option>
-                <option *ngFor="let data of selectFuel" [ngValue]="data" [selected]="fuel.value == data">{{data}}</option>
+                <option disabled value="">Seleccione una opción</option>
+                <option *ngFor="let data of selectFuel" [ngValue]="data">{{data}}</option>
             </select>
             <div *ngIf="fuel.invalid && fuel.touched" class="text-danger">
               <span *ngIf="fuel.hasError('required')">La transmisión es requerido</span>
@@ -188,7 +188,7 @@
             </div>
             <div *ngIf="innerMaterials.invalid && innerMaterials.touched" class="text-danger">
                 <span *ngIf="innerMaterials.hasError('required')">El número de asientos es requerido</span>
-                <span *ngIf="innerMaterials.hasError('min')">El número de asientos mínimo es de 0</span>
+                <span *ngIf="innerMaterials.hasError('min')">El número de asientos mínimo es de 2</span>
             </div>
         </div>
         <div class="mb-3">
@@ -201,6 +201,7 @@
             </div>
             <div *ngIf="description.invalid && description.touched" class="text-danger">
                 <span *ngIf="description.hasError('required')">La descripción es requerida</span>
+                <span *ngIf="description.hasError('maxlength')">La descripción es de máximo 255 carácteres</span>
             </div>
         </div>
     </form>

@@ -125,7 +125,7 @@ export class VehiclesFormComponent implements OnInit {
       Validators.min(0)
     ]);
 
-    this.seating = new FormControl(this.vehicle ? this.vehicle.seating : 0, [
+    this.seating = new FormControl(this.vehicle ? this.vehicle.seating : 2, [
       Validators.required,
       Validators.min(2)
     ]);
@@ -135,7 +135,8 @@ export class VehiclesFormComponent implements OnInit {
     ]);
 
     this.description = new FormControl(this.vehicle ? this.vehicle.description : '', [
-      Validators.required
+      Validators.required,
+      Validators.maxLength(255)
     ]);
   }
 

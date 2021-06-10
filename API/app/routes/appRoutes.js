@@ -304,16 +304,13 @@ module.exports = function(app) {
         app.route('/api/admin/providers/:providerId/info/add')
             .post(verifyToken, AdminProvidersProducts.add);
 
-        app.route('/api/admin/providers/:providerId/info/delete/:productId')
+        app.route('/api/admin/providers/:providerId/info/delete/:productId/:orderDate')
             .get(verifyToken, AdminProvidersProducts.delete);
-        
-        app.route('/api/admin/providers/:providerId/info/product/:productId')
-            .get(verifyToken, AdminProvidersProducts.getById);
 
-        app.route('/api/admin/providers/:providerId/info/cancel/:productId')
+        app.route('/api/admin/providers/:providerId/info/cancel/:productId/:orderDate')
             .get(verifyToken, AdminProvidersProducts.cancel);
 
-        app.route('/api/admin/providers/:providerId/info/deliver/:productId')
+        app.route('/api/admin/providers/:providerId/info/deliver/:productId/:orderDate')
             .get(verifyToken, AdminProvidersProducts.deliver);
 
     //Endpoint de Images

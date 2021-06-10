@@ -17,9 +17,6 @@ export class ProvidersProductsComponent implements OnInit {
   public providersProductsFormComponent = ProvidersProductsFormComponent;
   public permisos: Permissions[] = [
     {
-      name: 'delete'
-    },
-    {
       name: 'add'
     },
     {

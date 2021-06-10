@@ -87,7 +87,7 @@ Products.update = function(product, result) {
 }
 
 Products.restoreStock = function(product, result) {
-    let query = `UPDATE products SET amount = (amount + ?) WHERE id = ?`;
+    let query = `UPDATE products SET amount = (amount + ?), active = IF(amount > 0, 1, 0) WHERE id = ?`;
 
     sql.query(query, [product.amount, product.id], (err, res) => {
         if (err) {

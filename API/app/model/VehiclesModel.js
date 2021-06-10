@@ -56,7 +56,7 @@ Vehicles.getTopVehicles = function(result) {
                     vehicles.cv,
                     IF(COUNT(comments.product_id), AVG(comments.valoration), 0) AS val,
                     products.active,
-                    COUNT(orders_products.product_id) AS total
+                    IF(COUNT(orders_products.product_id),COUNT(orders_products.product_id), 0) AS total
                 FROM images
                 INNER JOIN products ON images.product_id = products.id 
                 INNER JOIN vehicles ON products.id = vehicles.id 
@@ -185,7 +185,7 @@ Vehicles.getVehicle = function(id, result) {
                 INNER JOIN brands ON models.brand_id = brands.id 
                 LEFT JOIN comments ON comments.product_id = products.id 
                 GROUP BY products.id 
-                HAVING products.id = ? AND products.active = 1`;
+                HAVING products.id = ?`;
 
     sql.query(query, id, (err, res) => {
         if (err) {

@@ -29,17 +29,8 @@ export class ProvidersProductsFormComponent implements OnInit {
       this.products = products
     })
 
-    if (this.data && this.data.id >= 0) {
-      this._adminProvidersProductsService.getById(this.data.fatherId, this.data.id).subscribe((product) => {
-        this.product = product;
-        this.buildFormControls();
-        this.buildFormGroup();
-      });
-    } else {
-      this.buildFormControls();
-      this.buildFormGroup();
-    }
-  
+    this.buildFormControls();
+    this.buildFormGroup();
   }
 
   buildFormControls() {
