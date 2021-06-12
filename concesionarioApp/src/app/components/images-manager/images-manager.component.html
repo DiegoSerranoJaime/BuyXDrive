@@ -1,7 +1,7 @@
 <div class="d-flex flex-row justify-content-between">
     <h4>Imagenes</h4>
     <div>
-        <button mat-raised-button [disabled]="selectedImages.length === 0" class="me-2" color="warn" (click)="delete()">
+        <button mat-raised-button [disabled]="selectedImages.length === 0 || selectedImages.length >= images.length" class="me-2" color="warn" (click)="delete()">
             Eliminar imagenes
         </button>
         <button mat-raised-button (click)="add()">
