@@ -25,7 +25,7 @@ module.exports = function(app) {
 
     const upload = require('../libs/storage')
 
-    //Endpoints de login y registro
+    //Endpoints de usuarios
     app.route('/api/user/login')
         .post(Users.login);
         
@@ -297,7 +297,7 @@ module.exports = function(app) {
         app.route('/api/admin/providers/:id')
             .get(verifyToken, AdminProviders.getById);
 
-        //Endpoints de proveedores
+        //Endpoints de productos proveidos
         app.route('/api/admin/providers/:providerId/info')
             .get(verifyToken, AdminProvidersProducts.getAll);
 
@@ -400,8 +400,8 @@ module.exports = function(app) {
         
     app.route('/api/products/:id')
         .put(verifyToken, Products.update);
-    
-        //Endpoints de comentarios    
+
+    //Endpoints de comentarios    
     app.route('/api/comments/products/:id')
         .get(Comments.getCommentsOfAProduct);
     
