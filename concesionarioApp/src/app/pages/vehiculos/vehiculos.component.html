@@ -15,7 +15,7 @@
                     [maxPrice]="maxPrice"
                     [brands]="brands"
                     [types]="types"
-                    [title]="'Vehiculos'"
+                    [title]="'Vehículos'"
                     [maxCv]="maxCv"
                     [maxDoors]="maxDoors"
                     [maxSeating]="maxSeating">
@@ -24,7 +24,7 @@
     <div class="col-12 col-md">
       <ng-template #noVehicles>
         <div class="alert alert-info" role="alert">
-          No se encuentran vehiculos disponibles
+          No se encuentran vehículos disponibles
         </div>
       </ng-template>
       <div *ngIf="vehiculos && (vehiculos | filterProducts:name:prices:selectedBrands:selectedTypes:valoration:selectedCv:selectedDoors:selectedSeating).length > 0; else noVehicles">

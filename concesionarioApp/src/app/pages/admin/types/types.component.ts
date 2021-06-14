@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class TypesComponent implements OnInit {
 
   public links: any[] = [
-    { name: 'Vehiculos', route: './vehicles'},
+    { name: 'Vehículos', route: './vehicles'},
     { name: 'Artículos', route: './articles'}
   ];
 

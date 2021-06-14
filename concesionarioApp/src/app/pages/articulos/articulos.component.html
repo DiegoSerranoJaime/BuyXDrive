@@ -12,13 +12,13 @@
                     [maxPrice]="maxPrice"
                     [brands]="brands"
                     [types]="types"
-                    [title]="'Articulos'">
+                    [title]="'Artículos'">
       </app-filters>
     </div>
     <div class="col-12 col-md">
       <ng-template #noVehicles>
         <div class="alert alert-info" role="alert">
-          No se encuentran articulos disponibles
+          No se encuentran artículos disponibles
         </div>
       </ng-template>
       <div *ngIf="articulos && (articulos | filterProducts:name:prices:selectedBrands:selectedTypes:valoration).length > 0; else noVehicles">
