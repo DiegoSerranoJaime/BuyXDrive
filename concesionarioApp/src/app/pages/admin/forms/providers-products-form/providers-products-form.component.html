@@ -19,6 +19,7 @@
             <div *ngIf="price.invalid && price.touched" class="text-danger">
                 <span *ngIf="price.hasError('required')">El precio es requerido</span>
                 <span *ngIf="price.hasError('min')">El precio mínimo es de 0</span>
+                <span *ngIf="price.hasError('max')">El precio máximo no puede superar o igualar los 10 billones</span>
             </div>
         </div>
         <div class="mb-3">

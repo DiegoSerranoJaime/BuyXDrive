@@ -77,7 +77,8 @@ export class VehiclesFormComponent implements OnInit {
 
     this.price = new FormControl(this.vehicle ? this.vehicle.price : 0, [
       Validators.required,
-      Validators.min(0)
+      Validators.min(0),
+      Validators.max(9999999999999.99)
     ]);
 
     this.amount = new FormControl(this.vehicle ? this.vehicle.amount : 0, [

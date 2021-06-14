@@ -37,7 +37,8 @@ Orders.getOrdersNotDelivered = function(id, result) {
     let query = `SELECT orders.id AS id, status.name AS status, order_date, delivery_date
     FROM orders
     INNER JOIN status ON orders.status = status.id
-    WHERE user_id = ? AND status IN (1, 2, 3)`;
+    WHERE user_id = ? AND status IN (1, 2, 3)
+    ORDER BY status.id ASC, order_date DESC`;
 
     sql.query(query, id, (err, res) => {
         if (err) {
@@ -53,7 +54,8 @@ Orders.getHistoryOrders = function(id, result) {
     let query = `SELECT orders.id AS id, status.name AS status, order_date, delivery_date
     FROM orders
     INNER JOIN status ON orders.status = status.id
-    WHERE user_id = ? AND status NOT IN (1, 2, 3)`;
+    WHERE user_id = ? AND status NOT IN (1, 2, 3)
+    ORDER BY status.id ASC, order_date DESC`;
 
     sql.query(query, id, (err, res) => {
         if (err) {

@@ -40,7 +40,8 @@ export class ProvidersProductsFormComponent implements OnInit {
     
     this.price = new FormControl(this.product ? this.product.price : '', [
       Validators.required,
-      Validators.min(0)
+      Validators.min(0),
+      Validators.max(9999999999999.99)
     ]);
 
     this.amount = new FormControl(this.product ? this.product.amount : '', [

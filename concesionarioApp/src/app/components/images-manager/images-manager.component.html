@@ -2,10 +2,10 @@
     <h4>Imagenes</h4>
     <div>
         <button mat-raised-button [disabled]="selectedImages.length === 0 || selectedImages.length >= images.length" class="me-2" color="warn" (click)="delete()">
-            Eliminar imagenes
+            Eliminar imágenes
         </button>
         <button mat-raised-button (click)="add()">
-            Agregar imagenes
+            Agregar imágenes
         </button>
     </div>
 </div>
@@ -19,7 +19,7 @@
     </div>
     <ng-template #noImages>
         <div class="alert alert-info" role="alert">
-            No hay disponible actualmente imagenes de este vehículo
+            No hay disponible actualmente imágenes de este producto
         </div>
     </ng-template>
 </div>

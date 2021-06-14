@@ -68,7 +68,8 @@ export class ArticlesFormComponent implements OnInit {
 
     this.price = new FormControl(this.article ? this.article.price : 0, [
       Validators.required,
-      Validators.min(0)
+      Validators.min(0),
+      Validators.max(9999999999999.99)
     ]);
 
     this.amount = new FormControl(this.article ? this.article.amount : 0, [
