@@ -90,4 +90,34 @@ AdminComments.getById = function(id, result) {
     });
 }
 
+AdminComments.deleteAndGetAll = function(id, result) {
+    
+    let query = `DELETE FROM comments WHERE product_id = ? AND user_id = ?`;
+
+    sql.query(query, [id.productId, id.userId], (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+
+        return AdminComments.getAll(result);
+    });
+}
+
+AdminComments.deleteAndGetAllByUser = function(id, result) {
+    
+    console.log(id);
+
+    let query = `DELETE FROM comments WHERE product_id = ? AND user_id = ?`;
+
+    sql.query(query, [id.productId, id.userId], (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+
+        return AdminComments.getAllByUser(id.userId, result);
+    });
+}
+
 module.exports = AdminComments;

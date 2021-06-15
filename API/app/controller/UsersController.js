@@ -129,7 +129,7 @@ exports.updateName = function(req, res) {
                             userType: authData.user.userType,
                         };
             
-                        jwt.sign({user: trueUser}, 'secretkey', { expiresIn: '1h' }, (err, token) => {
+                        jwt.sign({user: trueUser}, 'secretkey', { expiresIn: '1w' }, (err, token) => {
                             res.json({
                                 ok: true,
                                 token
@@ -177,7 +177,7 @@ exports.updateEmail = function(req, res) {
                             userType: authData.user.userType,
                         };
             
-                        jwt.sign({user: trueUser}, 'secretkey', { expiresIn: '1h' }, (err, token) => {
+                        jwt.sign({user: trueUser}, 'secretkey', { expiresIn: '1w' }, (err, token) => {
                             res.json({
                                 ok: true,
                                 token
@@ -225,7 +225,7 @@ exports.updatePassword = function(req, res) {
                             userType: authData.user.userType,
                         };
             
-                        jwt.sign({user: trueUser}, 'secretkey', { expiresIn: '1h' }, (err, token) => {
+                        jwt.sign({user: trueUser}, 'secretkey', { expiresIn: '1w' }, (err, token) => {
                             res.json({
                                 ok: true,
                                 token
@@ -271,7 +271,7 @@ exports.updateGender = function(req, res) {
                             userType: authData.user.userType,
                         };
             
-                        jwt.sign({user: trueUser}, 'secretkey', { expiresIn: '1h' }, (err, token) => {
+                        jwt.sign({user: trueUser}, 'secretkey', { expiresIn: '1w' }, (err, token) => {
                             res.json({
                                 ok: true,
                                 token
@@ -317,7 +317,7 @@ exports.updateAddress = function(req, res) {
                             userType: authData.user.userType,
                         };
             
-                        jwt.sign({user: trueUser}, 'secretkey', { expiresIn: '1h' }, (err, token) => {
+                        jwt.sign({user: trueUser}, 'secretkey', { expiresIn: '1w' }, (err, token) => {
                             res.json({
                                 ok: true,
                                 token
@@ -363,7 +363,7 @@ exports.updatePhoneNumber = function(req, res) {
                             userType: authData.user.userType,
                         };
             
-                        jwt.sign({user: trueUser}, 'secretkey', { expiresIn: '1h' }, (err, token) => {
+                        jwt.sign({user: trueUser}, 'secretkey', { expiresIn: '1w' }, (err, token) => {
                             res.json({
                                 ok: true,
                                 token

@@ -1,7 +1,7 @@
 <div class="card position-relative" [routerLink]="['/articulos', article.id]">
   <div class="position-relative">
     <img [src]="article.image" class="card-img-top" alt="...">    
-    <span class="badge position-absolute bottom-0 end-0 mb-2 me-2" [ngClass]="{'bg-success': article.amount > 0 ,'bg-danger': article.amount <= 0}">Stock</span>
+    <span class="badge position-absolute bottom-0 end-0 mb-2 me-2" [ngClass]="{'bg-success': article.amount > 0 ,'bg-danger': article.amount <= 0}">{{ article.amount > 0 ? '' : 'No ' }}Stock</span>
   </div>
   <div class="card-body">
     <h5 class="card-title">{{ article.name }}</h5>
@@ -15,6 +15,6 @@
       </div>
     </div>
   </div>
-  <div *ngIf="article.discount" class="badge bg-primary position-absolute mt-2 ms-2">{{ article.discount }}%</div>
+  <div *ngIf="article.discount" class="badge bg-primary position-absolute mt-2 ms-2">Desc. {{ article.discount }}%</div>
   <div class="badge bg-warning position-absolute mt-2 end-0 me-2">{{ article.val }} <i class="fas fa-star"></i></div>
 </div>

@@ -15,7 +15,6 @@ export class ToastService {
         message: message,
         icon: 'close'
       },
-      duration: 2000
     });
   }
 }

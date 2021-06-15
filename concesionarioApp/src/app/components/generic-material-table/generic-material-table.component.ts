@@ -80,9 +80,18 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
   cancelOrder(id: string, thirdId?: any) {
     this._modalService.show(SimpleBodyModalComponent, {
       title: 'Cancelar el <span class="text-danger">pedido</span>',
-      aceptar: (component) => {
-        let cancelMethod = this.claveCompuesta ? this.service.cancel(this.fatherId, id) : this.service.cancel(id);
-        cancelMethod = this.claveCompuesta && thirdId ? this.service.cancel(this.fatherId, id, thirdId) : cancelMethod;
+      aceptar: (component) => {        
+        let cancelMethod;
+        
+        if (this.claveCompuesta && thirdId) {
+          cancelMethod = this.service.cancel(this.fatherId, id, thirdId);
+        } else if(!this.claveCompuesta && thirdId) {
+          cancelMethod = this.service.cancel(id, thirdId);
+        } else if(this.claveCompuesta) {
+          cancelMethod = this.service.cancel(this.fatherId, id);
+        } else {
+          cancelMethod = this.service.cancel(id);
+        }
 
         cancelMethod.subscribe((data) => {
           if (data.ok) {
@@ -109,6 +118,7 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
       title: 'Aceptar el <span class="text-danger">pedido</span>',
       aceptar: (component) => {
         const acceptMethod = this.claveCompuesta ? this.service.accept(this.fatherId, id) : this.service.accept(id);
+
         acceptMethod.subscribe((data) => {
           if (data.length > 0) {
             this._toastService.show(`Se ha aceptado el pedido ${ id }`);
@@ -134,6 +144,7 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
       title: 'Denegar el <span class="text-danger">pedido</span>',
       aceptar: (component) => {
         const denegateMethod = this.claveCompuesta ? this.service.denegate(this.fatherId, id) : this.service.denegate(id);
+
         denegateMethod.subscribe((data) => {
           if (data.length > 0) {
             this._toastService.show(`Se ha denegado el pedido ${ id }`);
@@ -159,6 +170,7 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
       title: 'Poner en camino el <span class="text-danger">pedido</span>',
       aceptar: (component) => {
         const onWayMethod = this.claveCompuesta ? this.service.onWay(this.fatherId, id) : this.service.onWay(id);
+
         onWayMethod.subscribe((data) => {
           if (data.length > 0) {
             this._toastService.show(`Se ha puesto en camino el pedido ${ id }`);
@@ -183,8 +195,17 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
     this._modalService.show(SimpleBodyModalComponent, {
       title: 'Entregar el <span class="text-danger">pedido</span>',
       aceptar: (component) => {
-        let deliverMethod = this.claveCompuesta ? this.service.deliver(this.fatherId, id) : this.service.deliver(id);
-        deliverMethod = this.claveCompuesta && thirdId ? this.service.deliver(this.fatherId, id, thirdId) : deliverMethod;
+        let deliverMethod;
+
+        if (this.claveCompuesta && thirdId) {
+          deliverMethod = this.service.deliver(this.fatherId, id, thirdId);
+        } else if(!this.claveCompuesta && thirdId) {
+          deliverMethod = this.service.deliver(id, thirdId);
+        } else if(this.claveCompuesta) {
+          deliverMethod = this.service.deliver(this.fatherId, id);
+        } else {
+          deliverMethod = this.service.deliver(id);
+        }
         
         deliverMethod.subscribe((data) => {
           if (data.length > 0) {
@@ -209,8 +230,17 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
     this._modalService.show(SimpleBodyModalComponent, {
       title: `Eliminar el <span class="text-danger">${this.entity && this.entity.entityInfo ? this.entity.entityInfo : 'registro'}</span>`,
       aceptar: (component) => {
-        let deleteMethod = this.claveCompuesta ? this.service.delete(this.fatherId, id) : this.service.delete(id);
-        deleteMethod = this.claveCompuesta && thirdId ? this.service.delete(this.fatherId, id, thirdId) : deleteMethod;
+        let deleteMethod;
+
+        if (this.claveCompuesta && thirdId) {
+          deleteMethod = this.service.delete(this.fatherId, id, thirdId);
+        } else if(!this.claveCompuesta && thirdId) {
+          deleteMethod = this.service.delete(id, thirdId);
+        } else if(this.claveCompuesta) {
+          deleteMethod = this.service.delete(this.fatherId, id);
+        } else {
+          deleteMethod = this.service.delete(id);
+        }
 
         deleteMethod.subscribe((data) => {
           if (data.length >= 0) {
@@ -287,6 +317,7 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
       aceptar: (component: any) => {
         if (component.form.valid) {
           const addMethod = this.claveCompuesta ? this.service.add(this.fatherId, component.form.value) : this.service.add(component.form.value);
+
           addMethod.subscribe((data) => {
             if (data.ok) {
               this.dataSource.data = data.data;
@@ -313,6 +344,7 @@ export class GenericMaterialTableComponent implements OnInit, AfterViewInit {
       aceptar: (component: any) => {
         if (component.form.valid) {
           const updateMethod = this.claveCompuesta ? this.service.update(this.fatherId, id, component.form.value) : this.service.update(id, component.form.value);
+          
           updateMethod.subscribe((data) => {
             if (data.ok) {
               this.dataSource.data = data.data;

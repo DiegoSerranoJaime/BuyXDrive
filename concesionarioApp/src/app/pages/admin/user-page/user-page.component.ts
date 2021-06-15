@@ -25,10 +25,13 @@ export class UserPageComponent implements OnInit {
       name: 'order'
     }
   ];
+  
   public permisosComments: Permissions[] = [
     {
       name: 'view',
       route: './product'
+    }, {
+      name: 'delete'
     }
   ];
 
@@ -36,7 +39,9 @@ export class UserPageComponent implements OnInit {
     entityName: 'Pedidos'
   }
   public entityComment: Entity = {
-    entityName: 'Comentarios'
+    entityName: 'Comentarios',
+    entityInfo: 'Comentario',
+    entityText: 'el comentario del producto'
   }
 
   constructor(public _adminUserOrdersService: AdminUserOrdersService,

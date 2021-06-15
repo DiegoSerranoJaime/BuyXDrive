@@ -57,4 +57,11 @@ export class AdminCommentsService {
     return this._http.get<Comment>(`${this.baseUrl}/product/${productId}/user/${userId}`)
     .pipe(map(c => c[0]));
   }
+
+  delete(userId: number, productId: number): Observable<AdminComment[]> {
+    console.log('entra');
+    return this._http.get<AdminComment[]>(`${this.baseUrl}/user/${userId}/product/${productId}/delete`, {
+      headers: this._authService.getToken()
+    });
+  }
 }

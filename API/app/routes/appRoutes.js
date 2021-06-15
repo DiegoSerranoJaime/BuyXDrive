@@ -183,6 +183,12 @@ module.exports = function(app) {
         app.route('/api/admin/comments')
             .get(verifyToken, AdminComments.getAll);
 
+        app.route('/api/admin/comments/user/:userId/product/:productId/delete')
+            .get(verifyToken, AdminComments.deleteAndGetAll);
+
+        app.route('/api/admin/comments/product/:productId/user/:userId/delete')
+            .get(verifyToken, AdminComments.deleteAndGetAllByUser);
+
         app.route('/api/admin/comments/user/:id')
             .get(verifyToken, AdminComments.getAllByUser);
 

@@ -81,6 +81,9 @@
         <button type="button" *ngIf="checkPermission('delete')" [disabled]="element.status && element.status == 'Entregado'" class="btn btn-danger me-1" (click)="deleteElement(element.id)" data-bs-toggle="tooltip" data-bs-placement="top" title="Eliminado físico">
           <i class="fas fa-trash-alt"></i>
         </button>
+        <button type="button" *ngIf="checkPermission('composeDelete')" [disabled]="element.status && element.status == 'Entregado'" class="btn btn-danger me-1" (click)="deleteElement(element[keys[0]], element[keys[1]])" data-bs-toggle="tooltip" data-bs-placement="top" title="Eliminado físico">
+          <i class="fas fa-trash-alt"></i>
+        </button>
       </td>
       <td mat-footer-cell *matFooterCellDef hidden></td>
     </ng-container>

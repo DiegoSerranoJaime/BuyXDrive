@@ -29,13 +29,13 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserData();
-    this._gendersService.getById(this.userData.gender).subscribe((gender) => {
-      this.gender = gender;
-    });
   }
   
   getUserData() {
     this.userData = this._authService.getDecodedToken();
+    this._gendersService.getById(this.userData.gender).subscribe((gender) => {
+      this.gender = gender;
+    });
   }
 
   updateName() {

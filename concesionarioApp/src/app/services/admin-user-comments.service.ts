@@ -55,4 +55,10 @@ export class AdminUserCommentsService {
     return this._http.get<Comment>(`${this.baseUrl}/product/${productId}/user/${userId}`)
     .pipe(map(c => c[0]));
   }
+
+  delete(userId: number, productId: number): Observable<AdminUserComment[]> {
+    return this._http.get<AdminUserComment[]>(`${this.baseUrl}/product/${productId}/user/${userId}/delete`, {
+      headers: this._authService.getToken()
+    });
+  }
 }

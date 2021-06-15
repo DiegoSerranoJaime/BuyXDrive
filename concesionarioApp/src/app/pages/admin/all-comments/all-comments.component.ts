@@ -14,6 +14,8 @@ export class AllCommentsComponent implements OnInit {
     {
       name: 'composeView',
       route: './'
+    }, {
+      name: 'composeDelete'
     }
   ];
 
@@ -23,8 +25,8 @@ export class AllCommentsComponent implements OnInit {
   ];
 
   public entity: Entity = {
-    entityInfo: 'comentario',
-    entityText: 'el comentario'
+    entityInfo: 'comentario del usuario',
+    entityText: 'el comentario del usuario'
   };
 
   constructor(public _adminCommentsService: AdminCommentsService) {}

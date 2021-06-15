@@ -1,7 +1,7 @@
 <div *ngIf="_authService.isAuthenticated(); else noAuth">
   <div *ngIf="exist; else noComment">
     <div class="alert alert-danger">
-      No puedes agregar un comentario sobre este proyecto porque ya tienes uno
+      No puedes agregar un comentario sobre este producto porque ya tienes uno
     </div>
   </div>
   <ng-template #noComment>
