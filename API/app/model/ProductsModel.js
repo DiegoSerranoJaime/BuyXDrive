@@ -17,11 +17,12 @@ Products.getAll = function(result) {
                     IF(articles.id, concat(b1.name," ",articles.name), concat(b2.name," ",models.name)) AS name
                 FROM products
                 LEFT JOIN articles ON products.id = articles.id
-                LEFT JOIN article_type ON articles.type = article_type.id
                 LEFT JOIN brands AS b1 ON articles.brand = b1.id
                 LEFT JOIN vehicles ON products.id = vehicles.id
                 LEFT JOIN models ON vehicles.model_id = models.id
-                LEFT JOIN brands AS b2 ON models.brand_id = b2.id`;
+                LEFT JOIN brands AS b2 ON models.brand_id = b2.id
+                WHERE (articles.brand IS NOT NULL AND articles.type IS NOT NULL)
+                OR (models.brand_id IS NOT NULL AND vehicles.model_id IS NOT NULL AND vehicles.type IS NOT NULL)`;
 
     sql.query(query, (err, res) => {
         if (err) {

@@ -21,8 +21,7 @@ export class ProvidersProductsFormComponent implements OnInit {
   public price: FormControl;
   public amount: FormControl;
 
-  constructor(private _adminProvidersProductsService: AdminProvidersProductsService,
-    private _productsService: ProductsService) { }
+  constructor(private _productsService: ProductsService) { }
 
   ngOnInit(): void {
     this._productsService.getAllProducts().subscribe((products) => {
