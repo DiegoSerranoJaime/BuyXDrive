@@ -55,7 +55,7 @@ export class AmountComponent implements OnInit {
     this.checkErrors();
   }
 
-  async checkErrors() {
+  checkErrors() {
     this.amountInput.statusChanges.subscribe((data) => {
       if(data == 'VALID') {
         this.updateAmount();
