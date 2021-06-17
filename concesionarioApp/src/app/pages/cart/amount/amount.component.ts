@@ -47,25 +47,31 @@ export class AmountComponent implements OnInit {
 
   incrementAmount() {
     this.amountInput.setValue(this.amountInput.value + 1);
-    this.updateAmount();
+    this.checkErrors();
   }
-
+  
   decrementAmount() {
     this.amountInput.setValue(this.amountInput.value - 1);
-    this.updateAmount();
+    this.checkErrors();
+  }
+
+  async checkErrors() {
+    this.amountInput.statusChanges.subscribe((data) => {
+      if(data == 'VALID') {
+        this.updateAmount();
+      } else {
+        this.amountForm.markAllAsTouched();
+      }
+    });
   }
 
   updateAmount() {
-    if (this.amountForm.valid) {
-      let productUpdate: ProductUpdate = {
-        product: this.product,
-        amount: this.amountInput.value
-      };
+    let productUpdate: ProductUpdate = {
+      product: this.product,
+      amount: this.amountInput.value
+    };
 
-      this.update.emit(productUpdate);
-    }
-
-    this.amountForm.markAllAsTouched();
+    this.update.emit(productUpdate);
   }
 
 }
