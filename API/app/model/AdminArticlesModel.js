@@ -26,7 +26,7 @@ AdminArticles.getAllArticles = function(result) {
                 FROM products
                 INNER JOIN articles ON articles.id = products.id
                 INNER JOIN brands ON articles.brand = brands.id 
-                INNER JOIN article_type ON articles.type = article_type.id 
+                LEFT JOIN article_type ON articles.type = article_type.id 
                 LEFT JOIN comments ON comments.product_id = products.id 
                 GROUP BY products.id
                 ORDER BY products.active DESC, products.id ASC`;

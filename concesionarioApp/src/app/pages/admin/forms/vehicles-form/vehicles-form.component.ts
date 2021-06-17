@@ -67,7 +67,7 @@ export class VehiclesFormComponent implements OnInit {
       Validators.required,
     ]);
 
-    this.type = new FormControl(this.vehicle ? this.vehicle.type : '', [
+    this.type = new FormControl(this.vehicle && this.vehicle.type ? this.vehicle.type : '', [
       Validators.required
     ]);
 

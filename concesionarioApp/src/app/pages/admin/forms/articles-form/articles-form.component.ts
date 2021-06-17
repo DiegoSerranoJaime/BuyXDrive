@@ -58,7 +58,7 @@ export class ArticlesFormComponent implements OnInit {
       Validators.required,
     ]);
 
-    this.type = new FormControl(this.article ? this.article.type : '', [
+    this.type = new FormControl(this.article && this.article.type ? this.article.type : '', [
       Validators.required
     ]);
 

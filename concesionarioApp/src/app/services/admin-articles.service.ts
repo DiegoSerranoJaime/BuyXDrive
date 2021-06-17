@@ -34,7 +34,7 @@ export class AdminArticlesService {
     {
       field: 'type',
       type: 'string',
-      noData: false
+      noData: true
     },
     {
       field: 'val',

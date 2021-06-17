@@ -37,7 +37,7 @@ AdminVehicles.getAllVehicles = function(result) {
                 INNER JOIN vehicles ON products.id = vehicles.id 
                 INNER JOIN models ON vehicles.model_id = models.id 
                 INNER JOIN brands ON models.brand_id = brands.id 
-                INNER JOIN vehicle_type ON vehicles.type = vehicle_type.id 
+                LEFT JOIN vehicle_type ON vehicles.type = vehicle_type.id 
                 LEFT JOIN comments ON comments.product_id = products.id
                 GROUP BY products.id
                 ORDER BY products.active DESC, products.id ASC`;
